@@ -2,11 +2,15 @@ package cn.sgr.zmr.com.sgr.Modules.Home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nightonke.jellytogglebutton.JellyToggleButton;
+import com.nightonke.jellytogglebutton.State;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +31,9 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.top_view_title)
     TextView top_view_title;
+
+    @BindView(R.id.home_temp)
+    JellyToggleButton home_temp;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,5 +49,27 @@ public class HomeFragment extends BaseFragment {
         top_view_left_text.setText("设备");
         top_view_right_text.setVisibility(View.VISIBLE);
         top_view_right_text.setText("电子病历");
+
+
+        home_temp.setLeftBackgroundColor( ContextCompat.getColor(getActivity(), R.color.them_bg));
+        home_temp.setRightBackgroundColor( ContextCompat.getColor(getActivity(), R.color.them_bg));
+
+        home_temp.setTextSize(40);
+        home_temp.setTextColor( ContextCompat.getColor(getActivity(),R.color.withe));
+        home_temp.setTextMarginLeft(20);
+        home_temp.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
+            @Override
+            public void onStateChange(float process, State state, JellyToggleButton jtb) {
+                if (state.equals(State.LEFT)) {
+
+
+                }
+                if (state.equals(State.RIGHT)) {
+
+                }
+
+            }
+        });
+
     }
 }
