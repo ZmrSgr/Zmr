@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">智梦人</string>
+
+    <string name="bottom_home">体温计</string>
+    <string name="bottom_health">健康建议</string>
+    <string name="bottom_message">消息</string>
+
+
+    <string name="bottom_set">设置</string>
+    <string name="set_lost">防丢功能</string>
+    <string name="set_fever">发烧报警</string>
+    <string name="set_fever_temp">报警温度</string>
+    <string name="set_type">报警方式</string>
+    <string name="set_decive">设备</string>
+    <string name="set_about">关于</string>
+
+    <string name="home_in_temp">室内温度:</string>
+    <string name="home_baby_temp">体温:</string>
+
+
+
+</resources>
