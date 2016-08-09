@@ -1,5 +1,6 @@
 package cn.sgr.zmr.com.sgr.Modules.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -14,7 +15,9 @@ import com.nightonke.jellytogglebutton.State;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
+import cn.sgr.zmr.com.sgr.Modules.Home.Activity.Chart;
 import cn.sgr.zmr.com.sgr.R;
 
 public class HomeFragment extends BaseFragment {
@@ -72,4 +75,21 @@ public class HomeFragment extends BaseFragment {
         });
 
     }
+
+    @OnClick({R.id.top_view_right_text, R.id.top_view_left_text})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.top_view_right_text:
+                Intent intent1=new Intent();
+                intent1.setClass(getActivity(), Chart.class);
+                startActivity(intent1);
+                break;
+            case R.id.top_view_left_text:
+
+                break;
+        }
+    }
+
+
+
 }

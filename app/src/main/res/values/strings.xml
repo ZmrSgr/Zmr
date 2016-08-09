@@ -14,9 +14,11 @@
     <string name="set_decive">设备</string>
     <string name="set_about">关于</string>
 
-    <string name="home_in_temp">室内温度:</string>
+    <string name="home_in_temp">室内温度:28</string>
     <string name="home_baby_temp">体温:</string>
 
+    <string name="hua_unit">℉</string>
+    <string name="shishi_unit">℃</string>
 
 
 </resources>
