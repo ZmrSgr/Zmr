@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alorma.timeline.TimelineView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.Legend.LegendForm;
@@ -17,12 +19,15 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.Home_EventsAdapter;
+import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
 import cn.sgr.zmr.com.sgr.R;
 
 public class Chart extends Activity {
@@ -43,6 +48,13 @@ public class Chart extends Activity {
     ImageView iv_right;
 
 
+    @BindView(R.id.btn_up)
+    ImageView btn_up;
+
+    //时间轴
+    @BindView(R.id.chart_list)
+    ListView chart_list;
+
     @BindView(R.id.top_view_right_text)
     TextView top_view_right_text;
 
@@ -53,7 +65,11 @@ public class Chart extends Activity {
     TextView top_view_title;
 
 
+    @BindView(R.id.sliding_layout)
+    SlidingUpPanelLayout layout;
 
+    @BindView(R.id.lin_bottom)
+    TextView lin_bottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +77,6 @@ public class Chart extends Activity {
         setContentView(R.layout.activity_chart);
         ButterKnife.bind(this);
         intitView();
-        initialChart(mChart);
-        addLineDataSet(mChart);
-
-
 
     }
 
@@ -75,9 +87,81 @@ public class Chart extends Activity {
         iv_right.setImageResource(R.drawable.btn_share_friend);
         iv_right.setVisibility(View.VISIBLE);
         top_view_right_text.setVisibility(View.GONE);
+        //时间轴
+        ArrayList<EventDatas> items = new ArrayList<>();
+        items.add(new EventDatas("第一个", TimelineView.TYPE_START));
+        for (int i = 0; i < 20; i++) {
+            items.add(new EventDatas("even"+i,
+                    TimelineView.TYPE_MIDDLE));
+        }
+        items.add(new EventDatas("最后一个", TimelineView.TYPE_END));
+
+        chart_list.setAdapter(new Home_EventsAdapter(this, items));
+
+
+        //图标
+        initialChart(mChart);
+        addLineDataSet(mChart);
+
+        //向上滑动
+        layout.setShadowDrawable(getResources().getDrawable(R.drawable.above_shadow));
+        layout.setAnchorPoint(0.3f);
+        layout.setDragView(lin_bottom);
+        layout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+                if (slideOffset < 0.1) {
+                    btn_up.setImageResource(R.drawable.btn_down);
+                } else {
+                    btn_up.setImageResource(R.drawable.btn_up);
+                }
+            }
+
+            @Override
+            public void onPanelExpanded(View panel) {
+
+
+
+            }
+
+            @Override
+            public void onPanelCollapsed(View panel) {
+
+
+            }
+
+            @Override
+            public void onPanelAnchored(View panel) {
+
+
+            }
+        });
+       /* TextView t = (TextView) findViewById(R.id.brought_by);
+        t.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Toast.makeText(getApplication(), "点击text", 2000).show();
+                System.out.println("点击text");
+
+            }
+        });
+
+
+        lin_bottom=(View)findViewById(R.id.lin_bottom);
+        lin_bottom.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Toast.makeText(getApplication(), "点击text", 2000).show();
+                System.out.println("点击text");
+
+            }
+        });*/
 
     }
-        @OnClick({R.id.top_view_back,R.id.iv_right})
+        @OnClick({R.id.top_view_back,R.id.iv_right,R.id.lin_bottom})
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.top_view_back:
@@ -86,6 +170,11 @@ public class Chart extends Activity {
 
                 case R.id.iv_right:
                     Toast.makeText(Chart.this,"分享",Toast.LENGTH_LONG).show();
+                    break;
+
+                case R.id.lin_bottom:
+                    Toast.makeText(getApplication(), "点击text", Toast.LENGTH_SHORT).show();
+                    System.out.println("点击text");
                     break;
             }
         }
@@ -153,7 +242,7 @@ public class Chart extends Activity {
 
     // 为LineChart增加LineDataSet
     private void addLineDataSet(LineChart mChart) {
-        LineData data =getData(10,2);
+        LineData data =getData(24,2);
         mChart.setData(data);
     }
     private LineData getData(int count, float range) {

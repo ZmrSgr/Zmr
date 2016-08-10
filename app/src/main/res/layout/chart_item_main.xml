@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:timeline="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="horizontal">
+
+
+    <TextView
+
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="?android:listPreferredItemHeight"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="21:00:32"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="14dp"
+        tools:ignore="RtlHardcoded" />
+
+    <com.alorma.timeline.RoundTimelineView
+        android:id="@+id/timeline"
+        android:layout_width="30dp"
+        android:layout_height="?android:listPreferredItemHeight"
+        android:layout_gravity="center"
+        android:gravity="right"
+        timeline:timeline_lineStyle="linear" />
+
+
+    <LinearLayout
+
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/we"
+        android:gravity="left"
+
+        android:orientation="vertical">
+
+        <TextView
+
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_itemPadding"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+
+            android:textSize="17dp"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_itemPadding"
+            android:text="物理治疗"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+
+            android:textSize="17dp"
+            tools:ignore="RtlHardcoded" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

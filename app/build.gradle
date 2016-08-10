@@ -25,6 +25,8 @@ dependencies {
     compile project(':magicindicator')
     compile project(':jellytogglebutton')
     compile project(':MPChartLib')
+    compile project(':library')
+    compile project(':timeline')
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.google.code.gson:gson:2.6.2'
