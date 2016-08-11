@@ -8,6 +8,11 @@
         android:id="@+id/top_view"
         layout="@layout/top_view" />
 
+    <include
+        android:id="@+id/chart_time"
+        layout="@layout/chart_time" />
+
+
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout
         android:layout_margin="5dp"

@@ -27,10 +27,12 @@ dependencies {
     compile project(':MPChartLib')
     compile project(':library')
     compile project(':timeline')
+    compile project(':sublimepickerlibrary')
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.alibaba:fastjson:1.2.6'
     compile 'com.jakewharton:butterknife:8.1.0'
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
+    compile project(path: ':sublimepickerlibrary')
 }

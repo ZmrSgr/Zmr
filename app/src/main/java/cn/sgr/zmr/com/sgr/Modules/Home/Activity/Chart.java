@@ -1,15 +1,21 @@
 package cn.sgr.zmr.com.sgr.Modules.Home.Activity;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.util.Pair;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alorma.timeline.TimelineView;
+import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
+import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
+import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.Legend.LegendForm;
@@ -21,16 +27,21 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.Home_EventsAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
+import cn.sgr.zmr.com.sgr.Modules.Home.View.SublimePickerFragment;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
-public class Chart extends Activity {
+public class Chart extends FragmentActivity {
 
     // 高温线下标
     private final int HIGH = 0;
@@ -71,15 +82,32 @@ public class Chart extends Activity {
     @BindView(R.id.lin_bottom)
     TextView lin_bottom;
 
+    @BindView(R.id.time_chart)
+    TextView time_chart;
+
+    @BindView(R.id.chart_time)
+    View chart_time;
+
+
+    @BindView(R.id.time_left)
+    ImageView time_left;
+
+    @BindView(R.id.time_right)
+    ImageView time_right;
+
+    Calendar ca;//得到一个Calendar的实例
+    SimpleDateFormat sf;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_chart);
         ButterKnife.bind(this);
         intitView();
-
     }
-
     private void intitView() {
         top_view_title.setText("体温历史记录");
         top_view_back.setVisibility(View.VISIBLE);
@@ -91,93 +119,138 @@ public class Chart extends Activity {
         ArrayList<EventDatas> items = new ArrayList<>();
         items.add(new EventDatas("第一个", TimelineView.TYPE_START));
         for (int i = 0; i < 20; i++) {
-            items.add(new EventDatas("even"+i,
+            items.add(new EventDatas("even" + i,
                     TimelineView.TYPE_MIDDLE));
         }
         items.add(new EventDatas("最后一个", TimelineView.TYPE_END));
-
         chart_list.setAdapter(new Home_EventsAdapter(this, items));
-
-
         //图标
         initialChart(mChart);
         addLineDataSet(mChart);
-
+        //初始化时间
+        ca = Calendar.getInstance();//得到一个Calendar的实例
+        sf = new SimpleDateFormat("yyyy-M-d");
+        time_chart.setText(sf.format(ca.getTime()));
         //向上滑动
         layout.setShadowDrawable(getResources().getDrawable(R.drawable.above_shadow));
         layout.setAnchorPoint(0.3f);
         layout.setDragView(lin_bottom);
         layout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
                 if (slideOffset < 0.1) {
                     btn_up.setImageResource(R.drawable.btn_down);
+                    chart_time.setVisibility(View.GONE);
+
                 } else {
                     btn_up.setImageResource(R.drawable.btn_up);
+                    chart_time.setVisibility(View.VISIBLE);
                 }
             }
-
             @Override
             public void onPanelExpanded(View panel) {
-
-
-
             }
-
             @Override
             public void onPanelCollapsed(View panel) {
-
-
             }
 
             @Override
             public void onPanelAnchored(View panel) {
-
-
             }
         });
-       /* TextView t = (TextView) findViewById(R.id.brought_by);
-        t.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Toast.makeText(getApplication(), "点击text", 2000).show();
-                System.out.println("点击text");
-
-            }
-        });
-
-
-        lin_bottom=(View)findViewById(R.id.lin_bottom);
-        lin_bottom.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Toast.makeText(getApplication(), "点击text", 2000).show();
-                System.out.println("点击text");
-
-            }
-        });*/
-
     }
-        @OnClick({R.id.top_view_back,R.id.iv_right,R.id.lin_bottom})
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.top_view_back:
-                  finish();
-                    break;
 
-                case R.id.iv_right:
-                    Toast.makeText(Chart.this,"分享",Toast.LENGTH_LONG).show();
-                    break;
+    @OnClick({R.id.top_view_back, R.id.iv_right, R.id.lin_bottom, R.id.time_chart, R.id.time_left, R.id.time_right})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.top_view_back:
+                finish();
+                break;
 
-                case R.id.lin_bottom:
-                    Toast.makeText(getApplication(), "点击text", Toast.LENGTH_SHORT).show();
-                    System.out.println("点击text");
-                    break;
-            }
+            case R.id.iv_right:
+                Toast.makeText(Chart.this, "分享", Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.lin_bottom:
+                Toast.makeText(getApplication(), "添加数据", Toast.LENGTH_SHORT).show();
+                System.out.println("点击text");
+                break;
+
+            case R.id.time_right:
+                time_chart.setText(getDate(time_chart.getText().toString(), +1));
+                break;
+
+            case R.id.time_left:
+                time_chart.setText(getDate(time_chart.getText().toString(), -1));
+                break;
+
+            case R.id.time_chart:
+                // DialogFragment to host SublimePicker
+                SublimePickerFragment pickerFrag = new SublimePickerFragment();
+                pickerFrag.setCallback(mFragmentCallback);
+
+                // Options
+                Pair<Boolean, SublimeOptions> optionsPair = getOptions();
+
+                if (!optionsPair.first) { // If options are not valid
+                    Toast.makeText(Chart.this, "No pickers activated",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Valid options
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("SUBLIME_OPTIONS", optionsPair.second);
+                pickerFrag.setArguments(bundle);
+
+                pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+                pickerFrag.show(getSupportFragmentManager(), "SUBLIME_PICKER");
+                break;
         }
+    }
+
+    /**
+     * 获取日期
+     *
+     * @param date 当前日期
+     * @param type 少于0为减一日，大于0为加一日
+     * @return
+     */
+    private String getDate(String date, int type) {
+
+        int[] the_data = Utils.StringtoInt(date);
+        if (the_data.length < 3) {
+            return (sf.format(ca.getTime()));
+        }
+
+        ca.set(the_data[0], the_data[1] - 1, the_data[2]);//月份是从0开始的，所以11表示12月
+        Date now = ca.getTime();
+        if (type < 0) {
+            ca.add(Calendar.DATE, -1); //日数减1
+        } else {
+            ca.add(Calendar.DATE, +1); //日数+1
+        }
+        Date lastMonth = ca.getTime(); //结果
+
+//	Log.d("xiaofu", "now"+sf.format(now)+"lastMonth"+sf.format(lastMonth));
+        return (sf.format(lastMonth));
+    }
+
+         // 时间选择的样式
+         Pair<Boolean, SublimeOptions> getOptions() {
+        SublimeOptions options = new SublimeOptions();
+        int displayOptions = 0;
+        displayOptions |= SublimeOptions.ACTIVATE_DATE_PICKER;
+        displayOptions |= SublimeOptions.ACTIVATE_TIME_PICKER;
+        options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
+        options.setDisplayOptions(displayOptions);
+        // Enable/disable the date range selection feature
+        options.setCanPickDateRange(true);
+
+        // If 'displayOptions' is zero, the chosen options are not valid
+        return new Pair<>(displayOptions != 0 ? Boolean.TRUE : Boolean.FALSE, options);
+    }
+
     // 初始化图表
     private void initialChart(LineChart mChart) {
         mChart.setDescription(" ");
@@ -201,7 +274,7 @@ public class Chart extends Activity {
         l.setForm(LegendForm.LINE);
 
         // 颜色
-        l.setTextColor(ContextCompat.getColor(Chart.this,R.color.them_bg));
+        l.setTextColor(ContextCompat.getColor(Chart.this, R.color.them_bg));
         // x坐标轴
         XAxis xl = mChart.getXAxis();
 //        xl.setTextColor(0xff00897b);
@@ -224,8 +297,8 @@ public class Chart extends Activity {
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setTextColor(0xff37474f);
 
-        // 最大值
-        leftAxis.setAxisMaxValue(45f);
+//        // 最大值
+//        leftAxis.setAxisMaxValue(45f);
 
         // 最小值
         leftAxis.setAxisMinValue(35f);
@@ -242,9 +315,10 @@ public class Chart extends Activity {
 
     // 为LineChart增加LineDataSet
     private void addLineDataSet(LineChart mChart) {
-        LineData data =getData(24,2);
+        LineData data = getData(24, 2);
         mChart.setData(data);
     }
+
     private LineData getData(int count, float range) {
         ArrayList<Entry> yVals = new ArrayList<Entry>();
         for (int i = 0; i < count; i++) {
@@ -258,8 +332,8 @@ public class Chart extends Activity {
         set1.setLineWidth(1.75f);
         set1.setCircleRadius(5f);
         set1.setCircleHoleRadius(2.5f);
-        set1.setColor( ContextCompat.getColor(Chart.this,R.color.them_bg));
-        set1.setCircleColor( ContextCompat.getColor(Chart.this,R.color.them_bg));//圆圈的颜色
+        set1.setColor(ContextCompat.getColor(Chart.this, R.color.them_bg));
+        set1.setCircleColor(ContextCompat.getColor(Chart.this, R.color.them_bg));//圆圈的颜色
         set1.setLabel("时间体温");
 //        set1.setHighLightColor(Color.RED);
         set1.setDrawValues(false);
@@ -267,4 +341,18 @@ public class Chart extends Activity {
         LineData data = new LineData(set1);
         return data;
     }
+    //时间选择监听返回
+    SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
+        @Override
+        public void onCancelled() {
+        }
+        @Override
+        public void onDateTimeRecurrenceSet(SelectedDate selectedDate,
+                                            int hourOfDay, int minute,
+                                            SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
+                                            String recurrenceRule) {
+            time_chart.setText((String.valueOf(selectedDate.getStartDate().get(Calendar.YEAR)) + "-" + String.valueOf(selectedDate.getStartDate().get(Calendar.MONTH) + 1) + "-"
+                    + String.valueOf(selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH))).trim());
+        }
+    };
 }
