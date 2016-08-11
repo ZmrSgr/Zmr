@@ -1,1 +1,1 @@
-include ':app', ':magicindicator', ':jellytogglebutton'
+include ':app', ':magicindicator', ':jellytogglebutton', ':MPChartLib', ':library', ':timeline', ':sublimepickerlibrary'
