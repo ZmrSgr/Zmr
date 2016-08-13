@@ -1,76 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <include
         android:id="@+id/top_view"
         layout="@layout/top_view" />
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/top_view"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="@string/home_in_temp"
-        android:textColor="@color/them_text"
-        android:textSize="17sp"/>
+        android:gravity="center"
+        android:orientation="horizontal">
 
 
-
-    <LinearLayout
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-    <LinearLayout
-        android:id="@+id/rel_fever_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:gravity="center">
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_in_temp"
+            android:textColor="@color/them_text"
+            android:textSize="17sp" />
+        <TextView
+            android:id="@+id/home_unit_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/shishi_unit"
+            android:textColor="@color/them_text"
+            android:textSize="17sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:id="@+id/rel_fever_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/design_them_point"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/home_baby_temp"
+                android:textColor="@color/withe"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="正常"
+                android:textColor="@color/withe"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/home_unit_midle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:text="@string/home_baby_temp"
+            android:text="@string/shishi_unit"
             android:textColor="@color/them_text"
-            android:textSize="30sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="心情状态"
-            android:textColor="@color/them_text"
-            android:layout_marginTop="10dp"
             android:textSize="20sp" />
     </LinearLayout>
 
-
-    </LinearLayout>
-
     <RelativeLayout
-        android:gravity="center"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="15dp"
-       android:layout_marginTop="20dp"
-        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/iv_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/ic_launcher" />
 
         <TextView
 
@@ -82,18 +106,17 @@
             android:layout_toRightOf="@id/iv_image"
             android:text="昵称：小宝"
             android:textColor="@color/them_text"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
 
         <ImageView
-            android:src="@drawable/gril_icon"
             android:id="@+id/home_img_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/tv_title"
-           />
+            android:src="@drawable/gril_icon" />
 
         <TextView
             android:id="@+id/tv_start_time"
@@ -103,7 +126,7 @@
             android:layout_marginLeft="12dp"
             android:layout_toRightOf="@id/iv_image"
             android:text="年龄:8个月"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_line"
@@ -113,20 +136,18 @@
             android:layout_marginLeft="4dp"
             android:layout_toRightOf="@id/tv_start_time"
             android:text="   体重：5kg"
-            android:textSize="15sp"/>
-
+            android:textSize="15sp" />
 
 
         <com.nightonke.jellytogglebutton.JellyToggleButton
-            android:layout_marginRight="15dp"
             android:id="@+id/home_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:jtbLeftText="@string/shishi_unit"
-            app:jtbRightText="@string/hua_unit"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="15dp"
+            app:jtbLeftText="@string/shishi_unit"
+            app:jtbRightText="@string/hua_unit" />
     </RelativeLayout>
 </RelativeLayout>

@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3dbb28</color>
     <color name="colorPrimaryDark">#3dbb28</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#3dbb28</color>
 
 
     <color name="bottom_bg">#f8f8f8</color>
@@ -14,6 +14,8 @@
     <color name="list_bg">#ebebeb</color>
 
 
+    <drawable name="bg_default">#3dbb28</drawable>
+    <drawable name="bg_selects">#888888</drawable>
 
     <drawable name="img_selects">#FFFFFF</drawable>
     <drawable name="img_selected">#44aaaaaa</drawable>

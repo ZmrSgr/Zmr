@@ -1,5 +1,6 @@
 package cn.sgr.zmr.com.sgr.Modules.Setting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -16,7 +17,9 @@ import com.nightonke.jellytogglebutton.State;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
+import cn.sgr.zmr.com.sgr.LoginActivity;
 import cn.sgr.zmr.com.sgr.R;
 
 public class SettingFragment extends BaseFragment {
@@ -42,6 +45,19 @@ public class SettingFragment extends BaseFragment {
     @BindView(R.id.jtb_lost)
     JellyToggleButton   jtb_lost;
 
+    @BindView(R.id.line)
+    View   line;
+
+    @BindView(R.id.item_settings_about)
+    View   item_settings_about;
+
+    @BindView(R.id.item_settings_device)
+    View   item_settings_device;
+
+
+
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,16 +82,20 @@ public class SettingFragment extends BaseFragment {
         jtb_lost.setTextColor( ContextCompat.getColor(getActivity(),R.color.withe));
         jtb_fever.setTextMarginLeft(20);
         jtb_fever.setTextMarginRight(20);
+        jtb_lost.setTextMarginLeft(20);
+        jtb_lost.setTextMarginRight(20);
 
         jtb_fever.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
             @Override
             public void onStateChange(float process, State state, JellyToggleButton jtb) {
                 if (state.equals(State.LEFT)) {
                     rel_fever_temp.setVisibility(View.VISIBLE);
+                    line.setVisibility(View.VISIBLE);
 
                 }
                 if (state.equals(State.RIGHT)) {
                     rel_fever_temp.setVisibility(View.GONE);
+                    line.setVisibility(View.GONE);
                 }
 
             }
@@ -96,5 +116,20 @@ public class SettingFragment extends BaseFragment {
         });
 
     }
+
+    @OnClick({R.id.item_settings_about})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.item_settings_about:
+                Intent intent1=new Intent();
+                intent1.setClass(getActivity(), LoginActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.item_settings_device:
+
+                break;
+        }
+    }
+
 
 }

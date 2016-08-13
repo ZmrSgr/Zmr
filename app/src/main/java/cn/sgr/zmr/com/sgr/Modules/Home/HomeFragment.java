@@ -17,7 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
-import cn.sgr.zmr.com.sgr.Modules.Home.Activity.Chart;
+import cn.sgr.zmr.com.sgr.Modules.Home.Activity.BabyActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Activity.DeviceActivity;
 import cn.sgr.zmr.com.sgr.R;
 
 public class HomeFragment extends BaseFragment {
@@ -34,6 +35,13 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.top_view_title)
     TextView top_view_title;
+
+    @BindView(R.id.home_unit_top)
+    TextView home_unit_top;
+
+    @BindView(R.id.home_unit_midle)
+    TextView home_unit_midle;
+
 
     @BindView(R.id.home_temp)
     JellyToggleButton home_temp;
@@ -53,22 +61,24 @@ public class HomeFragment extends BaseFragment {
         top_view_right_text.setVisibility(View.VISIBLE);
         top_view_right_text.setText("电子病历");
 
-
         home_temp.setLeftBackgroundColor( ContextCompat.getColor(getActivity(), R.color.them_bg));
         home_temp.setRightBackgroundColor( ContextCompat.getColor(getActivity(), R.color.them_bg));
 
         home_temp.setTextSize(40);
         home_temp.setTextColor( ContextCompat.getColor(getActivity(),R.color.withe));
         home_temp.setTextMarginLeft(20);
+        home_temp.setTextMarginRight(20);
+        home_temp.setChecked(true);
         home_temp.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
             @Override
             public void onStateChange(float process, State state, JellyToggleButton jtb) {
                 if (state.equals(State.LEFT)) {
-
-
+                    home_unit_midle.setText(getResources().getString(R.string.hua_unit));
+                    home_unit_top.setText(getResources().getString(R.string.hua_unit));
                 }
                 if (state.equals(State.RIGHT)) {
-
+                    home_unit_midle.setText(getResources().getString(R.string.shishi_unit));
+                    home_unit_top.setText(getResources().getString(R.string.shishi_unit));
                 }
 
             }
@@ -81,11 +91,13 @@ public class HomeFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.top_view_right_text:
                 Intent intent1=new Intent();
-                intent1.setClass(getActivity(), Chart.class);
+                intent1.setClass(getActivity(), BabyActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.top_view_left_text:
-
+                Intent intent=new Intent();
+                intent.setClass(getActivity(), DeviceActivity.class);
+                startActivity(intent);
                 break;
         }
     }

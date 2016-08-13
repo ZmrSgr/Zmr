@@ -8,22 +8,32 @@
         android:id="@+id/top_view"
         layout="@layout/top_view" />
 
-    <include
-        android:id="@+id/chart_time"
-        layout="@layout/chart_time" />
-
-
-
     <com.sothree.slidinguppanel.SlidingUpPanelLayout
         android:layout_margin="5dp"
         android:id="@+id/sliding_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/charts"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_marginTop="10dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/chart_time"
+                layout="@layout/chart_time" />
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/charts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+
+
 
 
         <LinearLayout

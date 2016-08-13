@@ -14,13 +14,14 @@
             android:id="@+id/top_view_back"
             android:layout_width="52dp"
             android:layout_height="48dp"
-
-            android:padding="14dp"
+            android:background="@drawable/green_select"
+            android:padding="10dp"
             android:src="@drawable/back" />
 
 
         <TextView
             android:id="@+id/top_view_left_text"
+            android:background="@drawable/green_select"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_gravity="left"
@@ -58,8 +59,8 @@
             android:layout_width="52dp"
             android:layout_height="48dp"
             android:layout_gravity="right"
-
-            android:padding="14dp"
+            android:background="@drawable/green_select"
+            android:padding="10dp"
 
             android:visibility="gone" />
 
@@ -70,7 +71,7 @@
             android:layout_gravity="right"
             android:gravity="center"
             android:padding="10dp"
-
+            android:background="@drawable/green_select"
             android:textColor="@android:color/white"
             android:textSize="16dp"
             android:visibility="gone" />

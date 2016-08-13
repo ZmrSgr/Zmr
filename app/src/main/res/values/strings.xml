@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">智梦人</string>
 
+    <string name="company_name">珠海智梦人科技有限公司</string>
+
     <string name="bottom_home">体温计</string>
     <string name="bottom_health">健康建议</string>
     <string name="bottom_message">消息</string>
-
 
     <string name="bottom_set">设置</string>
     <string name="set_lost">防丢功能</string>
@@ -14,11 +15,51 @@
     <string name="set_decive">设备</string>
     <string name="set_about">关于</string>
 
-    <string name="home_in_temp">室内温度:28</string>
-    <string name="home_baby_temp">体温:</string>
+    <string name="home_in_temp">室内温度: 28</string>
+    <string name="home_baby_temp">37.5</string>
 
     <string name="hua_unit">℉</string>
     <string name="shishi_unit">℃</string>
+
+    <string name="loading">加载中</string>
+    <string name="mobile_phone">手机号</string>
+    <string name="password">密码</string>
+    <string name="no_account_now_signup">还没有账户？现在注册</string>
+    <string name="verify_code">验证码</string>
+    <string name="get_vetify_code">获取验证码</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="complete_signup">完成注册</string>
+    <string name="login">登录</string>
+    <string name="signup">注册</string>
+
+    <string name="please_input_mobile_phone">手机号码不能为空</string>
+    <string name="please_input_password">密码不能为空</string>
+    <string name="wrong_mobile_phone">手机号码输入不正确</string>
+    <string name="mobile_phone_or_password_error">手机号或密码错误</string>
+    <string name="please_input_verify_code">验证码不能为空</string>
+    <string name="please_enter_correct_verify_code_format">请输入正确格式验证码</string>
+    <string name="verify_have_send">验证码已发送</string>
+    <string name="get_verify_code_again">重新获取验证码</string>
+    <string name="please_enter_correct_password_format">请输入正确格式的密码</string>
+    <string name="password_wrong_format_hint">"密码必须有6-20位字符组成"</string>
+    <string name="two_passwords_differ_hint">"请注意两次密码输入不一致哦"</string>
+    <string name="please_input_six">输入6位的短信验证码</string>
+    <string name="resend_after">秒后重新发送</string>
+    <string name="del">删除</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="is_del_baby">是否删除?</string>
+
+    <string name="add_baby">添加宝宝</string>
+    <string name="save_baby">保存</string>
+    <string name="my_baby">我的宝宝</string>
+    <string name="baby_name">宝宝姓名</string>
+    <string name="baby_age">年龄</string>
+    <string name="baby_sex">性别</string>
+    <string name="baby_high">身高</string>
+    <string name="baby_weight">体重</string>
+
+
 
 
 </resources>

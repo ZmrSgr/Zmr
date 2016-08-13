@@ -8,15 +8,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Splash_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Modules.Home.Activity.Activity_History" />
-        <activity android:name=".Modules.Home.Activity.Chart"></activity>
+        <activity android:name=".Modules.Home.Activity.Chart" />
+        <activity android:name=".Modules.Home.Activity.DeviceActivity" />
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Register_Activity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Modules.Home.Activity.BabyActivity" />
+        <activity android:name=".Modules.Home.Activity.AddBaby_Activity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

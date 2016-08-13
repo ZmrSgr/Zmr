@@ -102,9 +102,11 @@
             android:layout_centerVertical="true"
             android:src="@drawable/ico_next"/>
 
+
     </RelativeLayout>
 
-    <include layout="@layout/line"/>
+    <include layout="@layout/line"
+        android:id="@+id/line"/>
 
     <RelativeLayout
         android:id="@+id/item_settings"
