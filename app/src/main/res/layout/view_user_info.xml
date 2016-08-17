@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_info_main_layout"
+    android:layout_width="match_parent"
+    android:background="@color/transparent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
+
+
+    <LinearLayout
+        android:id="@+id/value_top_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+
+    <TextView
+        android:id="@+id/user_top_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/them_text"
+        android:text="TEXT" />
+
+
+        <TextView
+
+            android:id="@+id/user_top_unit"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:textSize="12sp"
+            android:textColor="@color/them_text"
+            android:text="@string/shishi_unit" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/value_top_lin"
+        android:id="@+id/value_info_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+    <TextView
+
+        android:id="@+id/value_info_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:textSize="50sp"
+        android:textColor="@color/them_bg"
+        android:text="230.0" />
+
+
+    <TextView
+
+
+        android:id="@+id/user_center_unit"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/them_bg"
+        android:text="@string/shishi_unit" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_below="@+id/value_info_lin"
+        android:id="@+id/user_bottom_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/them_text"
+        android:text="TEXT" />
+
+
+</RelativeLayout>
