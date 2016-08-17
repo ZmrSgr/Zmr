@@ -95,6 +95,9 @@ public class Chart extends FragmentActivity {
     @BindView(R.id.time_right)
     ImageView time_right;
 
+    @BindView(R.id.chart_user_rel)
+    View chart_user_rel;
+
     Calendar ca;//得到一个Calendar的实例
     SimpleDateFormat sf;
 
@@ -160,9 +163,13 @@ public class Chart extends FragmentActivity {
         });
     }
 
-    @OnClick({R.id.top_view_back, R.id.iv_right, R.id.lin_bottom, R.id.time_chart, R.id.time_left, R.id.time_right})
+    @OnClick({R.id.top_view_back, R.id.iv_right, R.id.lin_bottom, R.id.time_chart, R.id.time_left, R.id.time_right,R.id.chart_user_rel})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.chart_user_rel:
+                Utils.toNextActivity(Chart.this,AddBaby_Activity.class);
+                break;
+
             case R.id.top_view_back:
                 finish();
                 break;
@@ -172,8 +179,7 @@ public class Chart extends FragmentActivity {
                 break;
 
             case R.id.lin_bottom:
-                Toast.makeText(getApplication(), "添加数据", Toast.LENGTH_SHORT).show();
-                System.out.println("点击text");
+                Utils.toNextActivity(this,AddHisoryActivity.class);
                 break;
 
             case R.id.time_right:

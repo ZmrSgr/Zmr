@@ -61,5 +61,15 @@
 
 
 
+    <string name="baby_fever_tem">体温</string>
+    <string name="baby_fever_time">时间</string>
+    <string name="baby_fever_wuli">物理降温</string>
+    <string name="baby_fever_yao">服药</string>
+    <string name="baby_add_history">添加记录</string>
+
+    <string name="camera">照相</string>
+    <string name="album">相册</string>
+    <string name="photo_choose">图片选择</string>
+
 
 </resources>

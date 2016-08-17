@@ -21,11 +21,15 @@
         <activity
             android:name=".LoginActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Register_Activity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".Register_Activity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Modules.Home.Activity.BabyActivity" />
-        <activity android:name=".Modules.Home.Activity.AddBaby_Activity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".Modules.Home.Activity.AddBaby_Activity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Modules.Home.Activity.AddHisoryActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

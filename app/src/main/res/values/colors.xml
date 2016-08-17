@@ -7,18 +7,27 @@
 
     <color name="bottom_bg">#f8f8f8</color>
     <color name="them_bg">#3dbb28</color>
+    <color name="them_bg_deep">#6cb950</color>
+    <color name="gery">#CCCCCC</color>
+
+
+
     <color name="them_text">#888888</color>
     <color name="withe">#ffffff</color>
+    <color name="white">#ffffff</color>
     <color name="line_color">#d7d7d7</color>
 
     <color name="list_bg">#ebebeb</color>
+    <color name="blue">#2B4DD5</color>
 
 
     <drawable name="bg_default">#3dbb28</drawable>
     <drawable name="bg_selects">#888888</drawable>
+    <drawable name="bg_blue">#2B4DD5</drawable>
 
     <drawable name="img_selects">#FFFFFF</drawable>
     <drawable name="img_selected">#44aaaaaa</drawable>
     <drawable name="img_defaul">#ffffff</drawable>
+    <color name="transparent">#00000000</color>
 
 </resources>

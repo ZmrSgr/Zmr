@@ -17,7 +17,7 @@ import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.Baby_Adapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.Baby;
 import cn.sgr.zmr.com.sgr.R;
-import cn.sgr.zmr.com.sgr.Utils.util.MyDecoration;
+import cn.sgr.zmr.com.sgr.View.MyDecoration;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 public class BabyActivity extends Activity {
@@ -87,6 +87,7 @@ public class BabyActivity extends Activity {
         switch (view.getId()) {
             case R.id.top_view_back:
                 finish();
+                break;
             case R.id.iv_right:
                 Utils.toNextActivity(BabyActivity.this,AddBaby_Activity.class);
                 break;
