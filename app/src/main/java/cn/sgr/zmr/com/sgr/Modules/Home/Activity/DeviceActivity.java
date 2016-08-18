@@ -54,7 +54,7 @@ public class DeviceActivity extends BaseActivity {
     }
 
     private void initView() {
-        top_view_title.setText("设备");
+        top_view_title.setText("设备信息");
         top_view_back.setVisibility(View.VISIBLE);
         top_view_left_text.setVisibility(View.GONE);
         top_view_right_text.setVisibility(View.GONE);

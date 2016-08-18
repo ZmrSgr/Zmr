@@ -1,58 +1,56 @@
 package cn.sgr.zmr.com.sgr.Modules.Home.Model;
 
-import android.support.annotation.NonNull;
 
-import com.alorma.timeline.TimelineView;
 
 
 public class EventDatas {
+
     private String name;
-    private int type;
-    private int alignment;
+    private String time,text_wuli,text_yao,text_tem;
 
-    public EventDatas(@NonNull String name) {
-        this(name, TimelineView.TYPE_DEFAULT);
-    }
-
-    public EventDatas(@NonNull String name, int type) {
-        this(name, type, TimelineView.ALIGNMENT_DEFAULT);
-    }
-
-    public EventDatas(@NonNull String name, int type, int alignment) {
+    public EventDatas(String name, String time) {
         this.name = name;
-        this.type = type;
-        this.alignment = alignment;
+        this.time = time;
+
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(@NonNull String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public @TimelineView.TimelineType int getType() {
-        return type;
+    public String getTime() {
+        return time;
     }
 
-    public void setType(@TimelineView.TimelineType int type) {
-        this.type = type;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public @TimelineView.TimelineAlignment int getAlignment() {
-        return alignment;
+    public String getText_wuli() {
+        return text_wuli;
     }
 
-    public void setAlignment(@TimelineView.TimelineAlignment int alignment) {
-        this.alignment = alignment;
+    public void setText_wuli(String text_wuli) {
+        this.text_wuli = text_wuli;
     }
 
-    @Override public String toString() {
-        return "EventDatas{" +
-            "name='" + name + '\'' +
-            ", type=" + type +
-            ", alignment=" + alignment +
-            '}';
+    public String getText_yao() {
+        return text_yao;
+    }
+
+    public void setText_yao(String text_yao) {
+        this.text_yao = text_yao;
+    }
+
+    public String getText_tem() {
+        return text_tem;
+    }
+
+    public void setText_tem(String text_tem) {
+        this.text_tem = text_tem;
     }
 }

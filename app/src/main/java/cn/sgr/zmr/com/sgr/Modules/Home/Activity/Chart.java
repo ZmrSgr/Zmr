@@ -4,15 +4,15 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alorma.timeline.TimelineView;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
@@ -35,18 +35,18 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.Home_EventsAdapter;
+import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.AddHistoryAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
 import cn.sgr.zmr.com.sgr.Modules.Home.View.SublimePickerFragment;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
+import cn.sgr.zmr.com.sgr.View.MyDecoration;
 
 public class Chart extends FragmentActivity {
 
     // 高温线下标
     private final int HIGH = 0;
 
-    // 低温线下标
     private final int LOW = 1;
 
     @BindView(R.id.charts)
@@ -64,7 +64,7 @@ public class Chart extends FragmentActivity {
 
     //时间轴
     @BindView(R.id.chart_list)
-    ListView chart_list;
+    RecyclerView chart_list;
 
     @BindView(R.id.top_view_right_text)
     TextView top_view_right_text;
@@ -119,14 +119,15 @@ public class Chart extends FragmentActivity {
         iv_right.setVisibility(View.VISIBLE);
         top_view_right_text.setVisibility(View.GONE);
         //时间轴
+        chart_list.setHasFixedSize(true);
+        chart_list.setLayoutManager(new LinearLayoutManager(this));
         ArrayList<EventDatas> items = new ArrayList<>();
-        items.add(new EventDatas("第一个", TimelineView.TYPE_START));
-        for (int i = 0; i < 20; i++) {
-            items.add(new EventDatas("even" + i,
-                    TimelineView.TYPE_MIDDLE));
+
+        for (int i = 0; i < 10; i++) {
+                items.add(new EventDatas("even" + i, "测试数据"));
         }
-        items.add(new EventDatas("最后一个", TimelineView.TYPE_END));
-        chart_list.setAdapter(new Home_EventsAdapter(this, items));
+        chart_list.setAdapter(new AddHistoryAdapter(this, items));
+
         //图标
         initialChart(mChart);
         addLineDataSet(mChart);
@@ -269,7 +270,7 @@ public class Chart extends FragmentActivity {
         mChart.setDrawGridBackground(false);
         mChart.setPinchZoom(true);
         // 设置图表的背景颜色
-        mChart.setBackgroundColor(0xfff5f5f5);
+//        mChart.setBackgroundColor(0xfff5f5f5);
         // 图表的注解(只有当数据集存在时候才生效)
         Legend l = mChart.getLegend();
 

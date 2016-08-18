@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/device_list_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="5dp"
+    android:gravity="left"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        card_view:cardBackgroundColor="@color/bottom_bg"
+        card_view:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:gravity="left"
+            android:orientation="horizontal"
+
+            android:padding="5dp">
+
+
+            <TextView
+                android:id="@+id/device_list_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/default_itemPadding"
+                android:text="蓝牙列表"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+
+                android:textSize="17dp"
+                tools:ignore="RtlHardcoded" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

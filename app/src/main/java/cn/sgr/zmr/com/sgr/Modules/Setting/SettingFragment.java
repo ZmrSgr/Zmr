@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.LoginActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Activity.DeviceActivity;
 import cn.sgr.zmr.com.sgr.R;
 
 public class SettingFragment extends BaseFragment {
@@ -117,7 +118,7 @@ public class SettingFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.item_settings_about})
+    @OnClick({R.id.item_settings_about,R.id.item_settings_device})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.item_settings_about:
@@ -126,7 +127,9 @@ public class SettingFragment extends BaseFragment {
                 startActivity(intent1);
                 break;
             case R.id.item_settings_device:
-
+                Intent intent=new Intent();
+                intent.setClass(getActivity(), DeviceActivity.class);
+                startActivity(intent);
                 break;
         }
     }

@@ -3,9 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:roundedimageview="http://schemas.android.com/tools"
+    android:background="@color/them_bg_deep"
     android:orientation="vertical">
 
     <TextView
+        android:textColor="@color/white"
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -13,11 +16,21 @@
         android:gravity="center"
         android:text="@string/company_name"
         android:textSize="18sp" />
-    <ImageView
 
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-       android:layout_centerInParent="true"
+
+    <cn.sgr.zmr.com.sgr.View.RoundImageView
+        android:layout_centerInParent="true"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:id="@+id/iv_avatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:gravity="center"
+        app:border_thickness="0.5dp"
+
+        app:border_outside_color="@color/white_s"
+
         android:src="@drawable/ic_launcher" />
+
 
 </RelativeLayout>

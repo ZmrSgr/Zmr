@@ -60,7 +60,6 @@
     <string name="baby_weight">体重</string>
 
 
-
     <string name="baby_fever_tem">体温</string>
     <string name="baby_fever_time">时间</string>
     <string name="baby_fever_wuli">物理降温</string>
@@ -70,6 +69,21 @@
     <string name="camera">照相</string>
     <string name="album">相册</string>
     <string name="photo_choose">图片选择</string>
+
+
+    <string name="scanning">正在搜索设备...</string>
+    <string name="select_device">选择一个设备进行连接</string>
+    <string name="none_found">未搜索到蓝牙设备</string>
+    <string name="connected_outtime"> 连接超时</string>
+    <string name="not_connected">未连接蓝牙设备</string>
+    <string name="bt_not_enabled_leaving">蓝牙设备未打开</string>
+    <string name="title_connecting">正在连接...</string>
+    <string name="title_connected_to">已连接: </string>
+    <string name="title_not_connected">未连接</string>
+    <string name="button_scan">搜索设备</string>
+
+
+
 
 
 </resources>
