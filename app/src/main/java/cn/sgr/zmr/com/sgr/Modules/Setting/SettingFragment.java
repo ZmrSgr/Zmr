@@ -19,8 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
-import cn.sgr.zmr.com.sgr.LoginActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Activity.DeviceActivity;
+import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
+import cn.sgr.zmr.com.sgr.Modules.Setting.Device.DeviceActivity;
 import cn.sgr.zmr.com.sgr.R;
 
 public class SettingFragment extends BaseFragment {

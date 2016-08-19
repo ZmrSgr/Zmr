@@ -1,4 +1,4 @@
-package cn.sgr.zmr.com.sgr.Modules.Home.Activity;
+package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,6 +14,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby.AddBaby_Activity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.Baby_Adapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.Baby;
 import cn.sgr.zmr.com.sgr.R;
@@ -70,7 +72,7 @@ public class BabyActivity extends Activity {
         adapter.setOnRecyclerViewListener(new Baby_Adapter.OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Utils.toNextActivity(BabyActivity.this,Chart.class);
+                Utils.toNextActivity(BabyActivity.this,ChartActivity.class);
             }
 
             @Override

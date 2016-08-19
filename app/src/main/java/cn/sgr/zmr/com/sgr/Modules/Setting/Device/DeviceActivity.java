@@ -1,4 +1,4 @@
-package cn.sgr.zmr.com.sgr.Modules.Home.Activity;
+package cn.sgr.zmr.com.sgr.Modules.Setting.Device;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;

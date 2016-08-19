@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +26,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Base.MyApplication;
-import cn.sgr.zmr.com.sgr.Modules.Home.Activity.BabyActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Activity.DeviceActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Activity.DeviceListActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.CirclePagerAdapter;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.BluetoothSet;
-import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.DemoView;
 
 public class HomeFragment extends BaseFragment {
@@ -77,6 +75,7 @@ public class HomeFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         intView();
+
         return view;
     }
     private void intView() {
@@ -133,12 +132,19 @@ public class HomeFragment extends BaseFragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_view_right_text:
-                Intent intent1=new Intent();
+
+//                showProgressDialog(getActivity().getFragmentManager());
+
+
+
+               Intent intent1=new Intent();
                 intent1.setClass(getActivity(), BabyActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.top_view_left_text:
-                Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
+                cancelProgressDialog();
+
+               Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
                 startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
                 break;
         }

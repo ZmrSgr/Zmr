@@ -1,8 +1,7 @@
-package cn.sgr.zmr.com.sgr;
+package cn.sgr.zmr.com.sgr.Common;
 
 import android.os.Bundle;
 import android.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -19,6 +18,7 @@ import cn.sgr.zmr.com.sgr.Modules.Health.HealhFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.HomeFragment;
 import cn.sgr.zmr.com.sgr.Modules.Messages.MessageFragment;
 import cn.sgr.zmr.com.sgr.Modules.Setting.SettingFragment;
+import cn.sgr.zmr.com.sgr.R;
 
 public class MainActivity extends BaseActivity {
 

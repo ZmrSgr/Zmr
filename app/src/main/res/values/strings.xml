@@ -21,7 +21,7 @@
     <string name="hua_unit">℉</string>
     <string name="shishi_unit">℃</string>
 
-    <string name="loading">加载中</string>
+    <string name="loading">加载中...</string>
     <string name="mobile_phone">手机号</string>
     <string name="password">密码</string>
     <string name="no_account_now_signup">还没有账户？现在注册</string>

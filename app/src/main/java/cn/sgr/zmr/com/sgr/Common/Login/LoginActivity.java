@@ -1,5 +1,4 @@
-package cn.sgr.zmr.com.sgr;
-
+package cn.sgr.zmr.com.sgr.Common.Login;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +12,9 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.sgr.zmr.com.sgr.Common.MainActivity;
+import cn.sgr.zmr.com.sgr.Common.Register.Register_Activity;
+import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 public class LoginActivity extends Activity {

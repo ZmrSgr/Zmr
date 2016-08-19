@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile project(':magicindicator')
     compile project(':jellytogglebutton')
@@ -33,8 +33,8 @@ dependencies {
     compile project(':library')
     compile project(':sublimepickerlibrary')
     compile project(':pickerview')
-//    compile project(':ProgressCirclelibrary')
-//    compile 'com.github.orangegangsters:library:1.0.0@aar'
+    //    compile project(':ProgressCirclelibrary')
+    //    compile 'com.github.orangegangsters:library:1.0.0@aar'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
@@ -43,4 +43,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.1.0'
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
     compile project(path: ':sublimepickerlibrary')
+    compile files('libs/activeandroid-3.1-beta.jar')
 }

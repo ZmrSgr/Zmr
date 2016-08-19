@@ -1,18 +1,17 @@
-package cn.sgr.zmr.com.sgr;
+package cn.sgr.zmr.com.sgr.Common;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
-import android.view.animation.ScaleAnimation;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.View.RoundImageView;
 
 public class Splash_Activity extends Activity {

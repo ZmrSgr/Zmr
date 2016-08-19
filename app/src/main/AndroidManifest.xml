@@ -12,30 +12,38 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Splash_Activity">
+        <!-- android:supportsRtl="true" -->
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="Zmr.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="2" />
+
+        <activity android:name=".Common.Splash_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Modules.Home.Activity.Chart" />
-        <activity android:name=".Modules.Home.Activity.DeviceActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Modules.Home.Module.Baby.Chart.ChartActivity" />
+        <activity android:name=".Modules.Setting.Device.DeviceActivity" />
+        <activity android:name=".Common.MainActivity" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Common.LoginActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Register_Activity"
+            android:name=".Common.Register_Activity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Modules.Home.Activity.BabyActivity" />
+        <activity android:name=".Modules.Home.Module.Baby.BabyActivity" />
         <activity
-            android:name=".Modules.Home.Activity.AddBaby_Activity"
+            android:name=".Modules.Home.Module.Baby.AddBaby.AddBaby_Activity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Modules.Home.Activity.AddHisoryActivity"
+            android:name=".Modules.Home.Module.Baby.AddHistory.AddHisoryActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Modules.Home.Activity.DeviceListActivity"></activity>
+        <activity android:name=".Modules.Home.Module.Device.DeviceListActivity"></activity>
     </application>
 
 </manifest>

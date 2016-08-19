@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Handler;
 
+import com.activeandroid.ActiveAndroid;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        ActiveAndroid.initialize(this);
 
     }
     public void addActivity(Activity activity) {
@@ -42,7 +45,6 @@ public class MyApplication extends Application {
 
     }
 
-    // ��������Activity��finish
     public void exit() {
         if (activitys != null && activitys.size() > 0) {
             for (Activity activity : activitys) {
@@ -69,5 +71,9 @@ public class MyApplication extends Application {
     {
         return mHandler;
     }
-
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ActiveAndroid.dispose();
+    }
 }

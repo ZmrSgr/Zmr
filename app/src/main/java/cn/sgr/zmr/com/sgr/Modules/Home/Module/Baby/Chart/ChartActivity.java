@@ -1,4 +1,4 @@
-package cn.sgr.zmr.com.sgr.Modules.Home.Activity;
+package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -37,12 +37,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.AddHistoryAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby.AddBaby_Activity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddHistory.AddHisoryActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.View.SublimePickerFragment;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
-import cn.sgr.zmr.com.sgr.View.MyDecoration;
 
-public class Chart extends FragmentActivity {
+public class ChartActivity extends FragmentActivity {
 
     // 高温线下标
     private final int HIGH = 0;
@@ -168,7 +169,7 @@ public class Chart extends FragmentActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.chart_user_rel:
-                Utils.toNextActivity(Chart.this,AddBaby_Activity.class);
+                Utils.toNextActivity(ChartActivity.this,AddBaby_Activity.class);
                 break;
 
             case R.id.top_view_back:
@@ -176,7 +177,7 @@ public class Chart extends FragmentActivity {
                 break;
 
             case R.id.iv_right:
-                Toast.makeText(Chart.this, "分享", Toast.LENGTH_LONG).show();
+                Toast.makeText(ChartActivity.this, "分享", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.lin_bottom:
@@ -200,7 +201,7 @@ public class Chart extends FragmentActivity {
                 Pair<Boolean, SublimeOptions> optionsPair = getOptions();
 
                 if (!optionsPair.first) { // If options are not valid
-                    Toast.makeText(Chart.this, "No pickers activated",
+                    Toast.makeText(ChartActivity.this, "No pickers activated",
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -281,7 +282,7 @@ public class Chart extends FragmentActivity {
         l.setForm(LegendForm.LINE);
 
         // 颜色
-        l.setTextColor(ContextCompat.getColor(Chart.this, R.color.them_bg));
+        l.setTextColor(ContextCompat.getColor(ChartActivity.this, R.color.them_bg));
         // x坐标轴
         XAxis xl = mChart.getXAxis();
 //        xl.setTextColor(0xff00897b);
@@ -339,8 +340,8 @@ public class Chart extends FragmentActivity {
         set1.setLineWidth(1.75f);
         set1.setCircleRadius(5f);
         set1.setCircleHoleRadius(2.5f);
-        set1.setColor(ContextCompat.getColor(Chart.this, R.color.them_bg));
-        set1.setCircleColor(ContextCompat.getColor(Chart.this, R.color.them_bg));//圆圈的颜色
+        set1.setColor(ContextCompat.getColor(ChartActivity.this, R.color.them_bg));
+        set1.setCircleColor(ContextCompat.getColor(ChartActivity.this, R.color.them_bg));//圆圈的颜色
         set1.setLabel("时间体温");
 //        set1.setHighLightColor(Color.RED);
         set1.setDrawValues(false);
