@@ -1,8 +1,13 @@
 package cn.sgr.zmr.com.sgr.Utils.util;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -11,6 +16,8 @@ import java.util.Date;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by Administrator on 2016/8/11 0011.
@@ -87,5 +94,19 @@ public class Utils {
     }
 
 
+    /**
+     * 增加fragment 到 activity里
+     *
+     * @param
+     * @return S
+     */
+    public static void addFragmentToActivity (@NonNull FragmentManager fragmentManager,
+                                              @NonNull Fragment fragment, int frameId) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(frameId, fragment);
+        transaction.commit();
+    }
 
 }

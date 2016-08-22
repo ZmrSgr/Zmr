@@ -31,10 +31,10 @@
         <activity android:name=".Modules.Setting.Device.DeviceActivity" />
         <activity android:name=".Common.MainActivity" />
         <activity
-            android:name=".Common.LoginActivity"
+            android:name=".Common.Login.LoginActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Common.Register_Activity"
+            android:name=".Common.Register.Register_Activity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Modules.Home.Module.Baby.BabyActivity" />
         <activity
