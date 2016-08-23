@@ -29,6 +29,7 @@ import cn.sgr.zmr.com.sgr.Base.MyApplication;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.CirclePagerAdapter;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListFragment;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.BluetoothSet;
 import cn.sgr.zmr.com.sgr.View.DemoView;
@@ -205,7 +206,7 @@ public class HomeFragment extends BaseFragment {
             case REQUEST_CONNECT_DEVICE:
                 if (resultCode == Activity.RESULT_OK) {
                     String address = data.getExtras()
-                            .getString(DeviceListActivity.EXTRA_DEVICE_ADDRESS);
+                            .getString(DeviceListFragment.EXTRA_DEVICE_ADDRESS);
                     mBluetoothSet.ConnectDevices(address);
                 }
                 break;

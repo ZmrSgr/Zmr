@@ -55,6 +55,13 @@ public class Device_Item_Adapter extends RecyclerView.Adapter {
         holder.device_list_content.setText(list.get(i));
     }
 
+
+    public void applyData(List<String> msgs) {
+        list.clear();
+        list.addAll(msgs);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return list.size();

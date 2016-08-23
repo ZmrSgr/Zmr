@@ -85,6 +85,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                 Intent intent1=new Intent();
                 intent1.setClass(getActivity(), Register_Activity.class);
                 startActivity(intent1);
+
                 break;
 
             case R.id.top_view_back:

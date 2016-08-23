@@ -75,6 +75,13 @@ public class Baby_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
 
+    public void applyData(List<Baby> msgs) {
+        datas.clear();
+        datas.addAll(msgs);
+        notifyDataSetChanged();
+    }
+
+
     public void removeData(int position) {
 
         datas.remove(position);

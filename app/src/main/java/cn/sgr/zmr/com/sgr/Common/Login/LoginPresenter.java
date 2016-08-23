@@ -31,6 +31,11 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
+    public void doLogin() {
+
+    }
+
+    @Override
     public void start() {
 
     }

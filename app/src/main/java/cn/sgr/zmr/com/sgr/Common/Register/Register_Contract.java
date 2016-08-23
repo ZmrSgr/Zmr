@@ -1,4 +1,4 @@
-package cn.sgr.zmr.com.sgr.Common.Login;
+package cn.sgr.zmr.com.sgr.Common.Register;
 
 import android.app.FragmentManager;
 
@@ -7,11 +7,9 @@ import cn.sgr.zmr.com.sgr.Base.BaseView;
 import cn.sgr.zmr.com.sgr.Common.Model.data.User;
 
 /**
- * Created by 沈国荣 on 2016/8/19 0019.
+ * Created by 沈国荣 on 2016/8/23 0023.
  */
-
-
-public interface LoginContract {
+public class Register_Contract {
 
     interface View extends BaseView<Presenter> {
 
@@ -30,7 +28,8 @@ public interface LoginContract {
 
         void saveUser(User user);//保存或者更新用户
 
-        void doLogin();//登录操作
+        void doRegister();//注册操作
+
 
     }
 }

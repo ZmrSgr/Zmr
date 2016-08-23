@@ -1,6 +1,5 @@
 package cn.sgr.zmr.com.sgr.Common.Login;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import butterknife.ButterKnife;
@@ -14,8 +13,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
-        ButterKnife.bind(this);
+        setContentView(R.layout.common_activity);
         initVP();
 
     }
@@ -27,7 +25,6 @@ public class LoginActivity extends BaseActivity {
             loginFragment = loginFragment.newInstance();
             Utils.addFragmentToActivity(getFragmentManager(),loginFragment, R.id.contentFrame);
         }
-
         // Create the presenter
         new LoginPresenter(this,loginFragment);
     }

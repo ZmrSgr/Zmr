@@ -21,7 +21,7 @@ public class Splash_Activity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final View startView = View.inflate(this, R.layout.activity_splash, null);
+        final View startView = View.inflate(this, R.layout.splash_activity, null);
         setContentView(startView);
         ButterKnife.bind(this);
 
