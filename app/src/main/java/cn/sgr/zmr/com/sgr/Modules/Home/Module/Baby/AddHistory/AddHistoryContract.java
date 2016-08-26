@@ -15,35 +15,19 @@ import cn.sgr.zmr.com.sgr.Modules.Home.Model.Chart;
 public interface AddHistoryContract {
     interface View extends BaseView<Presenter> {
 
+            boolean isActive();//目的是为了解决内存泄漏
 
-        boolean isActive();//目的是为了解决内存泄漏
+            void showProgressDialog(FragmentManager manager);//显示进度条
 
-        void showProgressDialog(FragmentManager manager);//显示进度条
-
-        void cancelProgressDialog();//隐藏进度条
-
-        void showBaby( List<Baby> babys );//展示baby列表
-
-        void showChart(List<Chart> charts);//显示表格数据
-
-        void showHistory();//显示物理治疗历史数据
-
-        void nextActivity(String id);//跳转宝宝详细信息，并且编辑
-
-        void nextDayChart(Chart chart);//下一天的表格信息
-
-        void preDayChart(Chart chart);//前一天的表格信息
-
-        void curryDayChart(Chart chart);//当前时间的表格信息
-    }
-
-    interface Presenter extends BasePresenter {
-        void getBabys(Baby babys);//获得宝宝信息
-        void getAllChart(List<Chart> charts);//获得全部表格信息
-        void nextActivity(int postiong);
-        void delBaby(int position);//删除宝宝
+            void cancelProgressDialog();//隐藏进度条
 
 
-    }
+            void nextActivity(String address);//跳转宝宝详细信息
+        }
+
+        interface Presenter extends BasePresenter {
+            void addBabys( List<Baby> babys);//获得宝宝列表
+            void nextActivity(int postiong);
+        }
 
 }

@@ -25,6 +25,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class Utils {
 
     private static Intent intent;
+     static long lastClickTime;
 
     /**
      * 截取日期
@@ -108,5 +109,11 @@ public class Utils {
         transaction.add(frameId, fragment);
         transaction.commit();
     }
-
+    //防止被快速多次点击
+    public static boolean isFastDoubleClick() {
+        long time = System.currentTimeMillis();
+        long timeD = time - lastClickTime;
+        lastClickTime = time;
+        return timeD <= 1000;
+    }
 }

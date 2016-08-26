@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Handler;
 
 import com.activeandroid.ActiveAndroid;
+import com.umeng.socialize.PlatformConfig;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -32,6 +33,14 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         ActiveAndroid.initialize(this);
+//        友盟分享和登录
+        //微信 appid appsecret
+        PlatformConfig.setWeixin("wxafceb940b5fd67a0", "ca3653563244ab1ab4056464446403ab");
+        //新浪微博 appkey appsecret
+        PlatformConfig.setSinaWeibo("1109305130","12bf679612df94be5a7bc6459fb93f75");
+        // QQ和Qzone appid appkey
+        PlatformConfig.setQQZone("1105570889", "vx7p91NQqmKW9YAD");
+
 
     }
     public void addActivity(Activity activity) {

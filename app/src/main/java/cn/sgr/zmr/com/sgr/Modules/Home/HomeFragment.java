@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 
+
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -158,21 +159,26 @@ public class HomeFragment extends BaseFragment {
         mBluetoothSetSession = (MyApplication) getActivity().getApplication();
         mBluetoothSetSession.setBluetoothSet(mBluetoothSet);
         mBluetoothSetSession.setHandler(mHandler);
-        mBluetoothSet.openBluetooth();
 
-        if (!mBluetoothSet.isSupported()){
-            Toast.makeText(getActivity(), "该设备部支持蓝牙", Toast.LENGTH_SHORT).show();
+        if(mBluetoothSet!=null){
+
+            mBluetoothSet.openBluetooth();
+            if (!mBluetoothSet.isSupported()){
+                Toast.makeText(getActivity(), "该设备部支持蓝牙", Toast.LENGTH_SHORT).show();
 
 //	        	return;
+            }
+
+            if (!mBluetoothSet.isConnected()){
+                Toast.makeText(getActivity(), "没有可连接的蓝牙设备!", Toast.LENGTH_SHORT).show();
+//				return;
+            }else{
+                //显示数据的线程
+                Toast.makeText(getActivity(), "显示数据!", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
-        if (!mBluetoothSet.isConnected()){
-            Toast.makeText(getActivity(), "没有可连接的蓝牙设备!", Toast.LENGTH_SHORT).show();
-//				return;
-        }else{
-            //显示数据的线程
-            Toast.makeText(getActivity(), "显示数据!", Toast.LENGTH_SHORT).show();
-        }
 
 
     }

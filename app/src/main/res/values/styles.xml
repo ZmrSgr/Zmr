@@ -39,5 +39,9 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
+    <!-- 友盟主题样式 -->
+
+    <style name="Theme.UMDefault" parent="android:style/Theme.NoTitleBar"></style>
+
 
 </resources>

@@ -3,6 +3,7 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -29,6 +30,12 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.utils.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -204,7 +211,19 @@ public class ChartFragment extends Fragment implements ChartContract.View{
                 break;
 
             case R.id.iv_right:
-                Toast.makeText(getActivity(), "分享", Toast.LENGTH_LONG).show();
+                new ShareAction(getActivity())
+                        .setDisplayList(SHARE_MEDIA.SINA,
+                                SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE,
+                                SHARE_MEDIA.WEIXIN,
+                                SHARE_MEDIA.WEIXIN_CIRCLE,
+                                SHARE_MEDIA.WEIXIN_FAVORITE)
+                        .withTitle(getActivity().getResources().getString(R.string.app_name))
+                        .withText("——来自友盟分享面板")
+                        .withMedia(
+                                new UMImage(getActivity(),
+                                        "http://dev.umeng.com/images/tab2_1.png"))
+                        .withTargetUrl("https://wsq.umeng.com/")
+                        .setCallback(umShareListener).open();
                 break;
 
             case R.id.lin_bottom:
@@ -243,7 +262,37 @@ public class ChartFragment extends Fragment implements ChartContract.View{
                 break;
         }
     }
+    private UMShareListener umShareListener = new UMShareListener() {
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
 
+
+            Log.d("plat", "platform" + platform);
+            if (platform.name().equals("WEIXIN_FAVORITE")) {
+                Toast.makeText(getActivity(), platform + " 收藏成功啦",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), platform + " 分享成功啦",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(getActivity(), platform + " 分享失败啦",
+                    Toast.LENGTH_SHORT).show();
+            if (t != null) {
+                System.out.println("分享失败"+t.getMessage());
+                Log.d("throw", "throw:" + t.getMessage());
+            }
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(getActivity(), platform + " 分享取消了",
+                    Toast.LENGTH_SHORT).show();
+        }
+    };
     /**
      * 获取日期
      *
@@ -307,7 +356,6 @@ public class ChartFragment extends Fragment implements ChartContract.View{
 
         // 线性，也可是圆
         l.setForm(Legend.LegendForm.LINE);
-
         // 颜色
         l.setTextColor(ContextCompat.getColor(getActivity(), R.color.them_bg));
         // x坐标轴
@@ -367,6 +415,8 @@ public class ChartFragment extends Fragment implements ChartContract.View{
         set1.setLineWidth(1.75f);
         set1.setCircleRadius(5f);
         set1.setCircleHoleRadius(2.5f);
+
+
         set1.setColor(ContextCompat.getColor(getActivity(), R.color.them_bg));
         set1.setCircleColor(ContextCompat.getColor(getActivity(), R.color.them_bg));//圆圈的颜色
         set1.setLabel("时间体温");
@@ -413,12 +463,12 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     }
 
     @Override
-    public void showChart(List<Chart> charts) {
+    public void showChart(LineData data) {
 
     }
 
     @Override
-    public void showHistory() {
+    public void showHistory(ArrayList<EventDatas> items) {
 
     }
 
@@ -446,5 +496,12 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     public void setPresenter(ChartContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
 
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /** attention to this below ,must add this **/
+        UMShareAPI.get(getActivity()).onActivityResult(requestCode, resultCode, data);
+        Log.d("result", "onActivityResult");
     }
 }

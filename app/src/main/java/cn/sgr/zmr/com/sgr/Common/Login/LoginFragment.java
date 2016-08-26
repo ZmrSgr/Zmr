@@ -15,6 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tencent.tauth.AuthActivity;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.utils.Log;
+
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -49,6 +57,17 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @BindView(R.id.login_et_password)
     EditText login_et_password;
 
+    @BindView(R.id.login_qq)
+    ImageView login_qq;
+
+    @BindView(R.id.login_weixin)
+    ImageView login_weixin;
+
+    @BindView(R.id.login_weibo)
+    ImageView login_weibo;
+
+    private UMShareAPI mShareAPI = null;
+
 
     private LoginContract.Presenter mPresenter;
 
@@ -58,7 +77,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
         ButterKnife.bind(this, view);
         initView();
-        
+        /** init auth api**/
+        mShareAPI = UMShareAPI.get(getActivity());
         return view;
     }
 
@@ -78,7 +98,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     }
 
 
-    @OnClick({R.id.tv_signup,R.id.top_view_back })
+    @OnClick({R.id.tv_signup,R.id.top_view_back,R.id.login_weibo,R.id.login_qq,R.id.login_weixin })
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_signup:
@@ -86,6 +106,20 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
                 intent1.setClass(getActivity(), Register_Activity.class);
                 startActivity(intent1);
 
+                break;
+
+            case R.id.login_weibo:
+               ;
+                mShareAPI.doOauthVerify(getActivity(),  SHARE_MEDIA.SINA, umAuthListener);
+
+                break;
+
+            case R.id.login_qq:
+                mShareAPI.doOauthVerify(getActivity(), SHARE_MEDIA.QQ, umAuthListener);
+                break;
+
+            case R.id.login_weixin:
+                mShareAPI.doOauthVerify(getActivity(),  SHARE_MEDIA.WEIXIN, umAuthListener);
                 break;
 
             case R.id.top_view_back:
@@ -148,4 +182,30 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     public void cancelProgressDialog() {
         cancelProgressDialog();
     }
+
+    /** auth callback interface**/
+    private UMAuthListener umAuthListener = new UMAuthListener() {
+        @Override
+        public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+            Toast.makeText(getActivity(), "Authorize succeed", Toast.LENGTH_SHORT).show();
+            Log.d("user info","user info:"+data.toString());
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+            Toast.makeText( getActivity(), "Authorize fail", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform, int action) {
+            Toast.makeText( getActivity(), "Authorize cancel", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mShareAPI.onActivityResult(requestCode, resultCode, data);
+    }
+
 }

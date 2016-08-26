@@ -29,6 +29,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddHistory.AddHistoryFragment;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddHistory.AddHistoryPresenter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyPresenter;
 import cn.sgr.zmr.com.sgr.R;
@@ -37,11 +39,6 @@ import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.RoundImageView;
 
 public class AddBaby_Activity extends BaseActivity {
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +53,10 @@ public class AddBaby_Activity extends BaseActivity {
         AddBabyFragment babyFragment = (AddBabyFragment) getFragmentManager().findFragmentById(R.id.contentFrame);
         if (babyFragment == null) {
             babyFragment = babyFragment.newInstance();
-            Utils.addFragmentToActivity(getFragmentManager(),babyFragment, R.id.contentFrame);
+            Utils.addFragmentToActivity(getFragmentManager(), babyFragment, R.id.contentFrame);
         }
         // Create the presenter
-        new AddBabyPresenter(this,babyFragment);
+        new AddBabyPresenter(this, babyFragment);
     }
 
 }

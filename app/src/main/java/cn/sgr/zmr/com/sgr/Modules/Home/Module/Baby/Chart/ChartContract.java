@@ -2,12 +2,16 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart;
 
 import android.app.FragmentManager;
 
+import com.github.mikephil.charting.data.LineData;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.sgr.zmr.com.sgr.Base.BasePresenter;
 import cn.sgr.zmr.com.sgr.Base.BaseView;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.Baby;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.Chart;
+import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.
@@ -23,9 +27,9 @@ public interface ChartContract {
 
             void showBaby( List<Baby> babys );//展示baby列表
 
-            void showChart(List<Chart> charts);//显示表格数据
+            void showChart( LineData data);//显示表格数据
 
-            void showHistory();//显示物理治疗历史数据
+            void showHistory( ArrayList<EventDatas> items);//显示物理治疗历史数据
 
             void nextActivity(String id);//跳转宝宝详细信息，并且编辑
 
@@ -38,9 +42,10 @@ public interface ChartContract {
 
         interface Presenter extends BasePresenter {
             void getBabys(Baby babys);//获得宝宝信息
-            void getAllChart(List<Chart> charts);//获得全部表格信息
+            void getAllChart();//获得全部表格信息
             void nextActivity(int postiong);
             void delBaby(int position);//删除宝宝
+            void getHistory();//获取物理治疗数据
 
 
         }

@@ -117,6 +117,9 @@ public class BluetoothSet {
 	 * 打开本地蓝牙设备
 	 */
 	public void openBluetooth(){
+		if (mBluetoothAdapter == null) {
+			return;
+		}
 		if (!mBluetoothAdapter.isEnabled()){
 
 			mDialog = new ProgressDialog(mContext);
