@@ -61,7 +61,8 @@ public class DeviceActivity extends BaseActivity {
 
 
         recyclerView.setHasFixedSize(true);
-        swipeRefreshLayout.setColorSchemeColors( ContextCompat.getColor(this, R.color.them_bg));
+
+        swipeRefreshLayout.setColorSchemeColors(  getResources().getColor(R.color.them_bg));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

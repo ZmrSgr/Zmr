@@ -1,22 +1,8 @@
 package cn.sgr.zmr.com.sgr.Common.Register;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseActivity;
-import cn.sgr.zmr.com.sgr.Common.Login.LoginFragment;
-import cn.sgr.zmr.com.sgr.Common.Login.LoginPresenter;
-import cn.sgr.zmr.com.sgr.Common.MainActivity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 

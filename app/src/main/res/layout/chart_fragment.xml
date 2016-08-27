@@ -5,9 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        android:id="@+id/top_view"
-        layout="@layout/top_view" />
+
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout
         android:layout_margin="5dp"

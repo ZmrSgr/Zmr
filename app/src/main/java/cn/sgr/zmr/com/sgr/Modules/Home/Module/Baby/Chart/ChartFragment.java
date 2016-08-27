@@ -72,29 +72,12 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     @BindView(R.id.charts)
     LineChart mChart;
 
-    @BindView(R.id.top_view_back)
-    ImageView top_view_back;
-
-    @BindView(R.id.iv_right)
-    ImageView iv_right;
-
-
     @BindView(R.id.btn_up)
     ImageView btn_up;
 
     //时间轴
     @BindView(R.id.chart_list)
     RecyclerView chart_list;
-
-    @BindView(R.id.top_view_right_text)
-    TextView top_view_right_text;
-
-    @BindView(R.id.top_view_left_text)
-    TextView top_view_left_text;
-
-    @BindView(R.id.top_view_title)
-    TextView top_view_title;
-
 
     @BindView(R.id.sliding_layout)
     SlidingUpPanelLayout layout;
@@ -146,12 +129,7 @@ public class ChartFragment extends Fragment implements ChartContract.View{
 
 
     private void intitView() {
-        top_view_title.setText("体温历史记录");
-        top_view_back.setVisibility(View.VISIBLE);
-        top_view_left_text.setVisibility(View.GONE);
-        iv_right.setImageResource(R.drawable.btn_share_friend);
-        iv_right.setVisibility(View.VISIBLE);
-        top_view_right_text.setVisibility(View.GONE);
+
         //时间轴
         chart_list.setHasFixedSize(true);
         chart_list.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -199,32 +177,13 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     }
 
 
-    @OnClick({R.id.top_view_back, R.id.iv_right, R.id.lin_bottom, R.id.time_chart, R.id.time_left, R.id.time_right,R.id.chart_user_rel})
+    @OnClick({R.id.lin_bottom, R.id.time_chart, R.id.time_left, R.id.time_right,R.id.chart_user_rel})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.chart_user_rel:
                 Utils.toNextActivity(getActivity(),AddBaby_Activity.class);
                 break;
 
-            case R.id.top_view_back:
-                getActivity().finish();
-                break;
-
-            case R.id.iv_right:
-                new ShareAction(getActivity())
-                        .setDisplayList(SHARE_MEDIA.SINA,
-                                SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE,
-                                SHARE_MEDIA.WEIXIN,
-                                SHARE_MEDIA.WEIXIN_CIRCLE,
-                                SHARE_MEDIA.WEIXIN_FAVORITE)
-                        .withTitle(getActivity().getResources().getString(R.string.app_name))
-                        .withText("——来自友盟分享面板")
-                        .withMedia(
-                                new UMImage(getActivity(),
-                                        "http://dev.umeng.com/images/tab2_1.png"))
-                        .withTargetUrl("https://wsq.umeng.com/")
-                        .setCallback(umShareListener).open();
-                break;
 
             case R.id.lin_bottom:
                 Utils.toNextActivity(getActivity(),AddHisoryActivity.class);
@@ -262,37 +221,7 @@ public class ChartFragment extends Fragment implements ChartContract.View{
                 break;
         }
     }
-    private UMShareListener umShareListener = new UMShareListener() {
-        @Override
-        public void onResult(SHARE_MEDIA platform) {
 
-
-            Log.d("plat", "platform" + platform);
-            if (platform.name().equals("WEIXIN_FAVORITE")) {
-                Toast.makeText(getActivity(), platform + " 收藏成功啦",
-                        Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(getActivity(), platform + " 分享成功啦",
-                        Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        @Override
-        public void onError(SHARE_MEDIA platform, Throwable t) {
-            Toast.makeText(getActivity(), platform + " 分享失败啦",
-                    Toast.LENGTH_SHORT).show();
-            if (t != null) {
-                System.out.println("分享失败"+t.getMessage());
-                Log.d("throw", "throw:" + t.getMessage());
-            }
-        }
-
-        @Override
-        public void onCancel(SHARE_MEDIA platform) {
-            Toast.makeText(getActivity(), platform + " 分享取消了",
-                    Toast.LENGTH_SHORT).show();
-        }
-    };
     /**
      * 获取日期
      *
@@ -357,7 +286,7 @@ public class ChartFragment extends Fragment implements ChartContract.View{
         // 线性，也可是圆
         l.setForm(Legend.LegendForm.LINE);
         // 颜色
-        l.setTextColor(ContextCompat.getColor(getActivity(), R.color.them_bg));
+        l.setTextColor(  getResources().getColor(R.color.them_bg));
         // x坐标轴
         XAxis xl = mChart.getXAxis();
 //        xl.setTextColor(0xff00897b);
@@ -417,8 +346,8 @@ public class ChartFragment extends Fragment implements ChartContract.View{
         set1.setCircleHoleRadius(2.5f);
 
 
-        set1.setColor(ContextCompat.getColor(getActivity(), R.color.them_bg));
-        set1.setCircleColor(ContextCompat.getColor(getActivity(), R.color.them_bg));//圆圈的颜色
+        set1.setColor(  getResources().getColor(R.color.them_bg));
+        set1.setCircleColor(  getResources().getColor(R.color.them_bg));//圆圈的颜色
         set1.setLabel("时间体温");
 //        set1.setHighLightColor(Color.RED);
         set1.setDrawValues(false);
@@ -496,12 +425,5 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     public void setPresenter(ChartContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
 
-    }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        /** attention to this below ,must add this **/
-        UMShareAPI.get(getActivity()).onActivityResult(requestCode, resultCode, data);
-        Log.d("result", "onActivityResult");
     }
 }

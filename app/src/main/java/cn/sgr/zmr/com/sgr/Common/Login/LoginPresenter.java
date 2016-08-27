@@ -18,10 +18,9 @@ public class LoginPresenter implements LoginContract.Presenter {
     @NonNull
     private final LoginContract.View loginView;
     Context context;
-    public LoginPresenter(Context contexts, LoginContract.View loginViews) {
+    public LoginPresenter(LoginContract.View loginViews) {
         this.loginModel = new CommonImp();
         this.loginView = loginViews;
-        this.context = contexts;
         loginView.setPresenter(this);
     }
 

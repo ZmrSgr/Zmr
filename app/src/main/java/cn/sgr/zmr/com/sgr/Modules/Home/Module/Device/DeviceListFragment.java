@@ -129,7 +129,7 @@ public class DeviceListFragment extends BaseFragment implements DeviceListContra
         DeviceAdapter = new Device_Item_Adapter(getActivity(), new ArrayList<String>());
         recycler_device.setAdapter(DeviceAdapter);
         DeviceAdapter.setOnRecyclerViewListener(this);
-        refreshLayout.setColorSchemeColors(ContextCompat.getColor(getActivity(), R.color.them_bg));
+        refreshLayout.setColorSchemeColors(  getResources().getColor(R.color.them_bg));
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

@@ -107,7 +107,7 @@ public class HomeFragment extends BaseFragment {
         //蓝牙初始化
         initBluetooth();
 
-        home_temp.setBackgroundColor(ContextCompat.getColor(getActivity(),R.color.withe));
+        home_temp.setBackgroundColor(  getResources().getColor(R.color.white));
         home_temp.setTextSize(40);
 //        home_temp.setTextColor( ContextCompat.getColor(getActivity(),R.color.them_bg));
         home_temp.setTextMarginLeft(20);
