@@ -114,6 +114,6 @@ public class Utils {
         long time = System.currentTimeMillis();
         long timeD = time - lastClickTime;
         lastClickTime = time;
-        return timeD <= 1000;
+        return timeD <= 500;
     }
 }

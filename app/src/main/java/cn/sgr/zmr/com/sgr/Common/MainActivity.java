@@ -1,5 +1,6 @@
 package cn.sgr.zmr.com.sgr.Common;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.app.FragmentTransaction;
 import android.view.KeyEvent;
@@ -20,7 +21,7 @@ import cn.sgr.zmr.com.sgr.Modules.Messages.MessageFragment;
 import cn.sgr.zmr.com.sgr.Modules.Setting.SettingFragment;
 import cn.sgr.zmr.com.sgr.R;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends Activity {
 
     @BindView(R.id.home_layout)
     View home_layout;

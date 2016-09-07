@@ -33,7 +33,7 @@ public class AddHisoryActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_history_fragment);
+        setContentView(R.layout.common_activity);
         ButterKnife.bind(this);
         initPV();
     }

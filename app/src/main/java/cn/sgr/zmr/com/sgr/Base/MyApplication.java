@@ -5,6 +5,7 @@ import android.app.Application;
 import android.os.Handler;
 
 import com.activeandroid.ActiveAndroid;
+import com.testin.agent.TestinAgent;
 import com.umeng.socialize.PlatformConfig;
 
 import java.util.LinkedList;
@@ -32,6 +33,9 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        //初始化云测
+        TestinAgent.init(this, "1fbcb75bf4e3ad1005fcfd26072fc7dc", "");
+        //初始化activite数据库
         ActiveAndroid.initialize(this);
 //        友盟分享和登录
         //微信 appid appsecret
