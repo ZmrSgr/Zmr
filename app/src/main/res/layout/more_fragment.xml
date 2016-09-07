@@ -1,50 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/top_view"
         layout="@layout/top_view" />
 
 
-
-
     <RelativeLayout
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/set_lost"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-
-        <com.nightonke.jellytogglebutton.JellyToggleButton
-            android:id="@+id/jtb_lost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:jtbLeftText="开"
-            app:jtbRightText="关"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            />
-    </RelativeLayout>
-
-    <include layout="@layout/line"/>
-
-    <RelativeLayout
-        android:id="@+id/item_message"
+        android:id="@+id/rel_reset_pwd"
         android:layout_width="match_parent"
         android:layout_height="45dp"
 
@@ -58,63 +25,16 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
 
-            android:text="@string/set_fever"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <com.nightonke.jellytogglebutton.JellyToggleButton
-            android:id="@+id/jtb_fever"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:jtbLeftText="开"
-            app:jtbRightText="关"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            />
-    </RelativeLayout>
-
-    <include layout="@layout/line"/>
-
-    <RelativeLayout
-        android:id="@+id/rel_fever_temp"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-
-            android:text="@string/set_fever_temp"
+            android:text="@string/set_retsetpwd"
             android:textColor="@color/them_text"
             android:textSize="17sp"/>
 
         <ImageView
-            android:id="@+id/iv_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ico_next"/>
-
-
-        <TextView
-            android:id="@+id/text_tem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/iv_right"
-            android:gravity="right"
-            android:textColor="@color/them_text"
-            android:textSize="15sp" />
 
 
     </RelativeLayout>
@@ -123,7 +43,7 @@
         android:id="@+id/line"/>
 
     <RelativeLayout
-        android:id="@+id/rel_fever_way"
+        android:id="@+id/rel_update"
         android:layout_width="match_parent"
         android:layout_height="45dp"
 
@@ -135,52 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:text="@string/set_type"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <ImageView
-            android:id="@+id/iv_right_way"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
-
-
-        <TextView
-            android:id="@+id/text_way"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/iv_right_way"
-            android:gravity="right"
-            android:textColor="@color/them_text"
-            android:textSize="15sp" />
-
-    </RelativeLayout>
-
-    <include layout="@layout/line"/>
-
-
-
-
-    <RelativeLayout
-        android:id="@+id/rel_help"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/set_help"
+            android:text="@string/set_update"
             android:textColor="@color/them_text"
             android:textSize="17sp"/>
 
@@ -197,9 +72,8 @@
 
 
 
-
     <RelativeLayout
-        android:id="@+id/item_settings_device"
+        android:id="@+id/rel_feedback"
         android:layout_width="match_parent"
         android:layout_height="45dp"
 
@@ -211,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:text="@string/set_decive"
+            android:text="@string/set_feedback"
             android:textColor="@color/them_text"
             android:textSize="17sp"/>
 
@@ -228,7 +102,7 @@
 
 
     <RelativeLayout
-        android:id="@+id/item_settings_about"
+        android:id="@+id/rel_about_us"
         android:layout_width="match_parent"
         android:layout_height="45dp"
 
@@ -240,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:text="@string/set_more"
+            android:text="@string/set_about_us"
             android:textColor="@color/them_text"
             android:textSize="17sp"/>
 
@@ -254,5 +128,50 @@
     </RelativeLayout>
 
     <include layout="@layout/line"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_settings_disclaimer"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/set_disclaimer"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+
+
+    <Button
+        android:padding="10dp"
+        android:id="@+id/btn_login_out"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/textbg_select"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:text="@string/login_out"
+        android:textColor="#ffffff" />
+
 
 </LinearLayout>
