@@ -1,17 +1,12 @@
-package cn.sgr.zmr.com.sgr.Modules.Setting.Help;
+package cn.sgr.zmr.com.sgr.Modules.Setting.Device;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +17,7 @@ import cn.sgr.zmr.com.sgr.R;
 /**
  * Created by 沈国荣 on 2016/9/7 0007.
  */
-public class HelpFragment extends BaseFragment implements HelpContract.View{
+public class DeviceFragment extends BaseFragment implements DeviceContract.View{
 
     @BindView(R.id.top_view_back)
     ImageView top_view_back;
@@ -30,17 +25,14 @@ public class HelpFragment extends BaseFragment implements HelpContract.View{
     @BindView(R.id.top_view_title)
     TextView top_view_title;
 
-    @BindView(R.id.wv_help)
-    WebView wv_help;
-
-    private HelpContract.Presenter mPresenter;
+    private DeviceContract.Presenter mPresenter;
 
     //单例 模式
-    public static HelpFragment newInstance() {
-        return new HelpFragment();
+    public static DeviceFragment newInstance() {
+        return new DeviceFragment();
     }
     //   构造方法
-    public HelpFragment() {
+    public DeviceFragment() {
         // Required empty public constructor
     }
 
@@ -49,22 +41,15 @@ public class HelpFragment extends BaseFragment implements HelpContract.View{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.help_fragment, container, false);
+        View view = inflater.inflate(R.layout.device_fragment, container, false);
         ButterKnife.bind(this, view);
         initView();
         return view;
     }
     //初始化控件
     private void initView() {
-        top_view_title.setText(getResources().getString(R.string.set_help));
+        top_view_title.setText(getResources().getString(R.string.set_decive ));
         top_view_back.setVisibility(View.VISIBLE);
-        wv_help.setWebChromeClient(new WebChromeClient());
-        wv_help.getSettings().setJavaScriptEnabled(true);
-        wv_help.getSettings().setAllowFileAccess(true);
-        wv_help.getSettings().setPluginState(WebSettings.PluginState.ON);
-
-
-        wv_help.loadUrl("http://app.120.net/");
     }
 
     //监听按钮
@@ -84,7 +69,7 @@ public class HelpFragment extends BaseFragment implements HelpContract.View{
     }
 
     @Override
-    public void setPresenter(HelpContract.Presenter presenter) {
+    public void setPresenter(DeviceContract.Presenter presenter) {
 
     }
 }

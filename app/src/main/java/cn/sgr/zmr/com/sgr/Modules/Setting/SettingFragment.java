@@ -56,6 +56,9 @@ public class SettingFragment extends BaseFragment {
     @BindView(R.id.line)
     View   line;
 
+    @BindView(R.id.line1)
+    View   line1;
+
     @BindView(R.id.item_settings_about)
     View   item_settings_about;
 
@@ -111,19 +114,29 @@ public class SettingFragment extends BaseFragment {
         jtb_lost.setTextMarginLeft(20);
         jtb_lost.setTextMarginRight(20);
 
+        rel_fever_temp.setVisibility(View.GONE);
+        rel_fever_way.setVisibility(View.GONE);
+        line.setVisibility(View.GONE);
+        line1.setVisibility(View.GONE);
+
         jtb_fever.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
             @Override
             public void onStateChange(float process, State state, JellyToggleButton jtb) {
                 if (state.equals(State.LEFT)) {
-                    rel_fever_temp.setVisibility(View.VISIBLE);
-                    rel_fever_way.setVisibility(View.VISIBLE);
-                    line.setVisibility(View.VISIBLE);
-
-                }
-                if (state.equals(State.RIGHT)) {
                     rel_fever_temp.setVisibility(View.GONE);
                     rel_fever_way.setVisibility(View.GONE);
                     line.setVisibility(View.GONE);
+                    line1.setVisibility(View.GONE);
+                }
+                if (state.equals(State.RIGHT)) {
+
+
+                    rel_fever_temp.setVisibility(View.VISIBLE);
+                    rel_fever_way.setVisibility(View.VISIBLE);
+                    line.setVisibility(View.VISIBLE);
+                    line1.setVisibility(View.VISIBLE);
+
+
                 }
 
             }
@@ -145,7 +158,7 @@ public class SettingFragment extends BaseFragment {
 
 
         //       体重
-        for (int i2 = 35; i2 < 45; i2++) {
+        for (int i2 = 32; i2 < 45; i2++) {
             ArrayList<String> options2Items_weigh=new ArrayList<>();
             Weightoptions1Items.add(i2+"");
             for (int i3 = 0; i3 < 10; i3++) {

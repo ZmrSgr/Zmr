@@ -1,6 +1,7 @@
 package cn.sgr.zmr.com.sgr.Modules.Setting.More;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
+import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
 import cn.sgr.zmr.com.sgr.Common.MainActivity;
 import cn.sgr.zmr.com.sgr.Common.Register.Register_Contract;
 import cn.sgr.zmr.com.sgr.Modules.Setting.More.Contract.ContractActivity;
@@ -92,6 +94,13 @@ public class MoreFragment extends BaseFragment implements MoreContract.View{
                 Utils.toNextActivity(getActivity(), RetsetPwdActivity.class);
                 break;
             case R.id.rel_update:
+                showProgressDialog(getFragmentManager());
+                new Handler().postDelayed(new Runnable() {//延时0.5秒显示
+                    public void run() {
+                       cancelProgressDialog();
+                    }
+                }, 1000);
+
                 Toast.makeText(getActivity(),"软件更新",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rel_feedback:
@@ -104,7 +113,7 @@ public class MoreFragment extends BaseFragment implements MoreContract.View{
                 Utils.toNextActivity(getActivity(), DisclaimerActivity.class);
                 break;
             case R.id.btn_login_out:
-                Toast.makeText(getActivity(),"账号登出",Toast.LENGTH_SHORT).show();
+                Utils.toNextActivity(getActivity(), LoginActivity.class);
                 break;
 
 

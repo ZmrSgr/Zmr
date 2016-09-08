@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nightonke.jellytogglebutton.JellyToggleButton;
+import com.nightonke.jellytogglebutton.State;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,6 +31,12 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
     TextView top_view_title;
 
     private AlarmWayContract.Presenter mPresenter;
+
+    @BindView(R.id.jtb_fever)
+    JellyToggleButton   jtb_fever;
+
+    @BindView(R.id.jtb_lost)
+    JellyToggleButton   jtb_lost;
 
     //单例 模式
     public static AlarmWayFragment newInstance() {
@@ -52,6 +61,47 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
     private void initView() {
         top_view_title.setText(getResources().getString(R.string.set_type));
         top_view_back.setVisibility(View.VISIBLE);
+
+        jtb_lost.setLeftBackgroundColor(  getResources().getColor(R.color.them_bg));
+        jtb_lost.setRightBackgroundColor(  getResources().getColor(R.color.them_bg));
+        jtb_fever.setLeftBackgroundColor(   getResources().getColor(R.color.them_bg));
+        jtb_fever.setRightBackgroundColor(   getResources().getColor(R.color.them_bg));
+        jtb_lost.setTextSize(40);
+        jtb_fever.setTextSize(40);
+        jtb_fever.setTextColor(  getResources().getColor(R.color.them_bg));
+        jtb_lost.setTextColor(  getResources().getColor(R.color.them_bg));
+        jtb_fever.setTextMarginLeft(20);
+        jtb_fever.setTextMarginRight(20);
+        jtb_lost.setTextMarginLeft(20);
+        jtb_lost.setTextMarginRight(20);
+
+        jtb_fever.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
+            @Override
+            public void onStateChange(float process, State state, JellyToggleButton jtb) {
+                if (state.equals(State.LEFT)) {
+
+
+                }
+                if (state.equals(State.RIGHT)) {
+
+                }
+
+            }
+        });
+
+        jtb_lost.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
+            @Override
+            public void onStateChange(float process, State state, JellyToggleButton jtb) {
+                if (state.equals(State.LEFT)) {
+
+                    Toast.makeText(getActivity(), "Left!", Toast.LENGTH_SHORT).show();
+                }
+                if (state.equals(State.RIGHT)) {
+                    Toast.makeText(getActivity(), "RIGHT!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
     //监听按钮

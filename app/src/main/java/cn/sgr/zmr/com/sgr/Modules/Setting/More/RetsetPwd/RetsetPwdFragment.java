@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,18 @@ public class RetsetPwdFragment extends BaseFragment implements RetsetPwdContract
 
     @BindView(R.id.top_view_title)
     TextView top_view_title;
+
+    @BindView(R.id.et_currypwd)
+    EditText et_currypwd;
+
+    @BindView(R.id.et_new_pwd)
+    EditText et_new_pwd;
+
+    @BindView(R.id.et_c_newpwd)
+    EditText et_c_newpwd;
+
+    @BindView(R.id.btn_save)
+    Button btn_save;
 
 
     private RetsetPwdContract.Presenter mPresenter;
@@ -56,11 +69,39 @@ public class RetsetPwdFragment extends BaseFragment implements RetsetPwdContract
     }
 
     //监听按钮
-    @OnClick({R.id.top_view_back})
+    @OnClick({R.id.top_view_back,R.id.btn_save})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_view_back:
                 getActivity().finish();
+                break;
+            case R.id.btn_save:
+                String now_password = et_currypwd.getText().toString().trim();
+                String new_password = et_new_pwd.getText().toString().trim();
+                String re_new_password = et_c_newpwd.getText().toString().trim();
+
+                if ("".equals(now_password)) {
+                    Toast.makeText(getActivity(),getString(R.string.input_password),Toast.LENGTH_SHORT).show();
+                    et_currypwd.requestFocus();
+                    et_currypwd.setText("");
+                }
+                else if (now_password.length() < 6 || now_password.length() > 20) {
+                    Toast.makeText(getActivity(),getString(R.string.password_wrong_format_hint),Toast.LENGTH_SHORT).show();
+                    et_currypwd.requestFocus();
+                } else if ("".equals(new_password)) {
+                    Toast.makeText(getActivity(),getString(R.string.input_new_password),Toast.LENGTH_SHORT).show();
+                    et_new_pwd.requestFocus();
+                    et_new_pwd.setText("");
+                }else if (new_password.length() < 6 || new_password.length() > 20) {
+                    Toast.makeText(getActivity(),getString(R.string.new_password_wrong_format_hint),Toast.LENGTH_SHORT).show();
+                    et_new_pwd.requestFocus();
+                }else if (!new_password.equals(re_new_password)) {
+                    Toast.makeText(getActivity(),getString(R.string.two_passwords_differ_hint),Toast.LENGTH_SHORT).show();
+                    et_c_newpwd.requestFocus();
+                }else{
+                    Toast.makeText(getActivity(),"提交成功",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
 
         }

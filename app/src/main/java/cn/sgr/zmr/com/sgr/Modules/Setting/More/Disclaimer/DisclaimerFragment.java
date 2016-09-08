@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +35,9 @@ public class DisclaimerFragment extends BaseFragment implements DisclaimerContra
     @BindView(R.id.top_view_title)
     TextView top_view_title;
 
+    @BindView(R.id.wv_help)
+    WebView wv_help;
+
 
     private DisclaimerContract.Presenter mPresenter;
 
@@ -58,6 +64,13 @@ public class DisclaimerFragment extends BaseFragment implements DisclaimerContra
     private void initView() {
         top_view_title.setText(getResources().getString(R.string.set_disclaimer));
         top_view_back.setVisibility(View.VISIBLE);
+        wv_help.setWebChromeClient(new WebChromeClient());
+        wv_help.getSettings().setJavaScriptEnabled(true);
+        wv_help.getSettings().setAllowFileAccess(true);
+        wv_help.getSettings().setPluginState(WebSettings.PluginState.ON);
+
+
+        wv_help.loadUrl("http://app.120.net/");
     }
 
     //监听按钮

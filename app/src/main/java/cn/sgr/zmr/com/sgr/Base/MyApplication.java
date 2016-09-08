@@ -34,7 +34,7 @@ public class MyApplication extends Application {
         super.onCreate();
         instance = this;
         //初始化云测
-        TestinAgent.init(this, "1fbcb75bf4e3ad1005fcfd26072fc7dc", "");
+        TestinAgent.init(this, "019cc0a31ffab5740c685c6cf3a2ae18", null);
         //初始化activite数据库
         ActiveAndroid.initialize(this);
 //        友盟分享和登录
