@@ -9,4 +9,11 @@
         android:id="@+id/top_view"
         layout="@layout/top_view" />
 
+    <WebView
+        android:hardwareAccelerated="true"
+        android:id="@+id/wv_help"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp" />
+
 </LinearLayout>

@@ -1,0 +1,49 @@
+<com.skyfishjy.library.RippleBackground
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/content"
+    app:rb_color="@color/colorPrimary"
+    app:rb_radius="32dp"
+    app:rb_rippleAmount="6"
+    app:rb_duration="3000"
+    app:rb_scale="6">
+
+
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/centerImage"
+        android:src="@drawable/talk_speech_big_normal"/>
+
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@id/centerImage"
+
+        android:gravity="center"
+        android:textColor="@color/them_text"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/centerImage"
+
+        android:gravity="center"
+        android:text="@string/press_ask"
+        android:textColor="@color/them_text"
+        android:textSize="18dp" />
+
+
+
+</com.skyfishjy.library.RippleBackground>

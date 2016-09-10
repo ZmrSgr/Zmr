@@ -8,12 +8,25 @@
     <string name="bottom_message">消息</string>
 
     <string name="bottom_set">设置</string>
+
+    <string name="set_voice">声音</string>
+    <string name="set_shake">震动</string>
+
+
     <string name="set_lost">防丢功能</string>
     <string name="set_fever">发烧报警</string>
     <string name="set_fever_temp">报警温度</string>
     <string name="set_type">报警方式</string>
     <string name="set_decive">设备</string>
+    <string name="set_help">使用帮助</string>
     <string name="set_about">关于</string>
+    <string name="set_more">更多</string>
+    <string name="set_retsetpwd">重置密码</string>
+    <string name="set_update">版本更新</string>
+    <string name="set_about_us">联系我们</string>
+    <string name="set_disclaimer">免责声明</string>
+    <string name="set_feedback">问题反馈</string>
+
 
     <string name="home_in_temp">室内温度: 28</string>
     <string name="home_baby_temp">37.5</string>
@@ -30,7 +43,16 @@
     <string name="confirm_password">确认密码</string>
     <string name="complete_signup">完成注册</string>
     <string name="login">登录</string>
+    <string name="login_out">账户登出</string>
     <string name="signup">注册</string>
+
+    <string name="curry_password">当前密码</string>
+    <string name="new_password">新密码</string>
+    <string name="comfirm_password">确认新密码</string>
+    <string name="input_password">请输入当前密码</string>
+    <string name="input_new_password">输入新密码</string>
+    <string name="new_password_wrong_format_hint">新密码必须有6-20位字符组成</string>
+
 
     <string name="please_input_mobile_phone">手机号码不能为空</string>
     <string name="please_input_password">密码不能为空</string>
@@ -42,6 +64,7 @@
     <string name="get_verify_code_again">重新获取验证码</string>
     <string name="login_failure">用户名或者密码错误</string>
     <string name="login_success">登录成功</string>
+    <string name="btn_ok">提交</string>
     <string name="please_enter_correct_password_format">请输入正确格式的密码</string>
     <string name="password_wrong_format_hint">"密码必须有6-20位字符组成"</string>
     <string name="two_passwords_differ_hint">"请注意两次密码输入不一致哦"</string>
@@ -51,6 +74,7 @@
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
     <string name="is_del_baby">是否删除?</string>
+    <string name="is_open_blue">是否允许打开蓝牙设备?</string>
 
     <string name="add_baby">添加宝宝</string>
     <string name="save_baby">保存</string>
@@ -102,9 +126,21 @@
     <string name="umeng_socialize_share">分享</string>
 
     <string name="umeng_socialize_sina">新浪</string>
+    <string name="title_activity_more">MoreActivity</string>
+    <string name="complain_text">亲，哪里不给力？欢迎指导建议！</string>
 
 
+    <string name="device_name">设备名称</string>
+    <string name="device_weight">重量</string>
+    <string name="device_accuracy">精度</string>
+    <string name="device_battery">电池</string>
+    <string name="device_quantity">电量</string>
+    <string name="device_way">连接方式</string>
 
+
+    <string name="press_ask">点击说话</string>
+    <string name="text_begin">请开始说话…</string>
+    <string name="text_update">同步</string>
 
 
 

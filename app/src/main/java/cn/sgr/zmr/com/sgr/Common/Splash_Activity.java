@@ -1,13 +1,21 @@
 package cn.sgr.zmr.com.sgr.Common;
 
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+import com.faorg.eason.addtocart.AddCartAnimation;
+import com.plattysoft.leonids.ParticleSystem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,28 +23,25 @@ import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.View.RoundImageView;
 
 public class Splash_Activity extends Activity {
+    @BindView(R.id.iv_center)
+    RoundImageView iv_center;
 
-    @BindView(R.id.iv_avatar)
-    RoundImageView iv_avatar;
+    @BindView(R.id.rl)
+    RelativeLayout rl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final View startView = View.inflate(this, R.layout.splash_activity, null);
-        setContentView(startView);
+        final View startViews = View.inflate(this, R.layout.splash_activity, null);
+        setContentView(startViews);
         ButterKnife.bind(this);
-
-
         // 渐变
          AlphaAnimation aa = new AlphaAnimation(1f, 1.0f);
          aa.setDuration(2500);
-         startView.setAnimation(aa);
+         startViews.setAnimation(aa);
          aa.setAnimationListener(new Animation.AnimationListener() {
 
          @Override
          public void onAnimationStart(Animation animation) {
-
-
-
 
              //创建一个AnimationSet对象，参数为Boolean型，
 
@@ -65,22 +70,13 @@ public class Splash_Activity extends Activity {
              //参数5：确定y轴坐标的类型
 
              //参数6：y轴的值，0.5f表明是以自身这个控件的一半长度为x轴
-
              RotateAnimation rotateAnimation = new RotateAnimation(0, 360,
-
                      Animation.RELATIVE_TO_SELF,0.5f,
-
                      Animation.RELATIVE_TO_SELF,0.5f);
-
              rotateAnimation.setDuration(2000);
              animationSet.addAnimation(alphaAnimation);
              animationSet.addAnimation(rotateAnimation);
-
-             iv_avatar.startAnimation(animationSet);
-
-
-
-
+             iv_center.startAnimation(animationSet);
 
          }
 
@@ -98,7 +94,7 @@ public class Splash_Activity extends Activity {
     }
     private void redirectto() {
 
-        Intent intent = new Intent(this, MainActivity.class);
+       Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         // overridePendingTransition(R.anim.push_right_in,
         // R.anim.push_right_out);

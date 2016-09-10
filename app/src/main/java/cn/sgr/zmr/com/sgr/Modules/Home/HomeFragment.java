@@ -27,19 +27,27 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Base.MyApplication;
+import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
+import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.CirclePagerAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListFragment;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.BluetoothSet;
+import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.DemoView;
+import cn.sgr.zmr.com.sgr.View.LoadingButton;
 
 public class HomeFragment extends BaseFragment {
 
 
     @BindView(R.id.top_view_back)
     ImageView top_view_back;
+
+    @BindView(R.id.iv_avatar)
+    ImageView iv_avatar;
 
     @BindView(R.id.top_view_right_text)
     TextView top_view_right_text;
@@ -51,14 +59,20 @@ public class HomeFragment extends BaseFragment {
     TextView top_view_title;
 
 
+    @BindView(R.id.tv_update)
+    LoadingButton tv_update;
+
+
+
+
     TextView home_unit_top;
 
 
     TextView home_unit_midle;
 
 
-    @BindView(R.id.home_temp)
-    JellyToggleButton home_temp;
+/*    @BindView(R.id.home_temp)
+    JellyToggleButton home_temp;*/
 
 //    private CircularBarPager mCircularBarPager;
 
@@ -81,6 +95,16 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
     private void intView() {
+
+        tv_update.setCallback(new LoadingButton.Callback() {
+            @Override
+            public void complete() {
+                System.out.println("下载完成,可以在这里写完成的回调方法");
+                Toast.makeText(getActivity(),"下载完成,可以在这里写完成的回调方法",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         ViewT=   new DemoView(getActivity());
         mCircularBarPager.setViewPagerAdapter(new CirclePagerAdapter(getActivity(),ViewT));
         top_view_title.setText("体温检测");
@@ -106,7 +130,7 @@ public class HomeFragment extends BaseFragment {
 
         //蓝牙初始化
         initBluetooth();
-
+/*
         home_temp.setBackgroundColor(  getResources().getColor(R.color.white));
         home_temp.setTextSize(40);
 //        home_temp.setTextColor( ContextCompat.getColor(getActivity(),R.color.them_bg));
@@ -126,22 +150,15 @@ public class HomeFragment extends BaseFragment {
                 }
 
             }
-        });
+        });*/
 
     }
 
-    @OnClick({R.id.top_view_right_text, R.id.top_view_left_text})
+    @OnClick({R.id.top_view_right_text, R.id.top_view_left_text,R.id.iv_avatar,R.id.top_view_title,R.id.tv_update})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_view_right_text:
-
-//                showProgressDialog(getActivity().getFragmentManager());
-
-
-
-               Intent intent1=new Intent();
-                intent1.setClass(getActivity(), BabyActivity.class);
-                startActivity(intent1);
+                Utils.toNextActivity(getActivity(), BabyActivity.class);
                 break;
             case R.id.top_view_left_text:
                 cancelProgressDialog();
@@ -149,6 +166,21 @@ public class HomeFragment extends BaseFragment {
                Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
                 startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
                 break;
+
+            case R.id.iv_avatar:
+                Utils.toNextActivity(getActivity(), ChartActivity.class);
+                break;
+
+            case R.id.top_view_title:
+                tv_update.setTargetProgress(360);
+                break;
+
+            case R.id.tv_update:
+                tv_update.startAnim();
+                break;
+
+
+
         }
     }
 
@@ -163,20 +195,8 @@ public class HomeFragment extends BaseFragment {
         if(mBluetoothSet!=null){
 
             mBluetoothSet.openBluetooth();
-            if (!mBluetoothSet.isSupported()){
-                Toast.makeText(getActivity(), "该设备部支持蓝牙", Toast.LENGTH_SHORT).show();
-
-//	        	return;
-            }
-
-            if (!mBluetoothSet.isConnected()){
-                Toast.makeText(getActivity(), "没有可连接的蓝牙设备!", Toast.LENGTH_SHORT).show();
-//				return;
-            }else{
-                //显示数据的线程
-                Toast.makeText(getActivity(), "显示数据!", Toast.LENGTH_SHORT).show();
-            }
-
+        }else{
+            Toast.makeText(getActivity(), "该设备不支持蓝牙", Toast.LENGTH_SHORT).show();
         }
 
 

@@ -3,6 +3,7 @@
     package="cn.sgr.zmr.com.sgr">
 
     <!-- 友盟权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -41,7 +42,8 @@
             android:name="TESTIN_APPKEY"
             android:value="019cc0a31ffab5740c685c6cf3a2ae18" />
 
-        <activity android:name=".Common.Splash_Activity">
+        <activity android:name=".Common.Splash_Activity"
+            android:theme="@style/AppWelcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

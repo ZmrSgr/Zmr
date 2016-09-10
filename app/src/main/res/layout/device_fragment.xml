@@ -1,55 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/top_view"
         layout="@layout/top_view" />
 
-
-
-
     <RelativeLayout
-        android:layout_marginTop="5dp"
+
         android:layout_width="match_parent"
         android:layout_height="45dp"
 
         android:paddingRight="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/set_lost"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-
-        <com.nightonke.jellytogglebutton.JellyToggleButton
-            android:id="@+id/jtb_lost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:jtbLeftText="关"
-            app:jtbRightText="开"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            />
-    </RelativeLayout>
-
-    <include layout="@layout/line"/>
-
-    <RelativeLayout
-        android:id="@+id/item_message"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
 
 
         <TextView
@@ -57,47 +22,12 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-
-            android:text="@string/set_fever"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <com.nightonke.jellytogglebutton.JellyToggleButton
-            android:id="@+id/jtb_fever"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:jtbLeftText="关"
-            app:jtbRightText="开"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            />
-    </RelativeLayout>
-
-    <include layout="@layout/line"
-       />
-
-    <RelativeLayout
-        android:id="@+id/rel_fever_temp"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-
-            android:text="@string/set_fever_temp"
+            android:text="@string/device_name"
             android:textColor="@color/them_text"
             android:textSize="17sp"/>
 
         <ImageView
-            android:id="@+id/iv_right"
+            android:id="@+id/iv_right_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -106,26 +36,24 @@
 
 
         <TextView
-            android:id="@+id/text_tem"
+            android:text="智梦人"
+            android:id="@+id/text_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/iv_right"
+            android:layout_toLeftOf="@id/iv_right_name"
             android:gravity="right"
             android:textColor="@color/them_text"
             android:textSize="15sp" />
 
-
     </RelativeLayout>
 
-    <include layout="@layout/line"
-        android:id="@+id/line"
-       />
+    <include layout="@layout/line"/>
 
     <RelativeLayout
-        android:id="@+id/rel_fever_way"
+
         android:layout_width="match_parent"
         android:layout_height="45dp"
 
@@ -137,7 +65,178 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:text="@string/set_type"
+            android:text="@string/device_weight"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:id="@+id/iv_right_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+
+        <TextView
+            android:text="50g"
+            android:id="@+id/text_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_right_weight"
+            android:gravity="right"
+            android:textColor="@color/them_text"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/device_accuracy"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:id="@+id/iv_right_accuracy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+
+        <TextView
+            android:text="0.1"
+            android:id="@+id/text_accuracy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_right_accuracy"
+            android:gravity="right"
+            android:textColor="@color/them_text"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/device_battery"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:id="@+id/iv_right_battery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+
+        <TextView
+            android:id="@+id/text_battery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_right_battery"
+            android:gravity="right"
+            android:text="CR2032 3v 210mAh"
+            android:textColor="@color/them_text"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/device_quantity"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:id="@+id/iv_right_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+
+        <TextView
+            android:text="100%"
+            android:id="@+id/text_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/iv_right_quantity"
+            android:gravity="right"
+            android:textColor="@color/them_text"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/device_way"
             android:textColor="@color/them_text"
             android:textSize="17sp"/>
 
@@ -158,83 +257,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/iv_right_way"
-            android:gravity="right"
-            android:textColor="@color/them_text"
-            android:textSize="15sp" />
-
-    </RelativeLayout>
-
-    <include layout="@layout/line"
-        android:id="@+id/line1"/>
-
-
-
-
-    <RelativeLayout
-        android:id="@+id/rel_help"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/set_help"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
-
-    </RelativeLayout>
-
-    <include layout="@layout/line"/>
-
-
-
-
-    <RelativeLayout
-        android:id="@+id/item_settings_device"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/set_decive"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <ImageView
-            android:id="@+id/iv_device"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
-
-
-        <TextView
-            android:id="@+id/text_device"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/iv_device"
+            android:text="蓝牙4.0"
             android:gravity="right"
             android:textColor="@color/them_text"
             android:textSize="15sp" />
@@ -244,32 +267,7 @@
     <include layout="@layout/line"/>
 
 
-    <RelativeLayout
-        android:id="@+id/item_settings_about"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/set_more"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
-
-    </RelativeLayout>
-
-    <include layout="@layout/line"/>
 
 </LinearLayout>

@@ -68,8 +68,6 @@ public class DisclaimerFragment extends BaseFragment implements DisclaimerContra
         wv_help.getSettings().setJavaScriptEnabled(true);
         wv_help.getSettings().setAllowFileAccess(true);
         wv_help.getSettings().setPluginState(WebSettings.PluginState.ON);
-
-
         wv_help.loadUrl("http://app.120.net/");
     }
 

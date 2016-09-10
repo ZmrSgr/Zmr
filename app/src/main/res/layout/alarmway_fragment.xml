@@ -9,4 +9,68 @@
         android:id="@+id/top_view"
         layout="@layout/top_view" />
 
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/set_voice"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+
+        <com.nightonke.jellytogglebutton.JellyToggleButton
+            android:id="@+id/jtb_lost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:jtbLeftText="关"
+            app:jtbRightText="开"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+    <RelativeLayout
+        android:id="@+id/item_message"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+
+            android:text="@string/set_shake"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <com.nightonke.jellytogglebutton.JellyToggleButton
+            android:id="@+id/jtb_fever"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:jtbLeftText="关"
+            app:jtbRightText="开"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
 </LinearLayout>

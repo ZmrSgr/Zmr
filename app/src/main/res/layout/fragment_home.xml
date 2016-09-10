@@ -43,6 +43,8 @@
            >
 
                 <cn.sgr.zmr.com.sgr.View.RoundImageView
+                    app:border_thickness="0.5dp"
+                    app:border_outside_color="@color/white_s"
                     android:layout_centerInParent="true"
                     android:id="@+id/iv_avatar"
                     android:layout_width="70dp"
@@ -55,7 +57,22 @@
 
             </RelativeLayout>
 
-            <com.nightonke.jellytogglebutton.JellyToggleButton
+
+            <cn.sgr.zmr.com.sgr.View.LoadingButton
+                android:id="@+id/tv_update"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"/>
+
+
+
+
+
+ <!--           <com.nightonke.jellytogglebutton.JellyToggleButton
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
@@ -71,7 +88,7 @@
                 app:jtbLeftTextColor="@color/them_bg_deep"
                 app:jtbLeftText="@string/shishi_unit"
                 app:jtbBackgroundRadius="10dp"
-                app:jtbRightText="@string/hua_unit" />
+                app:jtbRightText="@string/hua_unit" />-->
             <LinearLayout
                 android:layout_width="match_parent"
 

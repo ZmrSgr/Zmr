@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:roundedimageview="http://schemas.android.com/tools"
-    android:background="@color/them_bg_deep"
+    android:background="@drawable/bg_loading_launcher"
+    android:id="@+id/rl"
     android:orientation="vertical">
 
     <TextView
@@ -18,19 +19,33 @@
         android:textSize="18sp" />
 
 
+
+
+
+
+
     <cn.sgr.zmr.com.sgr.View.RoundImageView
+
+        android:id="@+id/iv_center"
         android:layout_centerInParent="true"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:id="@+id/iv_avatar"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:gravity="center"
         app:border_thickness="0.5dp"
 
         app:border_outside_color="@color/white_s"
 
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher"
+        android:text="Hello World!" />
+
+
+
+
+   />
+
+
+
+
+
 
 
 </RelativeLayout>

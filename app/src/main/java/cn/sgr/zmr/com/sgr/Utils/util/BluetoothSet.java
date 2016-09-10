@@ -7,11 +7,13 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import cn.sgr.zmr.com.sgr.Base.MyApplication;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.View.MyDialog;
 
 
 public class BluetoothSet {
@@ -118,17 +120,35 @@ public class BluetoothSet {
 	 */
 	public void openBluetooth(){
 		if (mBluetoothAdapter == null) {
+			Toast.makeText(mContext, "该设备不支持蓝牙", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		if (!mBluetoothAdapter.isEnabled()){
+		if (!mBluetoothAdapter.isEnabled()){//蓝牙没打开，
 
-			mDialog = new ProgressDialog(mContext);
-			mDialog.setMessage("Opening the bluetooth...");
-			mDialog.setCancelable(false);
+			final MyDialog dialog = new MyDialog(mContext,mContext.getResources().getString(R.string.is_open_blue),null,null);
+			dialog.show();
+			dialog.positive.setOnClickListener(new View.OnClickListener() {
 
-			mDialog.show();
-			mBluetoothAdapter.enable();
-			new OpenBluetoothThread().start();
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+					mDialog = new ProgressDialog(mContext);
+					mDialog.setMessage("打开蓝牙...");
+					mDialog.setCancelable(false);
+
+					mDialog.show();
+					mBluetoothAdapter.enable();
+					new OpenBluetoothThread().start();
+
+				}
+			});
+			dialog.negative.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
+
 		}
 		else
 		{
@@ -262,6 +282,10 @@ public class BluetoothSet {
 					break;
 				case STATE_OFF:
 
+
+					Toast.makeText(mContext,"没有权限打开蓝牙",Toast.LENGTH_LONG).show();
+                    System.out.println("没有权限打开蓝牙");
+
 					break;
 				case STATE_TURING_ON:
 
@@ -299,19 +323,27 @@ public class BluetoothSet {
 		@Override
 		public void run() {
 			// TODO 自动生成的方法存根
+
+
 			//直接打开蓝牙
-			while(mBluetoothAdapter.getState() != BluetoothAdapter.STATE_ON){
+			if(mBluetoothAdapter.getState() != BluetoothAdapter.STATE_ON){
 				try {
 					sleep(50L);
 					Message msg = new Message();
 					msg.what = mBluetoothAdapter.getState();
 					mHandler.sendMessage(msg);
+					mDialog.dismiss();
+					return;
 				} catch (InterruptedException e) {
 					// TODO: handle exception
 					e.printStackTrace();
 					mDialog.dismiss();
 				}
+			}else{
+				mDialog.dismiss();
+				return;
 			}
+
 		}
 	}
 

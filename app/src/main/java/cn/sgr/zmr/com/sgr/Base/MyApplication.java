@@ -5,12 +5,14 @@ import android.app.Application;
 import android.os.Handler;
 
 import com.activeandroid.ActiveAndroid;
+import com.iflytek.cloud.SpeechUtility;
 import com.testin.agent.TestinAgent;
 import com.umeng.socialize.PlatformConfig;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.BluetoothSet;
 
 /**
@@ -33,6 +35,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        //初始化讯飞语音
+        SpeechUtility.createUtility(this, "appid=57d0df43");
         //初始化云测
         TestinAgent.init(this, "019cc0a31ffab5740c685c6cf3a2ae18", null);
         //初始化activite数据库

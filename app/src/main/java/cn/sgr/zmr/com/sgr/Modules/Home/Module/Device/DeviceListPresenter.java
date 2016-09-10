@@ -10,12 +10,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
+import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.sgr.zmr.com.sgr.Common.Register.Register_Contract;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.View.MyDialog;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.
@@ -65,6 +68,7 @@ public class DeviceListPresenter implements DeviceListContract.Presenter {
     public void startDiscovery() {
         lstDevices.clear();
         registerView.showData(lstDevices);
+
         mBtAdapter.startDiscovery();
     }
 
@@ -89,8 +93,36 @@ public class DeviceListPresenter implements DeviceListContract.Presenter {
         IntentFilter discovery_filter = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         context.registerReceiver(mReceiver, discovery_filter);
         //开始搜索
-        if (mBtAdapter != null)
+        if (mBtAdapter != null&&mBtAdapter.isEnabled()) {//表示已经打开蓝牙
             doDiscovery();
+        }else{//没打开的话 先打开蓝牙在判断
+            final MyDialog dialog = new MyDialog(context,context.getResources().getString(R.string.is_open_blue),null,null);
+            dialog.show();
+            dialog.positive.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    mBtAdapter.enable();
+                    if(mBtAdapter.isEnabled()){
+                        doDiscovery();
+                    }else{
+                        Toast.makeText(context,"您的系统已对该应用禁用了蓝牙权限",Toast.LENGTH_LONG).show();
+                    }
+
+                }
+            });
+            dialog.negative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+
+
+        }
+
     }
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {

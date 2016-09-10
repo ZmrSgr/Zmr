@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.app.FragmentTransaction;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -297,4 +300,32 @@ public class MainActivity extends Activity {
         }
         return true;
     }
+
+
+    /**
+     * 以下的几个方法用来，让fragment能够监听touch事件
+     */
+    private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<MyOnTouchListener>(
+            10);
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        for (MyOnTouchListener listener : onTouchListeners) {
+            listener.onTouch(ev);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    public void registerMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
+        onTouchListeners.add(myOnTouchListener);
+    }
+
+    public void unregisterMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
+        onTouchListeners.remove(myOnTouchListener);
+    }
+
+    public interface MyOnTouchListener {
+        public boolean onTouch(MotionEvent ev);
+    }
+
 }
