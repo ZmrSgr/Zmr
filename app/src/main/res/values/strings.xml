@@ -22,6 +22,7 @@
     <string name="set_about">关于</string>
     <string name="set_more">更多</string>
     <string name="set_retsetpwd">重置密码</string>
+    <string name="find_pwd">找回密码</string>
     <string name="set_update">版本更新</string>
     <string name="set_about_us">联系我们</string>
     <string name="set_disclaimer">免责声明</string>
@@ -64,6 +65,7 @@
     <string name="get_verify_code_again">重新获取验证码</string>
     <string name="login_failure">用户名或者密码错误</string>
     <string name="login_success">登录成功</string>
+    <string name="find_success">成功找回密码</string>
     <string name="btn_ok">提交</string>
     <string name="please_enter_correct_password_format">请输入正确格式的密码</string>
     <string name="password_wrong_format_hint">"密码必须有6-20位字符组成"</string>
@@ -141,6 +143,14 @@
     <string name="press_ask">点击说话</string>
     <string name="text_begin">请开始说话…</string>
     <string name="text_update">同步</string>
+
+    <string name="open_lose">已开启防走丟功能</string>
+    <string name="close_lose">已关闭防丟功能</string>
+    <string name="close_shock">已关闭震动</string>
+    <string name="open_shock">已开启震动</string>
+
+
+
 
 
 

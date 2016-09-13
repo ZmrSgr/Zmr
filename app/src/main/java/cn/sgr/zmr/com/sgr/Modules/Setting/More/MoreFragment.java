@@ -17,6 +17,7 @@ import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
 import cn.sgr.zmr.com.sgr.Common.MainActivity;
+import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.Common.Register.Register_Contract;
 import cn.sgr.zmr.com.sgr.Modules.Setting.More.Contract.ContractActivity;
 import cn.sgr.zmr.com.sgr.Modules.Setting.More.Disclaimer.DisclaimerActivity;
@@ -80,6 +81,9 @@ public class MoreFragment extends BaseFragment implements MoreContract.View{
     private void initView() {
         top_view_title.setText(getResources().getString(R.string.set_more));
         top_view_back.setVisibility(View.VISIBLE);
+        if(!UserInfo.getInstance(getActivity()).hasSignIn()){
+            btn_login_out.setVisibility(View.GONE);
+        }
     }
 
     //监听按钮
@@ -113,6 +117,7 @@ public class MoreFragment extends BaseFragment implements MoreContract.View{
                 Utils.toNextActivity(getActivity(), DisclaimerActivity.class);
                 break;
             case R.id.btn_login_out:
+                UserInfo.getInstance(getActivity()).clearUserInfo();
                 Utils.toNextActivity(getActivity(), LoginActivity.class);
                 break;
 

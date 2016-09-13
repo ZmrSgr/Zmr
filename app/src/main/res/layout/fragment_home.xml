@@ -68,7 +68,18 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"/>
 
-
+            <TextView
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="同步"
+                android:layout_below="@+id/tv_update"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
 
 

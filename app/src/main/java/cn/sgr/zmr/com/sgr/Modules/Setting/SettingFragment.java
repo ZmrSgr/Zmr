@@ -23,6 +23,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
+import cn.sgr.zmr.com.sgr.Common.Model.Setting;
+import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.Modules.Setting.AlarmWay.AlarmWayActivity;
 import cn.sgr.zmr.com.sgr.Modules.Setting.Device.DeviceActivity;
 import cn.sgr.zmr.com.sgr.Modules.Setting.Help.HelpActivity;
@@ -119,18 +121,21 @@ public class SettingFragment extends BaseFragment {
         line.setVisibility(View.GONE);
         line1.setVisibility(View.GONE);
 
+        text_tem.setText(Setting.getInstance(getActivity()).getTemp());
+        jtb_lost.setChecked(Setting.getInstance(getActivity()).IsLose());
+        jtb_fever.setChecked(Setting.getInstance(getActivity()).IsAlarm());
         jtb_fever.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
             @Override
             public void onStateChange(float process, State state, JellyToggleButton jtb) {
                 if (state.equals(State.LEFT)) {
+                    Setting.getInstance(getActivity()).setAlarm("0");
                     rel_fever_temp.setVisibility(View.GONE);
                     rel_fever_way.setVisibility(View.GONE);
                     line.setVisibility(View.GONE);
                     line1.setVisibility(View.GONE);
                 }
                 if (state.equals(State.RIGHT)) {
-
-
+                    Setting.getInstance(getActivity()).setAlarm("1");
                     rel_fever_temp.setVisibility(View.VISIBLE);
                     rel_fever_way.setVisibility(View.VISIBLE);
                     line.setVisibility(View.VISIBLE);
@@ -146,11 +151,12 @@ public class SettingFragment extends BaseFragment {
             @Override
             public void onStateChange(float process, State state, JellyToggleButton jtb) {
                 if (state.equals(State.LEFT)) {
-
-                    Toast.makeText(getActivity(), "Left!", Toast.LENGTH_SHORT).show();
+                    Setting.getInstance(getActivity()).setLose("0");
+                    Toast.makeText(getActivity(), getString(R.string.close_lose), Toast.LENGTH_SHORT).show();
                 }
                 if (state.equals(State.RIGHT)) {
-                    Toast.makeText(getActivity(), "RIGHT!", Toast.LENGTH_SHORT).show();
+                    Setting.getInstance(getActivity()).setLose("1");
+                    Toast.makeText(getActivity(), getString(R.string.open_lose), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -212,6 +218,7 @@ public class SettingFragment extends BaseFragment {
                 //返回的分别是三个级别的选中位置
                 String tx = Weightoptions1Items.get(options1)+"." + Weightoptions2Items.get(options1).get(option2)+"℃";
                 text_tem.setText(tx);
+                Setting.getInstance(getActivity()).setTemp(tx);
 
             }
         });

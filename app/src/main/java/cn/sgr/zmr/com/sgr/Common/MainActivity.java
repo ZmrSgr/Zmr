@@ -18,11 +18,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseActivity;
 import cn.sgr.zmr.com.sgr.Base.MyApplication;
+import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
+import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.Modules.Health.HealhFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.HomeFragment;
 import cn.sgr.zmr.com.sgr.Modules.Messages.MessageFragment;
 import cn.sgr.zmr.com.sgr.Modules.Setting.SettingFragment;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 public class MainActivity extends Activity {
 
@@ -149,21 +152,25 @@ public class MainActivity extends Activity {
                 transaction.commit();
                 break;
             case 2:
+                if(!UserInfo.getInstance(this).hasSignIn()){
+                    Utils.toNextActivity(this, LoginActivity.class);
+                }else{
+                    message_image.setImageResource(R.drawable.tab_message_pressed);
+                    message_text.setTextColor(getResources().getColorStateList(
+                            R.color.them_bg));
 
+                    if (messagesFragment == null) {
 
-               message_image.setImageResource(R.drawable.tab_message_pressed);
-                message_text.setTextColor(getResources().getColorStateList(
-                        R.color.them_bg));
+                        messagesFragment = new MessageFragment();
+                        transaction.add(R.id.content, messagesFragment);
+                    } else {
 
-                if (messagesFragment == null) {
-
-                    messagesFragment = new MessageFragment();
-                    transaction.add(R.id.content, messagesFragment);
-                } else {
-
-                    transaction.show(messagesFragment);
+                        transaction.show(messagesFragment);
+                    }
+                    transaction.commit();
                 }
-                transaction.commit();
+
+
                 break;
             case 3:
 
@@ -204,6 +211,8 @@ public class MainActivity extends Activity {
                         R.color.them_bg));
                 break;
             case 2:
+
+
 
 
                 // 当点击了消息tab时，改变控件的图片和文字颜色
@@ -301,31 +310,5 @@ public class MainActivity extends Activity {
         return true;
     }
 
-
-    /**
-     * 以下的几个方法用来，让fragment能够监听touch事件
-     */
-    private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<MyOnTouchListener>(
-            10);
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        for (MyOnTouchListener listener : onTouchListeners) {
-            listener.onTouch(ev);
-        }
-        return super.dispatchTouchEvent(ev);
-    }
-
-    public void registerMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
-        onTouchListeners.add(myOnTouchListener);
-    }
-
-    public void unregisterMyOnTouchListener(MyOnTouchListener myOnTouchListener) {
-        onTouchListeners.remove(myOnTouchListener);
-    }
-
-    public interface MyOnTouchListener {
-        public boolean onTouch(MotionEvent ev);
-    }
 
 }

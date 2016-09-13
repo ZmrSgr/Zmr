@@ -1,9 +1,8 @@
-package cn.sgr.zmr.com.sgr.Common.Register;
+package cn.sgr.zmr.com.sgr.Common.FindPwd;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.NonNull;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,20 +17,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
-import cn.sgr.zmr.com.sgr.Common.Login.LoginContract;
+import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
 import cn.sgr.zmr.com.sgr.Common.MainActivity;
 import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.Common.Model.data.User;
+import cn.sgr.zmr.com.sgr.Modules.Setting.More.Contract.ContractActivity;
+import cn.sgr.zmr.com.sgr.Modules.Setting.More.Disclaimer.DisclaimerActivity;
+import cn.sgr.zmr.com.sgr.Modules.Setting.More.Feedback.FeedbackActivity;
+import cn.sgr.zmr.com.sgr.Modules.Setting.More.RetsetPwd.RetsetPwdActivity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
- * Created by Administrator on 2016/8/23 0023.
+ * Created by 沈国荣 on 2016/9/7 0007.
  */
-public class Register_Fragment extends BaseFragment implements Register_Contract.View  {
-
+public class FindPwdFragment extends BaseFragment implements FindPwdContract.View{
 
     @BindView(R.id.top_view_back)
     ImageView top_view_back;
@@ -54,35 +54,39 @@ public class Register_Fragment extends BaseFragment implements Register_Contract
     @BindView(R.id.et_verify_code)
     EditText mVerifyCode;
 
-
-
-
-
     @BindView(R.id.btn_get_verify_code_again)
     Button mGetVerifyCodeAgain;
 
     String mobile;//电话号码
     private TimeCount mTime;//倒计时控件
 
-    private Register_Contract.Presenter mPresenter;
+    private FindPwdContract.Presenter mPresenter;
+
+    //单例 模式
+    public static FindPwdFragment newInstance() {
+        return new FindPwdFragment();
+    }
+    //   构造方法
+    public FindPwdFragment() {
+        // Required empty public constructor
+    }
+
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.register_fragment, container, false);
+        View view = inflater.inflate(R.layout.findpwd_fragment, container, false);
         ButterKnife.bind(this, view);
         initView();
-
         return view;
     }
     //初始化控件
     private void initView() {
-        top_view_title.setText(getResources().getString(R.string.signup));
+        top_view_title.setText(getResources().getString(R.string.find_pwd));
         top_view_back.setVisibility(View.VISIBLE);
     }
-    
-    
+
     //监听按钮
     @OnClick({R.id.btn_signup_complete,R.id.top_view_back,R.id.btn_get_verify_code_again })
     public void onClick(View view) {
@@ -120,14 +124,8 @@ public class Register_Fragment extends BaseFragment implements Register_Contract
                     Toast.makeText(getActivity(), getString(R.string.two_passwords_differ_hint),Toast.LENGTH_SHORT).show();
                     mPasswordAgain.requestFocus();
                 } else {// 注册成功
-                    Toast.makeText(getActivity(), getString(R.string.complete_signup),Toast.LENGTH_SHORT).show();
-                    User user=new User();
-                    user.password=password;
-                    user.phone=mobile;
-                    user.tid="1";
-                    user.uid="1";
-                    AfterLogin(user);
-                    Utils.toNextActivity(getActivity(),MainActivity.class);
+                    Toast.makeText(getActivity(), getString(R.string.find_success),Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
                 }
                 break;
 
@@ -158,13 +156,6 @@ public class Register_Fragment extends BaseFragment implements Register_Contract
         }
     }
 
-    private void AfterLogin(User user) {
-        if (!UserInfo.getInstance(getActivity()).hasSignIn()) {//保存登录信息
-            UserInfo.getInstance(getActivity()).saveUserInfo(user.phone,user.password, user.uid, user.tid);
-        }
-    }
-
-
     /* 定义一个倒计时的内部类 */
     class TimeCount extends CountDownTimer {
         public TimeCount(long millisInFuture, long countDownInterval) {
@@ -186,44 +177,13 @@ public class Register_Fragment extends BaseFragment implements Register_Contract
         }
     }
 
-    //单例 模式
-    public static Register_Fragment newInstance() {
-        return new Register_Fragment();
-    }
-    //   构造方法
-    public Register_Fragment() {
-        // Required empty public constructor
-    }
-
-
-    @Override
-    public void showProgressDialog(FragmentManager manager) {
-        super.showProgressDialog(manager);
-    }
-
-    @Override
-    public void cancelProgressDialog() {
-        super.cancelProgressDialog();
-    }
-
-    @Override
-    public void showFailureLogin() {
-
-    }
-
-    @Override
-    public void showSuccessLogin() {
-
-    }
-
     @Override
     public boolean isActive() {
-        return isAdded();
+        return false;
     }
 
     @Override
-    public void setPresenter(@NonNull Register_Contract.Presenter presenter) {
-        mPresenter = checkNotNull(presenter);
+    public void setPresenter(FindPwdContract.Presenter presenter) {
 
     }
 }

@@ -24,4 +24,10 @@ public class CommonImp implements CommonInterface{
     public void Register(Context context, User user, HttpRequestCallback callback) {
 
     }
+    //保存到或者更新本地的数据库
+    private  void SaveUser(User user){
+            user.update();
+
+    }
+
 }

@@ -81,7 +81,6 @@ public class HealhFragment extends Fragment {
     private String mEngineType = SpeechConstant.TYPE_CLOUD;
     RippleBackground rippleBackground;
 
-    MainActivity.MyOnTouchListener myOnTouchListener;
 
     @Nullable
     @Override

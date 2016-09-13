@@ -25,7 +25,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseActivity;
+import cn.sgr.zmr.com.sgr.Common.FindPwd.FindPwdActivity;
 import cn.sgr.zmr.com.sgr.Common.MainActivity;
+import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
+import cn.sgr.zmr.com.sgr.Common.Model.data.User;
 import cn.sgr.zmr.com.sgr.Common.Register.Register_Activity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
@@ -60,6 +63,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     @BindView(R.id.login_weibo)
     ImageView login_weibo;
 
+    @BindView(R.id.tv_reset_password)
+    TextView tv_reset_password;
+
 
 
     private LoginContract.Presenter mPresenter;
@@ -85,7 +91,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     }
 
 
-    @OnClick({R.id.tv_signup,R.id.top_view_back,R.id.login_weibo,R.id.login_qq,R.id.login_weixin })
+    @OnClick({R.id.tv_signup,R.id.top_view_back,R.id.login_weibo,R.id.login_qq,R.id.login_weixin,R.id.tv_reset_password })
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_signup:
@@ -107,6 +113,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
             case R.id.login_weixin:
                 mShareAPI.doOauthVerify(LoginActivity.this,  SHARE_MEDIA.WEIXIN, umAuthListener);
+                break;
+
+            case R.id.tv_reset_password:
+               Utils.toNextActivity(this, FindPwdActivity.class);
                 break;
 
             case R.id.top_view_back:
@@ -132,9 +142,23 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
                 } else {
                     //presenter 处理
                     Toast.makeText(LoginActivity.this,getString(R.string.login_success),Toast.LENGTH_SHORT).show();
+
+                   User user=new User();
+                    user.password=password;
+                    user.phone=mobile;
+                    user.tid="1";
+                    user.uid="1";
+                    AfterLogin(user);
+
                 }
                 break;
 
+        }
+    }
+
+    private void AfterLogin(User user) {
+        if (!UserInfo.getInstance(this).hasSignIn()) {//保存登录信息
+            UserInfo.getInstance(this).saveUserInfo(user.phone,user.password, user.uid, user.tid);
         }
     }
 

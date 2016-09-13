@@ -176,7 +176,13 @@ public class HomeFragment extends BaseFragment {
                 break;
 
             case R.id.tv_update:
-                tv_update.startAnim();
+                if(UserInfo.getInstance(getActivity()).hasSignIn()){
+                    tv_update.startAnim();
+                }else{
+                    Toast.makeText(getActivity(),"请先登录",Toast.LENGTH_SHORT).show();
+                    Utils.toNextActivity(getActivity(),LoginActivity.class);
+                }
+
                 break;
 
 
