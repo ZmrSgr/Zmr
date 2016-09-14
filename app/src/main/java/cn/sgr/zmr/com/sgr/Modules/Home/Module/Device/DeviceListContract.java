@@ -1,16 +1,9 @@
 package cn.sgr.zmr.com.sgr.Modules.Home.Module.Device;
 
-import android.app.FragmentManager;
-import android.app.ProgressDialog;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
-
 import java.util.List;
 
 import cn.sgr.zmr.com.sgr.Base.BasePresenter;
 import cn.sgr.zmr.com.sgr.Base.BaseView;
-import cn.sgr.zmr.com.sgr.Common.Model.data.User;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.Baby;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.

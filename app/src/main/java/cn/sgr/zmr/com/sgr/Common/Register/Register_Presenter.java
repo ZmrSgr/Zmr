@@ -3,8 +3,8 @@ package cn.sgr.zmr.com.sgr.Common.Register;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import cn.sgr.zmr.com.sgr.Common.Login.LoginContract;
-import cn.sgr.zmr.com.sgr.Common.Model.data.User;
+import com.bean.entity.User;
+
 import cn.sgr.zmr.com.sgr.Common.Model.imp.CommonImp;
 
 /**

@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bean.entity.Baby;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.Baby;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.View.MyDialog;
 
@@ -41,9 +42,9 @@ public class Baby_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ViewHolder mHolder = (ViewHolder) holder;
-        mHolder.babay_tv_name.setText(datas.get(position).name);
+        mHolder.babay_tv_name.setText(datas.get(position).getName());
 //        mHolder.babay_tv_sex.setText(datas.get(position).sex);
-        mHolder.babay_tv_device.setText(datas.get(position).deviceName);
+        mHolder.babay_tv_device.setText(datas.get(position).getDeviceName());
         mHolder.babay_tv_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

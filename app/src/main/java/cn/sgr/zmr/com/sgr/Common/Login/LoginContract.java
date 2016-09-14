@@ -2,9 +2,10 @@ package cn.sgr.zmr.com.sgr.Common.Login;
 
 import android.app.FragmentManager;
 
+import com.bean.entity.User;
+
 import cn.sgr.zmr.com.sgr.Base.BasePresenter;
 import cn.sgr.zmr.com.sgr.Base.BaseView;
-import cn.sgr.zmr.com.sgr.Common.Model.data.User;
 
 /**
  * Created by 沈国荣 on 2016/8/19 0019.
@@ -29,6 +30,7 @@ public interface LoginContract {
     interface Presenter extends BasePresenter {
 
         void saveUser(User user);//保存或者更新用户
+
 
         void doLogin();//登录操作
 

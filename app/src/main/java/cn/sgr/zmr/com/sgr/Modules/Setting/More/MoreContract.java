@@ -4,7 +4,6 @@ import android.app.FragmentManager;
 
 import cn.sgr.zmr.com.sgr.Base.BasePresenter;
 import cn.sgr.zmr.com.sgr.Base.BaseView;
-import cn.sgr.zmr.com.sgr.Common.Model.data.User;
 
 /**
  * Created by 沈国荣 on 2016/9/7 0007.

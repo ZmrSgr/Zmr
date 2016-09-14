@@ -2,20 +2,12 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
+import com.bean.entity.Baby;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.Baby;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.Chart;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyContract;
-import cn.sgr.zmr.com.sgr.R;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.

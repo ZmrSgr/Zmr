@@ -2,9 +2,10 @@ package cn.sgr.zmr.com.sgr.Common.Register;
 
 import android.app.FragmentManager;
 
+import com.bean.entity.User;
+
 import cn.sgr.zmr.com.sgr.Base.BasePresenter;
 import cn.sgr.zmr.com.sgr.Base.BaseView;
-import cn.sgr.zmr.com.sgr.Common.Model.data.User;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.

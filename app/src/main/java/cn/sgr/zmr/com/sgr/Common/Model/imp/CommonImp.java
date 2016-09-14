@@ -2,8 +2,10 @@ package cn.sgr.zmr.com.sgr.Common.Model.imp;
 
 import android.content.Context;
 
-import cn.sgr.zmr.com.sgr.Common.Model.data.User;
+import com.bean.entity.User;
+
 import cn.sgr.zmr.com.sgr.Common.Model.interfaces.CommonInterface;
+import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 import cn.sgr.zmr.com.sgr.Utils.http.HttpRequestCallback;
 
 /**
@@ -25,8 +27,8 @@ public class CommonImp implements CommonInterface{
 
     }
     //保存到或者更新本地的数据库
-    private  void SaveUser(User user){
-            user.update();
+    private  void SaveUser(Context context,User user){
+        new DaoCacheManage(context).updateUser(user);
 
     }
 

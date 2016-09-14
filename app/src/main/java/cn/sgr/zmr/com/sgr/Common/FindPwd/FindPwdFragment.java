@@ -2,7 +2,6 @@ package cn.sgr.zmr.com.sgr.Common.FindPwd;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
-import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
-import cn.sgr.zmr.com.sgr.Common.MainActivity;
-import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
-import cn.sgr.zmr.com.sgr.Common.Model.data.User;
-import cn.sgr.zmr.com.sgr.Modules.Setting.More.Contract.ContractActivity;
-import cn.sgr.zmr.com.sgr.Modules.Setting.More.Disclaimer.DisclaimerActivity;
-import cn.sgr.zmr.com.sgr.Modules.Setting.More.Feedback.FeedbackActivity;
-import cn.sgr.zmr.com.sgr.Modules.Setting.More.RetsetPwd.RetsetPwdActivity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 

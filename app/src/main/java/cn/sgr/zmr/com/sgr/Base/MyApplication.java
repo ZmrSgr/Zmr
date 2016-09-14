@@ -1,10 +1,10 @@
 package cn.sgr.zmr.com.sgr.Base;
 
 import android.app.Activity;
+
 import android.app.Application;
 import android.os.Handler;
 
-import com.activeandroid.ActiveAndroid;
 import com.iflytek.cloud.SpeechUtility;
 import com.testin.agent.TestinAgent;
 import com.umeng.socialize.PlatformConfig;
@@ -39,8 +39,6 @@ public class MyApplication extends Application {
         SpeechUtility.createUtility(this, "appid=57d0df43");
         //初始化云测
         TestinAgent.init(this, "019cc0a31ffab5740c685c6cf3a2ae18", null);
-        //初始化activite数据库
-        ActiveAndroid.initialize(this);
 //        友盟分享和登录
         //微信 appid appsecret
         PlatformConfig.setWeixin("wxafceb940b5fd67a0", "ca3653563244ab1ab4056464446403ab");
@@ -87,10 +85,5 @@ public class MyApplication extends Application {
     public Handler getHandler()
     {
         return mHandler;
-    }
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        ActiveAndroid.dispose();
     }
 }

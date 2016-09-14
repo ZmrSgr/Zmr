@@ -3,11 +3,13 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.bean.entity.Baby;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.Baby;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListContract;
+import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
+import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.
@@ -44,15 +46,11 @@ public class BabyPresenter implements BabyContract.Presenter{
     @Override
     public void start() {
         initData();
-        getBabys(babyList);
-
     }
     private void initData() {
         babyList.clear();
-        for (int i=0; i < 5; ++i) {
-            Baby baby = new Baby("小宝"+i,"两个月","男","5kg","45cm","设备名称");
-            babyList.add(baby);
-        }
+        babyList= new DaoCacheManage(context).getBabys();
+        getBabys(babyList);
     }
 
 

@@ -2,6 +2,7 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart;
 
 import android.app.FragmentManager;
 
+import com.bean.entity.Baby;
 import com.github.mikephil.charting.data.LineData;
 
 import java.util.ArrayList;
@@ -9,7 +10,6 @@ import java.util.List;
 
 import cn.sgr.zmr.com.sgr.Base.BasePresenter;
 import cn.sgr.zmr.com.sgr.Base.BaseView;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.Baby;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.Chart;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
 

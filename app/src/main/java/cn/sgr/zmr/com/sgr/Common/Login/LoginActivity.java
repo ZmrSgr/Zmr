@@ -11,12 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.umeng.socialize.ShareAction;
+import com.bean.entity.User;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.utils.Log;
 
 import java.util.Map;
@@ -28,9 +26,9 @@ import cn.sgr.zmr.com.sgr.Base.BaseActivity;
 import cn.sgr.zmr.com.sgr.Common.FindPwd.FindPwdActivity;
 import cn.sgr.zmr.com.sgr.Common.MainActivity;
 import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
-import cn.sgr.zmr.com.sgr.Common.Model.data.User;
 import cn.sgr.zmr.com.sgr.Common.Register.Register_Activity;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -144,10 +142,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
                     Toast.makeText(LoginActivity.this,getString(R.string.login_success),Toast.LENGTH_SHORT).show();
 
                    User user=new User();
-                    user.password=password;
-                    user.phone=mobile;
-                    user.tid="1";
-                    user.uid="1";
+                    user.setPassword(password);
+                    user.setPhone(mobile);
+                    user.setUid("1");
+                    user.setTid("1");
                     AfterLogin(user);
 
                 }
@@ -158,7 +156,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     private void AfterLogin(User user) {
         if (!UserInfo.getInstance(this).hasSignIn()) {//保存登录信息
-            UserInfo.getInstance(this).saveUserInfo(user.phone,user.password, user.uid, user.tid);
+            new DaoCacheManage(this).updateUser(user);
         }
     }
 

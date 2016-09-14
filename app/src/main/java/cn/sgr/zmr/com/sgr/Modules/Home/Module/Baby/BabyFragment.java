@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bean.entity.Baby;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +21,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.Baby_Adapter;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.Baby;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby.AddBaby_Activity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListContract;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.MyDecoration;

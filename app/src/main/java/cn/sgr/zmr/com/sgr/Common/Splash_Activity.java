@@ -10,6 +10,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -34,11 +35,13 @@ public class Splash_Activity extends Activity {
         final View startViews = View.inflate(this, R.layout.splash_activity, null);
         setContentView(startViews);
         ButterKnife.bind(this);
-        // 渐变
+      // 渐变
          AlphaAnimation aa = new AlphaAnimation(1f, 1.0f);
          aa.setDuration(2500);
          startViews.setAnimation(aa);
-         aa.setAnimationListener(new Animation.AnimationListener() {
+//        Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash);
+
+        aa.setAnimationListener(new Animation.AnimationListener() {
 
          @Override
          public void onAnimationStart(Animation animation) {
