@@ -3,6 +3,8 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart;
 import android.app.FragmentManager;
 
 import com.bean.entity.Baby;
+import com.bean.entity.Chart;
+import com.bean.entity.Treat;
 import com.github.mikephil.charting.data.LineData;
 
 import java.util.ArrayList;
@@ -10,8 +12,6 @@ import java.util.List;
 
 import cn.sgr.zmr.com.sgr.Base.BasePresenter;
 import cn.sgr.zmr.com.sgr.Base.BaseView;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.Chart;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.
@@ -29,7 +29,7 @@ public interface ChartContract {
 
             void showChart( LineData data);//显示表格数据
 
-            void showHistory( ArrayList<EventDatas> items);//显示物理治疗历史数据
+            void showHistory( ArrayList<Treat> items);//显示物理治疗历史数据
 
             void nextActivity(String id);//跳转宝宝详细信息，并且编辑
 

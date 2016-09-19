@@ -161,13 +161,13 @@ public class LoadingButton extends View{
         super.onDraw(canvas);
         boolean isKeepDraw = false;
         if(isDefaultDraw){
-            System.out.println("isDefaultDraw");
+
 
             canvas.drawCircle(centerX, centerY, radius, mFillCirclePaint);
             canvas.translate(centerX-defaultCommonDrawableWidth/2,centerY-defaultCommonDrawableWidth/2);
             mCommonDrawable.draw(canvas);
         }else if(isDrawableStart){
-            System.out.println("isDrawableStart");
+
             defaultCommonDrawableWidth = Math.min(defaultCommonDrawableWidth+10,width);
             mCompleteDrawable.setBounds(0,0,defaultCommonDrawableWidth,defaultCommonDrawableWidth);
             canvas.drawCircle(centerX, centerY, Math.min(defaultCommonDrawableWidth,radius), mFillCirclePaint);
@@ -176,22 +176,22 @@ public class LoadingButton extends View{
             if(defaultCommonDrawableWidth>=width*0.5){
 
 
-                System.out.println("defaultCommonDrawableWidth>=width*0.5");
+
                 isDrawableStart = false;
                 isCompleted = true;
                 invokeComplete();
             }
             invalidate();
         } else if (isRotate) {
-            System.out.println("isRotate");
+
             isKeepDraw = true;
             if (currentProgress != targetProgress) {
                 isKeepDraw = true;
                 float addedValue = 2;
-                System.out.println("startDrawable");
+
                 currentProgress = Math.min(currentProgress + addedValue, targetProgress);
                 if (currentProgress == totalProgress) {
-                    System.out.println("startDrawable");
+
                     startDrawable();
                 }
             }
@@ -199,11 +199,11 @@ public class LoadingButton extends View{
             canvas.drawArc(oval, arcStartAngle + getArcStartOffset(), currentProgress / totalProgress * 360, false, mArcPaint);
         }else if (isShowArc) {
 
-            System.out.println("isShowArc");
+
             canvas.drawCircle(centerX, centerY, radius, mCirclePaint);
             isShowArc = false;
         }else if(isCompleted){
-            System.out.println("isCompleted");
+
             canvas.drawCircle(centerX, centerY, Math.min(defaultCommonDrawableWidth,radius), mFillCirclePaint);
             canvas.translate(centerX-defaultCommonDrawableWidth/2,centerX-defaultCommonDrawableWidth/2);
             mCompleteDrawable.draw(canvas);

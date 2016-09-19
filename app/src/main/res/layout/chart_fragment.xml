@@ -64,7 +64,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/tv_title"
-                    android:src="@drawable/gril_icon" />
+                    android:src="@drawable/baby_boy" />
 
                 <TextView
                     android:id="@+id/tv_start_time"

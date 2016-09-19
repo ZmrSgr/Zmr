@@ -1,6 +1,7 @@
 package cn.sgr.zmr.com.sgr.Modules.Home;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bean.entity.Baby;
 import com.github.OrangeGangsters.circularbarpager.library.CircularBarPager;
 import com.nightonke.jellytogglebutton.JellyToggleButton;
 import com.nightonke.jellytogglebutton.State;
@@ -30,6 +32,7 @@ import cn.sgr.zmr.com.sgr.Base.MyApplication;
 import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
 import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyContract;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.CirclePagerAdapter;
@@ -40,7 +43,9 @@ import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.DemoView;
 import cn.sgr.zmr.com.sgr.View.LoadingButton;
 
-public class HomeFragment extends BaseFragment {
+import static com.google.common.base.Preconditions.checkNotNull;
+
+public class HomeFragment extends BaseFragment implements HomeContract.View{
 
 
     @BindView(R.id.top_view_back)
@@ -62,13 +67,28 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.tv_update)
     LoadingButton tv_update;
 
-
-
-
     TextView home_unit_top;
 
-
     TextView home_unit_midle;
+
+//    性别
+    @BindView(R.id.iv_gender)
+    ImageView iv_gender;
+
+    @BindView(R.id.tv_username)
+    TextView tv_username;
+
+    @BindView(R.id.tv_hight)
+    TextView tv_hight;
+
+    @BindView(R.id.tv_weight)
+    TextView tv_weight;
+
+    @BindView(R.id.tv_date)
+    TextView tv_date;
+
+
+
 
 
 /*    @BindView(R.id.home_temp)
@@ -84,6 +104,22 @@ public class HomeFragment extends BaseFragment {
     private static final int REQUEST_CONNECT_DEVICE = 1;
     private BluetoothSet mBluetoothSet = null;		//蓝牙对象
     MyApplication mBluetoothSetSession = null;
+    HomeContract.Presenter mPresenter;
+
+    //单例 模式
+    public static HomeFragment newInstance() {
+        return new HomeFragment();
+    }
+    //   构造方法
+    public HomeFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
+    }
 
     @Nullable
     @Override
@@ -95,7 +131,6 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
     private void intView() {
-
         tv_update.setCallback(new LoadingButton.Callback() {
             @Override
             public void complete() {
@@ -103,8 +138,6 @@ public class HomeFragment extends BaseFragment {
                 Toast.makeText(getActivity(),"下载完成,可以在这里写完成的回调方法",Toast.LENGTH_SHORT).show();
             }
         });
-
-
         ViewT=   new DemoView(getActivity());
         mCircularBarPager.setViewPagerAdapter(new CirclePagerAdapter(getActivity(),ViewT));
         top_view_title.setText("体温检测");
@@ -121,37 +154,57 @@ public class HomeFragment extends BaseFragment {
         home_unit_midle=(TextView) ViewT.findViewById(R.id.user_center_unit);
 
         mCircularBarPager.getCircularBar().setStartLineEnabled(false);
-        user_top_textview.setText("室温：28");
-        value_info_textview.setText("37.5");
+        initBlue();
+
+    }
+
+    //当绑定宝宝的时候，显示数据
+    @Override
+    public void setDate(Baby baby){
+        tv_weight.setText(baby.getWeight());
+        tv_username.setText(baby.getName());
+        tv_hight.setText(baby.getHight());
+        tv_date.setText(baby.getAge());
+        if(baby.getSex()!=null&&baby.getSex().equals("男")){
+
+            iv_gender.setImageResource(R.drawable.baby_boy);
+        }else{
+            iv_gender.setImageResource(R.drawable.baby_girl);
+        }
+
+    }
+
+
+    @Override
+    public void showProgressDialog(FragmentManager manager) {
+        super.showProgressDialog(manager);
+    }
+
+    @Override
+    public void initBlue() {
+        mBluetoothSet = new BluetoothSet(getActivity(),top_view_left_text);
+        //设置共享对象，后面的Activity对象只需读取对象数据即可
+        mBluetoothSetSession = (MyApplication) getActivity().getApplication();
+        mBluetoothSetSession.setBluetoothSet(mBluetoothSet);
+        mBluetoothSetSession.setHandler(mHandler);
+        if(mBluetoothSet!=null){
+            mBluetoothSet.openBluetooth();
+        }else{
+            Toast.makeText(getActivity(), "该设备不支持蓝牙", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void clearData() {
+        user_top_textview.setText("室温：0");
+        value_info_textview.setText("0");
         user_bottom_textview.setText("正常");
-        mCircularBarPager.getCircularBar().animateProgress(0, 100, 1500);
-
-
-
-        //蓝牙初始化
-        initBluetooth();
-/*
-        home_temp.setBackgroundColor(  getResources().getColor(R.color.white));
-        home_temp.setTextSize(40);
-//        home_temp.setTextColor( ContextCompat.getColor(getActivity(),R.color.them_bg));
-        home_temp.setTextMarginLeft(20);
-        home_temp.setTextMarginRight(20);
-        home_temp.setChecked(true);
-        home_temp.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
-            @Override
-            public void onStateChange(float process, State state, JellyToggleButton jtb) {
-                if (state.equals(State.LEFT)) {
-                    home_unit_midle.setText(getResources().getString(R.string.hua_unit));
-                    home_unit_top.setText(getResources().getString(R.string.hua_unit));
-                }
-                if (state.equals(State.RIGHT)) {
-                    home_unit_midle.setText(getResources().getString(R.string.shishi_unit));
-                    home_unit_top.setText(getResources().getString(R.string.shishi_unit));
-                }
-
-            }
-        });*/
-
+        tv_date.setText("0");
+        tv_hight.setText("0");
+        tv_username.setText("");
+        tv_weight.setText("0");
+        iv_gender.setVisibility(View.GONE);
+        mCircularBarPager.getCircularBar().animateProgress(0, 0, 1500);
     }
 
     @OnClick({R.id.top_view_right_text, R.id.top_view_left_text,R.id.iv_avatar,R.id.top_view_title,R.id.tv_update})
@@ -186,29 +239,8 @@ public class HomeFragment extends BaseFragment {
                 break;
 
 
-
         }
     }
-
-    private void initBluetooth() {
-        mBluetoothSet = new BluetoothSet(getActivity(),top_view_left_text);
-
-        //设置共享对象，后面的Activity对象只需读取对象数据即可
-        mBluetoothSetSession = (MyApplication) getActivity().getApplication();
-        mBluetoothSetSession.setBluetoothSet(mBluetoothSet);
-        mBluetoothSetSession.setHandler(mHandler);
-
-        if(mBluetoothSet!=null){
-
-            mBluetoothSet.openBluetooth();
-        }else{
-            Toast.makeText(getActivity(), "该设备不支持蓝牙", Toast.LENGTH_SHORT).show();
-        }
-
-
-
-    }
-
 
     /**
      * 显示数据
@@ -237,8 +269,7 @@ public class HomeFragment extends BaseFragment {
         switch (requestCode) {
             case REQUEST_CONNECT_DEVICE:
                 if (resultCode == Activity.RESULT_OK) {
-                    String address = data.getExtras()
-                            .getString(DeviceListFragment.EXTRA_DEVICE_ADDRESS);
+                    String address = data.getExtras().getString(DeviceListFragment.EXTRA_DEVICE_ADDRESS);
                     mBluetoothSet.ConnectDevices(address);
                 }
                 break;
@@ -248,5 +279,13 @@ public class HomeFragment extends BaseFragment {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+    @Override
+    public boolean isActive() {
+        return  isAdded();
+    }
 
+    @Override
+    public void setPresenter(HomeContract.Presenter presenter) {
+        mPresenter = checkNotNull(presenter);
+    }
 }

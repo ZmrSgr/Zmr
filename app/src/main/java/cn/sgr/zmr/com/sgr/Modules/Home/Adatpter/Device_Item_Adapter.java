@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
 import cn.sgr.zmr.com.sgr.R;
 
 /**

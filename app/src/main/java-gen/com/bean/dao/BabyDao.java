@@ -33,6 +33,7 @@ public class BabyDao extends AbstractDao<Baby, Long> {
         public final static Property Hight = new Property(7, String.class, "hight", false, "HIGHT");
         public final static Property DeviceName = new Property(8, String.class, "deviceName", false, "DEVICE_NAME");
         public final static Property Img = new Property(9, String.class, "img", false, "IMG");
+        public final static Property Isconnect = new Property(10, Boolean.class, "isconnect", false, "ISCONNECT");
     };
 
 
@@ -57,7 +58,8 @@ public class BabyDao extends AbstractDao<Baby, Long> {
                 "\"WEIGHT\" TEXT," + // 6: weight
                 "\"HIGHT\" TEXT," + // 7: hight
                 "\"DEVICE_NAME\" TEXT," + // 8: deviceName
-                "\"IMG\" TEXT);"); // 9: img
+                "\"IMG\" TEXT," + // 9: img
+                "\"ISCONNECT\" INTEGER);"); // 10: isconnect
     }
 
     /** Drops the underlying database table. */
@@ -120,6 +122,11 @@ public class BabyDao extends AbstractDao<Baby, Long> {
         if (img != null) {
             stmt.bindString(10, img);
         }
+ 
+        Boolean isconnect = entity.getIsconnect();
+        if (isconnect != null) {
+            stmt.bindLong(11, isconnect ? 1L: 0L);
+        }
     }
 
     /** @inheritdoc */
@@ -141,7 +148,8 @@ public class BabyDao extends AbstractDao<Baby, Long> {
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // weight
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // hight
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // deviceName
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // img
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // img
+            cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0 // isconnect
         );
         return entity;
     }
@@ -159,6 +167,7 @@ public class BabyDao extends AbstractDao<Baby, Long> {
         entity.setHight(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setDeviceName(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setImg(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setIsconnect(cursor.isNull(offset + 10) ? null : cursor.getShort(offset + 10) != 0);
      }
     
     /** @inheritdoc */

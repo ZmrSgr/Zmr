@@ -97,17 +97,6 @@ public class HealhFragment extends Fragment {
         initNearby();
         //初始化演讲
         initLeture();
-
-
-
-
-
-
-
-
-
-
-
         return view;
     }
 

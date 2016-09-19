@@ -89,7 +89,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     }
 
 
-    @OnClick({R.id.tv_signup,R.id.top_view_back,R.id.login_weibo,R.id.login_qq,R.id.login_weixin,R.id.tv_reset_password })
+    @OnClick({R.id.tv_signup,R.id.top_view_back,R.id.login_weibo,R.id.login_qq,R.id.login_weixin,R.id.tv_reset_password ,R.id.btn_login})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_signup:
@@ -156,8 +156,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
 
     private void AfterLogin(User user) {
         if (!UserInfo.getInstance(this).hasSignIn()) {//保存登录信息
+            UserInfo.getInstance(this).saveUserInfo(user.getPhone(),user.getPassword(),user.getUid(),user.getTid());
             new DaoCacheManage(this).updateUser(user);
         }
+        Utils.toNextActivity(this,MainActivity.class);
     }
 
     /** auth callback interface**/

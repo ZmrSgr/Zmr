@@ -16,6 +16,7 @@ public class Baby {
     private String hight;
     private String deviceName;
     private String img;
+    private Boolean isconnect;
 
     public Baby() {
     }
@@ -24,7 +25,7 @@ public class Baby {
         this.id = id;
     }
 
-    public Baby(Long id, String bid, String fid, String name, String age, String sex, String weight, String hight, String deviceName, String img) {
+    public Baby(Long id, String bid, String fid, String name, String age, String sex, String weight, String hight, String deviceName, String img, Boolean isconnect) {
         this.id = id;
         this.bid = bid;
         this.fid = fid;
@@ -35,6 +36,7 @@ public class Baby {
         this.hight = hight;
         this.deviceName = deviceName;
         this.img = img;
+        this.isconnect = isconnect;
     }
 
     public Long getId() {
@@ -115,6 +117,14 @@ public class Baby {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public Boolean getIsconnect() {
+        return isconnect;
+    }
+
+    public void setIsconnect(Boolean isconnect) {
+        this.isconnect = isconnect;
     }
 
 }

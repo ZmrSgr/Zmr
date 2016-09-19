@@ -21,6 +21,7 @@ import com.plattysoft.leonids.ParticleSystem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.RoundImageView;
 
 public class Splash_Activity extends Activity {
@@ -96,11 +97,7 @@ public class Splash_Activity extends Activity {
          });
     }
     private void redirectto() {
-
-       Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        // overridePendingTransition(R.anim.push_right_in,
-        // R.anim.push_right_out);
+        Utils.toNextActivity(this,MainActivity.class);
         finish();
     }
 

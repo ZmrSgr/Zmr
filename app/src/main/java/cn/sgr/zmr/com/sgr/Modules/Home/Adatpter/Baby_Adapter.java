@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 import cn.sgr.zmr.com.sgr.View.MyDialog;
 
 /**
@@ -23,6 +24,7 @@ import cn.sgr.zmr.com.sgr.View.MyDialog;
 public class Baby_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Baby> datas;
     private Context context;
+    private DaoCacheManage daoManage;
 
     public Baby_Adapter( Context ct,List<Baby> list) {
                 this.context=ct;
@@ -43,8 +45,14 @@ public class Baby_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ViewHolder mHolder = (ViewHolder) holder;
         mHolder.babay_tv_name.setText(datas.get(position).getName());
-//        mHolder.babay_tv_sex.setText(datas.get(position).sex);
+        if(datas.get(position).getSex()!=null&&datas.get(position).getSex().equals("男")){
+            mHolder.babay_tv_sex.setImageResource(R.drawable.baby_boy);
+        }else{
+            mHolder.babay_tv_sex.setImageResource(R.drawable.baby_girl);
+        }
+
         mHolder.babay_tv_device.setText(datas.get(position).getDeviceName());
+        mHolder. babay_tv_age.setText(datas.get(position).getAge());
         mHolder.babay_tv_del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +92,8 @@ public class Baby_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
     public void removeData(int position) {
-
+        this.daoManage=  new DaoCacheManage(context);
+        daoManage.DeleteBaby(datas.get(position));
         datas.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position,datas.size());
@@ -96,12 +105,16 @@ public class Baby_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         @BindView(R.id.babay_tv_name)
         TextView babay_tv_name;;
-      /*  @BindView(R.id.babay_tv_sex)
-        TextView babay_tv_sex;;*/
+      @BindView(R.id.babay_tv_sex)
+        ImageView babay_tv_sex;
+
+        @BindView(R.id.babay_tv_age)
+        TextView babay_tv_age;
+
         @BindView(R.id.babay_tv_device)
-        TextView babay_tv_device;;
+        TextView babay_tv_device;
         @BindView(R.id.babay_tv_del)
-        TextView babay_tv_del;;
+        TextView babay_tv_del;
 //        public DummyContent.DummyItem mItem;
         public ViewHolder(View view) {
             super(view);

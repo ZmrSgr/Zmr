@@ -21,10 +21,12 @@ public class BabyPresenter implements BabyContract.Presenter{
 
     private List<Baby> babyList = new ArrayList<>();
     private Context context;
+    private DaoCacheManage daoManage;
 
     public BabyPresenter(Context contexts, @NonNull BabyContract.View registerView) {
         this.registerView = registerView;
         this.registerView.setPresenter(this);
+        this.daoManage=  new DaoCacheManage(contexts);
         this.context=contexts;
     }
 
@@ -49,7 +51,9 @@ public class BabyPresenter implements BabyContract.Presenter{
     }
     private void initData() {
         babyList.clear();
-        babyList= new DaoCacheManage(context).getBabys();
+        System.out.println("context"+context);
+        babyList=daoManage.getBabys();
+
         getBabys(babyList);
     }
 

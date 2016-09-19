@@ -22,7 +22,9 @@ import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
 import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.Modules.Health.HealhFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.HomeFragment;
+import cn.sgr.zmr.com.sgr.Modules.Home.HomePresenter;
 import cn.sgr.zmr.com.sgr.Modules.Messages.MessageFragment;
+import cn.sgr.zmr.com.sgr.Modules.Setting.More.MorePresenter;
 import cn.sgr.zmr.com.sgr.Modules.Setting.SettingFragment;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
@@ -119,18 +121,18 @@ public class MainActivity extends Activity {
         hideFragments(transaction);
         switch (index) {
             case 0:
-
                 home_image.setImageResource(R.drawable.tab_ask_doctor_pressed);
                 home_text.setTextColor(getResources().getColorStateList(R.color.them_bg));
-
                 if (homeFragment == null) {
-
                     homeFragment = new HomeFragment();
-
-
+                    if (homeFragment == null) {
+                        homeFragment = homeFragment.newInstance();
+                        Utils.addFragmentToActivity(getFragmentManager(),homeFragment, R.id.contentFrame);
+                    }
+                    // Create the presenter
+                    new HomePresenter(this,homeFragment);
                     transaction.add(R.id.content, homeFragment);
                 } else {
-
                     transaction.show(homeFragment);
                 }
                 transaction.commit();

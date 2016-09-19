@@ -82,7 +82,7 @@
     <string name="save_baby">保存</string>
     <string name="my_baby">我的宝宝</string>
     <string name="baby_name">宝宝姓名</string>
-    <string name="baby_age">年龄</string>
+    <string name="baby_age">出生日期</string>
     <string name="baby_sex">性别</string>
     <string name="baby_high">身高</string>
     <string name="baby_weight">体重</string>
@@ -148,6 +148,10 @@
     <string name="close_lose">已关闭防丟功能</string>
     <string name="close_shock">已关闭震动</string>
     <string name="open_shock">已开启震动</string>
+
+    <string name="write_baby_name">请填写宝宝名称</string>
+    <string name="please_add_baby">还没添加宝宝，请点击右上角添加宝宝</string>
+
 
 
 

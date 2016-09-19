@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoManager;
 import cn.sgr.zmr.com.sgr.Utils.util.BluetoothSet;
 
 /**
@@ -24,6 +25,7 @@ public class MyApplication extends Application {
     public static String DeviceName;
     private BluetoothSet mBluetoothSet = null;			//传递蓝牙对象
     private Handler mHandler = null;
+    private static DaoManager daoManager;
     public static MyApplication getInstance() {
         if (instance == null) {
             instance = new MyApplication();
@@ -35,6 +37,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        //初始化数据库
+        initGreenDao();
         //初始化讯飞语音
         SpeechUtility.createUtility(this, "appid=57d0df43");
         //初始化云测
@@ -48,6 +52,15 @@ public class MyApplication extends Application {
         PlatformConfig.setQQZone("1105570889", "vx7p91NQqmKW9YAD");
 
 
+    }
+
+    private void initGreenDao() {
+        daoManager = DaoManager.getInstance();
+        daoManager.initManager(getApplicationContext());
+
+    }
+    public static DaoManager getGreenDao() {
+        return daoManager;
     }
     public void addActivity(Activity activity) {
         if (activitys != null && activitys.size() > 0) {

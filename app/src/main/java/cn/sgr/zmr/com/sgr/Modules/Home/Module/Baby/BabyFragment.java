@@ -42,6 +42,11 @@ public class BabyFragment extends BaseFragment implements BabyContract.View{
     @BindView(R.id.top_view_title)
     TextView top_view_title;
 
+    @BindView(R.id.empty_tip)
+    TextView empty_tip;
+
+
+
     @BindView(R.id.top_view_back)
     ImageView top_view_back;
 
@@ -134,6 +139,11 @@ public class BabyFragment extends BaseFragment implements BabyContract.View{
 
     @Override
     public void showBaby(List<Baby> babys) {
+        if(babys.size()>0){
+            empty_tip.setVisibility(View.GONE);
+        }else{
+            empty_tip.setVisibility(View.VISIBLE);
+        }
         adapter.applyData(babys);
 
     }

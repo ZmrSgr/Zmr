@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bean.entity.Baby;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 
@@ -30,7 +31,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
+import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 import cn.sgr.zmr.com.sgr.Utils.util.Config;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.RoundImageView;
@@ -88,6 +91,7 @@ public class AddBabyFragment extends BaseFragment implements AddBabyContract.Vie
     private ArrayList<ArrayList<String>> Weightoptions2Items = new ArrayList<>();
 
     AddBabyContract.Presenter mPresenter;
+    private DaoCacheManage daoManage;
     //单例 模式
     public static AddBabyFragment newInstance() {
         return new AddBabyFragment();
@@ -156,7 +160,25 @@ public class AddBabyFragment extends BaseFragment implements AddBabyContract.Vie
                 getActivity().finish();
                 break;
             case R.id.btn_save:
-                Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
+                if(et_babyname.getText()==null&&et_babyname.getText().equals("")){
+                    Toast.makeText(getActivity(),getString(R.string.write_baby_name),Toast.LENGTH_SHORT).show();
+                }else{
+                    Baby baby=new Baby();
+                    baby.setName(et_babyname.getText().toString());
+
+                    if(et_babyage.getText()!=null&&!et_babyage.getText().equals(""))
+                       baby.setAge(et_babyage.getText().toString());
+                    if(et_babyweight.getText()!=null&&!et_babyweight.getText().equals(""))
+                        baby.setWeight(et_babyweight.getText().toString());
+                    if(et_babyhigh.getText()!=null&&!et_babyhigh.getText().equals(""))
+                        baby.setHight(et_babyhigh.getText().toString());
+                    if(et_babysex.getText()!=null&&!et_babysex.getText().equals(""))
+                        baby.setSex(et_babysex.getText().toString());
+
+                    baby.setIsconnect(false);
+                    mPresenter.SaveBaby(baby, UserInfo.getInstance(getActivity()).hasSignIn());
+        }
+
                 getActivity(). finish();
                 break;
             case R.id.et_babyweight:

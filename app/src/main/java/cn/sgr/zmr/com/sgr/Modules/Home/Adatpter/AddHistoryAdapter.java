@@ -9,12 +9,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-
+import com.bean.entity.Treat;
 
 import java.util.List;
-import java.util.logging.Logger;
 
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
 import cn.sgr.zmr.com.sgr.R;
 
 /**
@@ -36,10 +34,10 @@ public class AddHistoryAdapter extends RecyclerView.Adapter {
     }
 
     private static final String TAG = AddHistoryAdapter.class.getSimpleName();
-    private List<EventDatas> list;
+    private List<Treat> list;
     private Context context;
 
-    public AddHistoryAdapter(Context contexts,List<EventDatas> list) {
+    public AddHistoryAdapter(Context contexts,List<Treat> list) {
         this.list = list;
         this.context=contexts;
     }
@@ -56,8 +54,8 @@ public class AddHistoryAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         ItemViewHolder holder = (ItemViewHolder) viewHolder;
-        EventDatas events =  list.get(i);
-        holder.wuli.setText(events.getName());
+        Treat events =  list.get(i);
+        holder.wuli.setText(events.getPhysics());
     }
 
     @Override

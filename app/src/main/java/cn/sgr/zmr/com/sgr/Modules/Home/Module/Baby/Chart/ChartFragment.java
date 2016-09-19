@@ -21,6 +21,8 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.bean.entity.Baby;
+import com.bean.entity.Chart;
+import com.bean.entity.Treat;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -40,8 +42,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.AddHistoryAdapter;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.Chart;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.EventDatas;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby.AddBaby_Activity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddHistory.AddHisoryActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.View.SublimePickerFragment;
@@ -125,11 +125,11 @@ public class ChartFragment extends Fragment implements ChartContract.View{
         //时间轴
         chart_list.setHasFixedSize(true);
         chart_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ArrayList<EventDatas> items = new ArrayList<>();
+        ArrayList<Treat> items = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
+   /*     for (int i = 0; i < 10; i++) {
             items.add(new EventDatas("even" + i, "测试数据"));
-        }
+        }*/
         chart_list.setAdapter(new AddHistoryAdapter(getActivity(), items));
 
         //图标
@@ -389,7 +389,7 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     }
 
     @Override
-    public void showHistory(ArrayList<EventDatas> items) {
+    public void showHistory(ArrayList<Treat> items) {
 
     }
 

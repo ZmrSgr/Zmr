@@ -27,7 +27,7 @@ public interface AddBabyContract {
 }
 
 interface Presenter extends BasePresenter {
-    void addBabys( List<Baby> babys);//获得宝宝列表
+    void SaveBaby( Baby babys,boolean isOnline);//保存宝宝
     void nextActivity(int postiong);
 }
 }
