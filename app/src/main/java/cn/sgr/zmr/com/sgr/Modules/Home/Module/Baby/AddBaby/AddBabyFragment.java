@@ -35,6 +35,7 @@ import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 import cn.sgr.zmr.com.sgr.Utils.util.Config;
+import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.RoundImageView;
 
@@ -92,6 +93,8 @@ public class AddBabyFragment extends BaseFragment implements AddBabyContract.Vie
 
     AddBabyContract.Presenter mPresenter;
     private DaoCacheManage daoManage;
+
+    Baby Frombaby;
     //单例 模式
     public static AddBabyFragment newInstance() {
         return new AddBabyFragment();
@@ -107,7 +110,20 @@ public class AddBabyFragment extends BaseFragment implements AddBabyContract.Vie
         ButterKnife.bind(this, view);
         initView();
         initViewData();
+        setBabyData();
         return view;
+    }
+
+    private void setBabyData() {
+        Frombaby  = (Baby)getActivity().getIntent().getSerializableExtra(UtilKey.BABY_KEY);//跳转获得宝宝的对象数据
+        if(Frombaby!=null){
+            et_babyname.setText(Frombaby.getName());
+            et_babyage.setText(Frombaby.getAge());
+            et_babyweight.setText(Frombaby.getWeight());
+            et_babyhigh.setText(Frombaby.getHight());
+            et_babysex.setText(Frombaby.getSex());
+
+        }
     }
 
 
@@ -164,19 +180,41 @@ public class AddBabyFragment extends BaseFragment implements AddBabyContract.Vie
                     Toast.makeText(getActivity(),getString(R.string.write_baby_name),Toast.LENGTH_SHORT).show();
                 }else{
                     Baby baby=new Baby();
-                    baby.setName(et_babyname.getText().toString());
 
-                    if(et_babyage.getText()!=null&&!et_babyage.getText().equals(""))
-                       baby.setAge(et_babyage.getText().toString());
-                    if(et_babyweight.getText()!=null&&!et_babyweight.getText().equals(""))
-                        baby.setWeight(et_babyweight.getText().toString());
-                    if(et_babyhigh.getText()!=null&&!et_babyhigh.getText().equals(""))
-                        baby.setHight(et_babyhigh.getText().toString());
-                    if(et_babysex.getText()!=null&&!et_babysex.getText().equals(""))
-                        baby.setSex(et_babysex.getText().toString());
+                    if(Frombaby==null){//表示的是插入数据
+                        baby.setName(et_babyname.getText().toString());
 
-                    baby.setIsconnect(false);
-                    mPresenter.SaveBaby(baby, UserInfo.getInstance(getActivity()).hasSignIn());
+                        if(et_babyage.getText()!=null&&!et_babyage.getText().equals(""))
+                            baby.setAge(et_babyage.getText().toString());
+                        if(et_babyweight.getText()!=null&&!et_babyweight.getText().equals(""))
+                            baby.setWeight(et_babyweight.getText().toString());
+                        if(et_babyhigh.getText()!=null&&!et_babyhigh.getText().equals(""))
+                            baby.setHight(et_babyhigh.getText().toString());
+                        if(et_babysex.getText()!=null&&!et_babysex.getText().equals(""))
+                            baby.setSex(et_babysex.getText().toString());
+
+                        baby.setIsconnect(false);
+                        mPresenter.SaveBaby(baby, UserInfo.getInstance(getActivity()).hasSignIn());
+                    }else{//表示修改数据
+                        Frombaby.setName(et_babyname.getText().toString());
+
+                        if(et_babyage.getText()!=null&&!et_babyage.getText().equals(""))
+                            Frombaby.setAge(et_babyage.getText().toString());
+                        if(et_babyweight.getText()!=null&&!et_babyweight.getText().equals(""))
+                            Frombaby.setWeight(et_babyweight.getText().toString());
+                        if(et_babyhigh.getText()!=null&&!et_babyhigh.getText().equals(""))
+                            Frombaby.setHight(et_babyhigh.getText().toString());
+                        if(et_babysex.getText()!=null&&!et_babysex.getText().equals(""))
+                            Frombaby.setSex(et_babysex.getText().toString());
+                        mPresenter.SaveBaby(Frombaby, UserInfo.getInstance(getActivity()).hasSignIn());
+
+                    }
+
+
+
+
+
+
         }
 
                 getActivity(). finish();

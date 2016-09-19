@@ -44,7 +44,7 @@ public class UserDao extends AbstractDao<User, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"USER\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"UID\" TEXT," + // 1: uid
                 "\"TID\" TEXT," + // 2: tid
                 "\"PASSWORD\" TEXT," + // 3: password

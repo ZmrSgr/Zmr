@@ -3,6 +3,7 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddHistory;
 import android.app.FragmentManager;
 
 import com.bean.entity.Baby;
+import com.bean.entity.Treat;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ public interface AddHistoryContract {
         interface Presenter extends BasePresenter {
             void addBabys( List<Baby> babys);//获得宝宝列表
             void nextActivity(int postiong);
+            void saveTreat(Treat treat);
         }
 
 }

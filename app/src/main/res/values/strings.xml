@@ -151,6 +151,8 @@
 
     <string name="write_baby_name">请填写宝宝名称</string>
     <string name="please_add_baby">还没添加宝宝，请点击右上角添加宝宝</string>
+    <string name="add_baby_time">请填写时间</string>
+    <string name="add_baby_tem">请填写温度</string>
 
 
 

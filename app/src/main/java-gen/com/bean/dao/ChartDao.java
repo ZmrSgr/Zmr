@@ -29,6 +29,7 @@ public class ChartDao extends AbstractDao<Chart, Long> {
         public final static Property Bid = new Property(3, String.class, "bid", false, "BID");
         public final static Property Temperature = new Property(4, String.class, "temperature", false, "TEMPERATURE");
         public final static Property Time = new Property(5, String.class, "time", false, "TIME");
+        public final static Property Date = new Property(6, String.class, "date", false, "DATE");
     };
 
 
@@ -44,12 +45,13 @@ public class ChartDao extends AbstractDao<Chart, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CHART\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"CID\" TEXT," + // 1: cid
                 "\"UID\" TEXT," + // 2: uid
                 "\"BID\" TEXT," + // 3: bid
                 "\"TEMPERATURE\" TEXT," + // 4: temperature
-                "\"TIME\" TEXT);"); // 5: time
+                "\"TIME\" TEXT," + // 5: time
+                "\"DATE\" TEXT);"); // 6: date
     }
 
     /** Drops the underlying database table. */
@@ -92,6 +94,11 @@ public class ChartDao extends AbstractDao<Chart, Long> {
         if (time != null) {
             stmt.bindString(6, time);
         }
+ 
+        String date = entity.getDate();
+        if (date != null) {
+            stmt.bindString(7, date);
+        }
     }
 
     /** @inheritdoc */
@@ -109,7 +116,8 @@ public class ChartDao extends AbstractDao<Chart, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // uid
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // bid
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // temperature
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // time
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // time
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // date
         );
         return entity;
     }
@@ -123,6 +131,7 @@ public class ChartDao extends AbstractDao<Chart, Long> {
         entity.setBid(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setTemperature(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setTime(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setDate(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     /** @inheritdoc */

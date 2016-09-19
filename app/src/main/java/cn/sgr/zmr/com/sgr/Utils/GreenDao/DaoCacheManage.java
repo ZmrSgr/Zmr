@@ -3,6 +3,8 @@ package cn.sgr.zmr.com.sgr.Utils.GreenDao;
 import android.content.Context;
 
 import com.bean.dao.BabyDao;
+import com.bean.dao.ChartDao;
+import com.bean.dao.TreatDao;
 import com.bean.dao.UserDao;
 import com.bean.entity.Baby;
 import com.bean.entity.Chart;
@@ -34,7 +36,7 @@ public class DaoCacheManage {
     //更新和保存当前用户
     public boolean updateUser(User user) {
         boolean flag = false;
-        user.setId(null);//避免出现重复的主键报错
+//        user.setId(null);//避免出现重复的主键报错
         List<User> userList = new ArrayList<User>();
         QueryBuilder<User> queryBuilder = daoManager.getDaoSession().queryBuilder(User.class);
         userList =queryBuilder.where(UserDao.Properties.Uid.eq(user.getUid())).list();
@@ -119,7 +121,7 @@ public class DaoCacheManage {
     //更新baby和插入
     public boolean updateBaby(Baby baby,boolean isOnline) {
         boolean flag = false;
-        baby.setId(null);
+//        baby.setId(null);
         if (isOnline) {//已经登录
             //查询构建器
             List<Baby> babyList = new ArrayList<Baby>();
@@ -134,18 +136,25 @@ public class DaoCacheManage {
                 flag = daoManager.getDaoSession().insert(baby) != -1 ? true : false;
             }
         }else{//如果没有登录
-            Baby selectbaby= daoManager.getDaoSession().load(Baby.class, baby.getId());
-            if (selectbaby == null) {//不存在就插入
+
+
+            System.out.println("fid"+baby.getFid());
+            if (baby.getFid()==null||baby.getFid().equals("")) {//不存在就插入
+
                 baby.setFid("-1");
                 flag = daoManager.getDaoSession().insert(baby) != -1 ? true : false;
 
-            }else{//存在就更新
+
+            }else{
+                System.out.println("更新");
+                //存在就更新
                 try {
                     daoManager.getDaoSession().update(baby);
                     flag = true;
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
         }
         return flag;
@@ -174,7 +183,9 @@ public class DaoCacheManage {
 
     //添加温度表
     public boolean InsertChart(Chart chart){
-        return false;
+        boolean flag = false;
+        flag = daoManager.getDaoSession().insert(chart) != -1 ? true : false;
+        return flag;
     }
     //删除温度表
     public boolean DeleteChartByDay(String day){
@@ -182,11 +193,22 @@ public class DaoCacheManage {
     }
     //删除全部温度表
     public boolean DeleteAllChart(){
-        return false;
+        boolean flag = false;
+        try {
+            daoManager.getDaoSession().deleteAll(Chart.class);
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return flag;
     }
     //查看某一天的记录表
     public List<Chart> FindChartByDay(String day){
-        return null;
+        List<Chart> charts = new ArrayList<Chart>();
+        QueryBuilder<Chart> queryBuilder = daoManager.getDaoSession().queryBuilder(Chart.class);
+        charts =queryBuilder.where(ChartDao.Properties.Date.eq(day)).list();
+        return charts;
 
     }
 
@@ -199,24 +221,55 @@ public class DaoCacheManage {
 
     //查看某一天的治疗记录
     public List<Treat>FindTreatByDay(String day){
-        return null;
+
+        List<Treat> treats = new ArrayList<Treat>();
+        QueryBuilder<Treat> queryBuilder = daoManager.getDaoSession().queryBuilder(Treat.class);
+        treats =queryBuilder.where(TreatDao.Properties.Date.eq(day)).list();
+        return treats;
     }
     //插入一条治疗记录
     public boolean InsertTreat(Treat treat){
-        return false;
+
+        boolean flag = false;
+        flag = daoManager.getDaoSession().insert(treat) != -1 ? true : false;
+        return flag;
     }
     //删除一条记录
     public boolean DeleteTreate(Treat treat){
-        return false;
+
+        boolean flag = false;
+        try {
+            //删除指定ID
+            daoManager.getDaoSession().delete(treat);
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //daoManager.getDaoSession().deleteAll(); //删除所有记录
+        return flag;
     }
     //修改某一条治疗记录
     public boolean UpdateTreate(Treat treat){
-        return false;
+
+        boolean flag = false;
+        try {
+            daoManager.getDaoSession().update(treat);
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag;
     }
     //查找一条治疗记录
     public Treat FindTreatByTid(String tid){
         return null;
     }
+
+    public List<Treat> FindAll(){
+
+        return daoManager.getDaoSession().loadAll(Treat.class);
+    }
+
 
 
 

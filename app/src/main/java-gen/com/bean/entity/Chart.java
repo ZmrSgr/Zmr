@@ -12,6 +12,7 @@ public class Chart {
     private String bid;
     private String temperature;
     private String time;
+    private String date;
 
     public Chart() {
     }
@@ -20,13 +21,14 @@ public class Chart {
         this.id = id;
     }
 
-    public Chart(Long id, String cid, String uid, String bid, String temperature, String time) {
+    public Chart(Long id, String cid, String uid, String bid, String temperature, String time, String date) {
         this.id = id;
         this.cid = cid;
         this.uid = uid;
         this.bid = bid;
         this.temperature = temperature;
         this.time = time;
+        this.date = date;
     }
 
     public Long getId() {
@@ -75,6 +77,14 @@ public class Chart {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
 }

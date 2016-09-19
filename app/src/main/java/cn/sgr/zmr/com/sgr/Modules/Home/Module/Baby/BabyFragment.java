@@ -1,6 +1,7 @@
 package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.Baby_Adapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby.AddBaby_Activity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.MyDecoration;
 
@@ -59,6 +61,8 @@ public class BabyFragment extends BaseFragment implements BabyContract.View{
     Baby_Adapter adapter;
 
     BabyContract.Presenter mPresenter;
+
+    List<Baby> babys=new ArrayList<>();
     //单例 模式
     public static BabyFragment newInstance() {
         return new BabyFragment();
@@ -98,7 +102,11 @@ public class BabyFragment extends BaseFragment implements BabyContract.View{
         adapter.setOnRecyclerViewListener(new Baby_Adapter.OnRecyclerViewListener() {
             @Override
             public void onItemClick(int position, View v) {
-                Utils.toNextActivity(getActivity(),ChartActivity.class);
+                Intent mIntent = new Intent(getActivity(),ChartActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable(UtilKey.BABY_KEY,babys.get(position));
+                mIntent.putExtras(mBundle);
+                startActivity(mIntent);
             }
 
             @Override
@@ -139,6 +147,7 @@ public class BabyFragment extends BaseFragment implements BabyContract.View{
 
     @Override
     public void showBaby(List<Baby> babys) {
+        this.babys=babys;
         if(babys.size()>0){
             empty_tip.setVisibility(View.GONE);
         }else{

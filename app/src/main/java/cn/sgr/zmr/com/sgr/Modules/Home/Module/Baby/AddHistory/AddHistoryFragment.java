@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bean.entity.Baby;
+import com.bean.entity.Treat;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 
@@ -26,7 +28,10 @@ import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby.AddBabyContract;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.
@@ -82,7 +87,29 @@ public class AddHistoryFragment extends BaseFragment implements AddHistoryContra
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_save:
+                if(et_baby_time.getText()==null&&et_baby_time.getText().equals("")){
+                    Toast.makeText(getActivity(),getString(R.string.add_baby_time),Toast.LENGTH_SHORT).show();
+                }else if(et_baby_tem.getText()==null&&et_baby_tem.getText().equals("")){
+                    Toast.makeText(getActivity(),getString(R.string.add_baby_tem),Toast.LENGTH_SHORT).show();
+                }
+                Treat treat=new Treat();
+                treat.setTime(et_baby_time.getText().toString());
+                treat.setTemperature(et_baby_tem.getText().toString());
+                treat.setMedicine(et_baby_yao.getText().toString());
+                treat.setPhysics(et_baby_wuli.getText().toString());
+               Baby Frombaby  = (Baby)getActivity().getIntent().getSerializableExtra(UtilKey.BABY_KEY);//跳转获得宝宝的对象数据
+                if(Frombaby!=null){
+                    if(Frombaby.getBid()==null||Frombaby.getBid().equals("")){
+                        treat.setBid(Frombaby.getId()+"");
+                    }else{
+                        treat.setBid(Frombaby.getBid());
+                    }
+                }
+
+
+                mPresenter.saveTreat(treat);
                 Toast.makeText(getActivity(),"保存成功",Toast.LENGTH_SHORT).show();
+                getActivity().finish();
                 break;
 
             case R.id.et_baby_time:
@@ -178,6 +205,7 @@ public class AddHistoryFragment extends BaseFragment implements AddHistoryContra
 
     @Override
     public void setPresenter(AddHistoryContract.Presenter presenter) {
+        mPresenter = checkNotNull(presenter);
 
     }
 }

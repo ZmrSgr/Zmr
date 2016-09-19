@@ -8,6 +8,8 @@ import com.bean.entity.Treat;
 
 import java.util.ArrayList;
 
+import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
+
 /**
  * Created by 沈国荣 on 2016/8/23 0023.
  */
@@ -15,11 +17,13 @@ public class ChartPresenter implements ChartContract.Presenter {
     private Context context;
     @NonNull
     private final ChartContract.View registerView;
+    private DaoCacheManage daoManage;
 
     public ChartPresenter(Context context, @NonNull ChartContract.View registerView) {
         this.context = context;
         this.registerView = registerView;
         this. registerView.setPresenter(this);
+        this.daoManage=  new DaoCacheManage(context);
     }
 
     @Override
@@ -49,7 +53,7 @@ public class ChartPresenter implements ChartContract.Presenter {
        /* for (int i = 0; i < 10; i++) {
             items.add(new EventDatas("even" + i, "测试数据"));
         }*/
-        registerView.showHistory(items);
+        registerView.showHistory(daoManage.FindAll());
 
     }
 

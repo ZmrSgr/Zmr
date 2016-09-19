@@ -46,7 +46,7 @@
 
                 <TextView
 
-                    android:id="@+id/tv_title"
+                    android:id="@+id/tv_baby_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
@@ -58,32 +58,31 @@
 
 
                 <ImageView
-                    android:id="@+id/home_img_sex"
+                    android:id="@+id/img_sex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@id/tv_title"
+                    android:layout_toRightOf="@id/tv_baby_name"
                     android:src="@drawable/baby_boy" />
 
                 <TextView
                     android:id="@+id/tv_start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_title"
+                    android:layout_below="@id/tv_baby_name"
                     android:layout_marginLeft="12dp"
                     android:layout_toRightOf="@id/iv_image"
-                    android:text="年龄:8个月"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tv_line"
+                    android:id="@+id/tv_weight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_title"
+                    android:layout_below="@id/tv_baby_name"
                     android:layout_marginLeft="4dp"
                     android:layout_toRightOf="@id/tv_start_time"
-                    android:text="   体重：5kg"
+                    android:text=""
                     android:textSize="15sp" />
 
 

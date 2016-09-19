@@ -49,7 +49,7 @@ public class BabyDao extends AbstractDao<Baby, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"BABY\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"BID\" TEXT," + // 1: bid
                 "\"FID\" TEXT," + // 2: fid
                 "\"NAME\" TEXT," + // 3: name

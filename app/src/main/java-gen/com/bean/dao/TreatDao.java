@@ -47,7 +47,7 @@ public class TreatDao extends AbstractDao<Treat, Long> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"TREAT\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"TID\" TEXT," + // 1: tid
                 "\"UID\" TEXT," + // 2: uid
                 "\"BID\" TEXT," + // 3: bid

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.bean.entity.Baby;
 import com.bean.entity.Treat;
 
 import java.util.List;
@@ -42,6 +43,12 @@ public class AddHistoryAdapter extends RecyclerView.Adapter {
         this.context=contexts;
     }
 
+    public void applyData(List<Treat> msgs) {
+        list.clear();
+        list.addAll(msgs);
+        notifyDataSetChanged();
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int type) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chart_item_main, null);
@@ -56,6 +63,9 @@ public class AddHistoryAdapter extends RecyclerView.Adapter {
         ItemViewHolder holder = (ItemViewHolder) viewHolder;
         Treat events =  list.get(i);
         holder.wuli.setText(events.getPhysics());
+        holder.time.setText(events.getTime());
+        holder.yao.setText(events.getMedicine());
+        holder. add_history_temp.setText(events.getTemperature());
     }
 
     @Override
@@ -65,12 +75,13 @@ public class AddHistoryAdapter extends RecyclerView.Adapter {
 
     class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         public View rootView;
-        public TextView time,wuli,yao;
+        public TextView time,wuli,yao,add_history_temp;
         public ItemViewHolder(View itemView) {
             super(itemView);
             time = (TextView) itemView.findViewById(R.id.add_history_time);
             wuli = (TextView) itemView.findViewById(R.id.add_history_wuli);
             yao = (TextView)itemView.findViewById(R.id.add_history_yao);
+            add_history_temp= (TextView)itemView.findViewById(R.id.add_history_temp);
 
 //            rootView.setOnClickListener(this);
 //            rootView.setOnLongClickListener(this);

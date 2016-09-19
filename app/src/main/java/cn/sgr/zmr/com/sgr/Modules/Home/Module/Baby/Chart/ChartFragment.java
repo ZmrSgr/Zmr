@@ -3,6 +3,7 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -42,10 +43,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.AddHistoryAdapter;
+import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.Baby_Adapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby.AddBaby_Activity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddHistory.AddHisoryActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.View.SublimePickerFragment;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -97,6 +100,28 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     SimpleDateFormat sf;
 
 
+    @BindView(R.id.iv_image)
+    ImageView iv_image;
+
+    @BindView(R.id.img_sex)
+    ImageView img_sex;
+
+    @BindView(R.id.tv_weight)
+    TextView tv_weight;
+
+    @BindView(R.id.tv_start_time)
+    TextView tv_start_time;
+
+    @BindView(R.id.tv_baby_name)
+    TextView tv_baby_name;
+
+    Baby baby;
+
+
+    AddHistoryAdapter adapter;
+
+
+
 
     ChartContract.Presenter mPresenter;
     //单例 模式
@@ -107,7 +132,11 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     public ChartFragment() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
+    }
 
     @Nullable
     @Override
@@ -115,31 +144,26 @@ public class ChartFragment extends Fragment implements ChartContract.View{
         View view = inflater.inflate(R.layout.chart_fragment, container, false);
         ButterKnife.bind(this, view);
         intitView();
-        
         return view;
     }
 
 
     private void intitView() {
-
-        //时间轴
-        chart_list.setHasFixedSize(true);
-        chart_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ArrayList<Treat> items = new ArrayList<>();
-
-   /*     for (int i = 0; i < 10; i++) {
-            items.add(new EventDatas("even" + i, "测试数据"));
-        }*/
-        chart_list.setAdapter(new AddHistoryAdapter(getActivity(), items));
-
-        //图标
+        //宝宝数据
+        setBabyData();
+        //时间
+        setTime();
+        //图表
         initialChart(mChart);
         addLineDataSet(mChart);
-        //初始化时间
-        ca = Calendar.getInstance();//得到一个Calendar的实例
-        sf = new SimpleDateFormat("yyyy-M-d");
-        time_chart.setText(sf.format(ca.getTime()));
+        //治疗数据
+        setTreat();
+
         //向上滑动
+        setAboveShadow();
+    }
+
+    private void setAboveShadow() {
         layout.setShadowDrawable(getResources().getDrawable(R.drawable.above_shadow));
         layout.setAnchorPoint(0.3f);
         layout.setDragView(lin_bottom);
@@ -168,17 +192,59 @@ public class ChartFragment extends Fragment implements ChartContract.View{
         });
     }
 
+    private void setTreat() {
+        //时间轴
+        chart_list.setHasFixedSize(true);
+        chart_list.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ArrayList<Treat> items = new ArrayList<>();
+        adapter=new AddHistoryAdapter(getActivity(), items);
+        chart_list.setAdapter(adapter);
+    }
+
+    private void setTime() {
+        //初始化时间
+        ca = Calendar.getInstance();//得到一个Calendar的实例
+        sf = new SimpleDateFormat("yyyy-M-d");
+        time_chart.setText(sf.format(ca.getTime()));
+
+    }
+
+
+    //设置宝宝数据
+    private void setBabyData() {
+       baby  = (Baby)getActivity().getIntent().getSerializableExtra(UtilKey.BABY_KEY);//跳转获得宝宝的对象数据
+        if(baby!=null){
+            tv_baby_name.setText(baby.getName());
+            tv_start_time.setText(baby.getAge());
+            tv_weight.setText(baby.getWeight());
+            if(baby.getSex()!=null||baby.getSex().equals("男")){
+                img_sex.setImageResource(R.drawable.baby_boy);
+                }else{
+                img_sex.setImageResource(R.drawable.baby_girl );
+            }
+        }
+    }
+
 
     @OnClick({R.id.lin_bottom, R.id.time_chart, R.id.time_left, R.id.time_right,R.id.chart_user_rel})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.chart_user_rel:
-                Utils.toNextActivity(getActivity(),AddBaby_Activity.class);
+                Intent mIntent = new Intent(getActivity(),AddBaby_Activity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable(UtilKey.BABY_KEY, baby);
+                mIntent.putExtras(mBundle);
+                startActivity(mIntent);
                 break;
 
 
             case R.id.lin_bottom:
-                Utils.toNextActivity(getActivity(),AddHisoryActivity.class);
+                Intent mIntent1 = new Intent(getActivity(),AddHisoryActivity.class);
+                Bundle mBundle1 = new Bundle();
+                mBundle1.putSerializable(UtilKey.BABY_KEY, baby);
+                mIntent1.putExtras(mBundle1);
+                startActivity(mIntent1);
+
                 break;
 
             case R.id.time_right:
@@ -389,8 +455,8 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     }
 
     @Override
-    public void showHistory(ArrayList<Treat> items) {
-
+    public void showHistory(List<Treat> items) {
+        adapter.applyData(items);
     }
 
     @Override

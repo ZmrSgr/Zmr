@@ -29,7 +29,7 @@ public interface ChartContract {
 
             void showChart( LineData data);//显示表格数据
 
-            void showHistory( ArrayList<Treat> items);//显示物理治疗历史数据
+            void showHistory( List<Treat> items);//显示物理治疗历史数据
 
             void nextActivity(String id);//跳转宝宝详细信息，并且编辑
 
