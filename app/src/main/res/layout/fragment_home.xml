@@ -58,15 +58,31 @@
             </RelativeLayout>
 
 
-            <cn.sgr.zmr.com.sgr.View.LoadingButton
+            <ImageView
+                android:src="@drawable/location_test"
+                android:id="@+id/iv_location"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:padding="3dp"
+
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"/>
+
+
+            <ImageView
+                android:src="@drawable/updatess"
                 android:id="@+id/tv_update"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
+                android:padding="3dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="20dp"/>
 
             <TextView
                 android:visibility="gone"

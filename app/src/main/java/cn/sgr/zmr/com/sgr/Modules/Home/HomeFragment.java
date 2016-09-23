@@ -31,12 +31,14 @@ import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Base.MyApplication;
 import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
 import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
+import cn.sgr.zmr.com.sgr.Modules.Home.Location.LocationActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyContract;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.CirclePagerAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListFragment;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Synchronize.SynchronizeActivity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.BluetoothSet;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
@@ -65,7 +67,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
 
 
     @BindView(R.id.tv_update)
-    LoadingButton tv_update;
+    ImageView tv_update;
 
     TextView home_unit_top;
 
@@ -74,6 +76,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
 //    性别
     @BindView(R.id.iv_gender)
     ImageView iv_gender;
+
+    @BindView(R.id.iv_location)
+    ImageView iv_location;
+
+
 
     @BindView(R.id.tv_username)
     TextView tv_username;
@@ -131,13 +138,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
         return view;
     }
     private void intView() {
-        tv_update.setCallback(new LoadingButton.Callback() {
-            @Override
-            public void complete() {
-                System.out.println("下载完成,可以在这里写完成的回调方法");
-                Toast.makeText(getActivity(),"下载完成,可以在这里写完成的回调方法",Toast.LENGTH_SHORT).show();
-            }
-        });
         ViewT=   new DemoView(getActivity());
         mCircularBarPager.setViewPagerAdapter(new CirclePagerAdapter(getActivity(),ViewT));
         top_view_title.setText("体温检测");
@@ -207,7 +207,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
         mCircularBarPager.getCircularBar().animateProgress(0, 0, 1500);
     }
 
-    @OnClick({R.id.top_view_right_text, R.id.top_view_left_text,R.id.iv_avatar,R.id.top_view_title,R.id.tv_update})
+    @OnClick({R.id.top_view_right_text, R.id.top_view_left_text,R.id.iv_avatar,R.id.top_view_title,R.id.tv_update,R.id.iv_location})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_view_right_text:
@@ -224,17 +224,18 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
                 Utils.toNextActivity(getActivity(), ChartActivity.class);
                 break;
 
-            case R.id.top_view_title:
-                tv_update.setTargetProgress(360);
+            case R.id.iv_location:
+                Utils.toNextActivity(getActivity(),LocationActivity.class);
+//                tv_update.setTargetProgress(360);
                 break;
 
             case R.id.tv_update:
-                if(UserInfo.getInstance(getActivity()).hasSignIn()){
-                    tv_update.startAnim();
-                }else{
+//                if(UserInfo.getInstance(getActivity()).hasSignIn()){
+                    Utils.toNextActivity(getActivity(), SynchronizeActivity.class);
+               /* }else{
                     Toast.makeText(getActivity(),"请先登录",Toast.LENGTH_SHORT).show();
                     Utils.toNextActivity(getActivity(),LoginActivity.class);
-                }
+                }*/
 
                 break;
 

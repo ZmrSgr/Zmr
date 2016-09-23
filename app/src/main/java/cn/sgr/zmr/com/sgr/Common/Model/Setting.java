@@ -24,6 +24,9 @@ public class Setting {
     private static final String KEY_ALARM_IS_SHOCK = "alarm_shock";//0表示不报警，1表示报警
     private static final String KEY_ALARM_TEMP = "alarm_temp";//报警温度
 
+    private static final String KEY_SYNCHRONIZE_AUTO = "synchronize_auto";//自动同步
+    private static final String KEY_SYNCHRONIZE_WIFI = "synchronize_wifi";//仅WiFi下
+
     private Setting(Context ct) {
         Account = ct.getSharedPreferences(KEY_SETTING, 0);
         editor = Account.edit();
@@ -80,6 +83,14 @@ public class Setting {
         editor.putString(KEY_IS_LOSE, lose).commit();
     }
 
+    public void setSYNCHRONIZE_AUTO(String key) {
+        editor.putString(KEY_SYNCHRONIZE_AUTO, key).commit();
+    }
+
+    public void setSYNCHRONIZE_WIFI(String key) {
+        editor.putString(KEY_SYNCHRONIZE_WIFI, key).commit();
+    }
+
     public boolean IsLose() {
         return  Account.getString(KEY_IS_LOSE, "0").equals("1");
     }
@@ -91,6 +102,12 @@ public class Setting {
     }
     public boolean IsVocie() {
         return  Account.getString(KEY_ALARM_IS_VOICE, "0").equals("1");
+    }
+    public boolean IsAuto() {
+        return  Account.getString(KEY_SYNCHRONIZE_AUTO, "0").equals("1");
+    }
+    public boolean IsWifi() {
+        return  Account.getString(KEY_SYNCHRONIZE_WIFI, "0").equals("1");
     }
 
 

@@ -85,5 +85,6 @@ dependencies {
     compile project(':LeonidsLib')
     compile 'org.greenrobot:greendao:2.2.1'
     compile 'org.greenrobot:greendao-generator:2.2.0'
-
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
+    compile files('libs/BaiduLBS_Android.jar')
 }

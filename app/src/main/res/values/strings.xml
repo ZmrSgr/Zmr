@@ -153,11 +153,15 @@
     <string name="please_add_baby">还没添加宝宝，请点击右上角添加宝宝</string>
     <string name="add_baby_time">请填写时间</string>
     <string name="add_baby_tem">请填写温度</string>
+    <string name="title_activity_synchronize">SynchronizeActivity</string>
 
+    <string name="synchronize_auto">自动同步</string>
+    <string name="synchronize_wifi">仅无线网络下同步</string>
+    <string name="synchronize_right_now">立即同步</string>
+    <string name="synchronize_yun">云同步</string>
 
-
-
-
+    <string name="my_location">我的位置</string>
+    <string name="baby_location">宝宝位置</string>
 
 
 </resources>

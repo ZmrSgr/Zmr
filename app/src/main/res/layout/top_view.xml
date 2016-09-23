@@ -17,8 +17,6 @@
             android:background="@drawable/green_select"
             android:padding="10dp"
             android:src="@drawable/back" />
-
-
         <TextView
             android:id="@+id/top_view_left_text"
             android:background="@drawable/green_select"

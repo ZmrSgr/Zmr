@@ -100,7 +100,7 @@ public class SettingFragment extends BaseFragment {
     }
 
     private void intView() {
-        top_view_title.setText("设置");
+        top_view_title.setText(getString(R.string.bottom_set));
         top_view_back.setVisibility(View.GONE);
         top_view_right_text.setVisibility(View.GONE);
         jtb_lost.setLeftBackgroundColor(  getResources().getColor(R.color.them_bg));
@@ -140,8 +140,6 @@ public class SettingFragment extends BaseFragment {
                     rel_fever_way.setVisibility(View.VISIBLE);
                     line.setVisibility(View.VISIBLE);
                     line1.setVisibility(View.VISIBLE);
-
-
                 }
 
             }

@@ -2,12 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.sgr.zmr.com.sgr">
 
-    <!-- 友盟权限 -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <!-- 权限 -->
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,12 +27,30 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name="cn.sgr.zmr.com.sgr.Base.MyApplication"
+        android:name=".Base.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- 百度定位 -->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2"></action>
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="1ZT8UppLYp8tBnT5wuyATHGfTTQBkVWP" />
+        <!-- http://lbsyun.baidu.com/apiconsole/key -->
+
+
+        <!-- meta-data需要写在application中 -->
 
 
         <!-- 云测 -->
@@ -36,7 +58,8 @@
             android:name="TESTIN_APPKEY"
             android:value="019cc0a31ffab5740c685c6cf3a2ae18" />
 
-        <activity android:name=".Common.Splash_Activity"
+        <activity
+            android:name=".Common.Splash_Activity"
             android:theme="@style/AppWelcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -69,17 +92,14 @@
             android:name=".Modules.Home.Module.Baby.AddHistory.AddHisoryActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Modules.Home.Module.Device.DeviceListActivity" />
-
-        <activity android:name=".Modules.Setting.More.MoreActivity"/>
-        <activity android:name=".Modules.Setting.AlarmWay.AlarmWayActivity"/>
+        <activity android:name=".Modules.Setting.More.MoreActivity" />
+        <activity android:name=".Modules.Setting.AlarmWay.AlarmWayActivity" />
         <activity android:name=".Modules.Setting.Help.HelpActivity" />
         <activity android:name=".Modules.Setting.More.Contract.ContractActivity" />
         <activity android:name=".Modules.Setting.More.Disclaimer.DisclaimerActivity" />
         <activity android:name=".Modules.Setting.More.Feedback.FeedbackActivity" />
         <activity android:name=".Modules.Setting.More.RetsetPwd.RetsetPwdActivity" />
         <activity android:name=".Common.FindPwd.FindPwdActivity" />
-
-
 
         <!-- 友盟分享与登录 umeng sdk -->
 
@@ -90,10 +110,10 @@
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="57bd5dee67e58eea9e0008c6"></meta-data>
+            android:value="57bd5dee67e58eea9e0008c6" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Umeng"></meta-data>
+            android:value="Umeng" />
 
         <!-- 微信平台 -->
         <activity
@@ -118,7 +138,7 @@
             android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- qq和qq空间 -->
         <activity
@@ -141,6 +161,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 友盟分享与登录 umeng sdk -->
 
+        <activity android:name=".Modules.Home.Location.LocationActivity" />
+        <activity android:name=".Modules.Home.Module.Synchronize.SynchronizeActivity" />
     </application>
 
 </manifest>

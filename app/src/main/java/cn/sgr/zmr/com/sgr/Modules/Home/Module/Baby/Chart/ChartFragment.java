@@ -50,6 +50,9 @@ import cn.sgr.zmr.com.sgr.Modules.Home.View.SublimePickerFragment;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
+import de.greenrobot.event.EventBus;
+import de.greenrobot.event.Subscribe;
+import de.greenrobot.event.ThreadMode;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -144,13 +147,15 @@ public class ChartFragment extends Fragment implements ChartContract.View{
         View view = inflater.inflate(R.layout.chart_fragment, container, false);
         ButterKnife.bind(this, view);
         intitView();
+        EventBus.getDefault().register(this); //第1步: 注册
         return view;
     }
 
 
     private void intitView() {
+        baby  = (Baby)getActivity().getIntent().getSerializableExtra(UtilKey.BABY_KEY);//跳转获得宝宝的对象数据
         //宝宝数据
-        setBabyData();
+        setBabyData(baby);
         //时间
         setTime();
         //图表
@@ -211,13 +216,13 @@ public class ChartFragment extends Fragment implements ChartContract.View{
 
 
     //设置宝宝数据
-    private void setBabyData() {
-       baby  = (Baby)getActivity().getIntent().getSerializableExtra(UtilKey.BABY_KEY);//跳转获得宝宝的对象数据
-        if(baby!=null){
-            tv_baby_name.setText(baby.getName());
-            tv_start_time.setText(baby.getAge());
-            tv_weight.setText(baby.getWeight());
-            if(baby.getSex()!=null||baby.getSex().equals("男")){
+    private void setBabyData(Baby babys) {
+
+        if(babys!=null){
+            tv_baby_name.setText(babys.getName());
+            tv_start_time.setText(babys.getAge());
+            tv_weight.setText(babys.getWeight());
+            if(babys.getSex()!=null||babys.getSex().equals("男")){
                 img_sex.setImageResource(R.drawable.baby_boy);
                 }else{
                 img_sex.setImageResource(R.drawable.baby_girl );
@@ -482,6 +487,18 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     @Override
     public void setPresenter(ChartContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
-
     }
+    //在注册了的Activity中,声明处理事件的方法
+    @Subscribe(threadMode = ThreadMode.MainThread) //第2步:注册一个在后台线程执行的方法,用于接收事件
+    public void onBaby(Baby even) {//参数必须是ClassEvent类型, 否则不会调用此方法
+        baby  =even;
+        System.out.println("evenBus"+even);
+        setBabyData(baby);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//反注册
+    }
+
 }

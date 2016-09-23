@@ -3,8 +3,11 @@ package cn.sgr.zmr.com.sgr.Base;
 import android.app.Activity;
 
 import android.app.Application;
+import android.app.Service;
 import android.os.Handler;
+import android.os.Vibrator;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.iflytek.cloud.SpeechUtility;
 import com.testin.agent.TestinAgent;
 import com.umeng.socialize.PlatformConfig;
@@ -15,6 +18,7 @@ import java.util.List;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoManager;
 import cn.sgr.zmr.com.sgr.Utils.util.BluetoothSet;
+import cn.sgr.zmr.com.sgr.Utils.util.LocationService;
 
 /**
  * Created by 沈国荣 on 2016/8/4 0004.
@@ -26,6 +30,7 @@ public class MyApplication extends Application {
     private BluetoothSet mBluetoothSet = null;			//传递蓝牙对象
     private Handler mHandler = null;
     private static DaoManager daoManager;
+    public LocationService locationService;//定位
     public static MyApplication getInstance() {
         if (instance == null) {
             instance = new MyApplication();
@@ -37,6 +42,9 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+
+        locationService = new LocationService(getApplicationContext());
+        SDKInitializer.initialize(getApplicationContext());
         //初始化数据库
         initGreenDao();
         //初始化讯飞语音

@@ -38,6 +38,7 @@ import cn.sgr.zmr.com.sgr.Utils.util.Config;
 import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.RoundImageView;
+import de.greenrobot.event.EventBus;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -207,6 +208,9 @@ public class AddBabyFragment extends BaseFragment implements AddBabyContract.Vie
                         if(et_babysex.getText()!=null&&!et_babysex.getText().equals(""))
                             Frombaby.setSex(et_babysex.getText().toString());
                         mPresenter.SaveBaby(Frombaby, UserInfo.getInstance(getActivity()).hasSignIn());
+
+                       //在任意地方,调用发送事件
+                        EventBus.getDefault().post(Frombaby);//第3步: 发送事件
 
                     }
 

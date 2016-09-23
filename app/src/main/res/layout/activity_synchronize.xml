@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/top_view"
+        layout="@layout/top_view" />
+    <LinearLayout
+        android:layout_below="@+id/top_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+
+
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/synchronize_auto"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+
+        <com.nightonke.jellytogglebutton.JellyToggleButton
+            android:id="@+id/auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:jtbLeftText="关"
+            app:jtbRightText="开"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:checked="false" />
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+    <RelativeLayout
+        android:id="@+id/item_message"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+
+            android:text="@string/synchronize_wifi"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <com.nightonke.jellytogglebutton.JellyToggleButton
+            android:id="@+id/wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:jtbLeftText="关"
+            app:jtbRightText="开"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:checked="false" />
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+        </LinearLayout>
+
+
+    <Button
+        android:padding="10dp"
+        android:id="@+id/btn_submit"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/textbg_select"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:text="@string/synchronize_right_now"
+        android:textColor="#ffffff" />
+    </RelativeLayout>
