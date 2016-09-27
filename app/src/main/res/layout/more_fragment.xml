@@ -11,38 +11,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/rel_reset_pwd"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-
-            android:text="@string/set_retsetpwd"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
-
-
-    </RelativeLayout>
-
-    <include layout="@layout/line"
-        android:id="@+id/line"/>
-
-    <RelativeLayout
         android:id="@+id/rel_update"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -159,19 +127,6 @@
 
 
 
-    <Button
-        android:padding="10dp"
-        android:id="@+id/btn_login_out"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/textbg_select"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:text="@string/login_out"
-        android:textColor="#ffffff" />
 
 
 </LinearLayout>

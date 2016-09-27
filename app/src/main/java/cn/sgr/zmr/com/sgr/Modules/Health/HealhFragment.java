@@ -87,8 +87,6 @@ public class HealhFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_health, container, false);
         ButterKnife.bind(this, view);
-
-
         //初始化主界面
         initPage();
 //        初始化快速问医生

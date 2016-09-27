@@ -4,19 +4,15 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.app.FragmentTransaction;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import cn.sgr.zmr.com.sgr.Base.BaseActivity;
 import cn.sgr.zmr.com.sgr.Base.MyApplication;
 import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
 import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
@@ -24,8 +20,7 @@ import cn.sgr.zmr.com.sgr.Modules.Health.HealhFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.HomeFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.HomePresenter;
 import cn.sgr.zmr.com.sgr.Modules.Messages.MessageFragment;
-import cn.sgr.zmr.com.sgr.Modules.Setting.More.MorePresenter;
-import cn.sgr.zmr.com.sgr.Modules.Setting.SettingFragment;
+import cn.sgr.zmr.com.sgr.Modules.My.MyFragment;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
@@ -71,7 +66,7 @@ public class MainActivity extends Activity {
     private HealhFragment healthFragment;
     private HomeFragment homeFragment;
     private MessageFragment messagesFragment;
-    private SettingFragment settingFragment;
+    private MyFragment myFragment;
     private FragmentTransaction transaction;
     long firstTime;
     private boolean iscycle;
@@ -154,9 +149,9 @@ public class MainActivity extends Activity {
                 transaction.commit();
                 break;
             case 2:
-                if(!UserInfo.getInstance(this).hasSignIn()){
+/*                if(!UserInfo.getInstance(this).hasSignIn()){
                     Utils.toNextActivity(this, LoginActivity.class);
-                }else{
+                }else{*/
                     message_image.setImageResource(R.drawable.tab_message_pressed);
                     message_text.setTextColor(getResources().getColorStateList(
                             R.color.them_bg));
@@ -170,7 +165,7 @@ public class MainActivity extends Activity {
                         transaction.show(messagesFragment);
                     }
                     transaction.commit();
-                }
+//                }
 
 
                 break;
@@ -179,13 +174,13 @@ public class MainActivity extends Activity {
                 set_image.setImageResource(R.drawable.tab_i_pressed);
                 set_text.setTextColor(getResources().getColorStateList(
                         R.color.them_bg));
-                if (settingFragment == null) {
+                if (myFragment == null) {
 
-                    settingFragment = new SettingFragment();
-                    transaction.add(R.id.content, settingFragment);
+                    myFragment = new MyFragment();
+                    transaction.add(R.id.content, myFragment);
                 } else {
 
-                    transaction.show(settingFragment);
+                    transaction.show(myFragment);
                 }
                 transaction.commit();
                 break;
@@ -267,8 +262,8 @@ public class MainActivity extends Activity {
 
             transaction.hide(messagesFragment);
         }
-        if (settingFragment != null) {
-            transaction.hide(settingFragment);
+        if (myFragment != null) {
+            transaction.hide(myFragment);
         }
     }
 

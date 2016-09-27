@@ -1,5 +1,6 @@
 package cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -34,7 +35,8 @@ import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
-import cn.sgr.zmr.com.sgr.Utils.util.Config;
+import cn.sgr.zmr.com.sgr.Utils.util.ImageUtil;
+import cn.sgr.zmr.com.sgr.Utils.util.MyConfig;
 import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.RoundImageView;
@@ -81,7 +83,7 @@ public class AddBabyFragment extends BaseFragment implements AddBabyContract.Vie
     private String mFileName = "";
     private final int REQUEST_CAMERA = 1;
     private final int REQUEST_PHOTO = 2;
-
+    private final int REQUEST_PHOTOZOOM = 3;
 
     private ArrayList<String> Sexoptions1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> Sexoptions2Items = new ArrayList<>();
@@ -94,6 +96,9 @@ public class AddBabyFragment extends BaseFragment implements AddBabyContract.Vie
 
     AddBabyContract.Presenter mPresenter;
     private DaoCacheManage daoManage;
+
+    private File mFileZoomDir;
+    private String mImagePath;
 
     Baby Frombaby;
     //单例 模式
@@ -356,12 +361,12 @@ public class AddBabyFragment extends BaseFragment implements AddBabyContract.Vie
                 // TODO Auto-generated method stub
                 mDialog.dismiss();
                 if (mFileDir == null) {
-                    mFileDir = new File(Config.FILEPATH + "img/");
+                    mFileDir = new File(MyConfig.FILEPATH + "img/");
                     if (!mFileDir.exists()) {
                         mFileDir.mkdirs();
                     }
                 }
-                mFileName = Config.FILEPATH + "img/" + "temp.jpg";
+                mFileName = MyConfig.FILEPATH + "img/" + "temp.jpg";
                 mFile = new File(mFileName);
                 Uri imageuri = Uri.fromFile(mFile);
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -397,4 +402,63 @@ public class AddBabyFragment extends BaseFragment implements AddBabyContract.Vie
     public void setPresenter(AddBabyContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
     }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CAMERA) {
+                File files = new File(mFileName);
+                if (files.exists()) {
+                    mImagePath = mFileName;
+                    mImagePath = startPhotoZoom(Uri.fromFile(new File(
+                            mImagePath)));
+                }
+            } else if (requestCode == REQUEST_PHOTO) {
+                Uri selectedImage = data.getData();
+                mImagePath = startPhotoZoom(selectedImage);
+            } else if (requestCode == REQUEST_PHOTOZOOM) {
+                File f = new File(mImagePath);
+
+                if (f.exists()) {
+                    File file = new File(ImageUtil.zoomImage(mImagePath, 350));
+                    /*mUserBalance.changeAvatar(file);// 上传本地图片
+                    updatePhoto(mImagePath);// 第三方上传头像*/
+                } else {
+                   Toast.makeText(getActivity(),"图片不存在",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+    private String startPhotoZoom(Uri uri) {
+
+        if (mFileZoomDir == null) {
+            mFileZoomDir = new File(MyConfig.FILEPATH + "img/");
+            if (!mFileZoomDir.exists()) {
+                mFileZoomDir.mkdirs();
+            }
+        }
+
+        String fileName;
+        fileName = "/temp.jpg";
+
+        String filePath = mFileZoomDir + fileName;
+        File loadingFile = new File(filePath);
+
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 400);
+        intent.putExtra("aspectY", 400);
+        intent.putExtra("output", Uri.fromFile(loadingFile));// 输出到文件
+        intent.putExtra("outputFormat", "PNG");// 返回格式
+        intent.putExtra("noFaceDetection", true); // 去除面部检测
+        intent.putExtra("return-data", false); // 不要通过Intent传递截获的图片
+        startActivityForResult(intent, REQUEST_PHOTOZOOM);
+
+        return filePath;
+
+    }
+
 }

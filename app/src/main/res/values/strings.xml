@@ -151,6 +151,7 @@
 
     <string name="write_baby_name">请填写宝宝名称</string>
     <string name="please_add_baby">还没添加宝宝，请点击右上角添加宝宝</string>
+    <string name="please_add_user">还没添加孩子，请点击右上角添加孩子</string>
     <string name="add_baby_time">请填写时间</string>
     <string name="add_baby_tem">请填写温度</string>
     <string name="title_activity_synchronize">SynchronizeActivity</string>
@@ -158,10 +159,25 @@
     <string name="synchronize_auto">自动同步</string>
     <string name="synchronize_wifi">仅无线网络下同步</string>
     <string name="synchronize_right_now">立即同步</string>
-    <string name="synchronize_yun">云同步</string>
+    <string name="synchronize_yun">数据同步</string>
 
     <string name="my_location">我的位置</string>
     <string name="baby_location">宝宝位置</string>
+    <string name="check_temp"> 体温检测</string>
+    <string name="connected"> 连接</string>
+
+    <string name="my_child">我的孩子</string>
+    <string name="my_qr_code">二维码</string>
+    <string name="connected_child">绑定孩子</string>
+    <string name="my">我的</string>
+
+    <string name="nick_name">昵称</string>
+    <string name="my_hendimg">头像</string>
+    <string name="my_phone">电话号码</string>
+    <string name="my_profile">我的资料</string>
+    <string name="my_edit_name">编辑姓名</string>
+    <string name="baby_list">宝宝列表</string>
+    <string name="child_baby_location">位置</string>
 
 
 </resources>

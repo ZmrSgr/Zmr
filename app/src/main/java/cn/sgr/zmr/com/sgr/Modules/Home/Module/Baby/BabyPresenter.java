@@ -51,9 +51,7 @@ public class BabyPresenter implements BabyContract.Presenter{
     }
     private void initData() {
         babyList.clear();
-        System.out.println("context"+context);
         babyList=daoManage.getBabys();
-
         getBabys(babyList);
     }
 

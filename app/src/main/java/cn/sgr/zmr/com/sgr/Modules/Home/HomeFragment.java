@@ -38,6 +38,7 @@ import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.CirclePagerAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListFragment;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.SettingDevice.SettingDeviceActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Synchronize.SynchronizeActivity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.BluetoothSet;
@@ -140,12 +141,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
     private void intView() {
         ViewT=   new DemoView(getActivity());
         mCircularBarPager.setViewPagerAdapter(new CirclePagerAdapter(getActivity(),ViewT));
-        top_view_title.setText("体温检测");
+        top_view_title.setText(getString(R.string.check_temp));
         top_view_back.setVisibility(View.GONE);
         top_view_left_text.setVisibility(View.VISIBLE);
-        top_view_left_text.setText("连接");
+        top_view_left_text.setText(getString(R.string.connected));
         top_view_right_text.setVisibility(View.VISIBLE);
-        top_view_right_text.setText("电子病历");
+        top_view_right_text.setText(getString(R.string.set_more));
         user_top_textview=(TextView)ViewT.findViewById(R.id.user_top_textview);
         value_info_textview=(TextView)ViewT.findViewById(R.id.value_info_textview);
         user_bottom_textview=(TextView)ViewT.findViewById(R.id.user_bottom_textview);
@@ -211,7 +212,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_view_right_text:
-                Utils.toNextActivity(getActivity(), BabyActivity.class);
+                Utils.toNextActivity(getActivity(), SettingDeviceActivity.class);
                 break;
             case R.id.top_view_left_text:
                 cancelProgressDialog();
@@ -225,13 +226,13 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
                 break;
 
             case R.id.iv_location:
-                Utils.toNextActivity(getActivity(),LocationActivity.class);
+//                Utils.toNextActivity(getActivity(),LocationActivity.class);
 //                tv_update.setTargetProgress(360);
                 break;
 
             case R.id.tv_update:
 //                if(UserInfo.getInstance(getActivity()).hasSignIn()){
-                    Utils.toNextActivity(getActivity(), SynchronizeActivity.class);
+//                    Utils.toNextActivity(getActivity(), SynchronizeActivity.class);
                /* }else{
                     Toast.makeText(getActivity(),"请先登录",Toast.LENGTH_SHORT).show();
                     Utils.toNextActivity(getActivity(),LoginActivity.class);

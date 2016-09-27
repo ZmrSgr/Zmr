@@ -45,19 +45,19 @@
 
     </com.baidu.mapapi.map.MapView>
 
-    <TextView
-        android:padding="10dp"
-        android:id="@+id/btn_location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/textbg_select"
-        android:gravity="center"
-        android:textSize="14dp"
-        android:text="@string/my_location"
-        android:textColor="#ffffff" />
 
+    <ImageView
+        android:id="@+id/relocation"
+        android:src="@drawable/ic_track_explore_loc_content"
+        android:background="@color/withe"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+
+        />
 
 </RelativeLayout>

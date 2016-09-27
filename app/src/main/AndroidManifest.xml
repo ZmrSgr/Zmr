@@ -3,9 +3,6 @@
     package="cn.sgr.zmr.com.sgr">
 
     <!-- 权限 -->
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -40,7 +37,7 @@
             android:enabled="true"
             android:process=":remote">
             <intent-filter>
-                <action android:name="com.baidu.location.service_v2.2"></action>
+                <action android:name="com.baidu.location.service_v2.2" />
             </intent-filter>
         </service>
 
@@ -72,7 +69,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".Modules.Setting.Device.DeviceActivity" />
+        <activity android:name=".Modules.Home.Module.Device.DeviceActivity" />
         <activity android:name=".Common.MainActivity" />
         <activity
             android:name=".Common.Login.LoginActivity"
@@ -92,13 +89,13 @@
             android:name=".Modules.Home.Module.Baby.AddHistory.AddHisoryActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Modules.Home.Module.Device.DeviceListActivity" />
-        <activity android:name=".Modules.Setting.More.MoreActivity" />
-        <activity android:name=".Modules.Setting.AlarmWay.AlarmWayActivity" />
-        <activity android:name=".Modules.Setting.Help.HelpActivity" />
-        <activity android:name=".Modules.Setting.More.Contract.ContractActivity" />
-        <activity android:name=".Modules.Setting.More.Disclaimer.DisclaimerActivity" />
-        <activity android:name=".Modules.Setting.More.Feedback.FeedbackActivity" />
-        <activity android:name=".Modules.Setting.More.RetsetPwd.RetsetPwdActivity" />
+        <activity android:name=".Modules.My.More.MoreActivity" />
+        <activity android:name=".Modules.Home.Module.AlarmWay.AlarmWayActivity" />
+        <activity android:name=".Modules.My.Help.HelpActivity" />
+        <activity android:name=".Modules.My.More.Contract.ContractActivity" />
+        <activity android:name=".Modules.My.More.Disclaimer.DisclaimerActivity" />
+        <activity android:name=".Modules.My.More.Feedback.FeedbackActivity" />
+        <activity android:name=".Modules.My.More.RetsetPwd.RetsetPwdActivity" />
         <activity android:name=".Common.FindPwd.FindPwdActivity" />
 
         <!-- 友盟分享与登录 umeng sdk -->
@@ -163,6 +160,13 @@
 
         <activity android:name=".Modules.Home.Location.LocationActivity" />
         <activity android:name=".Modules.Home.Module.Synchronize.SynchronizeActivity" />
+        <activity android:name=".Modules.Home.Module.SettingDevice.SettingDeviceActivity" />
+        <activity android:name=".Modules.My.Profile.ProfileActivity" />
+        <activity android:name=".Modules.My.Profile.EditName.EditNameActivity" />
+        <activity android:name=".Modules.My.MyChild.MyChildActivity" />
+        <activity android:name=".Modules.My.MyChild.BabyOfChild.BabyOfChildActivity" />
+        <activity android:name=".Modules.My.QrCode.MyQrCodeActivity" />
+        <activity android:name=".Modules.My.QrCode.ScanCodeActivity"></activity>
     </application>
 
 </manifest>

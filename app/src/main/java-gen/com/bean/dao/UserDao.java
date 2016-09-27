@@ -29,6 +29,7 @@ public class UserDao extends AbstractDao<User, Long> {
         public final static Property Password = new Property(3, String.class, "password", false, "PASSWORD");
         public final static Property Phone = new Property(4, String.class, "phone", false, "PHONE");
         public final static Property Avatar = new Property(5, String.class, "avatar", false, "AVATAR");
+        public final static Property Nickname = new Property(6, String.class, "nickname", false, "NICKNAME");
     };
 
 
@@ -49,7 +50,8 @@ public class UserDao extends AbstractDao<User, Long> {
                 "\"TID\" TEXT," + // 2: tid
                 "\"PASSWORD\" TEXT," + // 3: password
                 "\"PHONE\" TEXT," + // 4: phone
-                "\"AVATAR\" TEXT);"); // 5: avatar
+                "\"AVATAR\" TEXT," + // 5: avatar
+                "\"NICKNAME\" TEXT);"); // 6: nickname
     }
 
     /** Drops the underlying database table. */
@@ -92,6 +94,11 @@ public class UserDao extends AbstractDao<User, Long> {
         if (avatar != null) {
             stmt.bindString(6, avatar);
         }
+ 
+        String nickname = entity.getNickname();
+        if (nickname != null) {
+            stmt.bindString(7, nickname);
+        }
     }
 
     /** @inheritdoc */
@@ -109,7 +116,8 @@ public class UserDao extends AbstractDao<User, Long> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // tid
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // password
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // phone
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // avatar
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // avatar
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // nickname
         );
         return entity;
     }
@@ -123,6 +131,7 @@ public class UserDao extends AbstractDao<User, Long> {
         entity.setPassword(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setPhone(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setAvatar(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setNickname(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     /** @inheritdoc */

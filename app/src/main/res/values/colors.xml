@@ -6,6 +6,8 @@
 
 
     <color name="bottom_bg">#f8f8f8</color>
+    <color name="my_bg">#ebebeb</color>
+
     <color name="them_bg">#3dbb28</color>
     <color name="them_bg_deep">#6cb950</color>
     <color name="gery">#CCCCCC</color>

@@ -1,10 +1,6 @@
 package cn.sgr.zmr.com.sgr.Modules.Home.Module.Synchronize;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,12 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseActivity;
 import cn.sgr.zmr.com.sgr.Common.Model.Setting;
-import cn.sgr.zmr.com.sgr.Modules.Setting.AlarmWay.AlarmWayActivity;
-import cn.sgr.zmr.com.sgr.Modules.Setting.Device.DeviceActivity;
-import cn.sgr.zmr.com.sgr.Modules.Setting.Help.HelpActivity;
-import cn.sgr.zmr.com.sgr.Modules.Setting.More.MoreActivity;
 import cn.sgr.zmr.com.sgr.R;
-import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 public class SynchronizeActivity extends BaseActivity {
     @BindView(R.id.auto)

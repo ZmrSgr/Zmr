@@ -66,7 +66,19 @@ public class DaoCacheManage {
 
         return list.get(0);
     }
-
+    //删除宝宝
+    public boolean DeleteUser(User user){
+        boolean flag = false;
+        try {
+            //删除指定ID
+            daoManager.getDaoSession().delete(user);
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //daoManager.getDaoSession().deleteAll(); //删除所有记录
+        return flag;
+    }
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////

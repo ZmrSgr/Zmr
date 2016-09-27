@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:background="@drawable/gray_select"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        >
+
+
+    <ImageView
+        android:id="@+id/babay_iv_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+
+        android:id="@+id/babay_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/babay_iv_head"
+        android:textColor="@color/them_text"
+        android:textSize="18sp" />
+
+
+    <ImageView
+        android:id="@+id/babay_tv_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/babay_tv_name"
+        android:src="@drawable/baby_boy" />
+
+    <TextView
+        android:id="@+id/babay_tv_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/babay_tv_name"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@id/babay_iv_head"
+
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/babay_tv_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/babay_tv_name"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@id/babay_tv_age"
+
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:id="@+id/babay_tv_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="10dp"
+
+        android:layout_marginLeft="@+id/babay_tv_device"
+        android:background="@drawable/button_bg"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/child_baby_location"
+        android:textColor="@color/them_bg" />
+        </RelativeLayout>
+
+
+
+</RelativeLayout>

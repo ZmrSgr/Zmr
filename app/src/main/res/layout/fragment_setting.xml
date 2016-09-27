@@ -13,6 +13,95 @@
 
 
     <RelativeLayout
+        android:id="@+id/rel_my_baby"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/my_baby"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+
+    <RelativeLayout
+        android:id="@+id/rel_synchronize_yun"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/synchronize_yun"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rel_location"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/my_location"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+
+
+    <RelativeLayout
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -170,35 +259,6 @@
 
 
 
-    <RelativeLayout
-        android:id="@+id/rel_help"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/set_help"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
-
-    </RelativeLayout>
-
-    <include layout="@layout/line"/>
-
-
 
 
     <RelativeLayout
@@ -238,35 +298,6 @@
             android:gravity="right"
             android:textColor="@color/them_text"
             android:textSize="15sp" />
-
-    </RelativeLayout>
-
-    <include layout="@layout/line"/>
-
-
-    <RelativeLayout
-        android:id="@+id/item_settings_about"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/set_more"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
 
     </RelativeLayout>
 

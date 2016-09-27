@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    >
+
+    <!--android:background="@color/my_bg"-->
+
+    <include
+        android:id="@+id/top_view"
+        layout="@layout/top_view" />
+
+
+
+
+    <RelativeLayout
+        android:paddingLeft="5dp"
+        android:background="@color/withe"
+        android:id="@+id/rel_my"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:paddingRight="16dp"
+       >
+
+        <cn.sgr.zmr.com.sgr.View.RoundImageView
+            android:layout_marginLeft="5dp"
+            app:border_thickness="0.5dp"
+            app:border_outside_color="@color/white_s"
+            android:layout_centerVertical="true"
+            android:id="@+id/iv_avatar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/no_avatar" />
+
+
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_avatar"
+            android:text="未登录"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+    </RelativeLayout>
+
+   <!-- <include layout="@layout/line"/>-->
+
+
+
+
+
+
+    <RelativeLayout
+        android:paddingLeft="5dp"
+        android:background="@color/withe"
+        android:id="@+id/rel_child"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/my_child"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+
+    <RelativeLayout
+
+        android:paddingLeft="5dp"
+        android:background="@color/withe"
+        android:id="@+id/connected_child"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/connected_child"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+    <RelativeLayout
+        android:paddingLeft="5dp"
+        android:id="@+id/rel_qr_code"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/withe"
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/my_qr_code"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+
+
+    <RelativeLayout
+        android:paddingLeft="5dp"
+        android:id="@+id/rel_help"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/withe"
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/set_help"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+    <RelativeLayout
+        android:id="@+id/rel_more"
+        android:paddingLeft="5dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/withe"
+        android:paddingRight="16dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/set_more"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"/>
+
+
+
+
+
+
+</LinearLayout>
