@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/top_view"
@@ -14,7 +14,7 @@
         android:id="@+id/rel_update"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
+        android:background="@drawable/setting_item_selector_trans"
         android:paddingRight="16dp">
 
 
@@ -25,25 +25,25 @@
             android:layout_marginLeft="5dp"
             android:text="@string/set_update"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
+            android:src="@drawable/ico_next" />
 
     </RelativeLayout>
 
-    <include layout="@layout/line"/>
-
+    <include layout="@layout/line" />
 
 
     <RelativeLayout
         android:id="@+id/rel_feedback"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:background="@drawable/setting_item_selector_trans"
 
         android:paddingRight="16dp">
 
@@ -55,25 +55,25 @@
             android:layout_marginLeft="5dp"
             android:text="@string/set_feedback"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
+            android:src="@drawable/ico_next" />
 
     </RelativeLayout>
 
-    <include layout="@layout/line"/>
+    <include layout="@layout/line" />
 
 
     <RelativeLayout
         android:id="@+id/rel_about_us"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
+        android:background="@drawable/setting_item_selector_trans"
         android:paddingRight="16dp">
 
 
@@ -84,24 +84,24 @@
             android:layout_marginLeft="5dp"
             android:text="@string/set_about_us"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
+            android:src="@drawable/ico_next" />
 
     </RelativeLayout>
 
-    <include layout="@layout/line"/>
+    <include layout="@layout/line" />
 
     <RelativeLayout
         android:id="@+id/rel_settings_disclaimer"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
+        android:background="@drawable/setting_item_selector_trans"
         android:paddingRight="16dp">
 
 
@@ -112,21 +112,18 @@
             android:layout_marginLeft="5dp"
             android:text="@string/set_disclaimer"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
+            android:src="@drawable/ico_next" />
 
     </RelativeLayout>
 
-    <include layout="@layout/line"/>
-
-
-
+    <include layout="@layout/line" />
 
 
 </LinearLayout>

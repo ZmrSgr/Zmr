@@ -9,6 +9,8 @@
 
     <string name="bottom_set">设置</string>
 
+    <string name="health_nearby">附近医疗</string>
+
     <string name="set_voice">声音</string>
     <string name="set_shake">震动</string>
 
@@ -179,5 +181,9 @@
     <string name="baby_list">宝宝列表</string>
     <string name="child_baby_location">位置</string>
 
+
+    <string name="health_search">搜索</string>
+    <string name="expand">展开</string>
+    <string name="shrink">收起</string>
 
 </resources>

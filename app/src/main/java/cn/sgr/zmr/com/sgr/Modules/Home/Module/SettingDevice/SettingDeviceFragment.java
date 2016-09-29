@@ -67,8 +67,8 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
     @BindView(R.id.rel_fever_way)
     View   rel_fever_way;
 
-    @BindView(R.id.rel_location)
-    View   rel_location;
+/*    @BindView(R.id.rel_location)
+    View   rel_location;*/
 
     @BindView(R.id.text_tem)
     TextView   text_tem;
@@ -180,7 +180,7 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
 
     }
 
-    @OnClick({R.id.rel_synchronize_yun,R.id.item_settings_device,R.id.rel_fever_way,R.id.rel_fever_temp,R.id.rel_my_baby,R.id.rel_location,R.id.top_view_back})
+    @OnClick({R.id.rel_synchronize_yun,R.id.item_settings_device,R.id.rel_fever_way,R.id.rel_fever_temp,R.id.rel_my_baby,R.id.top_view_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rel_synchronize_yun:
@@ -199,9 +199,6 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
 
             case R.id.rel_my_baby:
                 Utils.toNextActivity(getActivity(), BabyActivity.class);
-                break;
-            case R.id.rel_location:
-                Utils.toNextActivity(getActivity(), LocationActivity.class);
                 break;
             case R.id.top_view_back:
                getActivity().finish();

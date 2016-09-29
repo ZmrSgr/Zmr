@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -18,8 +19,12 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
+import cn.sgr.zmr.com.sgr.Modules.Home.Location.LocationActivity;
+import cn.sgr.zmr.com.sgr.Modules.Messages.Adapter.GridAdapter;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 public class MessageFragment extends BaseFragment {
     @BindView(R.id.top_view_back)
@@ -36,6 +41,14 @@ public class MessageFragment extends BaseFragment {
 
     @BindView(R.id.top_view_title)
     TextView top_view_title;
+
+    @BindView(R.id.message_leture)
+    View message_leture;
+
+    @BindView(R.id.message_nearby)
+    View message_nearby;
+
+
 
     private GridAdapter gridAdapter;
 
@@ -77,8 +90,22 @@ public class MessageFragment extends BaseFragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Toast.makeText(getActivity(),"敬请期待",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    //监听按钮
+    @OnClick({R.id.message_leture,R.id.message_nearby})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.message_leture:
+                Toast.makeText(getActivity(),"敬请期待",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.message_nearby:
+                Utils.toNextActivity(getActivity(),LocationActivity.class);
+
+                break;
+
+        }
     }
 }

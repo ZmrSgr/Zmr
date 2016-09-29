@@ -8,6 +8,7 @@ import com.bean.dao.TreatDao;
 import com.bean.dao.UserDao;
 import com.bean.entity.Baby;
 import com.bean.entity.Chart;
+import com.bean.entity.SearchRecent;
 import com.bean.entity.Treat;
 import com.bean.entity.User;
 
@@ -282,10 +283,48 @@ public class DaoCacheManage {
         return daoManager.getDaoSession().loadAll(Treat.class);
     }
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * 全部查询
+     *
+     * @return
+     */
+    public List<SearchRecent> listAllSearchRecent() {
+        return daoManager.getDaoSession().loadAll(SearchRecent.class);
+    }
+
+    /**
+     * 删除
+     *
+     * @param SearchRecent
+     * @return
+     */
+    public boolean deleteSearch(SearchRecent data) {
+        boolean flag = false;
+        try {
+            //删除指定ID
+            daoManager.getDaoSession().delete(data);
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //daoManager.getDaoSession().deleteAll(); //删除所有记录
+        return flag;
+    }
 
 
-
-
+    /**
+     * 对数据库中student表的插入操作
+     *
+     * @param SearchRecent
+     * @return
+     */
+    public boolean insertSearch(SearchRecent data) {
+        boolean flag = false;
+        flag = daoManager.getDaoSession().insert(data) != -1 ? true : false;
+        return flag;
+    }
 
 
 

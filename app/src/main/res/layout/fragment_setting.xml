@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <include
         android:id="@+id/top_view"
         layout="@layout/top_view" />
 
 
-
-
     <RelativeLayout
         android:id="@+id/rel_my_baby"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
+        android:background="@drawable/setting_item_selector_trans"
         android:paddingRight="16dp">
 
 
@@ -27,25 +25,25 @@
             android:layout_marginLeft="5dp"
             android:text="@string/my_baby"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
+            android:src="@drawable/ico_next" />
 
     </RelativeLayout>
 
-    <include layout="@layout/line"/>
+    <include layout="@layout/line" />
 
 
     <RelativeLayout
         android:id="@+id/rel_synchronize_yun"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
+        android:background="@drawable/setting_item_selector_trans"
         android:paddingRight="16dp">
 
 
@@ -56,56 +54,25 @@
             android:layout_marginLeft="5dp"
             android:text="@string/synchronize_yun"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
+            android:src="@drawable/ico_next" />
 
     </RelativeLayout>
 
-    <include layout="@layout/line"/>
-
+    <include layout="@layout/line" />
 
 
     <RelativeLayout
-        android:id="@+id/rel_location"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
-        android:paddingRight="16dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/my_location"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
-
-    </RelativeLayout>
-
-    <include layout="@layout/line"/>
-
-
-
-    <RelativeLayout
         android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-
+        android:background="@drawable/setting_item_selector_trans"
         android:paddingRight="16dp">
 
         <TextView
@@ -115,30 +82,28 @@
             android:layout_marginLeft="5dp"
             android:text="@string/set_lost"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
 
         <com.nightonke.jellytogglebutton.JellyToggleButton
             android:id="@+id/jtb_lost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:jtbLeftText="关"
-            app:jtbRightText="开"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            />
+            android:layout_gravity="center_horizontal"
+            app:jtbLeftText="关"
+            app:jtbRightText="开" />
     </RelativeLayout>
 
-    <include layout="@layout/line"/>
+    <include layout="@layout/line" />
 
     <RelativeLayout
         android:id="@+id/item_message"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
+        android:background="@drawable/setting_item_selector_trans"
         android:paddingRight="16dp">
-
 
 
         <TextView
@@ -149,30 +114,27 @@
 
             android:text="@string/set_fever"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <com.nightonke.jellytogglebutton.JellyToggleButton
             android:id="@+id/jtb_fever"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:jtbLeftText="关"
-            app:jtbRightText="开"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            />
+            android:layout_gravity="center_horizontal"
+            app:jtbLeftText="关"
+            app:jtbRightText="开" />
     </RelativeLayout>
 
-    <include layout="@layout/line"
-       />
+    <include layout="@layout/line" />
 
     <RelativeLayout
         android:id="@+id/rel_fever_temp"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
+        android:background="@drawable/setting_item_selector_trans"
         android:paddingRight="16dp">
-
 
 
         <TextView
@@ -183,7 +145,7 @@
 
             android:text="@string/set_fever_temp"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <ImageView
             android:id="@+id/iv_right"
@@ -191,7 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
+            android:src="@drawable/ico_next" />
 
 
         <TextView
@@ -209,15 +171,15 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/line"
+    <include
         android:id="@+id/line"
-       />
+        layout="@layout/line" />
 
     <RelativeLayout
         android:id="@+id/rel_fever_way"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
+        android:background="@drawable/setting_item_selector_trans"
         android:paddingRight="16dp">
 
 
@@ -228,7 +190,7 @@
             android:layout_marginLeft="5dp"
             android:text="@string/set_type"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <ImageView
             android:id="@+id/iv_right_way"
@@ -236,7 +198,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
+            android:src="@drawable/ico_next" />
 
 
         <TextView
@@ -253,19 +215,16 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/line"
-        android:id="@+id/line1"/>
-
-
-
-
+    <include
+        android:id="@+id/line1"
+        layout="@layout/line" />
 
 
     <RelativeLayout
         android:id="@+id/item_settings_device"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-
+        android:background="@drawable/setting_item_selector_trans"
         android:paddingRight="16dp">
 
 
@@ -276,7 +235,7 @@
             android:layout_marginLeft="5dp"
             android:text="@string/set_decive"
             android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
 
         <ImageView
             android:id="@+id/iv_device"
@@ -284,7 +243,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
+            android:src="@drawable/ico_next" />
 
 
         <TextView
@@ -301,6 +260,6 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/line"/>
+    <include layout="@layout/line" />
 
 </LinearLayout>

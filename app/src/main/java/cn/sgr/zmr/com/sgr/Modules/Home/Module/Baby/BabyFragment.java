@@ -48,7 +48,6 @@ public class BabyFragment extends BaseFragment implements BabyContract.View{
     TextView empty_tip;
 
 
-
     @BindView(R.id.top_view_back)
     ImageView top_view_back;
 

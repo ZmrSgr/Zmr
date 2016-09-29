@@ -1,24 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
     >
+    <include
+        android:id="@+id/top_view"
+        layout="@layout/top_view" />
 
-    <net.lucode.hackware.magicindicator.MagicIndicator
-        android:id="@+id/magic_indicator"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/navigator_common_height"
+    <com.skyfishjy.library.RippleBackground
 
-        android:background="@color/them_bg" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/navigator_margin"
-        android:background="@android:color/white" />
+        android:id="@+id/ripplebackground"
+        app:rb_color="@color/colorPrimary"
+        app:rb_radius="32dp"
+        app:rb_rippleAmount="6"
+        app:rb_duration="3000"
+        app:rb_scale="6">
+
+
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/centerImage"
+            android:src="@drawable/talk_speech_big_normal"/>
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@id/centerImage"
+
+            android:gravity="center"
+            android:textColor="@color/them_text"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/centerImage"
+
+            android:gravity="center"
+            android:text="@string/press_ask"
+            android:textColor="@color/them_text"
+            android:textSize="18dp" />
+
+
+
+    </com.skyfishjy.library.RippleBackground>
+
 
 
 

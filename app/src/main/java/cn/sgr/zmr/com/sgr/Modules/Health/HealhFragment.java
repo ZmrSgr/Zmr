@@ -52,18 +52,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Common.MainActivity;
+import cn.sgr.zmr.com.sgr.Modules.Health.Search.SearchActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby.AddBaby_Activity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 
 public class HealhFragment extends Fragment {
-
-    @BindView(R.id.magic_indicator)
-    MagicIndicator magic_indicator4;
-
-    @BindView(R.id.view_pager)
-    ViewPager mPager;
 
     private List<String> mDataList = new ArrayList<String>();
     private ArrayList<View> views = new ArrayList<View>();
@@ -76,10 +73,35 @@ public class HealhFragment extends Fragment {
     int ret = 0; // 函数调用返回值
     // 用HashMap存储听写结果
     private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();
-    TextView tv_content;
     // 引擎类型
     private String mEngineType = SpeechConstant.TYPE_CLOUD;
+
+
+    @BindView(R.id.top_view_back)
+    ImageView top_view_back;
+
+
+    @BindView(R.id.top_view_left_text)
+    TextView top_view_left_text;
+
+    @BindView(R.id.top_view_title)
+    TextView top_view_title;
+
+
+    @BindView(R.id.iv_right)
+    ImageView iv_right;
+
+    @BindView(R.id.ripplebackground)
     RippleBackground rippleBackground;
+
+
+    @BindView(R.id.centerImage)
+    ImageView centerImage;
+
+    @BindView(R.id.tv_content)
+    TextView tv_content;
+
+
 
 
     @Nullable
@@ -88,38 +110,33 @@ public class HealhFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_health, container, false);
         ButterKnife.bind(this, view);
         //初始化主界面
-        initPage();
+
+        initView();
 //        初始化快速问医生
         initVoice();
-//        初始化附件的医疗
-        initNearby();
-        //初始化演讲
-        initLeture();
         return view;
     }
 
     private void initVoice() {
-
         mIat = SpeechRecognizer.createRecognizer(getActivity(), mInitListener);
-
         // 初始化听写Dialog，如果只使用有UI听写功能，无需创建SpeechRecognizer
         // 使用UI听写功能，请根据sdk文件目录下的notice.txt,放置布局文件和图片资源
         mIatDialog = new RecognizerDialog(getActivity(), mInitListener);
-        View view1 = getActivity().getLayoutInflater().inflate(R.layout.askdoctor_layout, null);
-
-        rippleBackground=(RippleBackground)view1.findViewById(R.id.content);
-        ImageView button=(ImageView)view1.findViewById(R.id.centerImage);
-        tv_content=(TextView)view1.findViewById(R.id.tv_content);
+    }
 
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @OnClick({ R.id.iv_right,R.id.top_view_left_text,R.id.centerImage})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_right:
+                Utils.toNextActivity(getActivity(), SearchActivity.class);
+                break;
+            case R.id.top_view_left_text:
+                break;
+            case R.id.centerImage:
                 rippleBackground.startRippleAnimation();
-
                 // 移动数据分析，收集开始听写事件
                 FlowerCollector.onEvent(getActivity(), "iat_recognize");
-
                 tv_content.setText(null);// 清空显示内容
                 // 设置参数
                 setParam();
@@ -134,12 +151,9 @@ public class HealhFragment extends Fragment {
                             if(rippleBackground!=null){
                                 rippleBackground.stopRippleAnimation();
                             }
-
                         }
                     });
                     mIatDialog.show();
-
-
 //                    showTip(getString(R.string.text_begin));
                 } else {
                     // 不显示听写对话框
@@ -151,140 +165,17 @@ public class HealhFragment extends Fragment {
 //                        showTip(getString(R.string.text_begin));
                     }
                 }
-
-
-            }
-        });
-        views.add(view1);
-
+                break;
+        }
     }
-
-    private void initPage() {
-        mDataList.add("问医生");
-        mDataList.add("儿童健康讲座");
-        mDataList.add("附近医疗");
-
-
-        mPager.setAdapter(mAdapter);
-
-        // 自适应模式，带插值器
-//        final MagicIndicator magic_indicator4 = (MagicIndicator) findViewById(R.id.magic_indicator);
-        final CommonNavigator commonNavigator4 = new CommonNavigator(getActivity());
-        commonNavigator4.setAdjustMode(true);  // 自适应模式
-        commonNavigator4.setAdapter(new CommonNavigatorAdapter() {
-            @Override
-            public int getCount() {
-                return mDataList == null ? 0 : 3;
-            }
-
-            @Override
-            public IPagerTitleView getTitleView(Context context, final int index) {
-                ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
-                colorTransitionPagerTitleView.setText(mDataList.get(index));
-                colorTransitionPagerTitleView.setNormalColor(Color.GRAY);
-                colorTransitionPagerTitleView.setSelectedColor(Color.WHITE);
-                colorTransitionPagerTitleView.setTextSize(16);
-                colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mPager.setCurrentItem(index);
-                    }
-                });
-                return colorTransitionPagerTitleView;
-            }
-
-            @Override
-            public IPagerIndicator getIndicator(Context context) {
-                LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setStartInterpolator(new AccelerateInterpolator());
-                indicator.setEndInterpolator(new DecelerateInterpolator(1.6f));
-                indicator.setLineHeight(UIUtil.dip2px(context, 1.5));
-                List<String> colorList = new ArrayList<String>();
-                colorList.add("#FFFFFF");
-                indicator.setColorList(colorList);
-                return indicator;
-            }
-        });
-        magic_indicator4.setNavigator(commonNavigator4);
-        mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                magic_indicator4.onPageScrolled(position, positionOffset, positionOffsetPixels);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                magic_indicator4.onPageSelected(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                magic_indicator4.onPageScrollStateChanged(state);
-            }
-        });
-
-
-
+    private void initView() {
+        top_view_back.setVisibility(View.GONE);
+        top_view_title.setText(getResources().getString(R.string.bottom_health));
+        top_view_left_text.setVisibility(View.VISIBLE);
+//        top_view_left_text.setText(getResources().getString(R.string.health_nearby));
+        iv_right.setVisibility(View.VISIBLE);
+        iv_right.setImageResource(R.drawable.search);
     }
-
-    private void initNearby() {
-        View view3 = getActivity().getLayoutInflater().inflate(R.layout.nearby_layout, null);
-        views.add(view3);
-
-    }
-
-    private void initLeture() {
-        View view2 = getActivity().getLayoutInflater().inflate(R.layout.lecture_layout, null);
-        views.add(view2);
-    }
-
-
-    private PagerAdapter mAdapter = new PagerAdapter() {
-
-        @Override
-        public int getCount() {
-            return mDataList.size();
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-
-            ViewGroup parent = (ViewGroup) views.get(position).getParent();
-            if (parent != null) {
-                // // 很难理解新添加进来的view会自动绑定一个父类，由于一个儿子view不能与两个父类相关，所以得解绑
-                // 不这样做否则会产生 viewpager java.lang.IllegalStateException: The
-                // specified child already has a parent. You must call
-                // removeView() on the child's parent first.
-                // 还有一种方法是viewPager.setOffscreenPageLimit(3); 这种方法不用判断parent
-                // 是不是已经存在，但多余的listview不能被destroy
-                ((ViewGroup) views.get(position).getParent())
-                        .removeView(views.get(position));
-                ((ViewPager) container).addView(views.get(position), 0);
-            } else {
-                ((ViewPager) container).addView(views.get(position));
-            }
-            // // container.addView(v);
-
-            return views.get(position);
-
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            ((ViewPager) container).removeView(views.get(position));
-        }
-
-        @Override
-        public int getItemPosition(Object object) {
-            return POSITION_NONE;
-        }
-    };
-
     /**
      * 参数设置
      *
@@ -359,8 +250,6 @@ public class HealhFragment extends Fragment {
 
     private void showTip(final String str) {
       Toast.makeText(getActivity(),str,Toast.LENGTH_SHORT).show();
-
-
     }
     /**
      * 听写监听器。
@@ -372,7 +261,6 @@ public class HealhFragment extends Fragment {
             // 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
             rippleBackground.startRippleAnimation();
         }
-
         @Override
         public void onError(SpeechError error) {
             // Tips：
@@ -380,7 +268,6 @@ public class HealhFragment extends Fragment {
             // 如果使用本地功能（语记）需要提示用户开启语记的录音权限。
             showTip(error.getPlainDescription(true));
         }
-
         @Override
         public void onEndOfSpeech() {
             // 此回调表示：检测到了语音的尾端点，已经进入识别过程，不再接受语音输入
@@ -389,9 +276,6 @@ public class HealhFragment extends Fragment {
 
         @Override
         public void onResult(RecognizerResult results, boolean isLast) {
-
-            System.out.println("result"+isLast);
-
             if (isLast) {
                 printResult(results);
 
@@ -402,7 +286,6 @@ public class HealhFragment extends Fragment {
         @Override
         public void onVolumeChanged(int volume, byte[] data) {
             showTip("当前正在说话，音量大小：" + volume);
-
         }
 
         @Override
@@ -418,7 +301,6 @@ public class HealhFragment extends Fragment {
 
     private void printResult(RecognizerResult results) {
         String text = Utils.parseIatResult(results.getResultString());
-
         String sn = null;
         // 读取json结果中的sn字段
         try {
@@ -427,9 +309,7 @@ public class HealhFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         mIatResults.put(sn, text);
-
         StringBuffer resultBuffer = new StringBuffer();
         for (String key : mIatResults.keySet()) {
             resultBuffer.append(mIatResults.get(key));

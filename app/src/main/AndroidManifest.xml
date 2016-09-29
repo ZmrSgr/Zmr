@@ -166,7 +166,8 @@
         <activity android:name=".Modules.My.MyChild.MyChildActivity" />
         <activity android:name=".Modules.My.MyChild.BabyOfChild.BabyOfChildActivity" />
         <activity android:name=".Modules.My.QrCode.MyQrCodeActivity" />
-        <activity android:name=".Modules.My.QrCode.ScanCodeActivity"></activity>
+        <activity android:name=".Modules.My.QrCode.ScanCodeActivity" />
+        <activity android:name=".Modules.Health.Search.SearchActivity"></activity>
     </application>
 
 </manifest>

@@ -18,11 +18,12 @@
 
     <RelativeLayout
         android:paddingLeft="5dp"
-        android:background="@color/withe"
+
         android:id="@+id/rel_my"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:paddingRight="16dp"
+        android:background="@drawable/setting_item_selector_withe"
        >
 
         <cn.sgr.zmr.com.sgr.View.RoundImageView
@@ -66,7 +67,7 @@
 
     <RelativeLayout
         android:paddingLeft="5dp"
-        android:background="@color/withe"
+        android:background="@drawable/setting_item_selector_withe"
         android:id="@+id/rel_child"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -98,7 +99,7 @@
     <RelativeLayout
 
         android:paddingLeft="5dp"
-        android:background="@color/withe"
+        android:background="@drawable/setting_item_selector_withe"
         android:id="@+id/connected_child"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -129,7 +130,7 @@
         android:id="@+id/rel_qr_code"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@color/withe"
+        android:background="@drawable/setting_item_selector_withe"
         android:paddingRight="16dp">
 
 
@@ -160,7 +161,7 @@
         android:id="@+id/rel_help"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@color/withe"
+        android:background="@drawable/setting_item_selector_withe"
         android:paddingRight="16dp">
 
 
@@ -190,7 +191,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="@color/withe"
+        android:background="@drawable/setting_item_selector_withe"
         android:paddingRight="16dp">
 
 

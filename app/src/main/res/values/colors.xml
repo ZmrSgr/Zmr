@@ -34,6 +34,7 @@
     <drawable name="img_selected">#44aaaaaa</drawable>
     <drawable name="img_defaul">#ffffff</drawable>
     <color name="transparent">#00000000</color>
+    <color name="black2">#ffeeeeee</color>
 
 
 <!--友盟-->
@@ -50,5 +51,14 @@
     <color name="umeng_socialize_text_ucenter">#595959</color>
     <color name="umeng_socialize_edit_bg">#C4C4C4</color>
     <color name="umeng_socialize_grid_divider_line">#F8F8F8</color>
+
+    <color name="color_divider_line_gray">#e2e2e2</color>
+    <color name="color_gray_light_content_text">#5d5d5d</color>
+    <color name="grey50">#fafafa</color>
+    <color name="grey100">#f5f5f5</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="divider">#8fB6B6B6</color>
+
 
 </resources>

@@ -1,4 +1,4 @@
-package cn.sgr.zmr.com.sgr.Modules.Messages;
+package cn.sgr.zmr.com.sgr.Modules.Messages.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,7 +16,7 @@ import cn.sgr.zmr.com.sgr.R;
 /**
  * Created by Administrator on 2016/9/24 0024.
  */
-class GridAdapter extends BaseAdapter {
+public class GridAdapter extends BaseAdapter {
     List<Map<String, Object>> list;
     Context context;
     LayoutInflater inflater;

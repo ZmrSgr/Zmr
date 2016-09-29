@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/bottom_bg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+
+
+    <RelativeLayout android:id="@+id/top"
+        android:layout_width="fill_parent"
+        android:layout_alignParentTop="true"
+        android:padding="7dp"
+
+        android:background="@color/them_bg"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/top_view_back"
+            android:layout_width="45dp"
+            android:layout_height="48dp"
+            android:background="@drawable/green_select"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:src="@drawable/back" />
+
+        <TextView android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:textSize="14sp"
+            android:padding="10dp"
+            android:textColor="@color/withe"
+            android:background="@drawable/green_select"
+            android:text="@string/health_search"/>
+
+        <RelativeLayout android:id="@+id/rlSearchFrameDelete"
+            android:layout_toRightOf="@+id/top_view_back"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:layout_toLeftOf="@id/btnSearch">
+
+            <EditText android:id="@+id/etSearch"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:background="@drawable/search_frame"
+                android:layout_marginRight="5dp"
+                android:paddingLeft="32dp"
+                android:textSize="12sp"
+                android:hint="请输入文字..."/>
+
+            <ImageView android:id="@+id/ivDeleteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/delete"
+                android:layout_centerInParent="true"
+                android:paddingRight="20dp"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.4dp"
+        android:layout_gravity="bottom"
+        android:background="@color/them_text" />
+
+    <ListView
+        android:id="@+id/recent_list"
+        android:layout_width="fill_parent"
+
+        android:layout_height="wrap_content"
+        android:dividerHeight="1px"
+        android:scrollbars="none" />
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_gravity="bottom"
+        android:background="@color/my_bg" />
+
+
+    <cn.sgr.zmr.com.sgr.View.TextViewExpandableAnimation
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tv_expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tvea_expandBitmap="@drawable/icon_green_arrow_down"
+        app:tvea_expandLines="3"
+        app:tvea_shrinkBitmap="@drawable/icon_green_arrow_up"
+        app:tvea_textContentColor="@color/color_gray_light_content_text"
+        app:tvea_textContentSize="@dimen/sp_txt_size_content"
+        app:tvea_textExpand="@string/expand"
+        app:tvea_textShrink="@string/shrink"
+        app:tvea_textStateColor="@color/colorPrimary" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_tie"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+</LinearLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gray_select"
+    android:padding="5dp"
+    android:orientation="horizontal">
+
+
+
+    <ImageView
+        android:layout_marginLeft="8dp"
+        android:layout_centerVertical="true"
+        android:id="@+id/recent_iv_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:gravity="center"
+        android:src="@drawable/icon_recent" />
+
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:id="@+id/recent_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="失眠"
+        android:layout_toRightOf="@id/recent_iv_head"
+        android:textColor="@color/them_text"
+        android:textSize="14sp" />
+
+
+    <ImageView
+        android:id="@+id/recent_iv_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/delete" />
+
+
+</RelativeLayout>
+

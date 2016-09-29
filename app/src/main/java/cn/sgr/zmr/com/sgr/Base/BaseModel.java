@@ -40,8 +40,11 @@ public abstract class BaseModel
      */
     protected void sendPostRequest(Context context, String url, RequestParams params, HttpRequestCallback callback)
     {
-        HttpRequestUtil.getInstance().postRequest(context, getAbsUrl(url), params == null ? null : params.toParams(), callback);
+//        HttpRequestUtil.getInstance().postRequest(context, getAbsUrl(url), params == null ? null : params.toParams(), callback);
+        HttpRequestUtil.getInstance().postRequest(context,url, params == null ? null : params.toParams(), callback);
+
     }
+
 
     private String getAbsUrl(String url)
     {
