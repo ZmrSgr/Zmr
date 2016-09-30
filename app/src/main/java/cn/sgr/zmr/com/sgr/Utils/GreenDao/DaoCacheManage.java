@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.bean.dao.BabyDao;
 import com.bean.dao.ChartDao;
+import com.bean.dao.SearchRecentDao;
 import com.bean.dao.TreatDao;
 import com.bean.dao.UserDao;
 import com.bean.entity.Baby;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import cn.sgr.zmr.com.sgr.Base.MyApplication;
 import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
+import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import de.greenrobot.dao.query.QueryBuilder;
 
 /**
@@ -291,7 +293,7 @@ public class DaoCacheManage {
      * @return
      */
     public List<SearchRecent> listAllSearchRecent() {
-        return daoManager.getDaoSession().loadAll(SearchRecent.class);
+        return Utils.orderDes( daoManager.getDaoSession().loadAll(SearchRecent.class));
     }
 
     /**
@@ -322,7 +324,16 @@ public class DaoCacheManage {
      */
     public boolean insertSearch(SearchRecent data) {
         boolean flag = false;
-        flag = daoManager.getDaoSession().insert(data) != -1 ? true : false;
+        //查询构建器
+        QueryBuilder<SearchRecent> queryBuilder = daoManager.getDaoSession().queryBuilder(SearchRecent.class);
+        //查询年龄大于19的北京
+        List<SearchRecent> list = queryBuilder.where(SearchRecentDao.Properties.Title.ge(data.getTitle())).list();
+        if (list != null&&list.size()>0) {
+            flag=true;
+        }else{
+            flag = daoManager.getDaoSession().insert(data) != -1 ? true : false;
+        }
+
         return flag;
     }
 

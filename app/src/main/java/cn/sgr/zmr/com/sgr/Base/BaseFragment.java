@@ -30,8 +30,11 @@ public class BaseFragment extends Fragment {
      * 取消加载对话框
      */
     public void cancelProgressDialog() {
-        if (mView != null && mView.isVisible()) {
+
+        if (mView != null ) {
+            System.out.println("隐藏进度条");
             mView.dismiss();
+
         }
     }
 

@@ -167,7 +167,13 @@
         <activity android:name=".Modules.My.MyChild.BabyOfChild.BabyOfChildActivity" />
         <activity android:name=".Modules.My.QrCode.MyQrCodeActivity" />
         <activity android:name=".Modules.My.QrCode.ScanCodeActivity" />
-        <activity android:name=".Modules.Health.Search.SearchActivity"></activity>
+        <activity
+            android:name=".Modules.Health.Search.SearchActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".Modules.Health.Search.DetailTieActivity"
+            android:label="@string/title_activity_detail_tie"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -40,7 +40,7 @@ public class BaseActivity extends Activity {
      * 取消加载对话框
      */
     public void cancelProgressDialog() {
-        if (mView != null && mView.isVisible()) {
+        if (mView != null) {
             mView.dismiss();
         }
     }

@@ -16,7 +16,7 @@
         android:layout_margin="5dp"
         android:orientation="horizontal"
         card_view:cardBackgroundColor="@color/bottom_bg"
-        card_view:cardCornerRadius="10dp">
+        card_view:cardCornerRadius="5dp">
 
         <LinearLayout
             android:layout_width="wrap_content"

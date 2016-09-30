@@ -10,10 +10,12 @@
         android:id="@+id/tv_expand_text_view_animation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         android:textColor="@color/color_gray_light_content_text"
-        android:textSize="@dimen/sp_txt_size_content" />
+        android:textSize="15sp" />
 
     <RelativeLayout
+        android:padding="8dp"
         android:id="@+id/rl_expand_text_view_animation_toggle_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +28,7 @@
             android:layout_height="wrap_content"
 
             android:layout_centerVertical="true"
-            android:src="@drawable/wsdk_drawable_rg_ic_voice_on"
+            android:src="@drawable/wsdk_drawable_rg_ic_voice_off"
             />
 
         <TextView

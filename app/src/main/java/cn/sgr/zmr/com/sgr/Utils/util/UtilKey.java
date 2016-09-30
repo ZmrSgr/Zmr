@@ -8,4 +8,7 @@ import android.os.Environment;
 public class UtilKey {
     //指定图片，媒体的缓存路径
     public static String BABY_KEY = "baby_key";
+
+    //跳转url tie
+    public static String TIE_KEY = "tie_url";
 }

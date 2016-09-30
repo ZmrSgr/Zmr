@@ -13,6 +13,8 @@ import android.support.annotation.NonNull;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.bean.entity.SearchRecent;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -22,7 +24,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -149,6 +153,19 @@ public class Utils {
             e.printStackTrace();
         }
         return ret.toString();
+    }
+
+
+    public static List<SearchRecent> orderDes (List<SearchRecent>  data){
+        List<SearchRecent> change = new ArrayList<>();
+        if(data!=null&&data.size()>0){
+            for(int i=data.size()-1;i>=0;i--){
+                change.add(data.get(i));
+            }
+
+        }
+
+        return change;
     }
 
 }

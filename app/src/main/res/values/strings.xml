@@ -185,5 +185,6 @@
     <string name="health_search">搜索</string>
     <string name="expand">展开</string>
     <string name="shrink">收起</string>
+    <string name="title_activity_detail_tie">DetailTieActivity</string>
 
 </resources>

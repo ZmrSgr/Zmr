@@ -68,8 +68,9 @@ public class SearchPresenter implements SearchContract.Presenter{
         searchRecent.setTitle(keyword);
         AddSearchRecent(searchRecent);
         //访问网络获取结果
+        registerView.showProgressDialog();
         HealthModel healthmodel=new HealthModel();
-        healthmodel.getSearchList(context, keyword, new HttpRequestCallback<Result<List<SearchResult>>>() {
+        healthmodel.getSearchList(context, keyword, new HttpRequestCallback<Result<SearchResult>>() {
             @Override
             public void onStart() {
             }
@@ -78,14 +79,17 @@ public class SearchPresenter implements SearchContract.Presenter{
             public void onFinish() {
             }
             @Override
-            public void onResponse(Result<List<SearchResult>> user) {
-                System.out.println("返回结果"+user.toString());
+            public void onResponse(Result<SearchResult> user) {
+                registerView.dismissRecentView();
+                registerView.showSearchResult(user.data);
+                registerView.cancelProgressDialogs();
+
 
             }
 
             @Override
             public void onFailure(Call call, HttpException e) {
-                System.out.println("onFailure返回结果"+e.toString());
+                registerView.cancelProgressDialogs();
             }
         });
 
