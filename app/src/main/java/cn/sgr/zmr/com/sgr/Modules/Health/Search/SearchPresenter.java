@@ -14,6 +14,7 @@ import cn.sgr.zmr.com.sgr.Modules.Health.Model.HealthModel;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.Result;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.Search;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.SearchResult;
+import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 import cn.sgr.zmr.com.sgr.Utils.http.HttpException;
 import cn.sgr.zmr.com.sgr.Utils.http.HttpRequestCallback;
@@ -81,7 +82,12 @@ public class SearchPresenter implements SearchContract.Presenter{
             @Override
             public void onResponse(Result<SearchResult> user) {
                 registerView.dismissRecentView();
-                registerView.showSearchResult(user.data);
+                if(user.code==200){//表示获取到数据
+                    registerView.showSearchResult(user.data);
+                }else{
+                    Toast.makeText(context, R.string.search_nothing,Toast.LENGTH_LONG).show();
+                }
+
                 registerView.cancelProgressDialogs();
 
 

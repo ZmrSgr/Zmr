@@ -172,8 +172,7 @@
             android:windowSoftInputMode="adjustPan"></activity>
         <activity
             android:name=".Modules.Health.Search.DetailTieActivity"
-            android:label="@string/title_activity_detail_tie"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_detail_tie"></activity>
     </application>
 
 </manifest>

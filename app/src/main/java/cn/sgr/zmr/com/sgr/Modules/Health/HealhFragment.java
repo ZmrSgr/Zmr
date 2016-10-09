@@ -3,6 +3,7 @@ package cn.sgr.zmr.com.sgr.Modules.Health;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -54,9 +55,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Common.MainActivity;
+import cn.sgr.zmr.com.sgr.Modules.Health.Search.DetailTieActivity;
 import cn.sgr.zmr.com.sgr.Modules.Health.Search.SearchActivity;
+import cn.sgr.zmr.com.sgr.Modules.Health.Search.SearchFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby.AddBaby_Activity;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 
@@ -235,7 +239,10 @@ public class HealhFragment extends Fragment {
     private RecognizerDialogListener mRecognizerDialogListener = new RecognizerDialogListener() {
         public void onResult(RecognizerResult results, boolean isLast) {
 
-            printResult(results);
+            if(!isLast){
+                printResult(results);
+            }
+
         }
 
         /**
@@ -276,11 +283,15 @@ public class HealhFragment extends Fragment {
 
         @Override
         public void onResult(RecognizerResult results, boolean isLast) {
+    /*        System.out.println("返回结果RecognizerListener");
+
             if (isLast) {
-                printResult(results);
+                   printResult(results);//结果会出现重复调用，为了避免重复
+           }*/
+
 
                 // TODO 最后的结果
-            }
+
         }
 
         @Override
@@ -300,6 +311,7 @@ public class HealhFragment extends Fragment {
     };
 
     private void printResult(RecognizerResult results) {
+
         String text = Utils.parseIatResult(results.getResultString());
         String sn = null;
         // 读取json结果中的sn字段
@@ -315,10 +327,15 @@ public class HealhFragment extends Fragment {
             resultBuffer.append(mIatResults.get(key));
         }
 
-        tv_content.setText(resultBuffer.toString());
+//        tv_content.setText(resultBuffer.toString());
         if(rippleBackground!=null){
             rippleBackground.stopRippleAnimation();
         }
+
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), SearchActivity.class);
+        intent.putExtra(UtilKey.VOICE_KEY,resultBuffer.toString());
+        startActivity(intent);
 
     }
 

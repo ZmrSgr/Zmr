@@ -186,5 +186,9 @@
     <string name="expand">展开</string>
     <string name="shrink">收起</string>
     <string name="title_activity_detail_tie">DetailTieActivity</string>
+    <string formatted="false" name="tts_toast_format">缓冲进度为%d%%，播放进度为%d%%</string>
+    <string name="please_input_content">请输入搜索内容</string>
+    <string name="search_nothing">抱歉，没有搜索到东西。。。</string>
+
 
 </resources>

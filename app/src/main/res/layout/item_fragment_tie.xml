@@ -31,15 +31,18 @@
         android:background="@drawable/shot_item_background"
         android:paddingTop="@dimen/margin_8dp"
         android:paddingBottom="@dimen/margin_8dp">
-        <cn.sgr.zmr.com.sgr.View.RoundImageView
+        <ImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/profile_image"
             android:layout_width="@dimen/profile"
             android:layout_height="@dimen/profile"
             android:layout_marginLeft="@dimen/margin_8dp"
 
-            app:border_thickness="0.5dp"
-            app:border_outside_color="@color/white_s"/>
+          />
+
+<!--
+        app:border_thickness="0.5dp"
+        app:border_outside_color="@color/white_s"-->
 
         <TextView
             android:id="@+id/newsTitle"

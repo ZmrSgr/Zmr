@@ -11,4 +11,7 @@ public class UtilKey {
 
     //跳转url tie
     public static String TIE_KEY = "tie_url";
+
+    //跳转url tie
+    public static String VOICE_KEY = "voice_url";
 }

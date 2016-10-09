@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import android.view.inputmethod.InputMethodManager;
@@ -123,6 +124,29 @@ public class Utils {
         transaction.add(frameId, fragment);
         transaction.commit();
     }
+
+
+    /**
+     * 增加fragment 到 activity里 传递String 内容
+     *
+     * @param
+     * @return S
+     */
+    public static void addFragmentToActivityAddContent (@NonNull FragmentManager fragmentManager,
+                                              @NonNull Fragment fragment, int frameId,String content) {
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+        Bundle bundle = new Bundle();
+        bundle.putString(UtilKey.VOICE_KEY, content);
+        fragment.setArguments(bundle);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(frameId, fragment);
+        transaction.commit();
+
+    }
+
+
+
     //防止被快速多次点击
     public static boolean isFastDoubleClick() {
         long time = System.currentTimeMillis();

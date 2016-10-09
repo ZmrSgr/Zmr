@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bean.entity.Baby;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import cn.sgr.zmr.com.sgr.Modules.Health.Model.SearchResult;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.Tie;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
+import cn.sgr.zmr.com.sgr.Utils.util.GlideCircleTransform;
 import cn.sgr.zmr.com.sgr.View.MyDialog;
 import cn.sgr.zmr.com.sgr.View.RoundImageView;
 
@@ -30,7 +32,9 @@ public class Tie_Adapter extends BaseRecyclerAdapter<Tie>  {
     private Context context;
     private DaoCacheManage daoManage;
 
-
+    public Tie_Adapter(Context context) {
+        this.context = context;
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreate(ViewGroup parent, int viewType) {
@@ -58,6 +62,8 @@ public class Tie_Adapter extends BaseRecyclerAdapter<Tie>  {
         mHolder. mNewsTime.setText(data.getDateline());
         mHolder. description.setText(data.getContent());
         mHolder.newsNum.setText(data.getNum()+"个回答");
+        Glide.with(context).load(data.getPhoto()).centerCrop().transform(new GlideCircleTransform(context)).into(mHolder.profileImage);
+
     }
 
 /*
@@ -93,7 +99,7 @@ public class Tie_Adapter extends BaseRecyclerAdapter<Tie>  {
         @BindView(R.id.description) TextView description;
 
         @BindView(R.id.profile_image)
-        RoundImageView profileImage;
+        ImageView profileImage;
 
         @BindView(R.id.author)
         TextView author;

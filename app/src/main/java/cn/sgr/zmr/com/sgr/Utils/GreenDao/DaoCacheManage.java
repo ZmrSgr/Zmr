@@ -326,7 +326,7 @@ public class DaoCacheManage {
         boolean flag = false;
         //查询构建器
         QueryBuilder<SearchRecent> queryBuilder = daoManager.getDaoSession().queryBuilder(SearchRecent.class);
-        //查询年龄大于19的北京
+
         List<SearchRecent> list = queryBuilder.where(SearchRecentDao.Properties.Title.ge(data.getTitle())).list();
         if (list != null&&list.size()>0) {
             flag=true;

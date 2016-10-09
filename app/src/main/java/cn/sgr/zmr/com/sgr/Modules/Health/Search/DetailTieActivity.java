@@ -1,55 +1,160 @@
 package cn.sgr.zmr.com.sgr.Modules.Health.Search;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.sgr.zmr.com.sgr.Base.BaseActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyActivity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 
 public class DetailTieActivity extends BaseActivity {
-    @BindView(R.id.wv_help)
-    WebView wv_help;
+    /**
+     * Called when the activity is first created.
+     *
+     * 该界面是浏览器功能
+     * */
+    private WebView m_webview = null;
+    private String m_url = null;
+    private ProgressDialog m_progressDlg = null;
+    private Handler m_handler = null; // 用于下载线程与UI间的通讯
+
+    private final int HIDE = 0;
+    private final int SHOW = 1;
+
+    private final int RESULT_OK = 1;
+
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_tie);
 
-        ButterKnife.bind(this);
+        setContentView(R.layout.browser);
 
-        wv_help.setWebChromeClient(new WebChromeClient());
-        wv_help.getSettings().setJavaScriptEnabled(true);
-        wv_help.getSettings().setAllowFileAccess(true);
-        wv_help.getSettings().setPluginState(WebSettings.PluginState.ON);
-
-          /*获取Intent中的Bundle对象*/
+        initWebView();
+        initHandler();
+        initDlg();
+        Intent intent = getIntent();
+        // 获取数据
         Bundle bundle = this.getIntent().getExtras();
-        wv_help.setWebChromeClient(new WebViewClient());
-        wv_help.loadUrl(bundle.getString(UtilKey.TIE_KEY));
-
-
+        loadUrl(m_webview,bundle.getString(UtilKey.TIE_KEY));
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
 
-    private class WebViewClient extends WebChromeClient {
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
-//            showProgressDialog();
-            if (newProgress == 100) {
-//                cancelProgressDialog();
+        if (keyCode == KeyEvent.KEYCODE_BACK && m_webview.canGoBack()) {
+            m_webview.goBack();
+            Log.d("MAIN", "ONKEYDOWN1");
+            return true;
+        } else {
+            this.finish();
+            Log.d("MAIN", "ONKEYDOWN2");
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void initHandler() {
+        m_handler = new Handler() {
+
+            @Override
+            public void handleMessage(Message msg) {
+                // TODO Auto-generated method stub
+                switch (msg.what) {
+                    case HIDE:
+                        m_progressDlg.hide();
+                        break;
+                    case SHOW:
+                        m_progressDlg.show();
+                        break;
+                    default:
+                        break;
+                }
+                super.handleMessage(msg);
             }
-            super.onProgressChanged(view, newProgress);
+
+        };
+    }
+
+    private void initWebView() {
+        m_webview = (WebView) findViewById(R.id.web_engine);
+
+        // 设置多点触控放点
+        m_webview.getSettings().setSupportZoom(true);
+        m_webview.getSettings().setBuiltInZoomControls(true);
+        m_webview.getSettings().setUseWideViewPort(true);
+        m_webview.getSettings().setLoadWithOverviewMode(true);
+        m_webview.getSettings().setJavaScriptEnabled(true);
+        // m_webview.setScrollBarStyle(0);//设置滚动条风格，为0表示不给滚动条留空间
+        // setScalesPageToFit:NO
+        // m_webview.getSettings().sets
+        // WebSettings webSettings= m_webview.getSettings(); // webView:
+        // 类WebView的实例
+        // webSettings.setLayoutAlgorithm(LayoutAlgorithm.NORMAL);
+        // webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+        m_webview.setWebViewClient(new WebViewClient() {
+            // 用WebView载入页面
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                loadUrl(view, url);
+                return true;
+            }
+
+        });
+
+        m_webview.setWebChromeClient(new WebChromeClient() {
+            // 载入进度改变而被触发
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    m_handler.sendEmptyMessage(HIDE);
+                }
+                super.onProgressChanged(view, newProgress);
+            }
+
+        });
+    }
+
+    private void initDlg() {
+        m_progressDlg = new ProgressDialog(this);
+        m_progressDlg.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        m_progressDlg.setMessage("页面跳转中...");
+    }
+
+    private void loadUrl(final WebView view, final String url) {
+        m_handler.sendEmptyMessage(SHOW);
+        view.loadUrl(url);
+		/*new Thread() {
+			@Override
+			public void run() {
+
+			}
+		}.start();*/
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        switch (resultCode) {
+            case RESULT_OK:
+                m_url = data.getStringExtra(UtilKey.TIE_KEY);
+                loadUrl(m_webview, m_url);
+                break;
+            default:
+                break;
         }
     }
+
+
 }
