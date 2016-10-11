@@ -4,16 +4,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
-import com.bean.entity.Baby;
 import com.bean.entity.SearchRecent;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.HealthModel;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.Result;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.Search;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.SearchResult;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Result;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.SearchResult;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 import cn.sgr.zmr.com.sgr.Utils.http.HttpException;

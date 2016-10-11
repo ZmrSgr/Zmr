@@ -15,4 +15,12 @@
         <attr name="tvea_textShrink" format="string" />
         <attr name="tvea_textExpand" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="XRecyclerView">
+        <attr name="direction">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="both" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

@@ -1,4 +1,4 @@
-package cn.sgr.zmr.com.sgr.Modules.Home.Model;
+package cn.sgr.zmr.com.sgr.Modules.Home.Model.bean;
 
 import java.util.ArrayList;
 import java.util.List;

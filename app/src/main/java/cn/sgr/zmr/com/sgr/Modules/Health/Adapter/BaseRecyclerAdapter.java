@@ -7,11 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.SearchResult;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.Tie;
 
 /**
  * Created by qibin on 2015/11/5.
@@ -40,6 +36,18 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     public void addDatas(List<T> datas) {
         mDatas.addAll(datas);
         notifyDataSetChanged();
+    }
+    //加载更多
+    public void addAllItem(List<T> items) {
+        mDatas.addAll(items);
+
+            notifyDataSetChanged();
+    }
+    //更新
+    public void updata(List<T> lists){
+        this.mDatas.clear();
+        this.mDatas.addAll(lists);
+        this.notifyDataSetChanged();
     }
 
     @Override

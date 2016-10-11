@@ -52,6 +52,7 @@ dependencies {
     compile project(':sublimepickerlibrary')
     compile project(':pickerview')
     compile project(':libzxing')
+    compile project(':Banner')
     //    compile project(':ProgressCirclelibrary')
 
     //    compile 'com.github.orangegangsters:library:1.0.0@aar'
@@ -87,4 +88,5 @@ dependencies {
     compile 'org.greenrobot:greendao-generator:2.2.0'
     compile 'de.greenrobot:eventbus:3.0.0-beta1'
     compile files('libs/BaiduLBS_Android.jar')
+    compile 'com.github.orangegangsters:swipy:1.2.3@aar'
 }

@@ -1,4 +1,4 @@
-package cn.sgr.zmr.com.sgr.Modules.Health.Model;
+package cn.sgr.zmr.com.sgr.Modules.Health.Model.bean;
 
 import java.util.List;
 

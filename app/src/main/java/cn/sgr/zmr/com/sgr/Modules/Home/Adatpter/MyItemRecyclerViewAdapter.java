@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.DummyContent;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.DummyContent.DummyItem;
+import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.DummyContent;
+import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.DummyContent.DummyItem;
 import cn.sgr.zmr.com.sgr.Modules.Home.View.LoadMoreRecyclerView;
 import cn.sgr.zmr.com.sgr.R;
 

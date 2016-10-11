@@ -190,5 +190,11 @@
     <string name="please_input_content">请输入搜索内容</string>
     <string name="search_nothing">抱歉，没有搜索到东西。。。</string>
 
+    <string name="nearby_medice">附近药店</string>
+    <string name="nearby_store">附近医院</string>
+
+
+
+
 
 </resources>

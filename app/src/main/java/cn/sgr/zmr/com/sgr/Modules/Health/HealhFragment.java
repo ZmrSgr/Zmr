@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.RecognizerListener;
@@ -54,6 +55,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.bingoogolapple.bgabanner.BGABanner;
 import cn.sgr.zmr.com.sgr.Common.MainActivity;
 import cn.sgr.zmr.com.sgr.Modules.Health.Search.DetailTieActivity;
 import cn.sgr.zmr.com.sgr.Modules.Health.Search.SearchActivity;
@@ -64,7 +66,7 @@ import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 
-public class HealhFragment extends Fragment {
+public class HealhFragment extends Fragment implements BGABanner.OnItemClickListener{
 
     private List<String> mDataList = new ArrayList<String>();
     private ArrayList<View> views = new ArrayList<View>();
@@ -105,9 +107,13 @@ public class HealhFragment extends Fragment {
     @BindView(R.id.tv_content)
     TextView tv_content;
 
+    @BindView(R.id.banner)
+    BGABanner banner;
 
 
 
+/*    startRippleAnimation
+            stopRippleAnimation*/
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -138,7 +144,7 @@ public class HealhFragment extends Fragment {
             case R.id.top_view_left_text:
                 break;
             case R.id.centerImage:
-                rippleBackground.startRippleAnimation();
+                rippleBackground.stopRippleAnimation();
                 // 移动数据分析，收集开始听写事件
                 FlowerCollector.onEvent(getActivity(), "iat_recognize");
                 tv_content.setText(null);// 清空显示内容
@@ -153,7 +159,7 @@ public class HealhFragment extends Fragment {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
                             if(rippleBackground!=null){
-                                rippleBackground.stopRippleAnimation();
+                                rippleBackground.startRippleAnimation();
                             }
                         }
                     });
@@ -163,7 +169,7 @@ public class HealhFragment extends Fragment {
                     // 不显示听写对话框
                     ret = mIat.startListening(mRecognizerListener);
                     if (ret != ErrorCode.SUCCESS) {
-                        rippleBackground.stopRippleAnimation();
+                        rippleBackground.startRippleAnimation();
                         showTip("听写失败,错误码：" + ret);
                     } else {
 //                        showTip(getString(R.string.text_begin));
@@ -179,6 +185,29 @@ public class HealhFragment extends Fragment {
 //        top_view_left_text.setText(getResources().getString(R.string.health_nearby));
         iv_right.setVisibility(View.VISIBLE);
         iv_right.setImageResource(R.drawable.search);
+
+
+
+        //广告轮播
+        banner.setAdapter(new BGABanner.Adapter() {
+            @Override
+            public void fillBannerItem(BGABanner banner, View view, Object model, int position) {
+                Glide.with(banner.getContext()).load(model).placeholder(R.drawable.default_adv).error(R.drawable.default_adv).dontAnimate().thumbnail(0.1f).into((ImageView) view);
+            }
+        });
+
+        //广告轮播 设置数据
+        List<String> imgs = new ArrayList<>();
+        List<String> tips = new ArrayList<>();
+        tips.add("广告1");
+        tips.add("广告2");
+        tips.add("广告3");
+        imgs.add("http://www.lifesense.com/Public/Home/images/b12.jpg");
+        imgs.add("http://www.lifesense.com/Public/Home/images/b13.jpg");
+        imgs.add("http://www.lifesense.com/Public/Home/images/b15.jpg");
+        banner.setData(imgs, tips);
+        //广告轮播 设置监听
+        banner.setOnItemClickListener(this);
     }
     /**
      * 参数设置
@@ -266,7 +295,7 @@ public class HealhFragment extends Fragment {
         @Override
         public void onBeginOfSpeech() {
             // 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
-            rippleBackground.startRippleAnimation();
+            rippleBackground.stopRippleAnimation();
         }
         @Override
         public void onError(SpeechError error) {
@@ -329,7 +358,7 @@ public class HealhFragment extends Fragment {
 
 //        tv_content.setText(resultBuffer.toString());
         if(rippleBackground!=null){
-            rippleBackground.stopRippleAnimation();
+            rippleBackground.startRippleAnimation();
         }
 
         Intent intent = new Intent();
@@ -347,5 +376,18 @@ public class HealhFragment extends Fragment {
         mIat.destroy();
     }
 
+    @Override
+    public void onBannerItemClick(BGABanner banner, View view, Object model, int position) {
+        Toast.makeText(getActivity(), "点击了第" + (position + 1) + "页", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(rippleBackground!=null){
+            rippleBackground.startRippleAnimation();
+        }
+
+    }
 }
 

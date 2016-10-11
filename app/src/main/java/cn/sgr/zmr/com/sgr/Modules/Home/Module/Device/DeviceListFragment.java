@@ -136,6 +136,7 @@ public class DeviceListFragment extends BaseFragment implements DeviceListContra
                 mPresenter.startDiscovery();
             }
         });
+
     }
     @OnClick({R.id.top_view_back, R.id.top_view_right_text})
     public void onClick(View view) {

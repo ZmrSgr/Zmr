@@ -1,6 +1,5 @@
 package cn.sgr.zmr.com.sgr.Modules.Health.Search;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,18 +10,15 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bean.entity.Baby;
 import com.bean.entity.SearchRecent;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -32,10 +28,7 @@ import com.iflytek.cloud.SpeechSynthesizer;
 import com.iflytek.cloud.SynthesizerListener;
 import com.iflytek.sunflower.FlowerCollector;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,24 +36,10 @@ import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Modules.Health.Adapter.SearchRecentAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Health.Adapter.Tie_Adapter;
-import cn.sgr.zmr.com.sgr.Modules.Health.HealhFragment;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.HealthModel;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.Result;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.Search;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.SearchResult;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.Tie;
-import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.Baby_Adapter;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.AddBaby.AddBaby_Activity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.SearchResult;
 import cn.sgr.zmr.com.sgr.R;
-import cn.sgr.zmr.com.sgr.Utils.http.HttpException;
-import cn.sgr.zmr.com.sgr.Utils.http.HttpRequestCallback;
 import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
-import cn.sgr.zmr.com.sgr.Utils.util.Utils;
-import cn.sgr.zmr.com.sgr.View.MyDecoration;
-import cn.sgr.zmr.com.sgr.View.RecyclerViewHeader;
 import cn.sgr.zmr.com.sgr.View.TextViewExpandableAnimation;
-import okhttp3.Call;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

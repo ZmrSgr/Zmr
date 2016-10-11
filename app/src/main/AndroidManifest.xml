@@ -157,7 +157,8 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 友盟分享与登录 umeng sdk -->
-
+        <activity android:name=".Modules.Home.Location.NearByDrug.DrugActivity" />
+        <activity android:name=".Modules.Home.Location.NearByStore.StoreActivity" />
         <activity android:name=".Modules.Home.Location.LocationActivity" />
         <activity android:name=".Modules.Home.Module.Synchronize.SynchronizeActivity" />
         <activity android:name=".Modules.Home.Module.SettingDevice.SettingDeviceActivity" />

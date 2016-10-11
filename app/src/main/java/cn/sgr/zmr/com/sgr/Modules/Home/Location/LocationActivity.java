@@ -32,8 +32,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseActivity;
 import cn.sgr.zmr.com.sgr.Base.MyApplication;
+import cn.sgr.zmr.com.sgr.Modules.Home.Location.NearByDrug.DrugActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Location.NearByStore.StoreActivity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.LocationService;
+import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 public class LocationActivity extends BaseActivity {
     @BindView(R.id.mapView)
@@ -52,6 +55,15 @@ public class LocationActivity extends BaseActivity {
     private Marker mMarkerA;//宝宝位置标签
     private InfoWindow mInfoWindow;
 
+
+    @BindView(R.id.nearby_baby)
+    TextView nearby_baby;
+
+    @BindView(R.id.nearby_store)
+    TextView nearby_store;
+
+    @BindView(R.id.nearby_medice)
+    TextView nearby_medice;
 
 
 
@@ -223,7 +235,7 @@ public class LocationActivity extends BaseActivity {
 
     };
 
-    @OnClick({R.id.top_view_back,R.id.top_view_left_text,R.id.relocation})
+    @OnClick({R.id.top_view_back,R.id.top_view_left_text,R.id.relocation,R.id.nearby_baby,R.id.nearby_medice,R.id.nearby_store})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_view_left_text:
@@ -233,6 +245,20 @@ public class LocationActivity extends BaseActivity {
             case R.id.top_view_back:
                 finish();
                 break;
+
+            case R.id.nearby_baby:
+
+                break;
+
+            case R.id.nearby_medice:
+                Utils.toNextActivity(this, DrugActivity.class);
+                break;
+
+            case R.id.nearby_store:
+                Utils.toNextActivity(this, StoreActivity.class);
+                break;
+
+
 
             case R.id.relocation:
                 mBaiduMap.setMyLocationData(locData_curry);

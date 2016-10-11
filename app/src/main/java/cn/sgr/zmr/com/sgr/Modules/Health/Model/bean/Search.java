@@ -1,4 +1,4 @@
-package cn.sgr.zmr.com.sgr.Modules.Health.Model;
+package cn.sgr.zmr.com.sgr.Modules.Health.Model.bean;
 
 /**
  * Created by 沈国荣 on 2016/9/27 0027.

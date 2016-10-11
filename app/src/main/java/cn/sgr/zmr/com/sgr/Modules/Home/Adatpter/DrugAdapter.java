@@ -1,4 +1,4 @@
-package cn.sgr.zmr.com.sgr.Modules.Health.Adapter;
+package cn.sgr.zmr.com.sgr.Modules.Home.Adatpter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.sgr.zmr.com.sgr.Modules.Health.Adapter.BaseRecyclerAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Tie;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
@@ -20,18 +21,18 @@ import cn.sgr.zmr.com.sgr.Utils.util.GlideCircleTransform;
 /**
  * Created by Administrator on 2016/8/12 0012.
  */
-public class Tie_Adapter extends BaseRecyclerAdapter<Tie>  {
+public class DrugAdapter extends BaseRecyclerAdapter<Tie>  {
 
     private Context context;
     private DaoCacheManage daoManage;
 
-    public Tie_Adapter(Context context) {
+    public DrugAdapter(Context context) {
         this.context = context;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreate(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fragment_tie, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_drug, null);
 /*//        不知道为什么在xml设置的“android:layout_width="match_parent"”无效了，需要在这里重新设置
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);*/
 //        view.setLayoutParams(lp);

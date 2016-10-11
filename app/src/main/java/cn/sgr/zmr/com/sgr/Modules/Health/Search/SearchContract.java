@@ -1,15 +1,12 @@
 package cn.sgr.zmr.com.sgr.Modules.Health.Search;
 
-import android.app.FragmentManager;
-
-import com.bean.entity.Baby;
 import com.bean.entity.SearchRecent;
 
 import java.util.List;
 
 import cn.sgr.zmr.com.sgr.Base.BasePresenter;
 import cn.sgr.zmr.com.sgr.Base.BaseView;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.SearchResult;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.SearchResult;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.
