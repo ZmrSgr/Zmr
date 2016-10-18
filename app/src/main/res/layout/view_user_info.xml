@@ -25,19 +25,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:textColor="@color/them_text"
-        android:text="TEXT" />
+        android:textColor="@color/them_bg"
+        android:text="@string/home_battery" />
 
 
         <TextView
-
+            android:visibility="gone"
             android:id="@+id/user_top_unit"
             android:layout_width="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
             android:textSize="12sp"
-            android:textColor="@color/them_text"
+            android:textColor="@color/them_bg"
             android:text="@string/shishi_unit" />
 
     </LinearLayout>
@@ -62,7 +62,7 @@
         android:gravity="center"
         android:textSize="50sp"
         android:textColor="@color/them_bg"
-        android:text="230.0" />
+        android:text="0" />
 
 
     <TextView
@@ -87,8 +87,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="20sp"
-        android:textColor="@color/them_text"
-        android:text="TEXT" />
+        android:textColor="@color/them_bg"
+        android:text="@string/home_bottom" />
 
 
 </RelativeLayout>

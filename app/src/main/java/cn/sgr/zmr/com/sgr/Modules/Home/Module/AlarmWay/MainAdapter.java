@@ -58,7 +58,7 @@ public class MainAdapter extends BaseAdapter {
 		/* 新建一个arraylist来接收从系统中获取的短信铃声数据 */
 		ringList = new ArrayList<String>();
 		/* 添加“跟随系统”选项 */
-		ringList.add("跟随系统");
+//		ringList.add("跟随系统");
 		/* 获取RingtoneManager */
 		rm = new RingtoneManager(mContext);
 		/* 指定获取类型为短信铃声 */

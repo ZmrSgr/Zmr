@@ -27,6 +27,9 @@ public class Setting {
     private static final String KEY_SYNCHRONIZE_AUTO = "synchronize_auto";//自动同步
     private static final String KEY_SYNCHRONIZE_WIFI = "synchronize_wifi";//仅WiFi下
 
+    private static final String KEY_DEVICE_ADDRESS = "device_address";//硬件设备的地址
+    private static final String KEY_DEVICE_BATTERY = "device_battery";//硬件设备的电量
+
     private Setting(Context ct) {
         Account = ct.getSharedPreferences(KEY_SETTING, 0);
         editor = Account.edit();
@@ -47,6 +50,8 @@ public class Setting {
         editor.putString(KEY_ALARM_IS_SHOCK, "0").commit();
         editor.putString(KEY_ALARM_TEMP, "37.6").commit();
         editor.putInt(KEY_ALARM_POSITION_VOICE, 0).commit();
+        editor.putString(KEY_DEVICE_ADDRESS, "0").commit();
+        editor.putString(KEY_DEVICE_BATTERY, " ").commit();
     }
 
    //获得声音位置
@@ -59,8 +64,16 @@ public class Setting {
     }
 
 
+    public String getBattery() {
+        return Account.getString(KEY_DEVICE_BATTERY, " ");
+    }
+    //设置温度
+    public void setBattery(String temp) {
+        editor.putString(KEY_DEVICE_BATTERY, temp).commit();
+    }
+
     public String getTemp() {
-        return Account.getString(KEY_ALARM_TEMP, "37.6");
+        return Account.getString(KEY_ALARM_TEMP, "38.5");
     }
    //设置温度
     public void setTemp(String temp) {
@@ -83,6 +96,13 @@ public class Setting {
         editor.putString(KEY_IS_LOSE, lose).commit();
     }
 
+    public void setDeviceAddress(String address) {
+        editor.putString(KEY_DEVICE_ADDRESS, address).commit();
+    }
+
+    public String getDeviceAddress() {
+        return Account.getString(KEY_DEVICE_ADDRESS, "0");
+    }
     public void setSYNCHRONIZE_AUTO(String key) {
         editor.putString(KEY_SYNCHRONIZE_AUTO, key).commit();
     }

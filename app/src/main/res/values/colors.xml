@@ -53,5 +53,7 @@
     <color name="secondary_text">#727272</color>
     <color name="divider">#8fB6B6B6</color>
 
+    <color name="red_light">#ffff4444</color>
+
 
 </resources>

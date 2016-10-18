@@ -32,6 +32,8 @@ public interface SearchContract {
 
         void dismissRecentView();//隐藏最近的listView
 
+        void setPresenter(SearchContract.Presenter presenter);
+
 
     }
 

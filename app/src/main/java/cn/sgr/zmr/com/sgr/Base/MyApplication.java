@@ -3,21 +3,16 @@ package cn.sgr.zmr.com.sgr.Base;
 import android.app.Activity;
 
 import android.app.Application;
-import android.app.Service;
 import android.os.Handler;
-import android.os.Vibrator;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.iflytek.cloud.SpeechUtility;
 import com.testin.agent.TestinAgent;
 import com.umeng.socialize.PlatformConfig;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoManager;
-import cn.sgr.zmr.com.sgr.Utils.util.BluetoothSet;
 import cn.sgr.zmr.com.sgr.Utils.util.LocationService;
 
 /**
@@ -27,7 +22,6 @@ public class MyApplication extends Application {
     private static MyApplication instance;
     private List<Activity> activitys = null;
     public static String DeviceName;
-    private BluetoothSet mBluetoothSet = null;			//传递蓝牙对象
     private Handler mHandler = null;
     private static DaoManager daoManager;
     public LocationService locationService;//定位
@@ -58,8 +52,6 @@ public class MyApplication extends Application {
         PlatformConfig.setSinaWeibo("1109305130","12bf679612df94be5a7bc6459fb93f75");
         // QQ和Qzone appid appkey
         PlatformConfig.setQQZone("1105570889", "vx7p91NQqmKW9YAD");
-
-
     }
 
     private void initGreenDao() {
@@ -88,14 +80,6 @@ public class MyApplication extends Application {
             }
         }
         System.exit(0);
-    }
-
-    public BluetoothSet getBluetoothSet(){
-        return mBluetoothSet;
-    }
-
-    public void setBluetoothSet(BluetoothSet mbts) {
-        this.mBluetoothSet = mbts;
     }
 
     public void setHandler(Handler handler)

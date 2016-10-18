@@ -192,4 +192,14 @@ public class Utils {
         return change;
     }
 
+public static boolean isNumber(String str){//判断是不是数字
+    final String number = "0123456789.";
+    for (int i = 0; i < str.length()-1; i++) {
+        if (number.indexOf(str.charAt(i)) == -1) {
+            return false;
+        }
+    }
+    return true;
+}
+
 }

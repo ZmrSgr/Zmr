@@ -10,8 +10,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.DoctorList;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.DrugList;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Tie;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
@@ -20,10 +24,11 @@ import cn.sgr.zmr.com.sgr.Utils.util.GlideCircleTransform;
 /**
  * Created by Administrator on 2016/8/12 0012.
  */
-public class Tie_Adapter extends BaseRecyclerAdapter<Tie>  {
+public class Tie_Adapter<T> extends BaseRecyclerAdapter<T>  {
 
     private Context context;
     private DaoCacheManage daoManage;
+    private ArrayList<T> mDatas = new ArrayList<>();
 
     public Tie_Adapter(Context context) {
         this.context = context;
@@ -37,10 +42,10 @@ public class Tie_Adapter extends BaseRecyclerAdapter<Tie>  {
 //        view.setLayoutParams(lp);
         return new ViewHolder(view);
     }
-
     @Override
-    public void onBind(RecyclerView.ViewHolder viewHolder, int position,  Tie data) {
+    public void onBind(RecyclerView.ViewHolder viewHolder, int position,  T dataResult) {
         ViewHolder mHolder = (ViewHolder) viewHolder;
+        mDatas.add(dataResult);
        /* boolean isZhangJiaWei = newEntity.getContentSourceName().equals("张佳玮的博客");
         if(hasImage) {
             mHolder.  mNewsImage.setVisibility(View.VISIBLE);
@@ -48,14 +53,44 @@ public class Tie_Adapter extends BaseRecyclerAdapter<Tie>  {
                     .placeholder(R.mipmap.placeholder_biger)
                     .into(mNewsImage);
         }*/
-        mHolder. profileImage.setImageResource(R.drawable.ic_launcher);
-        mHolder.  author.setText(data.getAuthor());
-        mHolder. mNwsTitle.setText(data.getTitle());
+
+
+        if(dataResult instanceof Tie){//type为 0 1 5 帖子
+            Tie data=(Tie)dataResult;
+            mHolder. profileImage.setImageResource(R.drawable.ic_launcher);
+            mHolder.  author.setText(data.getAuthor());
+            mHolder. mNwsTitle.setText(data.getTitle());
 //        mHolder. showTime = new DateTime(Long.parseLong(newEntity.getPutdate())).toString("yyyy年MM月dd日");
-        mHolder. mNewsTime.setText(data.getDateline());
-        mHolder. description.setText(data.getContent());
-        mHolder.newsNum.setText(data.getNum()+"个回答");
-        Glide.with(context).load(data.getPhoto()).centerCrop().transform(new GlideCircleTransform(context)).into(mHolder.profileImage);
+            mHolder. mNewsTime.setText(data.getDateline());
+            mHolder. description.setText(data.getContent());
+            mHolder.newsNum.setText(data.getNum()+"个回答");
+            Glide.with(context).load(data.getPhoto()).centerCrop().transform(new GlideCircleTransform(context)).into(mHolder.profileImage);
+        }else if(dataResult instanceof DrugList){//药物列表  2
+            DrugList data=(DrugList)dataResult;
+            mHolder. profileImage.setImageResource(R.drawable.ic_launcher);
+            mHolder.  author.setText(data.getCompany());
+            mHolder. mNwsTitle.setText(data.getItemname());
+//        mHolder. showTime = new DateTime(Long.parseLong(newEntity.getPutdate())).toString("yyyy年MM月dd日");
+            mHolder. mNewsTime.setVisibility(View.GONE);
+            mHolder. newsNum.setVisibility(View.GONE);
+            mHolder. description.setText(data.getInfo());
+//            mHolder.newsNum.setText(data.getNum()+"个回答");
+            Glide.with(context).load(data.getPack_pic()).centerCrop().transform(new GlideCircleTransform(context)).into(mHolder.profileImage);
+        }else if(dataResult instanceof DoctorList){//医生医院列表  367
+            DoctorList data=(DoctorList)dataResult;
+            mHolder. profileImage.setImageResource(R.drawable.ic_launcher);
+            mHolder.  author.setText(data.getHos_name());
+            mHolder. mNwsTitle.setText(data.getRealname());
+//        mHolder. showTime = new DateTime(Long.parseLong(newEntity.getPutdate())).toString("yyyy年MM月dd日");
+//            mHolder. mNewsTime.setText(data.getDateline());
+            mHolder. description.setText(data.getGood_at());
+//            mHolder.newsNum.setText(data.getNum()+"个回答");
+            Glide.with(context).load(data.getFace()).centerCrop().transform(new GlideCircleTransform(context)).into(mHolder.profileImage);
+            mHolder. mNewsTime.setVisibility(View.GONE);
+            mHolder. newsNum.setVisibility(View.GONE);
+        }
+
+
 
     }
 
@@ -77,7 +112,7 @@ public class Tie_Adapter extends BaseRecyclerAdapter<Tie>  {
     }
 */
 
-    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
 
@@ -111,14 +146,14 @@ public class Tie_Adapter extends BaseRecyclerAdapter<Tie>  {
         @Override
         public void onClick(View v) {
             if (null != onRecyclerViewListener) {
-                onRecyclerViewListener.onItemClick(this.getPosition(),v);
+                onRecyclerViewListener.onItemClick(mDatas.get(this.getPosition()),v);
             }
         }
     }
 
 
-        public static interface OnRecyclerViewListener {
-            void onItemClick(int position, View v);
+        public  interface OnRecyclerViewListener<T>{
+            void  onItemClick(T data, View v);
             boolean onItemLongClick(int position);
         }
 

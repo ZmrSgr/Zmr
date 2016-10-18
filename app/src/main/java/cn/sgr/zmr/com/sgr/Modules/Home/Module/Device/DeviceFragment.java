@@ -12,6 +12,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
+import cn.sgr.zmr.com.sgr.Common.Model.Setting;
+import cn.sgr.zmr.com.sgr.Modules.Home.HomeFragment;
 import cn.sgr.zmr.com.sgr.R;
 
 /**
@@ -24,6 +26,9 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View{
 
     @BindView(R.id.top_view_title)
     TextView top_view_title;
+
+    @BindView(R.id.text_quantity)
+    TextView text_quantity;
 
     private DeviceContract.Presenter mPresenter;
 
@@ -50,6 +55,11 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View{
     private void initView() {
         top_view_title.setText(getResources().getString(R.string.set_decive ));
         top_view_back.setVisibility(View.VISIBLE);
+        if(HomeFragment.isConnState){
+
+        }else{
+            text_quantity.setText(Setting.getInstance(getActivity()).getBattery());
+        }
     }
 
     //监听按钮

@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Common.Model.Setting;
+import cn.sgr.zmr.com.sgr.Modules.Home.HomeFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.Location.LocationActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Synchronize.SynchronizeActivity;
@@ -41,6 +42,11 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
 
     @BindView(R.id.top_view_title)
     TextView top_view_title;
+
+
+    @BindView(R.id.text_device)
+    TextView text_device;
+
 
     @BindView(R.id.rel_fever_temp)
     RelativeLayout rel_fever_temp;
@@ -176,6 +182,11 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
             }
             Weightoptions2Items.add(options2Items_weigh);
         }
+        if(HomeFragment.isConnState){
+
+        }else{
+            text_device.setText(Setting.getInstance(getActivity()).getBattery());
+        }
 
 
     }
@@ -205,14 +216,13 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
                 break;
         }
     }
-
     private void setTemp() {
         weightOptions = new OptionsPickerView(getActivity());
         //三级联动效果
         weightOptions.setPicker(Weightoptions1Items, Weightoptions2Items, true);
         //设置选择的三级单位
-        weightOptions.setLabels(".", "℃");
-        weightOptions.setTitle("体温（℃）");
+        weightOptions.setLabels(".",getActivity().getResources().getString(R.string.shishi_unit));
+        weightOptions.setTitle(getActivity().getResources().getString(R.string.setting_titile));
         weightOptions.setCyclic(false, true, true);
         //设置默认选中的三级项目
         //监听确定选择按钮
@@ -223,9 +233,9 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
             @Override
             public void onOptionsSelect(int options1, int option2, int options3) {
                 //返回的分别是三个级别的选中位置
-                String tx = Weightoptions1Items.get(options1)+"." + Weightoptions2Items.get(options1).get(option2)+"℃";
+                String tx = Weightoptions1Items.get(options1)+"." + Weightoptions2Items.get(options1).get(option2)+getActivity().getResources().getString(R.string.shishi_unit);
                 text_tem.setText(tx);
-                Setting.getInstance(getActivity()).setTemp(tx);
+                Setting.getInstance(getActivity()).setTemp( Weightoptions1Items.get(options1)+"." + Weightoptions2Items.get(options1).get(option2));
 
             }
         });

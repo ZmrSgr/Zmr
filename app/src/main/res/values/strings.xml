@@ -193,6 +193,39 @@
     <string name="nearby_medice">附近药店</string>
     <string name="nearby_store">附近医院</string>
 
+    <string name="homeboy">男</string>
+    <string name="home_connected">已连接</string>
+    <string name="home_connectting">连接中...</string>
+    <string name="home_disconnectting">断开连接</string>
+    <!--<string name="home_top"> 室温：0</string>-->
+    <string name="home_bottom"> 正常</string>
+    <string name="home_battery">电量:</string>
+    <string name="home_state_low"> 可能低烧</string>
+    <string name="home_state_high">可能发烧</string>
+
+    <string name="setting_titile"> 体温（℃）</string>
+
+    <string name="temp_over">温度超过了</string>
+    <string name="after_tip">(十分钟后闹铃会继续响)</string>
+    <string name="close_tip">关闭报警提醒</string>
+    <string name="close_away">关闭防丢功能</string>
+    <string name="child_away">孩子已经离开监视范围</string>
+    <string name="know"> 知道了</string>
+    <string name="charging"> 充电中</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

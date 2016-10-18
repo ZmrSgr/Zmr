@@ -32,7 +32,6 @@ public class BaseFragment extends Fragment {
     public void cancelProgressDialog() {
 
         if (mView != null ) {
-            System.out.println("隐藏进度条");
             mView.dismiss();
 
         }

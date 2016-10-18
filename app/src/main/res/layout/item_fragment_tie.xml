@@ -74,7 +74,7 @@
            android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0个回答"
+
             android:layout_marginRight="8dp"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="13sp"
@@ -117,7 +117,7 @@
             android:paddingLeft="@dimen/margin_8dp"
             android:id="@+id/newsTime"
             android:layout_below="@+id/description"
-            android:text="shijain"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/them_text"

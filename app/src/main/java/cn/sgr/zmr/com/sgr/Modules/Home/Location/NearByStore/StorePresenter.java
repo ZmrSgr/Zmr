@@ -59,7 +59,7 @@ public class StorePresenter implements StoreContract.Presenter {
     }
 
     @Override
-    public void getStoreDrugList(String sign, String lat, String lng) {
+    public void getStoreMoreList(String sign, String lat, String lng) {
         nearByModel.getStoreList(context,sign,lat,lng,page++, new HttpRequestCallback<Result<Drug>>() {
             @Override
             public void onStart() {

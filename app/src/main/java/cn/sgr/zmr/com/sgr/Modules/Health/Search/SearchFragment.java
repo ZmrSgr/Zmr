@@ -20,6 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bean.entity.SearchRecent;
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.SpeechConstant;
@@ -28,6 +32,7 @@ import com.iflytek.cloud.SpeechSynthesizer;
 import com.iflytek.cloud.SynthesizerListener;
 import com.iflytek.sunflower.FlowerCollector;
 
+import java.io.Reader;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,17 +41,23 @@ import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Modules.Health.Adapter.SearchRecentAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Health.Adapter.Tie_Adapter;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.DoctorList;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.DrugList;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.SearchResult;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Tie;
+import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.Drug;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.util.GlideCircleTransform;
 import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.View.TextViewExpandableAnimation;
+import freemarker.core.ReturnInstruction;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.
  */
-public class SearchFragment extends BaseFragment implements SearchContract.View,Tie_Adapter.OnRecyclerViewListener{
+public class SearchFragment<T> extends BaseFragment implements SearchContract.View,Tie_Adapter.OnRecyclerViewListener<T>{
     @BindView(R.id.etSearch)
     EditText etSearch;
 
@@ -79,9 +90,6 @@ public class SearchFragment extends BaseFragment implements SearchContract.View,
     Tie_Adapter tie_adapter;
 
     boolean isvoice =false;
-
-    SearchResult Tempresult;
-
 
 
     // 语音合成对象
@@ -266,15 +274,46 @@ public class SearchFragment extends BaseFragment implements SearchContract.View,
 
     @Override
     public void showSearchResult(SearchResult result) {
-        Tempresult=result;
+
+        Gson gson = new Gson();
+
+
+
         if (result != null) {
             mNewsListView.setHasFixedSize(true);
             mNewsListView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+
+
             tie_adapter=new Tie_Adapter(getActivity());
+            gson.toJson(result.getList());
+            System.out.println("getList"+result.getList());
+            if(result.getType().equals("0")||result.getType().equals("1")||result.getType().equals("5")){
+
+           //把它变成json 在转变回对象
+                List<Tie> resultTie=gson.fromJson(gson.toJson(result.getList()), new TypeToken<List<Tie>>() {
+                }.getType());
+            tie_adapter.addDatas(resultTie);
+
+            }else if(result.getType().equals("3")||result.getType().equals("6")||result.getType().equals("7")){
+
+                List<DoctorList> resultDoctor=gson.fromJson(gson.toJson(result.getList()), new TypeToken<List<DoctorList>>() {
+                }.getType());
+            tie_adapter.addDatas(resultDoctor);
+
+            }else if(result.getType().equals("2")){
+
+                List<DrugList> resultDrug=gson.fromJson(gson.toJson(result.getList()), new TypeToken<List<DrugList>>() {
+                }.getType());
+                tie_adapter.addDatas(resultDrug);
+
+            }else if(result.getType().equals("4")){
+                Toast.makeText(getActivity(), R.string.search_nothing,Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            tie_adapter.setOnRecyclerViewListener(this);
             mNewsListView.setAdapter(tie_adapter);
             mNewsListView.setVerticalScrollBarEnabled(false);
-            tie_adapter.addDatas(result.getList());
-            tie_adapter.setOnRecyclerViewListener(this);
             if(result.getPiece()!=null&&!result.getPiece().equals("")){
                 View header = LayoutInflater.from(getActivity()).inflate(R.layout.header,mNewsListView, false);
                 tie_adapter.setHeaderView(header);
@@ -325,9 +364,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View,
 
         }
 
-
     }
-
 
     /**
      * 合成回调监听。
@@ -454,16 +491,35 @@ public class SearchFragment extends BaseFragment implements SearchContract.View,
     }
 
 
-    @Override
-    public void onItemClick(int position, View v) {
-        if(Tempresult!=null){
-            if(Tempresult.getList()!=null){
-                Intent intent = new Intent();
+   @Override
+    public void onItemClick(T data, View v) {
+
+       /*         Intent intent = new Intent();
                 intent.setClass(getActivity(), DetailTieActivity.class);
                 intent.putExtra(UtilKey.TIE_KEY, Tempresult.getList().get(position).getUrl());
-                startActivity(intent);
-            }
-        }
+                startActivity(intent);*/
+       if(data instanceof Tie){//type为 0 1 5 帖子
+           Tie dataTie=(Tie)data;
+           Intent intent = new Intent();
+           intent.setClass(getActivity(), DetailTieActivity.class);
+           intent.putExtra(UtilKey.TIE_KEY, dataTie.getUrl());
+           startActivity(intent);
+
+       }else if(data instanceof DrugList){//药物列表  2
+           DrugList dataDrug=(DrugList)data;
+           Intent intent = new Intent();
+           intent.setClass(getActivity(), DetailTieActivity.class);
+           intent.putExtra(UtilKey.TIE_KEY, dataDrug.getUrl());
+           startActivity(intent);
+
+       }else if(data instanceof DoctorList){//医生医院列表  367
+           DoctorList dataDoctor=(DoctorList)data;
+           Intent intent = new Intent();
+           intent.setClass(getActivity(), DetailTieActivity.class);
+           intent.putExtra(UtilKey.TIE_KEY, dataDoctor.getUrl());
+           startActivity(intent);
+       }
+
     }
 
 
@@ -501,6 +557,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View,
         }
 
     }
+
     @Override
     public boolean onItemLongClick(int position) {
         return false;

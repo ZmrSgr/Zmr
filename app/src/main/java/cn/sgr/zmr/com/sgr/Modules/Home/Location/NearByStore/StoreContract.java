@@ -22,7 +22,7 @@ public class StoreContract {
     interface Presenter extends BasePresenter {
 
         void getStoreList( String sign, String lat, String lng);
-        void getStoreDrugList( String sign, String lat, String lng);
+        void getStoreMoreList( String sign, String lat, String lng);
 
     }
 }

@@ -5,20 +5,27 @@ import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import com.bean.entity.SearchRecent;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
 
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.HealthModel;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Result;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Search;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.SearchResult;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Tie;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 import cn.sgr.zmr.com.sgr.Utils.http.HttpException;
 import cn.sgr.zmr.com.sgr.Utils.http.HttpRequestCallback;
+import cn.sgr.zmr.com.sgr.Utils.http.JsonAndObject;
 import okhttp3.Call;
 
 /**
  * Created by 沈国荣 on 2016/8/23 0023.
  */
-public class SearchPresenter implements SearchContract.Presenter{
+public class SearchPresenter<T> implements SearchContract.Presenter{
 
     @NonNull
     private final SearchContract.View registerView;
@@ -75,10 +82,11 @@ public class SearchPresenter implements SearchContract.Presenter{
             public void onFinish() {
             }
             @Override
-            public void onResponse(Result<SearchResult> user) {
+            public void onResponse(Result<SearchResult> result) {
                 registerView.dismissRecentView();
-                if(user.code==200){//表示获取到数据
-                    registerView.showSearchResult(user.data);
+                if(result.code==200){//表示获取到数据
+                System.out.println("result"+result);
+                    registerView.showSearchResult(result.data);
                 }else{
                     Toast.makeText(context, R.string.search_nothing,Toast.LENGTH_LONG).show();
                 }

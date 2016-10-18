@@ -2,14 +2,16 @@ package cn.sgr.zmr.com.sgr.Modules.Home;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
-
-
-import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,36 +21,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bean.entity.Baby;
+import com.example.administrator.scannerlib.DeviceSanListActivity;
 import com.github.OrangeGangsters.circularbarpager.library.CircularBarPager;
-import com.nightonke.jellytogglebutton.JellyToggleButton;
-import com.nightonke.jellytogglebutton.State;
-
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
-import cn.sgr.zmr.com.sgr.Base.MyApplication;
-import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
-import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
-import cn.sgr.zmr.com.sgr.Modules.Home.Location.LocationActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyContract;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListActivity;
+import cn.sgr.zmr.com.sgr.Common.Model.Setting;
+import cn.sgr.zmr.com.sgr.Common.ShowAlarm;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.CirclePagerAdapter;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceListFragment;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.SettingDevice.SettingDeviceActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Synchronize.SynchronizeActivity;
 import cn.sgr.zmr.com.sgr.R;
-import cn.sgr.zmr.com.sgr.Utils.util.BluetoothSet;
+import cn.sgr.zmr.com.sgr.Utils.BluetoothUtil.BleDeviceHelp;
+import cn.sgr.zmr.com.sgr.Utils.BluetoothUtil.ICmdModel;
+import cn.sgr.zmr.com.sgr.Utils.util.Constant;
+import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 import cn.sgr.zmr.com.sgr.View.DemoView;
-import cn.sgr.zmr.com.sgr.View.LoadingButton;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class HomeFragment extends BaseFragment implements HomeContract.View{
+public class HomeFragment extends BaseFragment implements HomeContract.View  ,BleDeviceHelp.BleReceiver{
 
 
     @BindView(R.id.top_view_back)
@@ -71,7 +66,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
     ImageView tv_update;
 
     TextView home_unit_top;
-
+    TextView user_center_unit;
     TextView home_unit_midle;
 
 //    性别
@@ -95,7 +90,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
     @BindView(R.id.tv_date)
     TextView tv_date;
 
+    private static final int REQUEST_SELECT_DEVICE = 1;
 
+    public static boolean isConnState = true;//是否连接
+
+    private BleDeviceHelp bleRe;//蓝牙帮助类
+
+    private int startInt,endInt;//进度条的终始
+
+    TimeAway AwayTime;//30分钟之后 才允许防丢失闹钟才能再次弹出
+    TimeAway AlarmTime;//30分钟之后 才允许温度闹钟才能再次弹出
 
 
 
@@ -110,8 +114,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
     Button button;
     DemoView ViewT;
     private static final int REQUEST_CONNECT_DEVICE = 1;
-    private BluetoothSet mBluetoothSet = null;		//蓝牙对象
-    MyApplication mBluetoothSetSession = null;
+    public static boolean isAlarm = true;//true表示可以弹出闹铃，
+    public static boolean isAway = true;//true表示可以弹出闹铃，
     HomeContract.Presenter mPresenter;
 
     //单例 模式
@@ -139,6 +143,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
         return view;
     }
     private void intView() {
+        bleRe = new BleDeviceHelp(getActivity(),this);
         ViewT=   new DemoView(getActivity());
         mCircularBarPager.setViewPagerAdapter(new CirclePagerAdapter(getActivity(),ViewT));
         top_view_title.setText(getString(R.string.check_temp));
@@ -150,10 +155,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
         user_top_textview=(TextView)ViewT.findViewById(R.id.user_top_textview);
         value_info_textview=(TextView)ViewT.findViewById(R.id.value_info_textview);
         user_bottom_textview=(TextView)ViewT.findViewById(R.id.user_bottom_textview);
-
+        user_center_unit=(TextView)ViewT.findViewById(R.id.user_center_unit);
         home_unit_top=(TextView) ViewT.findViewById(R.id.user_top_unit);
         home_unit_midle=(TextView) ViewT.findViewById(R.id.user_center_unit);
-
         mCircularBarPager.getCircularBar().setStartLineEnabled(false);
         initBlue();
 
@@ -166,7 +170,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
         tv_username.setText(baby.getName());
         tv_hight.setText(baby.getHight());
         tv_date.setText(baby.getAge());
-        if(baby.getSex()!=null&&baby.getSex().equals("男")){
+        if(baby.getSex()!=null&&baby.getSex().equals(getString(R.string.homeboy))){
 
             iv_gender.setImageResource(R.drawable.baby_boy);
         }else{
@@ -183,29 +187,46 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
 
     @Override
     public void initBlue() {
-        mBluetoothSet = new BluetoothSet(getActivity(),top_view_left_text);
-        //设置共享对象，后面的Activity对象只需读取对象数据即可
-        mBluetoothSetSession = (MyApplication) getActivity().getApplication();
-        mBluetoothSetSession.setBluetoothSet(mBluetoothSet);
-        mBluetoothSetSession.setHandler(mHandler);
-        if(mBluetoothSet!=null){
-            mBluetoothSet.openBluetooth();
-        }else{
-            Toast.makeText(getActivity(), "该设备不支持蓝牙", Toast.LENGTH_SHORT).show();
+        if (isBLEEnabled()) {
+           if(Setting.getInstance(getActivity()).getDeviceAddress().equals("0")){
+
+           }else{
+
+            String   deviceAddress=Setting.getInstance(getActivity()).getDeviceAddress();
+
+
+
+        /*       if(isConnState){
+
+               }else{
+                   bleRe.disconnect();
+               }*/
+//                        String mac = showMacTv.getText().toString().trim();
+                   if (bleRe.mBluetoothDeviceAddress != null) {
+                       bleRe.close();
+                   }
+                   if (!TextUtils.isEmpty(deviceAddress)) {
+                       bleRe.mBluetoothDeviceAddress = deviceAddress;
+                       Setting.getInstance(getActivity()).setDeviceAddress(deviceAddress);//保存硬件地址
+                       bleRe.connect();
+                   }
+                   isConnState = false;
+//                        top_view_left_text.setText("已连接");
+
+           }
+        } else {
+            showBLEDialog();
         }
     }
 
     @Override
     public void clearData() {
-        user_top_textview.setText("室温：0");
-        value_info_textview.setText("0");
-        user_bottom_textview.setText("正常");
         tv_date.setText("0");
         tv_hight.setText("0");
         tv_username.setText("");
         tv_weight.setText("0");
         iv_gender.setVisibility(View.GONE);
-        mCircularBarPager.getCircularBar().animateProgress(0, 0, 1500);
+        mCircularBarPager.getCircularBar().animateProgress(0, 0, 900);
     }
 
     @OnClick({R.id.top_view_right_text, R.id.top_view_left_text,R.id.iv_avatar,R.id.top_view_title,R.id.tv_update,R.id.iv_location})
@@ -215,10 +236,20 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
                 Utils.toNextActivity(getActivity(), SettingDeviceActivity.class);
                 break;
             case R.id.top_view_left_text:
-                cancelProgressDialog();
+
+                if (isBLEEnabled()) {
+                    Intent newIntent = new Intent(getActivity(), DeviceSanListActivity.class);
+                    startActivityForResult(newIntent, REQUEST_SELECT_DEVICE);
+                } else {
+//                    Toast.makeText(getActivity(), "Please Open Bluetooth !", Toast.LENGTH_SHORT).show();
+                    showBLEDialog();
+                }
+
+
+           /*     cancelProgressDialog();
 
                Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
-                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
+                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);*/
                 break;
 
             case R.id.iv_avatar:
@@ -243,43 +274,58 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
 
         }
     }
+    private void showBLEDialog() {
+        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+        startActivityForResult(enableBtIntent, 2);
+    }
+
 
     /**
-     * 显示数据
-     * @param iFlag
+     * 判断蓝牙是否开启
+     *
+     * @return
      */
-
-    private final Handler mHandler = new Handler(){
-
-        @Override
-        public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
-            Bundle bundle = msg.getData();
-            String strArray[] = null;
-            switch (msg.what) {
-                default:
-                    break;
-            }
-        }
-    };
-
+    public boolean isBLEEnabled() {
+        final BluetoothManager bluetoothManager = (BluetoothManager) getActivity().getSystemService(Context.BLUETOOTH_SERVICE);
+        final BluetoothAdapter adapter = bluetoothManager.getAdapter();
+        return adapter != null && adapter.isEnabled();
+    }
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
+    public void onActivityResult(int requestCode, int resultCode, Intent datae) {
         switch (requestCode) {
-            case REQUEST_CONNECT_DEVICE:
-                if (resultCode == Activity.RESULT_OK) {
-                    String address = data.getExtras().getString(DeviceListFragment.EXTRA_DEVICE_ADDRESS);
-                    mBluetoothSet.ConnectDevices(address);
+            case REQUEST_SELECT_DEVICE:
+                if (resultCode == Activity.RESULT_OK && datae != null) {
+                    String deviceAddress = datae.getStringExtra(BluetoothDevice.EXTRA_DEVICE);
+                    String deviceName = datae.getStringExtra(BluetoothDevice.EXTRA_NAME);
+
+                    String deviceRssi = datae.getStringExtra(BluetoothDevice.EXTRA_RSSI);
+                    top_view_left_text.setText(deviceName);
+
+                    user_bottom_textview.setText(deviceRssi);
+                    if (isConnState) {
+//                        String mac = showMacTv.getText().toString().trim();
+                        if (bleRe.mBluetoothDeviceAddress != null) {
+                            bleRe.close();
+                        }
+                        if (!TextUtils.isEmpty(deviceAddress)) {
+                            bleRe.mBluetoothDeviceAddress = deviceAddress;
+                            Setting.getInstance(getActivity()).setDeviceAddress(deviceAddress);//保存硬件地址
+                            bleRe.connect();
+                        }
+                        isConnState = false;
+//                        top_view_left_text.setText("已连接");
+                    } else {
+                        bleRe.disconnect();
+                        isConnState = true;
+                        top_view_left_text.setText(getString(R.string.connected));
+                    }
                 }
                 break;
-
             default:
                 break;
         }
-        super.onActivityResult(requestCode, resultCode, data);
     }
     @Override
     public boolean isActive() {
@@ -290,4 +336,223 @@ public class HomeFragment extends BaseFragment implements HomeContract.View{
     public void setPresenter(HomeContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
     }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bleRe.close();
+    }
+
+    @Override
+    public void getConnState(final int mConnectionState) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                switch (mConnectionState) {
+                    case BleDeviceHelp.CON_STATE_DISCONNECTED://断开连接
+                        DisConnectState();
+
+                        break;
+
+                    case BleDeviceHelp.CON_STATE_CLOSED://device closed. never can be used anymore.
+                        DisConnectState();
+                        break;
+                    case BleDeviceHelp.CON_STATE_CONNECTED:
+                        top_view_left_text.setText(getString( R.string.home_connected));
+
+                        ICmdModel.CmTxRequestBatteryInfo ctrbi = new ICmdModel.CmTxRequestBatteryInfo();
+                        bleRe.sendCmd(ctrbi);
+
+
+                        ICmdModel.CmTxRequestTemperatureOn ctrbi2 = new ICmdModel.CmTxRequestTemperatureOn();
+                        bleRe.sendCmd(ctrbi2);
+                        break;
+                    case BleDeviceHelp.CON_STATE_CONNECTING:
+                    case BleDeviceHelp.CON_STATE_DISCOVERING:
+                    case BleDeviceHelp.CON_STATE_ENABLING:
+                        top_view_left_text.setText(getString(R.string.home_connectting));
+                        break;
+                    default:
+                        DisConnectState();
+                }
+            }
+        });
+
+    }
+
+    private void DisConnectState(){
+        top_view_left_text.setText(getString(R.string.home_disconnectting));
+        user_top_textview.setText(getString(R.string.home_battery));
+        value_info_textview.setText("0");
+        user_bottom_textview.setText(getString(R.string.home_bottom));
+
+
+    }
+
+
+    private ICmdModel.CmRxBatteryInfo mBatteryInfo = null;
+    private ICmdModel.CmRxTemperature mTemperature = null;
+    @Override
+    public void getCmdData(byte[] characteristic) {
+        int id = ICmdModel.cmdIdFromBytes(characteristic, 0);
+
+        switch (id) {
+            case ICmdModel.CmRxBatteryInfo.ID:
+
+
+                mBatteryInfo = new ICmdModel.CmRxBatteryInfo();
+                mBatteryInfo.fromCmdBytes(characteristic);
+               getActivity(). runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        user_top_textview.setText(getString(R.string.home_battery)+mBatteryInfo.toString());
+                        Setting.getInstance(getActivity()).setBattery(mBatteryInfo.toString());
+                    }
+                });
+                break;
+            case ICmdModel.CmRxTemperature.ID:
+                mTemperature = new ICmdModel.CmRxTemperature();
+                mTemperature.fromCmdBytes(characteristic);
+                getActivity(). runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        value_info_textview.setText(mTemperature.toString());
+                        if(Utils.isNumber(mTemperature.toString())){
+                            endInt= (int)Math.floor(Float.valueOf(mTemperature.toString()));
+
+                         //闹铃
+                            if(Setting.getInstance(getActivity()).IsAlarm()){
+                                if(isAlarm){
+                                    if(Float.valueOf(mTemperature.toString())>Float.valueOf(Setting.getInstance(getActivity()).getTemp())){//报警字体显示的是红色
+                                        //计算十分钟之后闹钟继续闹
+                                        AwayTime = new TimeAway(1800000, 1000);// 构造CountDownTimer对象
+                                        AwayTime.start();
+
+
+                                        isAlarm=false;
+                                        Intent intent = new Intent(getActivity(), ShowAlarm.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        intent.putExtra(UtilKey.ALARM_KEY_ALARM,"0");
+                                        getActivity().startActivity(intent);
+
+                                    }
+                                }
+                            }
+
+
+
+
+                            //生病情况
+                            if(Float.valueOf(mTemperature.toString())>35.9&&Float.valueOf(mTemperature.toString())<37.5){
+                                user_top_textview.setTextColor(getResources().getColor(R.color.them_bg));
+                                user_bottom_textview.setText(getString(R.string.home_bottom));
+                                user_bottom_textview.setTextColor(getResources().getColor(R.color.them_bg));
+                                user_center_unit.setTextColor(getResources().getColor(R.color.them_bg));
+                                value_info_textview.setTextColor(getResources().getColor(R.color.them_bg));
+                                mCircularBarPager.getCircularBar().setClockwiseOutlineArcColor(getResources().getColor(R.color.them_bg));
+                                mCircularBarPager.getCircularBar().setCounterClockwiseArcColor(getResources().getColor(R.color.them_bg));
+                                mCircularBarPager.getCircularBar().setClockwiseReachedArcColor(getResources().getColor(R.color.them_bg));
+
+
+
+                            }
+                            if(Float.valueOf(mTemperature.toString())<=35.9){
+                                user_top_textview.setTextColor(getResources().getColor(R.color.them_text));
+                                user_bottom_textview.setText(getString(R.string.home_state_low));
+                                user_bottom_textview.setTextColor(getResources().getColor(R.color.them_text));
+                                user_center_unit.setTextColor(getResources().getColor(R.color.them_text));
+                                value_info_textview.setTextColor(getResources().getColor(R.color.them_text));
+                                mCircularBarPager.getCircularBar().setClockwiseOutlineArcColor(getResources().getColor(R.color.them_text));
+                                mCircularBarPager.getCircularBar().setCounterClockwiseArcColor(getResources().getColor(R.color.them_text));
+                                mCircularBarPager.getCircularBar().setClockwiseReachedArcColor(getResources().getColor(R.color.them_text));
+                            }
+                            if(Float.valueOf(mTemperature.toString())>37.5){
+                                user_top_textview.setTextColor(getResources().getColor(R.color.red_light));
+                                user_bottom_textview.setText(getString(R.string.home_state_high));
+                                user_bottom_textview.setTextColor(getResources().getColor(R.color.red_light));
+                                value_info_textview.setTextColor(getResources().getColor(R.color.red_light));
+                                user_center_unit.setTextColor(getResources().getColor(R.color.red_light));
+                                mCircularBarPager.getCircularBar().setCounterClockwiseOutlineArcColor(getResources().getColor(R.color.red_light));
+                                mCircularBarPager.getCircularBar().setClockwiseOutlineArcColor(getResources().getColor(R.color.red_light));
+                                mCircularBarPager.getCircularBar().setCounterClockwiseArcColor(getResources().getColor(R.color.red_light));
+                                mCircularBarPager.getCircularBar().setClockwiseReachedArcColor(getResources().getColor(R.color.red_light));
+
+                            }
+//                            35.9℃～37.5℃//正常体温
+
+                            //显示温度
+                            if(mCircularBarPager!=null){
+
+
+
+                                mCircularBarPager.getCircularBar().animateProgress(startInt, endInt*2, 900);
+                            }
+                            startInt=endInt*2;
+
+                        }
+
+
+
+                    }
+                });
+                break;
+        }
+    }
+
+    @Override
+    public void isDistantDisconnect() {
+        getActivity(). runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(Setting.getInstance(getActivity()).IsLose()) {//防丢功能已经开启
+                    if (isAway) {//防丢功能没有处理
+                        isAway = false;
+                        //计算30分钟之后闹钟继续闹
+                        AlarmTime = new TimeAway(1800000, 1000);// 构造CountDownTimer对象
+                        AlarmTime.start();
+                        Intent intent = new Intent(getActivity(), ShowAlarm.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra(UtilKey.ALARM_KEY_ALARM, "1");
+                        getActivity().startActivity(intent);
+                    }
+                }
+            }
+        });
+
+    }
+
+
+    /* 定义一个倒计时的内部类   计算多久没有应答*/
+    class TimeAway extends CountDownTimer {
+        public TimeAway(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);// 参数依次为总时长,和计时的时间间隔
+        }
+
+        @Override
+        public void onFinish() {// 计时完毕时触发
+            if(isAway){
+
+            }else {
+                isAway=true;
+            }
+
+
+            if(isAlarm){
+
+            }else {
+                isAlarm=true;
+            }
+
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {// 计时过程显示
+
+        }
+    }
+
+
+
 }

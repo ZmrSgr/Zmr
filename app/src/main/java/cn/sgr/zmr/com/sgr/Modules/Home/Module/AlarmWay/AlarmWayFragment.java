@@ -120,11 +120,10 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
                     /*
                      * 震动的方式
                      */
-                    // vibrator.vibrate(2000);//振动两秒
+                     vibrator.vibrate(2000);//振动两秒
 
                     // 下边是可以使震动有规律的震动   -1：表示不重复 0：循环的震动
-//                    long[] pattern = { 200, 2000, 2000, 200, 200, 200 };
-//                    vibrator.vibrate(1000);
+
 
 
                 }
@@ -183,28 +182,29 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
             mAdapter.map.put(position, true);
 			/*刷新数据*/
             mAdapter.notifyDataSetChanged();
-            Setting.getInstance(getActivity()).setVoicePosition(position-1);
+            Setting.getInstance(getActivity()).setVoicePosition(position);
 
+            StopVice();
 			/*判断位置不为0则播放的条目为position-1*/
-            if (position != 0) {
+//            if (position != 0) {
                 try {
 
                     RingtoneManager rm = new RingtoneManager(getActivity());
                     rm.setType(RingtoneManager.TYPE_ALARM);
                     rm.getCursor();
-                    rm.getRingtone(position - 1).play();
+                    rm.getRingtone(position ).play();
 
 
-                    rTone=rm.getRingtone(position - 1);
+                    rTone=rm.getRingtone(position);
                     rTone.play();
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
+//            }
 
 
-			/*position为0是跟随系统，先得到系统所使用的铃声，然后播放*/
+	/*		*//*position为0是跟随系统，先得到系统所使用的铃声，然后播放*//*
             if (position == 0) {
 
                 Uri uri = RingtoneManager.getActualDefaultRingtoneUri(
@@ -214,7 +214,7 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
 
                 rTone=RingtoneManager.getRingtone( getActivity(), uri);
                 rTone.play();
-            }
+            }*/
 
         }
 
