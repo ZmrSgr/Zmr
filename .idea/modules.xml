@@ -2,15 +2,20 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Banner/Banner.iml" filepath="$PROJECT_DIR$/Banner/Banner.iml" />
       <module fileurl="file://$PROJECT_DIR$/MPChartLib/MPChartLib.iml" filepath="$PROJECT_DIR$/MPChartLib/MPChartLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/MakeDreamer.iml" filepath="$PROJECT_DIR$/MakeDreamer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/addtocart/addtocart.iml" filepath="$PROJECT_DIR$/addtocart/addtocart.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/greendaolib/greendaolib.iml" filepath="$PROJECT_DIR$/greendaolib/greendaolib.iml" />
       <module fileurl="file://$PROJECT_DIR$/jellytogglebutton/jellytogglebutton.iml" filepath="$PROJECT_DIR$/jellytogglebutton/jellytogglebutton.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/librarys/library.iml" filepath="$PROJECT_DIR$/librarys/library.iml" />
       <module fileurl="file://$PROJECT_DIR$/librarys/librarys.iml" filepath="$PROJECT_DIR$/librarys/librarys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libzxing/libzxing.iml" filepath="$PROJECT_DIR$/libzxing/libzxing.iml" />
       <module fileurl="file://$PROJECT_DIR$/magicindicator/magicindicator.iml" filepath="$PROJECT_DIR$/magicindicator/magicindicator.iml" />
       <module fileurl="file://$PROJECT_DIR$/pickerview/pickerview.iml" filepath="$PROJECT_DIR$/pickerview/pickerview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ripple/ripple.iml" filepath="$PROJECT_DIR$/ripple/ripple.iml" />
       <module fileurl="file://$PROJECT_DIR$/sublimepickerlibrary/sublimepickerlibrary.iml" filepath="$PROJECT_DIR$/sublimepickerlibrary/sublimepickerlibrary.iml" />
     </modules>
   </component>

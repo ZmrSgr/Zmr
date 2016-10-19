@@ -35,7 +35,7 @@ public class StorePresenter implements StoreContract.Presenter {
 
     @Override
     public void getStoreList(String sign, String lat, String lng) {
-        nearByModel.getStoreList(context,sign,lat,lng,1, new HttpRequestCallback<Result<Drug>>() {
+        nearByModel.getStoreList(context,lat,lng,1, new HttpRequestCallback<Result<Drug>>() {
             @Override
             public void onStart() {
 
@@ -60,7 +60,7 @@ public class StorePresenter implements StoreContract.Presenter {
 
     @Override
     public void getStoreMoreList(String sign, String lat, String lng) {
-        nearByModel.getStoreList(context,sign,lat,lng,page++, new HttpRequestCallback<Result<Drug>>() {
+        nearByModel.getStoreList(context,lat,lng,page++, new HttpRequestCallback<Result<Drug>>() {
             @Override
             public void onStart() {
 

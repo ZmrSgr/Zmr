@@ -1,5 +1,6 @@
 package cn.sgr.zmr.com.sgr.Modules.Home.Location;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,10 +33,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseActivity;
 import cn.sgr.zmr.com.sgr.Base.MyApplication;
+import cn.sgr.zmr.com.sgr.Modules.Health.Search.DetailTieActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Location.NearByDrug.DrugActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Location.NearByStore.StoreActivity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.LocationService;
+import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 public class LocationActivity extends BaseActivity {
@@ -73,6 +76,8 @@ public class LocationActivity extends BaseActivity {
     LocationClientOption option;
     private LocationService locService;
 
+    private String Mylat,Mylng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,8 +106,6 @@ public class LocationActivity extends BaseActivity {
     }
    //获取位置并且显示
     private void getLocation() {
-
-
         //定义Maker坐标点
         LatLng point = new LatLng(22.255253, 113.567137);
 //构建Marker图标
@@ -172,6 +175,10 @@ public class LocationActivity extends BaseActivity {
             // TODO Auto-generated method stub
 
             if (location != null && (location.getLocType() == 161 || location.getLocType() == 66)) {
+
+                Mylat=String.valueOf(location.getLatitude());
+                Mylng=String.valueOf(location.getLongitude());
+
 
                 locData_curry = new MyLocationData.Builder()
                         .accuracy(location.getRadius())
@@ -250,8 +257,14 @@ public class LocationActivity extends BaseActivity {
 
                 break;
 
-            case R.id.nearby_medice:
-                Utils.toNextActivity(this, DrugActivity.class);
+            case R.id.nearby_medice://跳转到附近医疗
+                Intent intent = new Intent();
+                intent.setClass(this, DrugActivity.class);
+                if(Mylat!=null){
+                    intent.putExtra(UtilKey.DRUG_LAT, Mylat);
+                    intent.putExtra(UtilKey.DRUG_LNG, Mylng);
+                }
+                startActivity(intent);
                 break;
 
             case R.id.nearby_store:

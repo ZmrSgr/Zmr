@@ -31,12 +31,12 @@ public class DrugPresenter implements DrugContract.Presenter {
 
     @Override
     public void start() {
-
+//        getDrugList
     }
 
     @Override
-    public void getDrugList(String sign, String lat, String lng) {
-        nearByModel.getDrugList(context,sign,lat,lng,1, new HttpRequestCallback<Result<Drug>>() {
+    public void getDrugList(String lat, String lng) {
+        nearByModel.getDrugList(context,lat,lng,1, new HttpRequestCallback<Result<Drug>>() {
             @Override
             public void onStart() {
 
@@ -49,6 +49,7 @@ public class DrugPresenter implements DrugContract.Presenter {
 
             @Override
             public void onResponse(Result<Drug> drugResult) {
+                System.out.println("Result<Drug>"+drugResult);
 
             }
 
@@ -61,8 +62,8 @@ public class DrugPresenter implements DrugContract.Presenter {
     }
 
     @Override
-    public void getMoreDrugList(String sign, String lat, String lng) {
-        nearByModel.getDrugList(context,sign,lat,lng,page++, new HttpRequestCallback<Result<Drug>>() {
+    public void getMoreDrugList( String lat, String lng) {
+        nearByModel.getDrugList(context,lat,lng,page++, new HttpRequestCallback<Result<Drug>>() {
             @Override
             public void onStart() {
 

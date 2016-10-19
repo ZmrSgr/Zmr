@@ -17,11 +17,18 @@ public class DrugContract {
         void cancelProgressDialog();//隐藏进度条
 
         boolean isActive();//目的是为了解决内存泄漏
+
+        void showDrugList();//更新药物列表
+
+        void ShowMoreList();//显示更多的药物列表
     }
 
     interface Presenter extends BasePresenter {
-        void getDrugList( String sign, String lat, String lng);
-        void getMoreDrugList( String sign, String lat, String lng);
+        void getDrugList(  String lat, String lng);
+        void getMoreDrugList(  String lat, String lng);
+
+        @Override
+        void start();//开始加载数据。
 
     }
 }

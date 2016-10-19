@@ -12,10 +12,10 @@ import cn.sgr.zmr.com.sgr.Utils.util.Constant;
  */
 public class NearByModel extends BaseModel implements NearByInterfaces{
     @Override
-    public void getStoreList(Context context, String sign, String lat, String lng, int pageIndex, HttpRequestCallback callback) {
+    public void getStoreList(Context context,String lat, String lng, int pageIndex, HttpRequestCallback callback) {
         RequestParams params = new RequestParams();
         params.put("os" ,"1");
-        params.put("sign" ,sign);
+        params.put("sign" ,"9781ce3198fd5c2ecd367d7583659697");
         params.put("lat" ,lat);
         params.put("lng" ,lng);
         params.put("pageIndex" ,String.valueOf(pageIndex));
@@ -24,10 +24,10 @@ public class NearByModel extends BaseModel implements NearByInterfaces{
     }
 
     @Override
-    public void getDrugList(Context context, String sign, String lat, String lng, int pageIndex, HttpRequestCallback callback) {
+    public void getDrugList(Context context,  String lat, String lng, int pageIndex, HttpRequestCallback callback) {
         RequestParams params = new RequestParams();
         params.put("os" ,"1");
-        params.put("sign" ,sign);
+        params.put("sign" ,"9781ce3198fd5c2ecd367d7583659697");
         params.put("lat" ,lat);
         params.put("lng" ,lng);
         params.put("pageIndex" ,String.valueOf(pageIndex));

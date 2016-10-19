@@ -24,8 +24,6 @@ public class Register_Presenter implements Register_Contract.Presenter {
         this.registerView = registerView;
         registerView.setPresenter(this);//互相拥有对象
     }
-
-
     @Override
     public void saveUser(User user) {
 

@@ -20,4 +20,10 @@ public class UtilKey {
 
     //跳转url tie
     public static String ALARM_KEY_ALARM = "activity_alarm";
+
+    //跳转url lat
+    public static String DRUG_LAT = "grug_lat";
+
+    //跳转url lng
+    public static String DRUG_LNG = "grug_lng";
 }

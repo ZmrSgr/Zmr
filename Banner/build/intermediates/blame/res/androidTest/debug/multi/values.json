@@ -1,5 +1,29 @@
 [
     {
+        "outputFile": "F:\\WorkStation\\MakeDreamer\\Banner\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 2049,
+                    "endColumn": 47,
+                    "endOffset": 2092
+                },
+                "from": {
+                    "file": "F:\\WorkStation\\MakeDreamer\\Banner\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 2049,
+                        "endColumn": 47,
+                        "endOffset": 2092
+                    }
+                }
+            }
+        ]
+    },
+    {
         "outputFile": "F:\\WorkStation\\MakeDreamer\\Banner\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
         "map": [
             {
