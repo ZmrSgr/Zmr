@@ -40,7 +40,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class Utils {
 
     private static Intent intent;
-     static long lastClickTime;
+    static long lastClickTime;
 
     /**
      * 截取日期
@@ -62,7 +62,7 @@ public class Utils {
     /**
      * 手机号验证
      *
-     * @param  str
+     * @param str
      * @return 验证通过返回true
      */
     public static boolean isMobile(String str) {
@@ -78,17 +78,18 @@ public class Utils {
     /**
      * Intent跳转
      *
-     * @param  packageContext 当前activity，cls 跳转的activity
+     * @param packageContext 当前activity，cls 跳转的activity
      * @return String  时间
      */
     public static void toNextActivity(Activity packageContext, Class<?> cls) {
         intent = new Intent(packageContext, cls);
         packageContext.startActivity(intent);
     }
+
     /**
      * 时间格式化
      *
-     * @param  date 日期
+     * @param date 日期
      * @return String  时间
      */
 
@@ -100,7 +101,7 @@ public class Utils {
     /**
      * 时间格式化
      *
-     * @param  date 日期
+     * @param date 日期
      * @return String  时间
      */
 
@@ -116,8 +117,8 @@ public class Utils {
      * @param
      * @return S
      */
-    public static void addFragmentToActivity (@NonNull FragmentManager fragmentManager,
-                                              @NonNull Fragment fragment, int frameId) {
+    public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
+                                             @NonNull Fragment fragment, int frameId) {
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -132,8 +133,8 @@ public class Utils {
      * @param
      * @return S
      */
-    public static void addFragmentToActivityAddContent (@NonNull FragmentManager fragmentManager,
-                                              @NonNull Fragment fragment, int frameId,String content) {
+    public static void addFragmentToActivityAddContent(@NonNull FragmentManager fragmentManager,
+                                                       @NonNull Fragment fragment, int frameId, String content) {
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
         Bundle bundle = new Bundle();
@@ -146,7 +147,6 @@ public class Utils {
     }
 
 
-
     //防止被快速多次点击
     public static boolean isFastDoubleClick() {
         long time = System.currentTimeMillis();
@@ -154,6 +154,7 @@ public class Utils {
         lastClickTime = time;
         return timeD <= 500;
     }
+
     public static String parseIatResult(String json) {
         StringBuffer ret = new StringBuffer();
         try {
@@ -180,10 +181,10 @@ public class Utils {
     }
 
 
-    public static List<SearchRecent> orderDes (List<SearchRecent>  data){
+    public static List<SearchRecent> orderDes(List<SearchRecent> data) {
         List<SearchRecent> change = new ArrayList<>();
-        if(data!=null&&data.size()>0){
-            for(int i=data.size()-1;i>=0;i--){
+        if (data != null && data.size() > 0) {
+            for (int i = data.size() - 1; i >= 0; i--) {
                 change.add(data.get(i));
             }
 
@@ -192,14 +193,14 @@ public class Utils {
         return change;
     }
 
-public static boolean isNumber(String str){//判断是不是数字
-    final String number = "0123456789.";
-    for (int i = 0; i < str.length()-1; i++) {
-        if (number.indexOf(str.charAt(i)) == -1) {
-            return false;
+    public static boolean isNumber(String str) {//判断是不是数字
+        final String number = "0123456789.";
+        for (int i = 0; i < str.length() - 1; i++) {
+            if (number.indexOf(str.charAt(i)) == -1) {
+                return false;
+            }
         }
+        return true;
     }
-    return true;
-}
 
 }

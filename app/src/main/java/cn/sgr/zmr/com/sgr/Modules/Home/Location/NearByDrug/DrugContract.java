@@ -2,8 +2,11 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Location.NearByDrug;
 
 import android.app.FragmentManager;
 
+import java.util.List;
+
 import cn.sgr.zmr.com.sgr.Base.BasePresenter;
 import cn.sgr.zmr.com.sgr.Base.BaseView;
+import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.Drug;
 
 /**
  * Created by 沈国荣 on 2016/9/7 0007.
@@ -18,7 +21,7 @@ public class DrugContract {
 
         boolean isActive();//目的是为了解决内存泄漏
 
-        void showDrugList();//更新药物列表
+        void showDrugList(List<Drug> drugStoreList);//更新药物列表
 
         void ShowMoreList();//显示更多的药物列表
     }

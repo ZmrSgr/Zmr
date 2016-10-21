@@ -6,6 +6,7 @@ import cn.sgr.zmr.com.sgr.Utils.http.HttpRequestCallback;
 import cn.sgr.zmr.com.sgr.Utils.http.HttpRequestUtil;
 import cn.sgr.zmr.com.sgr.Utils.http.RequestParams;
 import cn.sgr.zmr.com.sgr.Utils.util.Constant;
+import cn.sgr.zmr.com.sgr.Utils.util.EncryptUtil;
 
 
 /**
@@ -43,6 +44,19 @@ public abstract class BaseModel
 //        HttpRequestUtil.getInstance().postRequest(context, getAbsUrl(url), params == null ? null : params.toParams(), callback);
         HttpRequestUtil.getInstance().postRequest(context,url, params == null ? null : params.toParams(), callback);
 
+    }
+
+    /**
+     * 带参数加密的post请求
+     * @param context
+     * @param url
+     * @param params
+     * @param callback
+     */
+    protected void sendPostRequestWithEncrypt(Context context, String url, RequestParams params, HttpRequestCallback callback)
+    {
+        params.put("sign", EncryptUtil.getEncryptParam(params));
+        HttpRequestUtil.getInstance().postRequest(context,url, params == null ? null : params.toParams(), callback);
     }
 
 

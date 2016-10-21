@@ -13,11 +13,14 @@ import android.widget.Toast;
 
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.DrugAdapter;
+import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.Drug;
 import cn.sgr.zmr.com.sgr.Modules.My.More.Contract.ContractActivity;
 import cn.sgr.zmr.com.sgr.Modules.My.More.Disclaimer.DisclaimerActivity;
 import cn.sgr.zmr.com.sgr.Modules.My.More.Feedback.FeedbackActivity;
@@ -63,6 +66,7 @@ public class DrugFragment extends BaseFragment implements DrugContract.View{
         View view = inflater.inflate(R.layout.drug_fragment, container, false);
         ButterKnife.bind(this, view);
         initView();
+        mPresenter.getDrugList(getActivity().getIntent().getStringExtra(UtilKey.DRUG_LAT), getActivity().getIntent().getStringExtra(UtilKey.DRUG_LNG));
         return view;
     }
     //初始化控件
@@ -97,9 +101,10 @@ public class DrugFragment extends BaseFragment implements DrugContract.View{
     }
 
     @Override
-    public void showDrugList() {
-
+    public void showDrugList(List<Drug> drugStoreList) {
+        adapter.addDatas(drugStoreList);
     }
+
 
     @Override
     public void ShowMoreList() {
