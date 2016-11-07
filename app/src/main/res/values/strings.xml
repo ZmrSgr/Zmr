@@ -88,6 +88,8 @@
     <string name="baby_sex">性别</string>
     <string name="baby_high">身高</string>
     <string name="baby_weight">体重</string>
+    <string name="bound">绑定</string>
+    <string name="bounded">已绑定</string>
 
 
     <string name="baby_fever_tem">体温</string>

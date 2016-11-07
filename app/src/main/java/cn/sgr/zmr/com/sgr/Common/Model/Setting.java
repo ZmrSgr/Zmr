@@ -15,7 +15,7 @@ public class Setting {
     public SharedPreferences.Editor editor;
 
 
-    private static final String KEY_SETTING = "key_setting";//是否防丢失，false，表示不防丢失
+    private static final String KEY_SETTING = "key_setting";//
     private static final String KEY_IS_LOSE = "is_lose";//是否防丢失，0，表示不防丢失
     private static final String KEY_ALARM = "alarm";//0表示不报警，1表示报警
     private static final String KEY_ALARM_IS_VOICE = "alarm_voice";//0表示不用语音，1表示语音

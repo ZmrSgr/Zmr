@@ -10,13 +10,6 @@
         android:layout_height="50dp"
          >
 
-        <ImageView
-            android:id="@+id/top_view_back"
-            android:layout_width="52dp"
-            android:layout_height="48dp"
-            android:background="@drawable/green_select"
-            android:padding="10dp"
-            android:src="@drawable/back" />
         <TextView
             android:id="@+id/top_view_left_text"
             android:background="@drawable/green_select"
@@ -79,6 +72,14 @@
             android:layout_height="0.4dp"
             android:layout_gravity="bottom"
             android:background="@color/them_text" />
+
+        <ImageView
+            android:id="@+id/top_view_back"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            android:background="@drawable/green_select"
+            android:padding="10dp"
+            android:src="@drawable/back" />
     </FrameLayout>
 
 </LinearLayout>
