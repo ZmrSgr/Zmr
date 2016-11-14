@@ -36,9 +36,7 @@ public class HomeTestContract {
         void setBoundedBabyData(Baby baby);
 
         // TODO 参数待改，可能有变化
-        void showChooseBabyDialog(List<Baby> babyList, MsgDialog.Builder.ContentViewIniter initer, String positiveBtnText, String negativeBtnText,
-                                  DialogInterface.OnClickListener positiveBtnListener,
-                                  DialogInterface.OnClickListener negativeBtnListener);
+        void showChooseBabyDialog(List<Baby> babyList, String positiveBtnText, String negativeBtnText);
 
         // TODO
         /**
@@ -93,9 +91,20 @@ public class HomeTestContract {
         void initDevice(Activity activity);
 
         /**
+         * 设置要绑定的宝宝
+         * @param boundedBaby
+         */
+        void setBoundedBaby(Baby boundedBaby);
+
+        /**
          * 绑定宝宝
          */
         void boundBaby();//绑定宝宝
+
+        /**
+         *
+         */
+        void boundBabyandDevice(String DeviceName);
 
         /**
          * 新建宝宝
@@ -110,5 +119,7 @@ public class HomeTestContract {
         void sendCmd(Activity activity, String deviceAddress);// 发送指令
 
         void closeDevice();
+
+
     }
 }

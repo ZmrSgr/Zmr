@@ -11,7 +11,10 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
 
+import com.bean.entity.Baby;
 import com.example.administrator.scannerlib.DeviceSanListActivity;
 
 import java.lang.annotation.Inherited;
@@ -25,6 +28,7 @@ import cn.sgr.zmr.com.sgr.Utils.BluetoothUtil.ICmdModel;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
+import cn.sgr.zmr.com.sgr.View.MsgDialog;
 
 /**
  * Created by zuky on 2016/9/7 0007.
@@ -37,6 +41,7 @@ public class HomeTestPresenter implements HomeTestContract.Presenter, BleDeviceH
     public static boolean isConnState = true;//是否连接
     public static boolean isAlarm = true;//true表示可以弹出闹铃，
     public static boolean isAway = true;//true表示可以弹出闹铃，
+    public static boolean isBoundedBaby = false;// 是否已经绑定了宝宝
 
     TimeAway AwayTime;//30分钟之后 才允许防丢失闹钟才能再次弹出
     TimeAway AlarmTime;//30分钟之后 才允许温度闹钟才能再次弹出
@@ -47,6 +52,8 @@ public class HomeTestPresenter implements HomeTestContract.Presenter, BleDeviceH
     private final HomeTestContract.View registerView;
     Context context;
     private DaoCacheManage daoManage;
+
+    private Baby boundedBaby;
 
     public HomeTestPresenter(Context contexts, @NonNull HomeTestContract.View registerView) {
         this.context = contexts;
@@ -102,15 +109,14 @@ public class HomeTestPresenter implements HomeTestContract.Presenter, BleDeviceH
 
     @Override
     public void linkDevice(final Activity activity) {
+
         if (isBLEEnabled(activity)) {
-            if (isConnState) {// 未连接
+            if (isConnState) {
                 if (daoManage.getBabys().size() == 0) {
                     registerView.showMsgDialog("提示", "您未新建宝宝信息，是否新建", "是", "否", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
-                            Intent i = new Intent(activity, AddBaby_Activity.class);
-                            activity.startActivity(i);
                         }
                     }, new DialogInterface.OnClickListener() {
                         @Override
@@ -123,20 +129,9 @@ public class HomeTestPresenter implements HomeTestContract.Presenter, BleDeviceH
                     activity.startActivityForResult(newIntent, REQUEST_SELECT_DEVICE);
 
                 } else {
-                    registerView.showMsgDialog("提示", "请绑定宝宝", "绑定", "取消",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            });
+                    registerView.showChooseBabyDialog(daoManage.getBabys(), "绑定", "取消");
                 }
-            } else {// 已连接
+            } else {
                 Intent newIntent = new Intent(activity, DeviceSanListActivity.class);
                 activity.startActivityForResult(newIntent, REQUEST_SELECT_DEVICE);
             }
@@ -153,20 +148,42 @@ public class HomeTestPresenter implements HomeTestContract.Presenter, BleDeviceH
     }
 
     @Override
+    public void setBoundedBaby(Baby boundedBaby) {
+        this.boundedBaby = boundedBaby;
+//        registerView.setBoundedBabyData(boundedBaby);
+    }
+
+    @Override
     public void boundBaby() {
+        if (boundedBaby != null){
+            daoManage.setCurryBaby(boundedBaby, "0");// 暂时设置为-1作为绑定了宝宝的标识，用于启动界面时设置页面数据
+            registerView.setBoundedBabyData(boundedBaby);
+        } else {
+
+        }
+    }
+
+    @Override
+    public void boundBabyandDevice(String deviceName) {
+        if(!TextUtils.isEmpty(deviceName) && deviceName.equals("0")){
+            daoManage.setCurryBaby(boundedBaby, deviceName);
+        } else {
+            Log.e("boundBabyandDevice", "boundBabyandDevice Error: deviceName 为空或为0" );
+        }
 
     }
 
     @Override
     public void createBaby() {
-
+//        Intent i = new Intent(activity, AddBaby_Activity.class);
+//        activity.startActivity(i);
     }
 
     @Override
     public void sendCmd(Activity activity, String deviceAddress) {
 
         if (isConnState) {
-//                        String mac = showMacTv.getText().toString().trim();
+//              String mac = showMacTv.getText().toString().trim();
             if (bleRe.mBluetoothDeviceAddress != null) {
                 bleRe.close();
             }
@@ -270,8 +287,6 @@ public class HomeTestPresenter implements HomeTestContract.Presenter, BleDeviceH
 
         switch (id) {
             case ICmdModel.CmRxBatteryInfo.ID:
-
-
                 mBatteryInfo = new ICmdModel.CmRxBatteryInfo();
                 mBatteryInfo.fromCmdBytes(characteristic);
                 registerView.setBatteryInfoDisplay(((HomeTestFragment) registerView).getActivity().getString(R.string.home_battery), mBatteryInfo.toString(), 0);

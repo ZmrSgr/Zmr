@@ -12,11 +12,16 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bean.entity.Baby;
@@ -252,17 +257,52 @@ public class HomeTestFragment extends BaseFragment implements HomeTestContract.V
     }
 
     @Override
-    public void showChooseBabyDialog(List<Baby> babyList, MsgDialog.Builder.ContentViewIniter initer, String positiveBtnText, String negativeBtnText,
-                                     DialogInterface.OnClickListener positiveBtnListener,
-                                     DialogInterface.OnClickListener negativeBtnListener) {
+    public void showChooseBabyDialog(final List<Baby> babyList, String positiveBtnText, String negativeBtnText) {
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_content_boundbaby, null);
         // 显示可供选择的宝宝列表
         MsgDialog.Builder builder = new MsgDialog.Builder(getActivity());
-        builder.setTitle("绑定宝宝")
-                .setPositiveButton(positiveBtnText, positiveBtnListener)
-                .setNegativeButton(negativeBtnText, negativeBtnListener)
-                .setContentView(view, initer)
+        builder.setTitle("请先绑定宝宝")
+                .setPositiveButton(positiveBtnText, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mPresenter.boundBaby();
+                        mPresenter.linkDevice(getActivity());
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(negativeBtnText, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setContentView(view, new MsgDialog.Builder.ContentViewIniter() {
+                    @Override
+                    public void initContentView(View contentView) {
+                        RadioGroup rgChooseBaby = (RadioGroup) contentView.findViewById(R.id.dialog_content_bound_baby_rg);
+
+                        if (babyList != null){
+                            for(int i = 0; i < babyList.size(); i++){
+                                RadioButton rbtn = new RadioButton(getActivity());
+                                rbtn.setText(babyList.get(i).getName());
+                                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                                lp.setMargins(0, 20, 0, 0);
+                                rbtn.setLayoutParams(lp);
+                                final int boundedPosition = i;
+                                rbtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                    @Override
+                                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                        if (isChecked){
+                                            mPresenter.setBoundedBaby(babyList.get(boundedPosition));
+                                        }
+                                    }
+                                });
+                                rgChooseBaby.addView(rbtn);
+                            }
+                        }
+                    }
+                })
                 .create()
                 .show();
     }
@@ -347,21 +387,21 @@ public class HomeTestFragment extends BaseFragment implements HomeTestContract.V
 
     @Override
     public void setHeight(int height) {
-        if(height > 0){
+        if (height > 0) {
             tv_hight.setText(String.valueOf(height));
         }
     }
 
     @Override
     public void setWeight(int weight) {
-        if(weight > 0){
+        if (weight > 0) {
             tv_weight.setText(String.valueOf(weight));
         }
     }
 
     @Override
     public void setBirthday(Date date) {
-        if(date != null){
+        if (date != null) {
             SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
             tv_date.setText(formater.format(date));
         }
@@ -447,6 +487,8 @@ public class HomeTestFragment extends BaseFragment implements HomeTestContract.V
                     user_bottom_textview.setText(deviceRssi);
 
                     mPresenter.sendCmd(getActivity(), deviceAddress);
+
+                    mPresenter.boundBabyandDevice(deviceName);
 //                    if (isConnState) {
 ////                        String mac = showMacTv.getText().toString().trim();
 //                        if (bleRe.mBluetoothDeviceAddress != null) {
