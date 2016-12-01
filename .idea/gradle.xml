@@ -9,19 +9,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Banner" />
-            <option value="$PROJECT_DIR$/MPChartLib" />
-            <option value="$PROJECT_DIR$/addtocart" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/greendaolib" />
-            <option value="$PROJECT_DIR$/jellytogglebutton" />
-            <option value="$PROJECT_DIR$/library" />
-            <option value="$PROJECT_DIR$/librarys" />
             <option value="$PROJECT_DIR$/libzxing" />
-            <option value="$PROJECT_DIR$/magicindicator" />
-            <option value="$PROJECT_DIR$/pickerview" />
-            <option value="$PROJECT_DIR$/ripple" />
-            <option value="$PROJECT_DIR$/sublimepickerlibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
