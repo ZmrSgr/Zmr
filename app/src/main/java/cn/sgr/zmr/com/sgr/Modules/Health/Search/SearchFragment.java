@@ -158,6 +158,7 @@ public class SearchFragment<T> extends BaseFragment implements SearchContract.Vi
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         if (mSwipeRefreshLayout.isRefreshing()) {
+
                             return true;
                         } else {
                             return false;

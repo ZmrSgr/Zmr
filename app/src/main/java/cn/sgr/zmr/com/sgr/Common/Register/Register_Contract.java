@@ -16,11 +16,11 @@ public class Register_Contract {
 
         void showFailureLogin();//登录失败
 
-        void showProgressDialog(FragmentManager manager);//显示进度条
+        void showProgressDialog();//显示进度条
 
         void cancelProgressDialog();//隐藏进度条
 
-        void showSuccessLogin();//登录成功
+        void showSuccessLogin(User user);//登录成功
 
         boolean isActive();//目的是为了解决内存泄漏
     }
@@ -29,7 +29,7 @@ public class Register_Contract {
 
         void saveUser(User user);//保存或者更新用户
 
-        void doRegister();//注册操作
+        void doRegister(User user);//注册操作
 
 
     }

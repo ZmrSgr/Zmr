@@ -11,11 +11,13 @@ public class Constant {
 
 
 
-    public static final String APIURL="http://api.imbiker.cn/";//api接口地址的前缀
+    public static final String APIURL="http://123.56.29.164/";//api接口地址的前缀
 
 
-    public static final String ACTIVITY_LIST="Activity/get";//获取活动列表
-    public static final String ACTIVITY_ADD="Activity";//添加活动
+    public static final String LOGIN=APIURL+"api/user/signin";//登录
+    public static final String REGISTER=APIURL+"api/user/signup";//注册
+    public static final String THIRD_LOGIN=APIURL+"api/user/third-signup";//第三方登录
+
     public static final String ACTIVITY_DELETE="activity/ delete";//删除活动
     public static final String ACTIVITY_EDIT="Activity";//编辑活动
     public static final String ACTIVITY_DETAIL="Activity/get";//活动详情

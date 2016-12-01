@@ -55,6 +55,10 @@ public class Register_Fragment extends BaseFragment implements Register_Contract
     @BindView(R.id.et_verify_code)
     EditText mVerifyCode;
 
+    @BindView(R.id.et_nickname)
+    EditText et_nickname;
+
+
 
 
 
@@ -96,10 +100,15 @@ public class Register_Fragment extends BaseFragment implements Register_Contract
                 String password = mPassword.getText().toString();
                 String password_again = mPasswordAgain.getText().toString();
                 String verify_code = mVerifyCode.getText().toString().trim();
+                String nickName = et_nickname.getText().toString().trim();
                 if ("".equals(mobile)) {
                     Toast.makeText(getActivity(), getString(R.string.please_input_mobile_phone),Toast.LENGTH_SHORT).show();
                     mMobile.requestFocus();
-                } else if (mobile.length() < 11) {
+                } else if("".equals(nickName)){
+                    Toast.makeText(getActivity(), getString(R.string.please_input_nickname),Toast.LENGTH_SHORT).show();
+                    et_nickname.requestFocus();
+                }
+                else if (mobile.length() < 11) {
 
                     Toast.makeText(getActivity(), getString(R.string.wrong_mobile_phone),Toast.LENGTH_SHORT).show();
                     mMobile.requestFocus();
@@ -121,15 +130,12 @@ public class Register_Fragment extends BaseFragment implements Register_Contract
                     Toast.makeText(getActivity(), getString(R.string.two_passwords_differ_hint),Toast.LENGTH_SHORT).show();
                     mPasswordAgain.requestFocus();
                 } else {// 注册成功
-                    Toast.makeText(getActivity(), getString(R.string.complete_signup),Toast.LENGTH_SHORT).show();
-
                     User user=new User();
                     user.setPassword(password);
                     user.setPhone(mobile);
-                    user.setUid("1");
-                    user.setTid("1");
-                    AfterLogin(user);
-                    Utils.toNextActivity(getActivity(),MainActivity.class);
+                    user.setNickname(nickName);
+
+                    mPresenter.doRegister(user);
                 }
                 break;
 
@@ -160,11 +166,7 @@ public class Register_Fragment extends BaseFragment implements Register_Contract
         }
     }
 
-    private void AfterLogin(User user) {
-        if (!UserInfo.getInstance(getActivity()).hasSignIn()) {//保存登录信息
-            new DaoCacheManage(getActivity()).updateUser(user);
-        }
-    }
+
 
 
     /* 定义一个倒计时的内部类 */
@@ -199,8 +201,8 @@ public class Register_Fragment extends BaseFragment implements Register_Contract
 
 
     @Override
-    public void showProgressDialog(FragmentManager manager) {
-        super.showProgressDialog(manager);
+    public void showProgressDialog() {
+        super.showProgressDialog(getFragmentManager());
     }
 
     @Override
@@ -214,7 +216,10 @@ public class Register_Fragment extends BaseFragment implements Register_Contract
     }
 
     @Override
-    public void showSuccessLogin() {
+    public void showSuccessLogin(User user) {
+        UserInfo.getInstance(getActivity()).saveUserInfo(user);
+        Utils.toNextActivity(getActivity(),MainActivity.class);
+        getActivity().finish();
 
     }
 

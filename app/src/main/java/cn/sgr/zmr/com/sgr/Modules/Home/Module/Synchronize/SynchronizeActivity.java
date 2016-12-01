@@ -21,8 +21,7 @@ public class SynchronizeActivity extends BaseActivity {
     @BindView(R.id.auto)
     JellyToggleButton   auto;
 
-    @BindView(R.id.wifi)
-    JellyToggleButton   wifi;
+
 
     @BindView(R.id.top_view_back)
     ImageView top_view_back;
@@ -31,8 +30,7 @@ public class SynchronizeActivity extends BaseActivity {
     @BindView(R.id.top_view_title)
     TextView top_view_title;
 
-    @BindView(R.id.btn_submit)
-    Button btn_submit;
+
 
 
 
@@ -47,20 +45,20 @@ public class SynchronizeActivity extends BaseActivity {
 
     private void intView() {
         top_view_title.setText(getString(R.string.synchronize_yun));
-        wifi.setLeftBackgroundColor(getResources().getColor(R.color.them_bg));
-        wifi.setRightBackgroundColor(getResources().getColor(R.color.them_bg));
+       /* wifi.setLeftBackgroundColor(getResources().getColor(R.color.them_bg));
+        wifi.setRightBackgroundColor(getResources().getColor(R.color.them_bg));*/
         auto.setLeftBackgroundColor(getResources().getColor(R.color.them_bg));
         auto.setRightBackgroundColor(getResources().getColor(R.color.them_bg));
-        wifi.setTextSize(40);
+//        wifi.setTextSize(40);
         auto.setTextSize(40);
         auto.setTextColor(getResources().getColor(R.color.them_bg));
-        wifi.setTextColor(getResources().getColor(R.color.them_bg));
+//        wifi.setTextColor(getResources().getColor(R.color.them_bg));
         auto.setTextMarginLeft(20);
         auto.setTextMarginRight(20);
-        wifi.setTextMarginLeft(20);
-        wifi.setTextMarginRight(20);
+//        wifi.setTextMarginLeft(20);
+//        wifi.setTextMarginRight(20);
 
-        wifi.setChecked(Setting.getInstance(this).IsWifi());
+//        wifi.setChecked(Setting.getInstance(this).IsWifi());
         auto.setChecked(Setting.getInstance(this).IsAuto());
         auto.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
             @Override
@@ -76,7 +74,7 @@ public class SynchronizeActivity extends BaseActivity {
             }
         });
 
-        wifi.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
+     /*   wifi.setOnStateChangeListener(new JellyToggleButton.OnStateChangeListener() {
             @Override
             public void onStateChange(float process, State state, JellyToggleButton jtb) {
                 if (state.equals(State.LEFT)) {
@@ -88,14 +86,14 @@ public class SynchronizeActivity extends BaseActivity {
                 }
 
             }
-        });
+        });*/
     }
-    @OnClick({R.id.top_view_back,R.id.btn_submit})
+    @OnClick({R.id.top_view_back})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_submit:
+      /*      case R.id.btn_submit:
                 Toast.makeText(SynchronizeActivity.this,"提交",Toast.LENGTH_SHORT).show();
-                break;
+                break;*/
             case R.id.top_view_back:
                finish();
                 break;

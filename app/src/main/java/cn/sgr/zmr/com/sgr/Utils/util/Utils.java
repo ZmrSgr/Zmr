@@ -24,6 +24,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -201,6 +204,24 @@ public class Utils {
             }
         }
         return true;
+    }
+    //密码加密 与php加密一致
+    public static String md5(String input) throws NoSuchAlgorithmException {
+        String result = input;
+        if(input != null) {
+            MessageDigest md = MessageDigest.getInstance("MD5"); //or "SHA-1"
+            md.update(input.getBytes());
+            BigInteger hash = new BigInteger(1, md.digest());
+            result = hash.toString(16);
+            while(result.length() < 32) {
+                result = "0" + result;
+            }
+        }
+        return result;
+    }
+    //密码加密 与php加密一致
+    public static String Mymd5(String input) throws NoSuchAlgorithmException {
+        return  md5( md5(input)+"zmrPassword!@#");
     }
 
 }

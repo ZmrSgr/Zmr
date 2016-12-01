@@ -47,7 +47,7 @@ public class MyApplication extends Application {
         TestinAgent.init(this, "019cc0a31ffab5740c685c6cf3a2ae18", null);
 //        友盟分享和登录
         //微信 appid appsecret
-        PlatformConfig.setWeixin("wxafceb940b5fd67a0", "ca3653563244ab1ab4056464446403ab");
+       PlatformConfig.setWeixin("wxafceb940b5fd67a0", "ca3653563244ab1ab4056464446403ab");
         //新浪微博 appkey appsecret
         PlatformConfig.setSinaWeibo("1109305130","12bf679612df94be5a7bc6459fb93f75");
         // QQ和Qzone appid appkey

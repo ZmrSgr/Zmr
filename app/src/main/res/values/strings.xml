@@ -20,6 +20,8 @@
     <string name="set_fever_temp">报警温度</string>
     <string name="set_type">报警方式</string>
     <string name="set_decive">设备</string>
+    <string name="set_myhome">我的家庭</string>
+    <string name="set_unlogin">未登录</string>
     <string name="set_help">使用帮助</string>
     <string name="set_about">关于</string>
     <string name="set_more">更多</string>
@@ -61,7 +63,8 @@
     <string name="please_input_password">密码不能为空</string>
     <string name="wrong_mobile_phone">手机号码输入不正确</string>
     <string name="mobile_phone_or_password_error">手机号或密码错误</string>
-    <string name="please_input_verify_code">验证码不能为空</string>
+    <string name="please_input_verify_code">请输入验证码</string>
+    <string name="please_input_nickname">昵称不能为空</string>
     <string name="please_enter_correct_verify_code_format">请输入正确格式验证码</string>
     <string name="verify_have_send">验证码已发送</string>
     <string name="get_verify_code_again">重新获取验证码</string>

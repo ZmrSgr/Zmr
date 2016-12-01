@@ -18,9 +18,10 @@ public class ExampleUnitTest {
 
     @Test
     public void IsNum() throws Exception {
-        boolean result = Utils.isNumber("-1.0");
+        String result = Utils.md5("123456");
+        System.out.println("result");
         System.out.println("result"+result);
-        assertEquals(true, result);
+
     }
 
     @Test

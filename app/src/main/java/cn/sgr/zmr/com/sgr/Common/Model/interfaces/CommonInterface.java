@@ -14,4 +14,7 @@ public interface CommonInterface {
     void Login(Context context, User user, HttpRequestCallback callback);
 //   注册接口
     void Register(Context context, User user, HttpRequestCallback callback);
+
+    // 第三方登录
+    void Third_Login(Context context, String third_id,String nickname,String avatar, HttpRequestCallback callback);
 }

@@ -20,11 +20,35 @@
             android:orientation="vertical">
 
 
-
             <EditText
 
-                android:textColor="@android:color/holo_red_light"
 
+                android:id="@+id/et_nickname"
+                android:layout_marginTop="10dp"
+
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@null"
+                android:ems="14"
+                android:hint="昵称"
+
+                android:maxLength="15"
+                android:maxLines="1"
+                android:paddingLeft="10dp"
+                android:textColorHint="#B9B9B9"
+                android:textCursorDrawable="@null" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="#B9B9B9" />
+
+
+            <EditText
                 android:layout_marginTop="10dp"
                 android:id="@+id/et_mobile"
                 android:layout_width="fill_parent"

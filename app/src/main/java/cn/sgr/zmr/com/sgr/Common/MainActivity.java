@@ -24,6 +24,7 @@ import cn.sgr.zmr.com.sgr.Modules.Home.HomeTestFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.HomeTestPresenter;
 import cn.sgr.zmr.com.sgr.Modules.Messages.MessageFragment;
 import cn.sgr.zmr.com.sgr.Modules.My.MyFragment;
+import cn.sgr.zmr.com.sgr.Modules.My.MyPresenter;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
@@ -165,6 +166,12 @@ public class MainActivity extends Activity {
                     if (messagesFragment == null) {
 
                         messagesFragment = new MessageFragment();
+
+
+
+
+
+
                         transaction.add(R.id.content, messagesFragment);
                     } else {
 
@@ -181,8 +188,16 @@ public class MainActivity extends Activity {
                 set_text.setTextColor(getResources().getColorStateList(
                         R.color.them_bg));
                 if (myFragment == null) {
-
                     myFragment = new MyFragment();
+                    if (myFragment == null) {
+                        myFragment = myFragment.newInstance();
+                        Utils.addFragmentToActivity(getFragmentManager(),myFragment, R.id.contentFrame);
+                    }
+                    // Create the presenter
+//                    new HomePresenter(this,homeFragment);
+                    new MyPresenter(this, myFragment);
+
+
                     transaction.add(R.id.content, myFragment);
                 } else {
 
