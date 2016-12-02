@@ -26,4 +26,10 @@ public class UtilKey {
 
     //跳转url lng
     public static String DRUG_LNG = "grug_lng";
+
+    //跳转url lat
+    public static String STORE_LAT = "store_lat";
+
+    //跳转url lng
+    public static String STORE_LNG = "store_lng";
 }

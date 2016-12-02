@@ -97,7 +97,7 @@ public class MyChildFragment extends BaseFragment implements MyChildContract.Vie
     //初始化控件
 
         private void initView() {
-            top_view_title.setText(getResources().getString(R.string.my_child));
+            top_view_title.setText("我的家庭");
             top_view_back.setVisibility(View.VISIBLE);
             top_view_left_text.setVisibility(View.GONE);
             top_view_right_text.setVisibility(View.GONE);

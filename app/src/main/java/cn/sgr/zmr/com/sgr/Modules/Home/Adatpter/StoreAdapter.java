@@ -2,29 +2,30 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Adatpter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import java.text.DecimalFormat;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.sgr.zmr.com.sgr.Modules.Health.Adapter.BaseRecyclerAdapter;
-import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Tie;
+import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.StoreResult;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
-import cn.sgr.zmr.com.sgr.Utils.util.GlideCircleTransform;
 
 /**
  * Created by Administrator on 2016/8/12 0012.
  */
-public class StoreAdapter extends BaseRecyclerAdapter<Tie>  {
+public class StoreAdapter extends BaseRecyclerAdapter<StoreResult.HospitalBean> {
 
     private Context context;
     private DaoCacheManage daoManage;
+    private List<StoreResult.HospitalBean> mDatas;
 
     public StoreAdapter(Context context) {
         this.context = context;
@@ -32,7 +33,7 @@ public class StoreAdapter extends BaseRecyclerAdapter<Tie>  {
 
     @Override
     public RecyclerView.ViewHolder onCreate(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_drug, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hospital, null);
 /*//        不知道为什么在xml设置的“android:layout_width="match_parent"”无效了，需要在这里重新设置
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);*/
 //        view.setLayoutParams(lp);
@@ -40,92 +41,58 @@ public class StoreAdapter extends BaseRecyclerAdapter<Tie>  {
     }
 
     @Override
-    public void onBind(RecyclerView.ViewHolder viewHolder, int position,  Tie data) {
+    public void onBind(RecyclerView.ViewHolder viewHolder, int position, StoreResult.HospitalBean data) {
         ViewHolder mHolder = (ViewHolder) viewHolder;
-       /* boolean isZhangJiaWei = newEntity.getContentSourceName().equals("张佳玮的博客");
-        if(hasImage) {
-            mHolder.  mNewsImage.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(newEntity.getImgUrlList().get(0))
-                    .placeholder(R.mipmap.placeholder_biger)
-                    .into(mNewsImage);
-        }*/
-        mHolder. profileImage.setImageResource(R.drawable.ic_launcher);
-        mHolder.  author.setText(data.getAuthor());
-        mHolder. mNwsTitle.setText(data.getTitle());
-//        mHolder. showTime = new DateTime(Long.parseLong(newEntity.getPutdate())).toString("yyyy年MM月dd日");
-        mHolder. mNewsTime.setText(data.getDateline());
-        mHolder. description.setText(data.getContent());
-        mHolder.newsNum.setText(data.getNum()+"个回答");
-        Glide.with(context).load(data.getPhoto()).centerCrop().transform(new GlideCircleTransform(context)).into(mHolder.profileImage);
+        if(data != null){
+            if(!TextUtils.isEmpty(data.getHospitalName())){
+                mHolder.tvHospitalName.setText(data.getHospitalName());
+            }
 
+            if(!TextUtils.isEmpty(data.getAddress())){
+                mHolder.tvAddress.setText(data.getAddress());
+            }
+
+            if(!TextUtils.isEmpty(String.valueOf(data.getDistance()))){
+
+                DecimalFormat df = new DecimalFormat("#.#");
+
+                Double d = data.getDistance();
+
+                mHolder.tvDistance.setText(df.format(d) + "公里");
+            }
+        }
     }
 
-/*
-    public void applyData(List<Baby> msgs) {
-        datas.clear();
-        datas.addAll(msgs);
-        notifyDataSetChanged();
-    }*/
+    public interface OnRecyclerViewListener {
+        void onItemClick(int position, View v);
 
-/*
-
-    public void removeData(int position) {
-        this.daoManage=  new DaoCacheManage(context);
-        daoManage.DeleteBaby(datas.get(position));
-        datas.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position,datas.size());
+        boolean onItemLongClick(int position);
     }
-*/
 
-    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
+    private OnRecyclerViewListener onRecyclerViewListener;
 
+    public void setOnRecyclerViewListener(OnRecyclerViewListener onRecyclerViewListener) {
+        this.onRecyclerViewListener = onRecyclerViewListener;
+    }
 
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.tv_hospitalname_item_store)
+        TextView tvHospitalName;
+        @BindView(R.id.tv_address_item_store)
+        TextView tvAddress;
+        @BindView(R.id.tv_distance_item_store)
+        TextView tvDistance;
 
-        @BindView(R.id.newsImage)
-        ImageView mNewsImage;
-
-        @BindView(R.id.newsTitle)
-        TextView mNwsTitle;
-
-        @BindView(R.id.newsTime) TextView mNewsTime;
-
-        @BindView(R.id.description) TextView description;
-
-        @BindView(R.id.profile_image)
-        ImageView profileImage;
-
-        @BindView(R.id.author)
-        TextView author;
-
-        @BindView(R.id.newsNum)
-        TextView newsNum;
-
-
-//        public DummyContent.DummyItem mItem;
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (null != onRecyclerViewListener) {
-                onRecyclerViewListener.onItemClick(this.getPosition(),v);
+                onRecyclerViewListener.onItemClick(this.getPosition(), v);
             }
         }
     }
-
-
-        public static interface OnRecyclerViewListener {
-            void onItemClick(int position, View v);
-            boolean onItemLongClick(int position);
-        }
-
-        private OnRecyclerViewListener onRecyclerViewListener;
-
-        public void setOnRecyclerViewListener(OnRecyclerViewListener onRecyclerViewListener) {
-            this.onRecyclerViewListener = onRecyclerViewListener;
-        }
 }

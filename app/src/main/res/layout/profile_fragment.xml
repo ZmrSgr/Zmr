@@ -9,8 +9,50 @@
         android:id="@+id/top_view"
         layout="@layout/top_view" />
 
+    <RelativeLayout
+        android:id="@+id/rel_code"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+
+        android:paddingRight="16dp">
 
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+
+            android:text="二维码名片"
+            android:textColor="@color/them_text"
+            android:textSize="17sp"/>
+
+        <ImageView
+            android:id="@+id/image_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ico_next"/>
+
+        <ImageView
+            android:src="@drawable/two_code"
+            android:id="@+id/text_tem"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/image_right"
+            android:gravity="right"
+
+            />
+
+    </RelativeLayout>
+
+    <include layout="@layout/line"
+        android:id="@+id/line"/>
 
     <RelativeLayout
         android:id="@+id/rel_name"

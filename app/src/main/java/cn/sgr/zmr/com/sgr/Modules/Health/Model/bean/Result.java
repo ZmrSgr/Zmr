@@ -13,6 +13,8 @@ public class Result<T> {
 
     public String status;
 
+    public String desc;
+
 
     public int code;
 

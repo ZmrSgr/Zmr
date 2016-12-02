@@ -1,9 +1,7 @@
 package cn.sgr.zmr.com.sgr.Common.Login;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,14 +24,22 @@ import cn.sgr.zmr.com.sgr.Base.BaseActivity;
 import cn.sgr.zmr.com.sgr.Common.FindPwd.FindPwdActivity;
 import cn.sgr.zmr.com.sgr.Common.MainActivity;
 import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
+import cn.sgr.zmr.com.sgr.Common.Model.UserResult;
+import cn.sgr.zmr.com.sgr.Common.Model.imp.CommonImp;
 import cn.sgr.zmr.com.sgr.Common.Register.Register_Activity;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Result;
+import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.SearchResult;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
+import cn.sgr.zmr.com.sgr.Utils.http.HttpException;
+import cn.sgr.zmr.com.sgr.Utils.http.HttpRequestCallback;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
-
-import static com.google.common.base.Preconditions.checkNotNull;
-
-public class LoginActivity extends BaseActivity implements LoginContract.View{
+import okhttp3.Call;
+/*
+*
+*  //qq 保存的是openid ，微信保存的是unionid，微博保存的是uid
+* */
+public class LoginActivity extends BaseActivity{
     @BindView(R.id.tv_signup)
     TextView tv_signup;
 
@@ -64,11 +70,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     @BindView(R.id.tv_reset_password)
     TextView tv_reset_password;
 
+    String third_id,nicke_name,avatar;
 
-
-    private LoginContract.Presenter mPresenter;
 
     private UMShareAPI mShareAPI = null;
+    private CommonImp commonModel;
 
 
     @Override
@@ -77,8 +83,9 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         setContentView(R.layout.login_activity);
         ButterKnife.bind(this);
         mShareAPI = UMShareAPI.get(this);
+        commonModel=new CommonImp();
         initView();
-        new LoginPresenter(this);
+//        new LoginPresenter(this);
 
     }
 
@@ -100,16 +107,18 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
                 break;
 
             case R.id.login_weibo:
-                ;
+                ;showProgressDialog();
                 mShareAPI.doOauthVerify(LoginActivity.this,  SHARE_MEDIA.SINA, umAuthListener);
 
                 break;
 
             case R.id.login_qq:
+                showProgressDialog();
                 mShareAPI.doOauthVerify(LoginActivity.this, SHARE_MEDIA.QQ, umAuthListener);
                 break;
 
             case R.id.login_weixin:
+                showProgressDialog();
                 mShareAPI.doOauthVerify(LoginActivity.this,  SHARE_MEDIA.WEIXIN, umAuthListener);
                 break;
 
@@ -138,36 +147,129 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
                     Toast.makeText(LoginActivity.this, getString(R.string.please_enter_correct_password_format),Toast.LENGTH_SHORT).show();
                     loing_et_mobile.requestFocus();
                 } else {
-                    //presenter 处理
-                    Toast.makeText(LoginActivity.this,getString(R.string.login_success),Toast.LENGTH_SHORT).show();
+                    login(mobile,password);
 
-                   User user=new User();
-                    user.setPassword(password);
-                    user.setPhone(mobile);
-                    user.setUid("1");
-                    user.setTid("1");
-                    AfterLogin(user);
+
+
+//                    AfterLogin(user);
 
                 }
                 break;
 
         }
     }
+   //登录
+    private void login(String mobile,String password){
+        User user=new User();
+        user.setPassword(password);
+        user.setPhone(mobile);
+        commonModel.Login(LoginActivity.this, user, new HttpRequestCallback<Result<UserResult>>() {
+            @Override
+            public void onStart() {
+                showProgressDialog();
+
+            }
+
+            @Override
+            public void onFinish() {
+                cancelProgressDialog();
+            }
+
+            @Override
+            public void onResponse(Result<UserResult> userResult) {
+                if(userResult.msg.equals("1")){//正常访问
+                    UserInfo.getInstance(LoginActivity.this).setSid(userResult.data.sid);//保存sid
+                    AfterLogin(userResult.data.user);
+                }else{
+                    Toast.makeText(LoginActivity.this,userResult.desc,Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call call, HttpException e) {
+                System.out.println("onFailure");
+            }
+        });
+
+    }
+
+    //第三方登录
+    private void Third_login(String third_id,String nicke_name,String avatar){
+        commonModel.Third_Login(LoginActivity.this,third_id,nicke_name,avatar , new HttpRequestCallback<Result<UserResult>>() {
+            @Override
+            public void onStart() {
+                showProgressDialog();
+
+            }
+
+            @Override
+            public void onFinish() {
+                cancelProgressDialog();
+            }
+
+            @Override
+            public void onResponse(Result<UserResult> userResult) {
+                if(userResult.msg.equals("1")){//正常访问
+                    UserInfo.getInstance(LoginActivity.this).setSid(userResult.data.sid);//保存sid
+                    AfterLogin(userResult.data.user);
+                }else{
+                    Toast.makeText(LoginActivity.this,userResult.desc,Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call call, HttpException e) {
+                System.out.println("onFailure");
+            }
+        });
+    }
+
+
 
     private void AfterLogin(User user) {
-        if (!UserInfo.getInstance(this).hasSignIn()) {//保存登录信息
-            UserInfo.getInstance(this).saveUserInfo(user.getPhone(),user.getPassword(),user.getUid(),user.getTid());
-            new DaoCacheManage(this).updateUser(user);
-        }
+       //保存登录信息
+        UserInfo.getInstance(this).saveUserInfo(user);
+//        new DaoCacheManage(this).updateUser(user);
         Utils.toNextActivity(this,MainActivity.class);
+        finish();
     }
 
     /** auth callback interface**/
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
         public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
-            Toast.makeText(LoginActivity.this, "Authorize succeed", Toast.LENGTH_SHORT).show();
-            Log.d("user info","user info:"+data.toString());
+
+            if(action==UMAuthListener.ACTION_GET_PROFILE){//获取用户资料
+                if(platform==SHARE_MEDIA.QQ){
+                    nicke_name=data.get("screen_name");
+                    third_id=data.get("openid");
+                    avatar=data.get("profile_image_url");
+                }else if(platform==SHARE_MEDIA.WEIXIN){
+                    nicke_name=data.get("screen_name");
+                    third_id=data.get("unionid");
+                    avatar=data.get("profile_image_url");
+
+                }else if(platform==SHARE_MEDIA.SINA){
+                    nicke_name=data.get("screen_name");
+                    third_id=data.get("uid");
+                    avatar=data.get("profile_image_url");
+                }
+                Third_login(third_id,nicke_name,avatar);//登录保存信息
+                System.out.println("用户资料"+data.toString());
+
+
+            }else if(action==UMAuthListener.ACTION_AUTHORIZE){
+                System.out.println("用户授权"+data.toString());
+                cancelProgressDialog();
+                mShareAPI.getPlatformInfo(LoginActivity.this,platform, umAuthListener);
+            }
+
+
+
         }
 
         @Override
@@ -189,35 +291,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
     }
 
 
-    @Override
-    public void showFailureLogin() {
-        Toast.makeText(LoginActivity.this,R.string.login_failure,Toast.LENGTH_SHORT).show();
-    }
 
-    @Override
-    public void showSuccessLogin() {
-        Utils.toNextActivity(LoginActivity.this,MainActivity.class);
-
-    }
-
-    @Override
-    public boolean isActive() {
-        return false;
-    }
-
-    @Override
-    public void setPresenter(@NonNull LoginContract.Presenter presenter) {
-        mPresenter = checkNotNull(presenter);
-
-    }
-    @Override
-    public void showProgressDialog(FragmentManager manager) {
-        showProgressDialog(getFragmentManager());
-    }
-
-    @Override
+/*    @Override
     public void cancelProgressDialog() {
         cancelProgressDialog();
-    }
+    }*/
 
 }

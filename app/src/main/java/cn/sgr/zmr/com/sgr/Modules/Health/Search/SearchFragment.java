@@ -20,9 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bean.entity.SearchRecent;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -32,7 +30,6 @@ import com.iflytek.cloud.SpeechSynthesizer;
 import com.iflytek.cloud.SynthesizerListener;
 import com.iflytek.sunflower.FlowerCollector;
 
-import java.io.Reader;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,12 +42,9 @@ import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.DoctorList;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.DrugList;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.SearchResult;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Tie;
-import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.Drug;
 import cn.sgr.zmr.com.sgr.R;
-import cn.sgr.zmr.com.sgr.Utils.util.GlideCircleTransform;
 import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.View.TextViewExpandableAnimation;
-import freemarker.core.ReturnInstruction;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -164,6 +158,7 @@ public class SearchFragment<T> extends BaseFragment implements SearchContract.Vi
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         if (mSwipeRefreshLayout.isRefreshing()) {
+
                             return true;
                         } else {
                             return false;

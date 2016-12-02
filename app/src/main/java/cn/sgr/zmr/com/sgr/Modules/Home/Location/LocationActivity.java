@@ -78,6 +78,8 @@ public class LocationActivity extends BaseActivity {
 
     private String Mylat,Mylng;
 
+    BDLocation location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,11 +220,8 @@ public class LocationActivity extends BaseActivity {
             // TODO Auto-generated method stub
             super.handleMessage(msg);
             try {
-                BDLocation location = msg.getData().getParcelable("loc");
+                location = msg.getData().getParcelable("loc");
                 top_view_left_text.setText(location.getAddrStr()+","+location.getLocationDescribe());
-
-
-
 
                 if (location != null) {
                     LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
@@ -268,10 +267,16 @@ public class LocationActivity extends BaseActivity {
                 break;
 
             case R.id.nearby_store:
-                Utils.toNextActivity(this, StoreActivity.class);
+//                Utils.toNextActivity(this, StoreActivity.class);
+                Intent i = new Intent(this, StoreActivity.class);
+                if(Mylat != null){
+                    i.putExtra(UtilKey.STORE_LAT, Mylat);
+                    i.putExtra(UtilKey.STORE_LNG, Mylng);
+                    i.putExtra(UtilKey.DRUG_LAT, Mylat);
+                    i.putExtra(UtilKey.DRUG_LNG, Mylng);
+                }
+                startActivity(i);
                 break;
-
-
 
             case R.id.relocation:
                 mBaiduMap.setMyLocationData(locData_curry);

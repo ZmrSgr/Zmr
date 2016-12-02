@@ -19,8 +19,12 @@ import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
 import cn.sgr.zmr.com.sgr.Modules.Health.HealhFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.HomeFragment;
 import cn.sgr.zmr.com.sgr.Modules.Home.HomePresenter;
+import cn.sgr.zmr.com.sgr.Modules.Home.HomeTestContract;
+import cn.sgr.zmr.com.sgr.Modules.Home.HomeTestFragment;
+import cn.sgr.zmr.com.sgr.Modules.Home.HomeTestPresenter;
 import cn.sgr.zmr.com.sgr.Modules.Messages.MessageFragment;
 import cn.sgr.zmr.com.sgr.Modules.My.MyFragment;
+import cn.sgr.zmr.com.sgr.Modules.My.MyPresenter;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
@@ -64,7 +68,8 @@ public class MainActivity extends Activity {
     TextView  message_text;
 
     private HealhFragment healthFragment;
-    private HomeFragment homeFragment;
+//    private HomeFragment homeFragment;
+    private HomeTestFragment homeFragment;
     private MessageFragment messagesFragment;
     private MyFragment myFragment;
     private FragmentTransaction transaction;
@@ -119,13 +124,15 @@ public class MainActivity extends Activity {
                 home_image.setImageResource(R.drawable.tab_ask_doctor_pressed);
                 home_text.setTextColor(getResources().getColorStateList(R.color.them_bg));
                 if (homeFragment == null) {
-                    homeFragment = new HomeFragment();
+//                    homeFragment = new HomeFragment();
+                    homeFragment = new HomeTestFragment();
                     if (homeFragment == null) {
                         homeFragment = homeFragment.newInstance();
                         Utils.addFragmentToActivity(getFragmentManager(),homeFragment, R.id.contentFrame);
                     }
                     // Create the presenter
-                    new HomePresenter(this,homeFragment);
+//                    new HomePresenter(this,homeFragment);
+                    new HomeTestPresenter(this, homeFragment);
                     transaction.add(R.id.content, homeFragment);
                 } else {
                     transaction.show(homeFragment);
@@ -159,6 +166,12 @@ public class MainActivity extends Activity {
                     if (messagesFragment == null) {
 
                         messagesFragment = new MessageFragment();
+
+
+
+
+
+
                         transaction.add(R.id.content, messagesFragment);
                     } else {
 
@@ -175,8 +188,16 @@ public class MainActivity extends Activity {
                 set_text.setTextColor(getResources().getColorStateList(
                         R.color.them_bg));
                 if (myFragment == null) {
-
                     myFragment = new MyFragment();
+                    if (myFragment == null) {
+                        myFragment = myFragment.newInstance();
+                        Utils.addFragmentToActivity(getFragmentManager(),myFragment, R.id.contentFrame);
+                    }
+                    // Create the presenter
+//                    new HomePresenter(this,homeFragment);
+                    new MyPresenter(this, myFragment);
+
+
                     transaction.add(R.id.content, myFragment);
                 } else {
 

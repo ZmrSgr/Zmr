@@ -52,7 +52,8 @@ public class HttpRequestUtil
     public HttpRequestUtil()
     {
         okHttpClient = new OkHttpClient();
-        httpHandler = new Handler(Looper.getMainLooper());
+        httpHandler = new Handler(Looper.getMainLooper());  //原来的样子
+//        httpHandler = new Handler();
         gson = new Gson();
     }
 

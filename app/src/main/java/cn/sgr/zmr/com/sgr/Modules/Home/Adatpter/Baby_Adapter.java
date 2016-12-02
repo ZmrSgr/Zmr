@@ -2,6 +2,7 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Adatpter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class Baby_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<Baby> datas;
     private Context context;
     private DaoCacheManage daoManage;
+    private String DeviceName;
 
     public Baby_Adapter( Context ct,List<Baby> list) {
                 this.context=ct;
@@ -57,15 +59,17 @@ public class Baby_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             @Override
             public void onClick(View v) {
 
-
-               final MyDialog dialog = new MyDialog(context,context.getResources().getString(R.string.is_del_baby),null,null);
+                final MyDialog dialog = new MyDialog(context,context.getResources().getString(R.string.is_del_baby),null,null);
                 dialog.show();
                 dialog.positive.setOnClickListener(new View.OnClickListener() {
 
                             @Override
                             public void onClick(View v) {
-                                removeData(position);
-                                dialog.dismiss();
+//                                removeData(position);
+                                if(!TextUtils.isEmpty(DeviceName)){
+                                    boundBaby(position, DeviceName);
+                                    dialog.dismiss();
+                                }
                             }
                         });
                 dialog.negative.setOnClickListener(new View.OnClickListener() {
@@ -74,8 +78,35 @@ public class Baby_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                                 dialog.dismiss();
                             }
                         });
+
+//               final MyDialog dialog = new MyDialog(context,context.getResources().getString(R.string.is_del_baby),null,null);
+//                dialog.show();
+//                dialog.positive.setOnClickListener(new View.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(View v) {
+//                                removeData(position);
+//                                dialog.dismiss();
+//                            }
+//                        });
+//                dialog.negative.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                dialog.dismiss();
+//                            }
+//                        });
             }
         });
+    }
+
+    public void setDeviceName(String DeviceName){
+        this.DeviceName = DeviceName;
+    }
+
+    private void boundBaby(int position,String DeviceName) {
+        this.daoManage = new DaoCacheManage(context);
+        daoManage.setCurryBaby(datas.get(position), DeviceName);
+
     }
 
     @Override
@@ -90,14 +121,15 @@ public class Baby_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
+//    public void removeData(int position) {
+//        this.daoManage=  new DaoCacheManage(context);
+//        daoManage.DeleteBaby(datas.get(position));
+//        datas.remove(position);
+//        notifyItemRemoved(position);
+//        notifyItemRangeChanged(position,datas.size());
+//    }
 
-    public void removeData(int position) {
-        this.daoManage=  new DaoCacheManage(context);
-        daoManage.DeleteBaby(datas.get(position));
-        datas.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position,datas.size());
-    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
         @BindView(R.id.babay_iv_head)

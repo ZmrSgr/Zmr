@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
+    android:orientation="vertical"
 
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
 
     <!--android:background="@color/my_bg"-->
@@ -12,8 +12,6 @@
     <include
         android:id="@+id/top_view"
         layout="@layout/top_view" />
-
-
 
 
     <RelativeLayout
@@ -24,12 +22,11 @@
         android:layout_height="70dp"
         android:paddingRight="16dp"
         android:background="@drawable/setting_item_selector_withe"
-       >
+        >
 
-        <cn.sgr.zmr.com.sgr.View.RoundImageView
+        <ImageView
             android:layout_marginLeft="5dp"
-            app:border_thickness="0.5dp"
-            app:border_outside_color="@color/white_s"
+
             android:layout_centerVertical="true"
             android:id="@+id/iv_avatar"
             android:layout_width="60dp"
@@ -37,28 +34,64 @@
             android:gravity="center"
             android:scaleType="fitXY"
             android:src="@drawable/no_avatar" />
-
-
-        <TextView
+        <LinearLayout
             android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_centerVertical="true"
+            android:gravity="center_vertical"
             android:layout_toRightOf="@+id/iv_avatar"
-            android:text="未登录"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+            android:orientation="vertical"
+            >
+
+
+            <TextView
+                android:id="@+id/nickname"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+
+                android:text="@string/set_unlogin"
+                android:textColor="@color/them_text"
+                android:textSize="17sp"/>
+
+            <TextView
+                android:id="@+id/phone"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textColor="@color/them_text"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
 
         <ImageView
+            android:id="@+id/image_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ico_next"/>
 
+        <ImageView
+            android:src="@drawable/two_code"
+            android:id="@+id/text_tem"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/image_right"
+            android:gravity="right"
+
+            />
+
+
     </RelativeLayout>
 
-   <!-- <include layout="@layout/line"/>-->
+    <!-- <include layout="@layout/line"/>-->
 
 
 
@@ -80,7 +113,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:text="@string/my_child"
+            android:text="@string/set_myhome"
             android:textColor="@color/them_text"
             android:textSize="17sp"/>
 
@@ -93,65 +126,65 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/line"/>
 
 
-    <RelativeLayout
 
-        android:paddingLeft="5dp"
-        android:background="@drawable/setting_item_selector_withe"
-        android:id="@+id/connected_child"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:paddingRight="16dp">
+    <!-- <RelativeLayout
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/connected_child"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
-
-    </RelativeLayout>
-
-    <include layout="@layout/line"/>
-    <RelativeLayout
-        android:paddingLeft="5dp"
-        android:id="@+id/rel_qr_code"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@drawable/setting_item_selector_withe"
-        android:paddingRight="16dp">
+         android:paddingLeft="5dp"
+         android:background="@drawable/setting_item_selector_withe"
+         android:id="@+id/connected_child"
+         android:layout_width="match_parent"
+         android:layout_height="45dp"
+         android:paddingRight="16dp">
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:text="@string/my_qr_code"
-            android:textColor="@color/them_text"
-            android:textSize="17sp"/>
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerVertical="true"
+             android:layout_marginLeft="5dp"
+             android:text="@string/connected_child"
+             android:textColor="@color/them_text"
+             android:textSize="17sp"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ico_next"/>
+         <ImageView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:src="@drawable/ico_next"/>
 
-    </RelativeLayout>
+     </RelativeLayout>
 
+     <include layout="@layout/line"/>
+     <RelativeLayout
+         android:paddingLeft="5dp"
+         android:id="@+id/rel_qr_code"
+         android:layout_width="match_parent"
+         android:layout_height="45dp"
+         android:background="@drawable/setting_item_selector_withe"
+         android:paddingRight="16dp">
+
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerVertical="true"
+             android:layout_marginLeft="5dp"
+             android:text="@string/my_qr_code"
+             android:textColor="@color/them_text"
+             android:textSize="17sp"/>
+
+         <ImageView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:src="@drawable/ico_next"/>
+
+     </RelativeLayout>
+ -->
     <include layout="@layout/line"/>
 
 

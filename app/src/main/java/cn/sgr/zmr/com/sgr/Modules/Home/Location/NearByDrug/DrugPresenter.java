@@ -3,6 +3,8 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Location.NearByDrug;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import java.util.List;
+
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.HealthModel;
 import cn.sgr.zmr.com.sgr.Modules.Health.Model.bean.Result;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.NearByModel;
@@ -36,7 +38,7 @@ public class DrugPresenter implements DrugContract.Presenter {
 
     @Override
     public void getDrugList(String lat, String lng) {
-        nearByModel.getDrugList(context,lat,lng,1, new HttpRequestCallback<Result<Drug>>() {
+        nearByModel.getDrugList(context,lat,lng,1, new HttpRequestCallback<Result<List<Drug>>>() {
             @Override
             public void onStart() {
 
@@ -48,9 +50,9 @@ public class DrugPresenter implements DrugContract.Presenter {
             }
 
             @Override
-            public void onResponse(Result<Drug> drugResult) {
-                System.out.println("Result<Drug>"+drugResult);
-
+            public void onResponse(Result<List<Drug>> drugResult) {
+//                System.out.println("Result<Drug>"+drugResult);
+                registerView.showDrugList(drugResult.data);
             }
 
             @Override

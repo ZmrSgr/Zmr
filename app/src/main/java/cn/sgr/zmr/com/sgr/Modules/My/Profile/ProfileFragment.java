@@ -110,6 +110,7 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
             case R.id.btn_login_out:
                 UserInfo.getInstance(getActivity()).clearUserInfo();
                 Utils.toNextActivity(getActivity(), LoginActivity.class);
+                getActivity().finish();
                 break;
 
 

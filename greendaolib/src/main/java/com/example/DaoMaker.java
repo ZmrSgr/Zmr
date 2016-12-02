@@ -9,7 +9,7 @@ public class DaoMaker {
     public static void main(String[] args) {
         //生成数据库的实体类,还有版本号
 
-        Schema schema = new Schema(3, "com.bean.entity");
+        Schema schema = new Schema(4, "com.bean.entity");
         addUser(schema);
         addBaby(schema);
         BabyTemperature(schema);
@@ -20,7 +20,7 @@ public class DaoMaker {
         schema.setDefaultJavaPackageDao("com.bean.dao");
         try {
             //指定路径
-            new DaoGenerator().generateAll(schema, "F:\\WorkStation\\MakeDreamer\\app\\src\\main\\java-gen");
+            new DaoGenerator().generateAll(schema, "F:\\WorkStation\\Zmr\\app\\src\\main\\java-gen");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,14 +32,18 @@ public class DaoMaker {
      * @param schema
      */
     public static void addUser(Schema schema) {
+
+
         //创建数据库的表
         Entity entity = schema.addEntity("User");
+        //序列化
+        entity.implementsSerializable();
         //主键 是int类型
         entity.addIdProperty().autoincrement();
 //        用户id
         entity.addStringProperty("uid");
 //        第三方id
-        entity.addStringProperty("tid");
+        entity.addStringProperty("third_id");
 //        密码
         entity.addStringProperty("password");
 //        电话
@@ -48,6 +52,14 @@ public class DaoMaker {
         entity.addStringProperty("avatar");
         //昵称
         entity.addStringProperty("nickname");
+
+        //sid
+        entity.addStringProperty("sid");
+
+        // 性别1为女 2为男
+        entity.addStringProperty("gender");
+
+
     }
     /**
      * 创建数据库的表  宝宝
@@ -57,6 +69,8 @@ public class DaoMaker {
     public static void addBaby(Schema schema) {
         //创建数据库的表
         Entity entity = schema.addEntity("Baby");
+
+        entity.implementsSerializable();
         //主键 是int类型
         entity.addIdProperty().autoincrement();
 //        宝宝id

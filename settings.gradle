@@ -1,1 +1,1 @@
-include ':app', ':magicindicator', ':jellytogglebutton', ':MPChartLib', ':librarys', ':sublimepickerlibrary', ':pickerview', ':library', ':ripple', ':addtocart', ':greendaolib', ':libzxing', ':Banner'
+include ':app', ':greendaolib', ':libzxing'
