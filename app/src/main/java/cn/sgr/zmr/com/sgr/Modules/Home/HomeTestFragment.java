@@ -373,6 +373,7 @@ public class HomeTestFragment extends BaseFragment implements HomeTestContract.V
                 mCircularBarPager.getCircularBar().setClockwiseOutlineArcColor(getResources().getColor(themeColor));
                 mCircularBarPager.getCircularBar().setCounterClockwiseArcColor(getResources().getColor(themeColor));
                 mCircularBarPager.getCircularBar().setClockwiseReachedArcColor(getResources().getColor(themeColor));
+//                mCircularBarPager.getCircularBar().setCircleFillColor();
             }
         });
 

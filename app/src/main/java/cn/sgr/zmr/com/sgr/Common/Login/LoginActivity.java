@@ -8,15 +8,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bean.entity.User;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.utils.Log;
-
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -71,12 +68,8 @@ public class LoginActivity extends BaseActivity{
     TextView tv_reset_password;
 
     String third_id,nicke_name,avatar;
-
-
     private UMShareAPI mShareAPI = null;
     private CommonImp commonModel;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,17 +78,12 @@ public class LoginActivity extends BaseActivity{
         mShareAPI = UMShareAPI.get(this);
         commonModel=new CommonImp();
         initView();
-//        new LoginPresenter(this);
-
     }
-
     private void initView() {
         top_view_title.setText(getResources().getString(R.string.login));
         top_view_back.setVisibility(View.VISIBLE);
 
     }
-
-
     @OnClick({R.id.tv_signup,R.id.top_view_back,R.id.login_weibo,R.id.login_qq,R.id.login_weixin,R.id.tv_reset_password ,R.id.btn_login})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -103,22 +91,20 @@ public class LoginActivity extends BaseActivity{
                 Intent intent1=new Intent();
                 intent1.setClass(LoginActivity.this, Register_Activity.class);
                 startActivity(intent1);
-
                 break;
-
             case R.id.login_weibo:
-                ;showProgressDialog();
+
                 mShareAPI.doOauthVerify(LoginActivity.this,  SHARE_MEDIA.SINA, umAuthListener);
 
                 break;
 
             case R.id.login_qq:
-                showProgressDialog();
+
                 mShareAPI.doOauthVerify(LoginActivity.this, SHARE_MEDIA.QQ, umAuthListener);
                 break;
 
             case R.id.login_weixin:
-                showProgressDialog();
+
                 mShareAPI.doOauthVerify(LoginActivity.this,  SHARE_MEDIA.WEIXIN, umAuthListener);
                 break;
 
@@ -130,7 +116,6 @@ public class LoginActivity extends BaseActivity{
                 LoginActivity.this.finish();
                 break;
             case R.id.btn_login:
-
                 String  mobile = loing_et_mobile.getText().toString();
                 String  password = login_et_password.getText().toString();
                 if ("".equals(mobile)) {
@@ -148,14 +133,8 @@ public class LoginActivity extends BaseActivity{
                     loing_et_mobile.requestFocus();
                 } else {
                     login(mobile,password);
-
-
-
-//                    AfterLogin(user);
-
                 }
                 break;
-
         }
     }
    //登录
@@ -169,12 +148,10 @@ public class LoginActivity extends BaseActivity{
                 showProgressDialog();
 
             }
-
             @Override
             public void onFinish() {
                 cancelProgressDialog();
             }
-
             @Override
             public void onResponse(Result<UserResult> userResult) {
                 if(userResult.msg.equals("1")){//正常访问
@@ -183,10 +160,7 @@ public class LoginActivity extends BaseActivity{
                 }else{
                     Toast.makeText(LoginActivity.this,userResult.desc,Toast.LENGTH_LONG).show();
                 }
-
-
             }
-
             @Override
             public void onFailure(Call call, HttpException e) {
                 System.out.println("onFailure");
@@ -194,7 +168,6 @@ public class LoginActivity extends BaseActivity{
         });
 
     }
-
     //第三方登录
     private void Third_login(String third_id,String nicke_name,String avatar){
         commonModel.Third_Login(LoginActivity.this,third_id,nicke_name,avatar , new HttpRequestCallback<Result<UserResult>>() {
@@ -227,9 +200,6 @@ public class LoginActivity extends BaseActivity{
             }
         });
     }
-
-
-
     private void AfterLogin(User user) {
        //保存登录信息
         UserInfo.getInstance(this).saveUserInfo(user);
@@ -237,7 +207,6 @@ public class LoginActivity extends BaseActivity{
         Utils.toNextActivity(this,MainActivity.class);
         finish();
     }
-
     /** auth callback interface**/
     private UMAuthListener umAuthListener = new UMAuthListener() {
         @Override
@@ -259,42 +228,24 @@ public class LoginActivity extends BaseActivity{
                     avatar=data.get("profile_image_url");
                 }
                 Third_login(third_id,nicke_name,avatar);//登录保存信息
-                System.out.println("用户资料"+data.toString());
-
 
             }else if(action==UMAuthListener.ACTION_AUTHORIZE){
-                System.out.println("用户授权"+data.toString());
-                cancelProgressDialog();
                 mShareAPI.getPlatformInfo(LoginActivity.this,platform, umAuthListener);
             }
-
-
-
         }
-
         @Override
         public void onError(SHARE_MEDIA platform, int action, Throwable t) {
             Toast.makeText(LoginActivity.this, "Authorize fail", Toast.LENGTH_SHORT).show();
         }
-
         @Override
         public void onCancel(SHARE_MEDIA platform, int action) {
             Toast.makeText( LoginActivity.this, "Authorize cancel", Toast.LENGTH_SHORT).show();
         }
     };
     //初始化   presenter 和 fregment（view）
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mShareAPI.onActivityResult(requestCode, resultCode, data);
     }
-
-
-
-/*    @Override
-    public void cancelProgressDialog() {
-        cancelProgressDialog();
-    }*/
-
 }

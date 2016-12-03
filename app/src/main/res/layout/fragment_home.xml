@@ -257,9 +257,10 @@ android:layout_margin="5dp"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             app:progress_pager_fill_circle_color="@android:color/transparent"
+
             app:progress_pager_fill_mode="default_mode"/>
 
-        </LinearLayout>
+    </LinearLayout>
 
 
  <!--   </LinearLayout>

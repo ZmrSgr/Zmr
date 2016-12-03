@@ -48,6 +48,11 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     @BindView(R.id.rel_name)
     View   rel_name;
 
+    @BindView(R.id.line_pwd)
+    View   line_pwd;
+
+
+
     @BindView(R.id.rel_head)
     View   rel_head;
 
@@ -89,6 +94,10 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     private void initView() {
         top_view_title.setText(getResources().getString(R.string.my_profile));
         top_view_back.setVisibility(View.VISIBLE);
+        if(UserInfo.getInstance(getActivity()).geThird_id()!=null&&UserInfo.getInstance(getActivity()).geThird_id().length()<3){//表示的是第三方登录
+            rel_reset_pwd.setVisibility(View.GONE);
+            line_pwd.setVisibility(View.GONE);
+        }
     }
 
     //监听按钮
@@ -112,9 +121,6 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
                 Utils.toNextActivity(getActivity(), LoginActivity.class);
                 getActivity().finish();
                 break;
-
-
-
         }
     }
 
@@ -130,7 +136,6 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
                 .findViewById(R.id.register_camera);
         LinearLayout requestPhotoLayout = (LinearLayout) view
                 .findViewById(R.id.register_photo);
-
         requsetCameraLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,7 +156,6 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
                 startActivityForResult(intent, REQUEST_CAMERA);
             }
         });
-
         requestPhotoLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -131,7 +131,6 @@ public class MyFragment extends BaseFragment implements MyContract.View {
 
     @Override
     public void showUserInfo(Context context,String nickName, String phone, String avatar) {
-        System.out.println("avatar"+avatar);
         if (!UserInfo.getInstance(getActivity()).hasSignIn()) {//没有登录
             nickname.setText(getString(R.string.set_unlogin));
             Tvphone.setVisibility(View.GONE);
