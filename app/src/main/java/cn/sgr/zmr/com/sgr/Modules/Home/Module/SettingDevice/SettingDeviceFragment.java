@@ -21,8 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Common.Model.Setting;
-import cn.sgr.zmr.com.sgr.Modules.Home.HomeFragment;
-import cn.sgr.zmr.com.sgr.Modules.Home.Location.LocationActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Device.HomeDevicePresenter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Synchronize.SynchronizeActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.AlarmWay.AlarmWayActivity;
@@ -182,7 +181,7 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
             }
             Weightoptions2Items.add(options2Items_weigh);
         }
-        if(HomeFragment.isConnState){
+        if(HomeDevicePresenter.isConnState){
 
         }else{
             text_device.setText(Setting.getInstance(getActivity()).getBattery());

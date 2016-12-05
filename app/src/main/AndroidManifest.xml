@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.sgr.zmr.com.sgr">
+
     <!-- 权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -23,6 +24,7 @@
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
     <application
         android:name=".Base.MyApplication"
         android:allowBackup="true"
@@ -30,6 +32,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <!-- 百度定位 -->
         <service
             android:name="com.baidu.location.f"
@@ -39,6 +42,7 @@
                 <action android:name="com.baidu.location.service_v2.2" />
             </intent-filter>
         </service>
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="1ZT8UppLYp8tBnT5wuyATHGfTTQBkVWP" />
@@ -48,11 +52,13 @@
         <meta-data
             android:name="TESTIN_APPKEY"
             android:value="019cc0a31ffab5740c685c6cf3a2ae18" />
+
         <activity
             android:name=".Common.Splash_Activity"
             android:theme="@style/AppWelcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -162,10 +168,11 @@
         <activity android:name=".Common.ShowAlarm" />
         <activity
             android:name=".Modules.Health.Search.SearchActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Modules.Health.Search.DetailTieActivity"
-            android:label="@string/title_activity_detail_tie"></activity>
+            android:label="@string/title_activity_detail_tie" />
+        <activity android:name=".Modules.Home.Device.HomeDeviceActivity"></activity>
     </application>
 
 </manifest>
