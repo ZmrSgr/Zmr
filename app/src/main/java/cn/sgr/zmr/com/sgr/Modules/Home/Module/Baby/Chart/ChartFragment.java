@@ -70,18 +70,16 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     @BindView(R.id.charts)
     LineChart mChart;
 
-    @BindView(R.id.btn_up)
-    ImageView btn_up;
+/*    @BindView(R.id.btn_up)
+    ImageView btn_up;*/
 
-    //时间轴
-    @BindView(R.id.chart_list)
-    RecyclerView chart_list;
 
-    @BindView(R.id.sliding_layout)
-    SlidingUpPanelLayout layout;
 
-    @BindView(R.id.lin_bottom)
-    TextView lin_bottom;
+ /*   @BindView(R.id.sliding_layout)
+    SlidingUpPanelLayout layout;*/
+
+/*    @BindView(R.id.lin_bottom)
+    TextView lin_bottom;*/
 
     @BindView(R.id.time_chart)
     TextView time_chart;
@@ -121,7 +119,7 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     Baby baby;
 
 
-    AddHistoryAdapter adapter;
+
 
 
 
@@ -161,50 +159,13 @@ public class ChartFragment extends Fragment implements ChartContract.View{
         //图表
         initialChart(mChart);
         addLineDataSet(mChart);
-        //治疗数据
-        setTreat();
-
         //向上滑动
-        setAboveShadow();
+
     }
 
-    private void setAboveShadow() {
-        layout.setShadowDrawable(getResources().getDrawable(R.drawable.above_shadow));
-        layout.setAnchorPoint(0.3f);
-        layout.setDragView(lin_bottom);
-        layout.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-            @Override
-            public void onPanelSlide(View panel, float slideOffset) {
-                if (slideOffset < 0.1) {
-                    btn_up.setImageResource(R.drawable.btn_down);
-                    chart_time.setVisibility(View.GONE);
 
-                } else {
-                    btn_up.setImageResource(R.drawable.btn_up);
-                    chart_time.setVisibility(View.VISIBLE);
-                }
-            }
-            @Override
-            public void onPanelExpanded(View panel) {
-            }
-            @Override
-            public void onPanelCollapsed(View panel) {
-            }
 
-            @Override
-            public void onPanelAnchored(View panel) {
-            }
-        });
-    }
 
-    private void setTreat() {
-        //时间轴
-        chart_list.setHasFixedSize(true);
-        chart_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ArrayList<Treat> items = new ArrayList<>();
-        adapter=new AddHistoryAdapter(getActivity(), items);
-        chart_list.setAdapter(adapter);
-    }
 
     private void setTime() {
         //初始化时间
@@ -231,7 +192,7 @@ public class ChartFragment extends Fragment implements ChartContract.View{
     }
 
 
-    @OnClick({R.id.lin_bottom, R.id.time_chart, R.id.time_left, R.id.time_right,R.id.chart_user_rel})
+    @OnClick({R.id.time_chart, R.id.time_left, R.id.time_right,R.id.chart_user_rel})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.chart_user_rel:
@@ -243,14 +204,14 @@ public class ChartFragment extends Fragment implements ChartContract.View{
                 break;
 
 
-            case R.id.lin_bottom:
+     /*       case R.id.lin_bottom:
                 Intent mIntent1 = new Intent(getActivity(),AddHisoryActivity.class);
                 Bundle mBundle1 = new Bundle();
                 mBundle1.putSerializable(UtilKey.BABY_KEY, baby);
                 mIntent1.putExtras(mBundle1);
                 startActivity(mIntent1);
 
-                break;
+                break;*/
 
             case R.id.time_right:
                 time_chart.setText(getDate(time_chart.getText().toString(), +1));
@@ -461,7 +422,7 @@ public class ChartFragment extends Fragment implements ChartContract.View{
 
     @Override
     public void showHistory(List<Treat> items) {
-        adapter.applyData(items);
+//        adapter.applyData(items);
     }
 
     @Override

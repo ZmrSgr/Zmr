@@ -91,7 +91,7 @@ public class MyFragment extends BaseFragment implements MyContract.View {
         iv_right.setVisibility(View.VISIBLE);
         iv_right.setImageResource(R.drawable.ic_qrcode);
     }
-    @OnClick({R.id.rel_more,R.id.rel_help,R.id.rel_child,R.id.rel_my})
+    @OnClick({R.id.rel_more,R.id.rel_help,R.id.rel_child,R.id.rel_my,R.id.iv_right})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.rel_more:
@@ -100,9 +100,10 @@ public class MyFragment extends BaseFragment implements MyContract.View {
             case R.id.rel_help:
                 Utils.toNextActivity(getActivity(), HelpActivity.class);;
                 break;
-   /*         case R.id.rel_qr_code:
+          case R.id.iv_right:
                 Utils.toNextActivity(getActivity(), MyQrCodeActivity.class);
                 break;
+           /*
             case R.id.connected_child:
                 Utils.toNextActivity(getActivity(), ScanCodeActivity.class);
                 break;*/

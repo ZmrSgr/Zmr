@@ -3,7 +3,7 @@
 
     <string name="company_name">珠海智梦人科技有限公司</string>
 
-    <string name="bottom_home">体温计</string>
+    <string name="bottom_home">首页</string>
     <string name="bottom_health">健康建议</string>
     <string name="bottom_message">消息</string>
 
@@ -15,6 +15,7 @@
     <string name="set_shake">震动</string>
 
 
+    <string name="temp_home">体温计</string>
     <string name="set_lost">防丢功能</string>
     <string name="set_fever">发烧报警</string>
     <string name="set_fever_temp">报警温度</string>
@@ -191,7 +192,7 @@
     <string name="expand">展开</string>
     <string name="shrink">收起</string>
     <string name="title_activity_detail_tie">DetailTieActivity</string>
-    <string formatted="false" name="tts_toast_format">缓冲进度为%d%%，播放进度为%d%%</string>
+    <string name="tts_toast_format" formatted="false">缓冲进度为%d%%，播放进度为%d%%</string>
     <string name="please_input_content">请输入搜索内容</string>
     <string name="search_nothing">抱歉，没有搜索到东西。。。</string>
 
@@ -217,22 +218,6 @@
     <string name="child_away">孩子已经离开监视范围</string>
     <string name="know"> 知道了</string>
     <string name="charging"> 充电中</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </resources>

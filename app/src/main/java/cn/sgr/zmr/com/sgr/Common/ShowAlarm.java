@@ -4,19 +4,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
 import cn.sgr.zmr.com.sgr.Common.Model.Setting;
-import cn.sgr.zmr.com.sgr.Modules.Home.HomeFragment;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 
