@@ -60,6 +60,10 @@ public abstract class BaseModel
     }
 
 
+
+
+
+
     private String getAbsUrl(String url)
     {
         return Constant.APIURL + url;

@@ -1,62 +1,29 @@
 package cn.sgr.zmr.com.sgr.Modules.Home;
 
-import android.app.Activity;
 import android.app.FragmentManager;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.bean.entity.Baby;
 import com.bumptech.glide.Glide;
-import com.example.administrator.scannerlib.DeviceSanListActivity;
-import com.github.OrangeGangsters.circularbarpager.library.CircularBarPager;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.SimpleFormatter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Common.Login.LoginActivity;
-import cn.sgr.zmr.com.sgr.Common.Model.Setting;
 import cn.sgr.zmr.com.sgr.Common.Model.UserInfo;
-import cn.sgr.zmr.com.sgr.Common.ShowAlarm;
-import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.CirclePagerAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Device.HomeDeviceActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
-import cn.sgr.zmr.com.sgr.Modules.Home.Module.SettingDevice.SettingDeviceActivity;
 import cn.sgr.zmr.com.sgr.Modules.My.Profile.ProfileActivity;
-import cn.sgr.zmr.com.sgr.Modules.My.QrCode.MyQrCodeActivity;
 import cn.sgr.zmr.com.sgr.Modules.My.QrCode.ScanCodeActivity;
 import cn.sgr.zmr.com.sgr.R;
-import cn.sgr.zmr.com.sgr.Utils.BluetoothUtil.BleDeviceHelp;
-import cn.sgr.zmr.com.sgr.Utils.BluetoothUtil.ICmdModel;
 import cn.sgr.zmr.com.sgr.Utils.util.GlideCircleTransform;
-import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
-import cn.sgr.zmr.com.sgr.View.DemoView;
-import cn.sgr.zmr.com.sgr.View.MsgDialog;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

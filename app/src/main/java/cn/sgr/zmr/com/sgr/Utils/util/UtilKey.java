@@ -32,4 +32,7 @@ public class UtilKey {
 
     //跳转url lng
     public static String STORE_LNG = "store_lng";
+
+    //跳转到commonmap的界面 的key
+    public static String DRUG_DATA_KEY = "drug_data_key";
 }

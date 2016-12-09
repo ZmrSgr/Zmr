@@ -46,7 +46,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
     compile 'com.sgr.zmr:SlidingUp:0.0.1'
-    compile 'com.sgr.zmr:CircularBar:0.0.1'
+//    compile 'com.sgr.zmr:CircularBar:0.0.1'
     compile 'com.sgr.zmr:JellyToggle:0.0.1'
     compile 'com.sgr.zmr:MagicIndicator:0.0.1'
     compile 'com.sgr.zmr:PickerView:0.0.1'
@@ -56,13 +56,11 @@ dependencies {
     compile 'com.sgr.zmr:Ripple:0.0.1'
     compile 'com.sgr.zmr:MPChartLib:0.0.1'
     compile project(':libzxing')
-
+    compile project(':boommenu')
     compile(name: 'scannerlib-debug', ext: 'aar')
     //    compile project(':ProgressCirclelibrary')
-
 //        compile 'com.github.orangegangsters:library:1.0.0@aar'
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
-    compile files('libs/activeandroid-3.1-beta.jar')
     compile files('libs/SocialSDK_Sina.jar')
     compile files('libs/open_sdk_r5756.jar')
     compile files('libs/SocialSDK_QQZone_3.jar')
@@ -95,5 +93,6 @@ dependencies {
     compile files('libs/android-support-v4.jar')
     compile files('libs/ormlite-android-4.41.jar')
     compile files('libs/ormlite-core-4.41.jar')
+
 
 }

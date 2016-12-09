@@ -14,7 +14,7 @@
     <string name="set_voice">声音</string>
     <string name="set_shake">震动</string>
 
-
+    <string name="set_alarm">报警设置</string>
     <string name="temp_home">体温计</string>
     <string name="set_lost">防丢功能</string>
     <string name="set_fever">发烧报警</string>
@@ -218,6 +218,7 @@
     <string name="child_away">孩子已经离开监视范围</string>
     <string name="know"> 知道了</string>
     <string name="charging"> 充电中</string>
+    <string name="title_activity_common_map">CommonMapActivity</string>
 
 
 </resources>

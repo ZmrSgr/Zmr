@@ -63,17 +63,12 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
     public AlarmWayFragment() {
         // Required empty public constructor
     }
-
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.alarmway_fragment, container, false);
-
         // 震动效果的系统服务
         vibrator = (Vibrator)getActivity(). getSystemService(Context.VIBRATOR_SERVICE);
-
         ButterKnife.bind(this, view);
         initView();
         return view;
@@ -82,7 +77,6 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
     private void initView() {
         top_view_title.setText(getResources().getString(R.string.set_type));
         top_view_back.setVisibility(View.VISIBLE);
-
         jtb_lost.setLeftBackgroundColor(  getResources().getColor(R.color.them_bg));
         jtb_lost.setRightBackgroundColor(  getResources().getColor(R.color.them_bg));
         jtb_fever.setLeftBackgroundColor(   getResources().getColor(R.color.them_bg));
@@ -108,7 +102,6 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
                 if (state.equals(State.LEFT)) {
                     Toast.makeText(getActivity(),getString(R.string.close_shock),Toast.LENGTH_SHORT).show();
                     Setting.getInstance(getActivity()).setShock("0");
-
                 }
                 if (state.equals(State.RIGHT)) {
                     Toast.makeText(getActivity(),getString(R.string.open_shock),Toast.LENGTH_SHORT).show();
@@ -116,15 +109,11 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
                     Animation shake = AnimationUtils.loadAnimation(
                             getActivity(), R.anim.shake);
                     jtb_fever.startAnimation(shake);
-
                     /*
                      * 震动的方式
                      */
                      vibrator.vibrate(2000);//振动两秒
-
                     // 下边是可以使震动有规律的震动   -1：表示不重复 0：循环的震动
-
-
 
                 }
 
@@ -136,7 +125,6 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
             @Override
             public void onStateChange(float process, State state, JellyToggleButton jtb) {
                 if (state.equals(State.LEFT)) {
-
                     StopVice();
                     listView.setVisibility(View.GONE);
                     Setting.getInstance(getActivity()).setVoice("0");
@@ -144,7 +132,6 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
                 if (state.equals(State.RIGHT)) {
                     Setting.getInstance(getActivity()).setVoice("1");
                     listView.setVisibility(View.VISIBLE);
-                    Toast.makeText(getActivity(), "RIGHT!", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -160,9 +147,6 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
         mAdapter.map.put(Setting.getInstance(getActivity()).getVoicePosition(), true);
 			/*刷新数据*/
         mAdapter.notifyDataSetChanged();
-
-
-
     }
 
     /*listView的按钮点击事件*/
@@ -171,7 +155,6 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-
             MainAdapter.ViewHolder mHolder = new MainAdapter.ViewHolder(parent);
 			/*设置Imageview不可被点击*/
             mHolder.iv.setClickable(false);
@@ -183,10 +166,7 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
 			/*刷新数据*/
             mAdapter.notifyDataSetChanged();
             Setting.getInstance(getActivity()).setVoicePosition(position);
-
             StopVice();
-			/*判断位置不为0则播放的条目为position-1*/
-//            if (position != 0) {
                 try {
 
                     RingtoneManager rm = new RingtoneManager(getActivity());
@@ -194,27 +174,12 @@ public class AlarmWayFragment extends BaseFragment implements AlarmWayContract.V
                     rm.getCursor();
                     rm.getRingtone(position ).play();
 
-
                     rTone=rm.getRingtone(position);
                     rTone.play();
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-//            }
-
-
-	/*		*//*position为0是跟随系统，先得到系统所使用的铃声，然后播放*//*
-            if (position == 0) {
-
-                Uri uri = RingtoneManager.getActualDefaultRingtoneUri(
-                      getActivity(), RingtoneManager.TYPE_ALARM);
-
-
-
-                rTone=RingtoneManager.getRingtone( getActivity(), uri);
-                rTone.play();
-            }*/
 
         }
 

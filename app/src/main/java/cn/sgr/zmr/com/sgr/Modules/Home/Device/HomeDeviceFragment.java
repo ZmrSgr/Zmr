@@ -23,7 +23,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bean.entity.Baby;
-import com.github.OrangeGangsters.circularbarpager.library.CircularBarPager;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -31,6 +30,12 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.nightonke.boommenu.BoomButtons.BoomButton;
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.OnBoomListener;
+import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,18 +47,20 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
 import cn.sgr.zmr.com.sgr.Common.Model.Setting;
-import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.CirclePagerAdapter;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.AlarmWay.AlarmWayActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.BabyActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.Baby.Chart.ChartActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Device.DeviceActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Module.SettingDevice.SettingDeviceActivity;
+import cn.sgr.zmr.com.sgr.Modules.Home.Module.Synchronize.SynchronizeActivity;
 import cn.sgr.zmr.com.sgr.R;
+import cn.sgr.zmr.com.sgr.Utils.util.BuilderManager;
 import cn.sgr.zmr.com.sgr.Utils.util.Utils;
-import cn.sgr.zmr.com.sgr.View.DemoView;
 import cn.sgr.zmr.com.sgr.View.MsgDialog;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContract.View
-//        , BleDeviceHelp.BleReceiver
+public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContract.View,OnBoomListener
 {
 
 
@@ -75,10 +82,8 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
 
     @BindView(R.id.tv_update)
     ImageView tv_update;
-
-    TextView home_unit_top;
     TextView user_center_unit;
-    TextView home_unit_midle;
+
 
     //    性别
     @BindView(R.id.iv_gender)
@@ -86,7 +91,6 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
 
     @BindView(R.id.iv_location)
     ImageView iv_location;
-
 
     @BindView(R.id.tv_username)
     TextView tv_username;
@@ -103,84 +107,54 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
     @BindView(R.id.charts)
     LineChart mChart;
 
+    @BindView(R.id.bmb)
+    BoomMenuButton bmb;
+
     private static final int REQUEST_SELECT_DEVICE = 1;
-
-//    public static boolean isConnState = true;//是否连接
-
-//    private BleDeviceHelp bleRe;//蓝牙帮助类
-
-//    private int startInt, endInt;//进度条的终始
-
-//    TimeAway AwayTime;//30分钟之后 才允许防丢失闹钟才能再次弹出
-//    TimeAway AlarmTime;//30分钟之后 才允许温度闹钟才能再次弹出
-
-
-
-/*    @BindView(R.id.home_temp)
-    JellyToggleButton home_temp;*/
-
-//    private CircularBarPager mCircularBarPager;
-
-/*    @BindView(R.id.circularBarPager)
-    CircularBarPager mCircularBarPager;
-    TextView value_info_textview, user_top_textview, user_bottom_textview;*/
-    //    Button button;
-    DemoView ViewT;
     private static final int REQUEST_CONNECT_DEVICE = 1;
     //    public static boolean isAlarm = true;//true表示可以弹出闹铃，
 //    public static boolean isAway = true;//true表示可以弹出闹铃，
     HomeDeviceContract.Presenter mPresenter;
-
     //单例 模式
     public static HomeDeviceFragment newInstance() {
         return new HomeDeviceFragment();
     }
-
     //   构造方法
     public HomeDeviceFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onResume() {
         super.onResume();
         mPresenter.start();
     }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_device, container, false);
         ButterKnife.bind(this, view);
         intView();
-
         return view;
     }
-
     private void intView() {
-//        bleRe = new BleDeviceHelp(getActivity(), this);
-        ViewT = new DemoView(getActivity());
-//        mCircularBarPager.setViewPagerAdapter(new CirclePagerAdapter(getActivity(), ViewT));
+        bmb.setButtonEnum(ButtonEnum.TextInsideCircle);
+        bmb.setPiecePlaceEnum(PiecePlaceEnum.DOT_4_1);
+        bmb.setButtonPlaceEnum(ButtonPlaceEnum.SC_4_1);
+        for (int i = 0; i < bmb.getButtonPlaceEnum().buttonNumber(); i++) addBuilder(i);
+        bmb.setOnBoomListener(this);
         top_view_title.setText(getString(R.string.check_temp));
-        top_view_back.setVisibility(View.GONE);
-        top_view_left_text.setVisibility(View.VISIBLE);
-        top_view_left_text.setText(getString(R.string.connected));
+        top_view_back.setVisibility(View.VISIBLE);
         top_view_right_text.setVisibility(View.VISIBLE);
-        top_view_right_text.setText(getString(R.string.set_more));
-        /*user_top_textview = (TextView) ViewT.findViewById(R.id.user_top_textview);
-        value_info_textview = (TextView) ViewT.findViewById(R.id.value_info_textview);
-        user_bottom_textview = (TextView) ViewT.findViewById(R.id.user_bottom_textview);*/
-        user_center_unit = (TextView) ViewT.findViewById(R.id.user_center_unit);
-        home_unit_top = (TextView) ViewT.findViewById(R.id.user_top_unit);
-        home_unit_midle = (TextView) ViewT.findViewById(R.id.user_center_unit);
-//        mCircularBarPager.getCircularBar().setStartLineEnabled(false);
-//        initBlue();
+        top_view_right_text.setText(getString(R.string.connected));
         // TODO 完成后去掉注释给上面加注释
         mPresenter.initBlueTooth(getActivity());
-
         initialChart(mChart);
         addLineDataSet(mChart);
     }
+    private void addBuilder(final int index) {
+        bmb.addBuilder(BuilderManager.getTextInsideCircleButtonBuilder());
+    }
+
     // 为LineChart增加LineDataSet
     private void addLineDataSet(LineChart mChart) {
         LineData data = getData(24, 2);
@@ -192,21 +166,14 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
             float val = (float) (Math.random() * range) + 37;
             yVals.add(new Entry(i, val));
         }
-        // create a dataset and give it a type
         LineDataSet set1 = new LineDataSet(yVals, "时间体温");
-        // set1.setFillAlpha(110);
-        // set1.setFillColor(Color.RED);
         set1.setLineWidth(1.75f);
         set1.setCircleRadius(5f);
         set1.setCircleHoleRadius(2.5f);
-
-
         set1.setColor(  getResources().getColor(R.color.them_bg));
         set1.setCircleColor(  getResources().getColor(R.color.them_bg));//圆圈的颜色
         set1.setLabel("时间体温");
-//        set1.setHighLightColor(Color.RED);
         set1.setDrawValues(false);
-        // create a data object with the datasets
         LineData data = new LineData(set1);
         return data;
     }
@@ -288,7 +255,6 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
 
     }
 
-
     @Override
     public void showProgressDialog(FragmentManager manager) {
         super.showProgressDialog(manager);
@@ -303,7 +269,6 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
         tv_username.setText("");
         tv_weight.setText("0");
         iv_gender.setVisibility(View.GONE);
-//        mCircularBarPager.getCircularBar().animateProgress(0, 0, 900);
     }
 
     @Override
@@ -392,7 +357,6 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
                 if (temperature >= 0 && temperature <= 50) {
 //                    value_info_textview.setText(String.valueOf(temperature));
                 }
-//                user_top_textview.setTextColor(getResources().getColor(themeColor));
                 user_center_unit.setTextColor(getResources().getColor(themeColor));
             }
         });
@@ -432,12 +396,7 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
             @Override
             public void run() {
                 if (endNum > 0) {
-//                    mCircularBarPager.getCircularBar().animateProgress(startNum, endNum, duration);
                 }
-            /*    mCircularBarPager.getCircularBar().setClockwiseOutlineArcColor(getResources().getColor(themeColor));
-                mCircularBarPager.getCircularBar().setCounterClockwiseArcColor(getResources().getColor(themeColor));
-                mCircularBarPager.getCircularBar().setClockwiseReachedArcColor(getResources().getColor(themeColor));*/
-//                mCircularBarPager.getCircularBar().setCircleFillColor();
             }
         });
 
@@ -472,59 +431,22 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
         }
     }
 
-    @OnClick({R.id.top_view_right_text, R.id.top_view_left_text, R.id.iv_avatar, R.id.top_view_title, R.id.tv_update, R.id.iv_location})
+    @OnClick({R.id.top_view_right_text, R.id.top_view_left_text, R.id.iv_avatar, R.id.top_view_title, R.id.tv_update, R.id.iv_location,R.id.top_view_back})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.top_view_right_text:
-                Utils.toNextActivity(getActivity(), SettingDeviceActivity.class);
+            case R.id.top_view_back:
+            getActivity().finish();
                 break;
-            case R.id.top_view_left_text:
-
-//                if (isBLEEnabled()) {
-//                    Intent newIntent = new Intent(getActivity(), DeviceSanListActivity.class);
-//                    startActivityForResult(newIntent, REQUEST_SELECT_DEVICE);
-//                } else {
-////                    Toast.makeText(getActivity(), "Please Open Bluetooth !", Toast.LENGTH_SHORT).show();
-//                    showBLEDialog();
-//                }
-
+            case R.id.top_view_right_text:
                 mPresenter.linkDevice(getActivity());
-
-
-           /*     cancelProgressDialog();
-
-               Intent serverIntent = new Intent(getActivity(), DeviceListActivity.class);
-                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);*/
                 break;
 
             case R.id.iv_avatar:
                 Utils.toNextActivity(getActivity(), ChartActivity.class);
                 break;
 
-            case R.id.iv_location:
-//                Utils.toNextActivity(getActivity(),LocationActivity.class);
-//                tv_update.setTargetProgress(360);
-                break;
-
-            case R.id.tv_update:
-//                if(UserInfo.getInstance(getActivity()).hasSignIn()){
-//                    Utils.toNextActivity(getActivity(), SynchronizeActivity.class);
-               /* }else{
-                    Toast.makeText(getActivity(),"请先登录",Toast.LENGTH_SHORT).show();
-                    Utils.toNextActivity(getActivity(),LoginActivity.class);
-                }*/
-
-                break;
-
-
         }
     }
-
-//    private void showBLEDialog() {
-//        Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-//        startActivityForResult(enableBtIntent, 2);
-//    }
-
 
     /**
      * 判断蓝牙是否开启
@@ -546,31 +468,9 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
                     String deviceAddress = datae.getStringExtra(BluetoothDevice.EXTRA_DEVICE);
                     String deviceName = datae.getStringExtra(BluetoothDevice.EXTRA_NAME);
                     String deviceRssi = datae.getStringExtra(BluetoothDevice.EXTRA_RSSI);
-
                     top_view_left_text.setText(deviceName);
-
-//                    user_bottom_textview.setText(deviceRssi);
-
                     mPresenter.sendCmd(getActivity(), deviceAddress);
-
                     mPresenter.boundBabyandDevice(deviceName);
-//                    if (isConnState) {
-////                        String mac = showMacTv.getText().toString().trim();
-//                        if (bleRe.mBluetoothDeviceAddress != null) {
-//                            bleRe.close();
-//                        }
-//                        if (!TextUtils.isEmpty(deviceAddress)) {
-//                            bleRe.mBluetoothDeviceAddress = deviceAddress;
-//                            Setting.getInstance(getActivity()).setDeviceAddress(deviceAddress);//保存硬件地址
-//                            bleRe.connect();
-//                        }
-//                        isConnState = false;
-////                        top_view_left_text.setText("已连接");
-//                    } else {
-//                        bleRe.disconnect();
-//                        isConnState = true;
-//                        top_view_left_text.setText(getString(R.string.connected));
-//                    }
                 }
                 break;
             default:
@@ -592,211 +492,49 @@ public class HomeDeviceFragment extends BaseFragment implements HomeDeviceContra
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        bleRe.close();
         mPresenter.closeDevice();
     }
 
-//    @Override
-//    public void getConnState(final int mConnectionState) {
-//        getActivity().runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                switch (mConnectionState) {
-//                    case BleDeviceHelp.CON_STATE_DISCONNECTED://断开连接
-//                        DisConnectState();
-//
-//                        break;
-//
-//                    case BleDeviceHelp.CON_STATE_CLOSED://device closed. never can be used anymore.
-//                        DisConnectState();
-//                        break;
-//                    case BleDeviceHelp.CON_STATE_CONNECTED:
-//                        top_view_left_text.setText(getString(R.string.home_connected));
-//
-//                        ICmdModel.CmTxRequestBatteryInfo ctrbi = new ICmdModel.CmTxRequestBatteryInfo();
-//                        bleRe.sendCmd(ctrbi);
-//
-//
-//                        ICmdModel.CmTxRequestTemperatureOn ctrbi2 = new ICmdModel.CmTxRequestTemperatureOn();
-//                        bleRe.sendCmd(ctrbi2);
-//                        break;
-//                    case BleDeviceHelp.CON_STATE_CONNECTING:
-//                    case BleDeviceHelp.CON_STATE_DISCOVERING:
-//                    case BleDeviceHelp.CON_STATE_ENABLING:
-//                        top_view_left_text.setText(getString(R.string.home_connectting));
-//                        break;
-//                    default:
-//                        DisConnectState();
-//                }
-//            }
-//        });
-//
-//    }
-
     private void DisConnectState() {
         top_view_left_text.setText(getString(R.string.home_disconnectting));
-       /* user_top_textview.setText(getString(R.string.home_battery));
-        value_info_textview.setText("0");
-        user_bottom_textview.setText(getString(R.string.home_bottom));*/
     }
 
+    @Override
+    public void onClicked(int index, BoomButton boomButton) {
+        if(index==0){
+            Utils.toNextActivity(getActivity(), BabyActivity.class);
+        }else if(index==1){
+            Utils.toNextActivity(getActivity(), SynchronizeActivity.class);
+        }else if(index==2){
+            Utils.toNextActivity(getActivity(), SettingDeviceActivity.class);
+        }else if(index==3){
+            Utils.toNextActivity(getActivity(), DeviceActivity.class);;
+        }
 
-//    private ICmdModel.CmRxBatteryInfo mBatteryInfo = null;
-//    private ICmdModel.CmRxTemperature mTemperature = null;
+    }
 
-//    @Override
-//    public void getCmdData(byte[] characteristic) {
-//        int id = ICmdModel.cmdIdFromBytes(characteristic, 0);
-//
-//        switch (id) {
-//            case ICmdModel.CmRxBatteryInfo.ID:
-//
-//
-//                mBatteryInfo = new ICmdModel.CmRxBatteryInfo();
-//                mBatteryInfo.fromCmdBytes(characteristic);
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        user_top_textview.setText(getString(R.string.home_battery) + mBatteryInfo.toString());
-//                        Setting.getInstance(getActivity()).setBattery(mBatteryInfo.toString());
-//                    }
-//                });
-//                break;
-//            case ICmdModel.CmRxTemperature.ID:
-//                mTemperature = new ICmdModel.CmRxTemperature();
-//                mTemperature.fromCmdBytes(characteristic);
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        value_info_textview.setText(mTemperature.toString());
-//                        if (Utils.isNumber(mTemperature.toString())) {
-//                            endInt = (int) Math.floor(Float.valueOf(mTemperature.toString()));
-//
-//                            //闹铃
-//                            if (Setting.getInstance(getActivity()).IsAlarm()) {
-//                                if (isAlarm) {
-//                                    if (Float.valueOf(mTemperature.toString()) > Float.valueOf(Setting.getInstance(getActivity()).getTemp())) {//报警字体显示的是红色
-//                                        //计算十分钟之后闹钟继续闹
-//                                        AwayTime = new TimeAway(1800000, 1000);// 构造CountDownTimer对象
-//                                        AwayTime.start();
-//
-//
-//                                        isAlarm = false;
-//                                        Intent intent = new Intent(getActivity(), ShowAlarm.class);
-//                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                        intent.putExtra(UtilKey.ALARM_KEY_ALARM, "0");
-//                                        getActivity().startActivity(intent);
-//
-//                                    }
-//                                }
-//                            }
-//
-//
-//                            //生病情况
-//                            if (Float.valueOf(mTemperature.toString()) > 35.9 && Float.valueOf(mTemperature.toString()) < 37.5) {
-//                                user_top_textview.setTextColor(getResources().getColor(R.color.them_bg));
-//                                user_bottom_textview.setText(getString(R.string.home_bottom));
-//                                user_bottom_textview.setTextColor(getResources().getColor(R.color.them_bg));
-//                                user_center_unit.setTextColor(getResources().getColor(R.color.them_bg));
-//                                value_info_textview.setTextColor(getResources().getColor(R.color.them_bg));
-//                                mCircularBarPager.getCircularBar().setClockwiseOutlineArcColor(getResources().getColor(R.color.them_bg));
-//                                mCircularBarPager.getCircularBar().setCounterClockwiseArcColor(getResources().getColor(R.color.them_bg));
-//                                mCircularBarPager.getCircularBar().setClockwiseReachedArcColor(getResources().getColor(R.color.them_bg));
-//
-//
-//                            }
-//                            if (Float.valueOf(mTemperature.toString()) <= 35.9) {
-//                                user_top_textview.setTextColor(getResources().getColor(R.color.them_text));
-//                                user_bottom_textview.setText(getString(R.string.home_state_low));
-//                                user_bottom_textview.setTextColor(getResources().getColor(R.color.them_text));
-//                                user_center_unit.setTextColor(getResources().getColor(R.color.them_text));
-//                                value_info_textview.setTextColor(getResources().getColor(R.color.them_text));
-//                                mCircularBarPager.getCircularBar().setClockwiseOutlineArcColor(getResources().getColor(R.color.them_text));
-//                                mCircularBarPager.getCircularBar().setCounterClockwiseArcColor(getResources().getColor(R.color.them_text));
-//                                mCircularBarPager.getCircularBar().setClockwiseReachedArcColor(getResources().getColor(R.color.them_text));
-//                            }
-//                            if (Float.valueOf(mTemperature.toString()) > 37.5) {
-//                                user_top_textview.setTextColor(getResources().getColor(R.color.red_light));
-//                                user_bottom_textview.setText(getString(R.string.home_state_high));
-//                                user_bottom_textview.setTextColor(getResources().getColor(R.color.red_light));
-//                                value_info_textview.setTextColor(getResources().getColor(R.color.red_light));
-//                                user_center_unit.setTextColor(getResources().getColor(R.color.red_light));
-//                                mCircularBarPager.getCircularBar().setCounterClockwiseOutlineArcColor(getResources().getColor(R.color.red_light));
-//                                mCircularBarPager.getCircularBar().setClockwiseOutlineArcColor(getResources().getColor(R.color.red_light));
-//                                mCircularBarPager.getCircularBar().setCounterClockwiseArcColor(getResources().getColor(R.color.red_light));
-//                                mCircularBarPager.getCircularBar().setClockwiseReachedArcColor(getResources().getColor(R.color.red_light));
-//
-//                            }
-////                            35.9℃～37.5℃//正常体温
-//
-//                            //显示温度
-//                            if (mCircularBarPager != null) {
-//
-//
-//                                mCircularBarPager.getCircularBar().animateProgress(startInt, endInt * 2, 900);
-//                            }
-//                            startInt = endInt * 2;
-//
-//                        }
-//
-//
-//                    }
-//                });
-//                break;
-//        }
-//    }
+    @Override
+    public void onBackgroundClick() {
 
-//    @Override
-//    public void isDistantDisconnect() {
-//        getActivity(). runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                if(Setting.getInstance(getActivity()).IsLose()) {//防丢功能已经开启
-//                    if (isAway) {//防丢功能没有处理
-//                        isAway = false;
-//                        //计算30分钟之后闹钟继续闹
-//                        AlarmTime = new TimeAway(1800000, 1000);// 构造CountDownTimer对象
-//                        AlarmTime.start();
-//                        Intent intent = new Intent(getActivity(), ShowAlarm.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        intent.putExtra(UtilKey.ALARM_KEY_ALARM, "1");
-//                        getActivity().startActivity(intent);
-//                    }
-//                }
-//            }
-//        });
-//
-//    }
+    }
 
-//    /**
-//     * 定义一个倒计时的内部类   计算多久没有应答
-//     */
-//    class TimeAway extends CountDownTimer {
-//        public TimeAway(long millisInFuture, long countDownInterval) {
-//            super(millisInFuture, countDownInterval);// 参数依次为总时长,和计时的时间间隔
-//        }
-//
-//        @Override
-//        public void onFinish() {// 计时完毕时触发
-//            if(isAway){
-//
-//            }else {
-//                isAway=true;
-//            }
-//
-//
-//            if(isAlarm){
-//
-//            }else {
-//                isAlarm=true;
-//            }
-//
-//        }
-//
-//        @Override
-//        public void onTick(long millisUntilFinished) {// 计时过程显示
-//
-//        }
-//    }
+    @Override
+    public void onBoomWillHide() {
+
+    }
+
+    @Override
+    public void onBoomDidHide() {
+
+    }
+
+    @Override
+    public void onBoomWillShow() {
+
+    }
+
+    @Override
+    public void onBoomDidShow() {
+
+    }
 }

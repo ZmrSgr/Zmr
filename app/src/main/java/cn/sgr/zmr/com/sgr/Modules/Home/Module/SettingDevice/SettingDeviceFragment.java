@@ -37,19 +37,11 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
     @BindView(R.id.top_view_back)
     ImageView top_view_back;
 
-
-
     @BindView(R.id.top_view_title)
     TextView top_view_title;
 
-
-    @BindView(R.id.text_device)
-    TextView text_device;
-
-
     @BindView(R.id.rel_fever_temp)
     RelativeLayout rel_fever_temp;
-
 
     @BindView(R.id.jtb_fever)
     JellyToggleButton jtb_fever;
@@ -60,20 +52,8 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
     @BindView(R.id.line)
     View   line;
 
-    @BindView(R.id.line1)
-    View   line1;
-
-    @BindView(R.id.rel_my_baby)
-    View   rel_my_baby;
-
-    @BindView(R.id.item_settings_device)
-    View   item_settings_device;
-
     @BindView(R.id.rel_fever_way)
     View   rel_fever_way;
-
-/*    @BindView(R.id.rel_location)
-    View   rel_location;*/
 
     @BindView(R.id.text_tem)
     TextView   text_tem;
@@ -81,28 +61,17 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
     @BindView(R.id.text_way)
     TextView   text_way;
 
-
-
-
-
     OptionsPickerView weightOptions;
     private ArrayList<String> Weightoptions1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> Weightoptions2Items = new ArrayList<>();
-
-
     private SettingDeviceContract.Presenter mPresenter;
-
     //单例 模式
     public static SettingDeviceFragment newInstance() {
         return new SettingDeviceFragment();
     }
     //   构造方法
     public SettingDeviceFragment() {
-        // Required empty public constructor
     }
-
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -128,9 +97,8 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
         jtb_lost.setTextMarginRight(20);
 
         rel_fever_temp.setVisibility(View.GONE);
-        rel_fever_way.setVisibility(View.GONE);
         line.setVisibility(View.GONE);
-        line1.setVisibility(View.GONE);
+
 
         text_tem.setText(Setting.getInstance(getActivity()).getTemp());
         jtb_lost.setChecked(Setting.getInstance(getActivity()).IsLose());
@@ -141,16 +109,13 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
                 if (state.equals(State.LEFT)) {
                     Setting.getInstance(getActivity()).setAlarm("0");
                     rel_fever_temp.setVisibility(View.GONE);
-                    rel_fever_way.setVisibility(View.GONE);
                     line.setVisibility(View.GONE);
-                    line1.setVisibility(View.GONE);
+
                 }
                 if (state.equals(State.RIGHT)) {
                     Setting.getInstance(getActivity()).setAlarm("1");
                     rel_fever_temp.setVisibility(View.VISIBLE);
-                    rel_fever_way.setVisibility(View.VISIBLE);
                     line.setVisibility(View.VISIBLE);
-                    line1.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -181,24 +146,12 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
             }
             Weightoptions2Items.add(options2Items_weigh);
         }
-        if(HomeDevicePresenter.isConnState){
-
-        }else{
-            text_device.setText(Setting.getInstance(getActivity()).getBattery());
-        }
-
-
     }
 
-    @OnClick({R.id.rel_synchronize_yun,R.id.item_settings_device,R.id.rel_fever_way,R.id.rel_fever_temp,R.id.rel_my_baby,R.id.top_view_back})
+    @OnClick({R.id.rel_fever_way,R.id.rel_fever_temp,R.id.top_view_back})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.rel_synchronize_yun:
-                Utils.toNextActivity(getActivity(), SynchronizeActivity.class);
-                break;
-            case R.id.item_settings_device:
-                Utils.toNextActivity(getActivity(), DeviceActivity.class);;
-                break;
+
             case R.id.rel_fever_temp:
                 setTemp();
                 break;
@@ -207,9 +160,6 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
                 Utils.toNextActivity(getActivity(), AlarmWayActivity.class);
                 break;
 
-            case R.id.rel_my_baby:
-                Utils.toNextActivity(getActivity(), BabyActivity.class);
-                break;
             case R.id.top_view_back:
                getActivity().finish();
                 break;
@@ -235,13 +185,9 @@ public class SettingDeviceFragment extends BaseFragment implements SettingDevice
                 String tx = Weightoptions1Items.get(options1)+"." + Weightoptions2Items.get(options1).get(option2)+getActivity().getResources().getString(R.string.shishi_unit);
                 text_tem.setText(tx);
                 Setting.getInstance(getActivity()).setTemp( Weightoptions1Items.get(options1)+"." + Weightoptions2Items.get(options1).get(option2));
-
             }
         });
-
     }
-
-
 
     @Override
     public boolean isActive() {

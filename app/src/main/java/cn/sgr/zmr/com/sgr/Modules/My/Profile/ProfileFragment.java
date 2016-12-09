@@ -94,7 +94,7 @@ public class ProfileFragment extends BaseFragment implements ProfileContract.Vie
     private void initView() {
         top_view_title.setText(getResources().getString(R.string.my_profile));
         top_view_back.setVisibility(View.VISIBLE);
-        if(UserInfo.getInstance(getActivity()).geThird_id()!=null&&UserInfo.getInstance(getActivity()).geThird_id().length()<3){//表示的是第三方登录
+        if(UserInfo.getInstance(getActivity()).geThird_id()!=null&&UserInfo.getInstance(getActivity()).geThird_id().length()>3){//表示的是第三方登录
             rel_reset_pwd.setVisibility(View.GONE);
             line_pwd.setVisibility(View.GONE);
         }

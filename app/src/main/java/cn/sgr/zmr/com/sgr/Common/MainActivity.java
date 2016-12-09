@@ -1,8 +1,8 @@
 package cn.sgr.zmr.com.sgr.Common;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.app.FragmentTransaction;
+import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -49,7 +49,6 @@ public class MainActivity extends Activity {
     @BindView(R.id.set_image)
     ImageView set_image;
 
-
     @BindView(R.id.home_text)
     TextView home_text;
 
@@ -63,7 +62,6 @@ public class MainActivity extends Activity {
     TextView  message_text;
 
     private HealhFragment healthFragment;
-//    private HomeFragment homeFragment;
     private HomeTestFragment homeFragment;
     private MessageFragment messagesFragment;
     private MyFragment myFragment;
@@ -78,7 +76,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
         setTabSelection(chooseIndex);
-//        MyApplication.getInstance().addActivity(this);
     }
     @OnClick({R.id.home_layout, R.id.health_layout, R.id.message_layout, R.id.set_layout})
     public void onTabClick(View view) {
@@ -125,8 +122,6 @@ public class MainActivity extends Activity {
                         homeFragment = homeFragment.newInstance();
                         Utils.addFragmentToActivity(getFragmentManager(),homeFragment, R.id.contentFrame);
                     }
-                    // Create the presenter
-//                    new HomePresenter(this,homeFragment);
                     new HomeTestPresenter(this, homeFragment);
                     transaction.add(R.id.content, homeFragment);
                 } else {
@@ -135,7 +130,6 @@ public class MainActivity extends Activity {
                 transaction.commit();
                 break;
             case 1:
-
                 healthr_image.setImageResource(R.drawable.tab_discover_pressed);
                 health_text.setTextColor(getResources().getColorStateList(
                         R.color.them_bg));
@@ -151,34 +145,19 @@ public class MainActivity extends Activity {
                 transaction.commit();
                 break;
             case 2:
-/*                if(!UserInfo.getInstance(this).hasSignIn()){
-                    Utils.toNextActivity(this, LoginActivity.class);
-                }else{*/
                     message_image.setImageResource(R.drawable.tab_message_pressed);
                     message_text.setTextColor(getResources().getColorStateList(
                             R.color.them_bg));
 
                     if (messagesFragment == null) {
-
                         messagesFragment = new MessageFragment();
-
-
-
-
-
-
                         transaction.add(R.id.content, messagesFragment);
                     } else {
-
                         transaction.show(messagesFragment);
                     }
                     transaction.commit();
-//                }
-
-
                 break;
             case 3:
-
                 set_image.setImageResource(R.drawable.tab_i_pressed);
                 set_text.setTextColor(getResources().getColorStateList(
                         R.color.them_bg));
@@ -188,27 +167,16 @@ public class MainActivity extends Activity {
                         myFragment = myFragment.newInstance();
                         Utils.addFragmentToActivity(getFragmentManager(),myFragment, R.id.contentFrame);
                     }
-                    // Create the presenter
-//                    new HomePresenter(this,homeFragment);
                     new MyPresenter(this, myFragment);
-
-
                     transaction.add(R.id.content, myFragment);
                 } else {
-
                     transaction.show(myFragment);
                 }
                 transaction.commit();
                 break;
-
-
-
         }
-
     }
-
     private void setImageText(int index) {
-
         clearSelection();
         switch (index) {
             case 0:
@@ -224,30 +192,19 @@ public class MainActivity extends Activity {
                         R.color.them_bg));
                 break;
             case 2:
-
-
-
-
                 // 当点击了消息tab时，改变控件的图片和文字颜色
                 message_image.setImageResource(R.drawable.tab_message_pressed);
                 message_text.setTextColor(getResources().getColorStateList(
                         R.color.them_bg));
-
-
-
                 break;
-
             case 3:
                 set_image.setImageResource(R.drawable.tab_i_pressed);
                 set_text.setTextColor(getResources().getColorStateList(
                         R.color.them_bg));
-
                 break;
-
         }
 
     }
-
     /**
      * 清除掉所有的选中状态。
      */
@@ -265,7 +222,9 @@ public class MainActivity extends Activity {
         set_text.setTextColor(getResources().getColor(
                 R.color.them_text));
     }
-
+    /**
+     * 隐藏fragment
+     */
     private void hideFragments(FragmentTransaction transaction) {
         if (healthFragment != null) {
             transaction.hide(healthFragment);
@@ -273,7 +232,6 @@ public class MainActivity extends Activity {
         if (homeFragment != null) {
             transaction.hide(homeFragment);
         }
-
         if (messagesFragment != null) {
 
             transaction.hide(messagesFragment);
@@ -282,7 +240,9 @@ public class MainActivity extends Activity {
             transaction.hide(myFragment);
         }
     }
-
+    /**
+     * 保存状态，因为横屏切换时 会重新启动所以导致界面混乱
+     */
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -294,7 +254,6 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-
         outState.putBoolean("iscycle", true);
         outState.putInt("chooseIndex", chooseIndex);
     }
@@ -307,7 +266,9 @@ public class MainActivity extends Activity {
         }
     }
 
-
+    /*
+    双击返回提出
+    * */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub
@@ -322,6 +283,4 @@ public class MainActivity extends Activity {
         }
         return true;
     }
-
-
 }

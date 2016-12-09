@@ -3,6 +3,7 @@
     package="cn.sgr.zmr.com.sgr">
 
     <!-- 权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -172,7 +173,9 @@
         <activity
             android:name=".Modules.Health.Search.DetailTieActivity"
             android:label="@string/title_activity_detail_tie" />
-        <activity android:name=".Modules.Home.Device.HomeDeviceActivity"></activity>
+        <activity android:name=".Modules.Home.Device.HomeDeviceActivity" />
+        <activity
+            android:name=".Modules.Home.Location.CommonMapActivity"/>
     </application>
 
 </manifest>

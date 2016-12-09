@@ -46,15 +46,6 @@ public class Tie_Adapter<T> extends BaseRecyclerAdapter<T>  {
     public void onBind(RecyclerView.ViewHolder viewHolder, int position,  T dataResult) {
         ViewHolder mHolder = (ViewHolder) viewHolder;
         mDatas.add(dataResult);
-       /* boolean isZhangJiaWei = newEntity.getContentSourceName().equals("张佳玮的博客");
-        if(hasImage) {
-            mHolder.  mNewsImage.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(newEntity.getImgUrlList().get(0))
-                    .placeholder(R.mipmap.placeholder_biger)
-                    .into(mNewsImage);
-        }*/
-
-
         if(dataResult instanceof Tie){//type为 0 1 5 帖子
             Tie data=(Tie)dataResult;
             mHolder. profileImage.setImageResource(R.drawable.ic_launcher);
@@ -93,28 +84,7 @@ public class Tie_Adapter<T> extends BaseRecyclerAdapter<T>  {
 
 
     }
-
-/*
-    public void applyData(List<Baby> msgs) {
-        datas.clear();
-        datas.addAll(msgs);
-        notifyDataSetChanged();
-    }*/
-
-/*
-
-    public void removeData(int position) {
-        this.daoManage=  new DaoCacheManage(context);
-        daoManage.DeleteBaby(datas.get(position));
-        datas.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position,datas.size());
-    }
-*/
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
-
 
         @BindView(R.id.newsImage)
         ImageView mNewsImage;
