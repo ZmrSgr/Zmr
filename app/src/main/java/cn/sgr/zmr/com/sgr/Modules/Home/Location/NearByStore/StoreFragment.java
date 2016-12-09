@@ -1,5 +1,6 @@
 package cn.sgr.zmr.com.sgr.Modules.Home.Location.NearByStore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseFragment;
+import cn.sgr.zmr.com.sgr.Modules.Health.Search.DetailTieActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Adatpter.StoreAdapter;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.Store;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.StoreResult;
@@ -30,7 +32,7 @@ import cn.sgr.zmr.com.sgr.View.recycleView.XRecyclerView;
 /**
  * Created by 沈国荣 on 2016/9/7 0007.
  */
-public class StoreFragment extends BaseFragment implements StoreContract.View {
+public class StoreFragment extends BaseFragment implements StoreContract.View ,StoreAdapter.OnRecyclerViewListener{
 
     @BindView(R.id.top_view_back)
     ImageView top_view_back;
@@ -75,6 +77,7 @@ public class StoreFragment extends BaseFragment implements StoreContract.View {
 
         mStoreAdapter = new StoreAdapter(getActivity());
         mXRecyclerView.setAdapter(mStoreAdapter);
+        mStoreAdapter.setOnRecyclerViewListener(this);
     }
 
     //监听按钮
@@ -121,5 +124,19 @@ public class StoreFragment extends BaseFragment implements StoreContract.View {
     @Override
     public void setPresenter(StoreContract.Presenter presenter) {
         this.mPresenter = presenter;
+    }
+
+    @Override
+    public void onItemClick(StoreResult.HospitalBean data, View v) {
+
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), DetailTieActivity.class);
+        intent.putExtra(UtilKey.TIE_KEY, data.getUrl());
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onItemLongClick(int position) {
+        return false;
     }
 }

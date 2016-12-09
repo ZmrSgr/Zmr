@@ -13,6 +13,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,29 +24,32 @@ import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
 
 /**
- * Created by Administrator on 2016/8/12 0012.
+ * Created by 沈国荣 on 2016/8/12 0012.
  */
 public class DrugAdapter extends BaseRecyclerAdapter<Drug> {
 
     private Context context;
     private DaoCacheManage daoManage;
-
+    private ArrayList<Drug> mDatas = new ArrayList<>();
     public DrugAdapter(Context context) {
         this.context = context;
     }
-
+   /*
+   * 绑定布局（view）
+   * */
     @Override
     public RecyclerView.ViewHolder onCreate(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_drugstore, null);
-/*//        不知道为什么在xml设置的“android:layout_width="match_parent"”无效了，需要在这里重新设置
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);*/
-//        view.setLayoutParams(lp);
         return new ViewHolder(view);
     }
-
+    /*
+    * 绑定数据
+    *
+    * */
     @Override
     public void onBind(RecyclerView.ViewHolder viewHolder, int position, Drug data) {
         ViewHolder mHolder = (ViewHolder) viewHolder;
+        mDatas.add(data);
         if(data != null){
             if(!TextUtils.isEmpty(data.getDurgstoreName())){
                 mHolder.tvStorename.setText(data.getDurgstoreName());
@@ -62,15 +66,18 @@ public class DrugAdapter extends BaseRecyclerAdapter<Drug> {
             }
         }
     }
-
+    /*
+    * 监听接口
+    * */
     public interface OnRecyclerViewListener {
-        void onItemClick(int position, View v);
-
+        void onItemClick(Drug data, View v);
         boolean onItemLongClick(int position);
     }
 
     private OnRecyclerViewListener onRecyclerViewListener;
-
+    /*
+       * 注册监听（初始化监听）
+       * */
     public void setOnRecyclerViewListener(OnRecyclerViewListener onRecyclerViewListener) {
         this.onRecyclerViewListener = onRecyclerViewListener;
     }
@@ -90,12 +97,13 @@ public class DrugAdapter extends BaseRecyclerAdapter<Drug> {
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);//注册监听
         }
 
         @Override
         public void onClick(View v) {
-            if (null != onRecyclerViewListener) {
-                onRecyclerViewListener.onItemClick(this.getPosition(), v);
+            if (null != onRecyclerViewListener) {//通知监听回调
+                onRecyclerViewListener.onItemClick( mDatas.get(this.getPosition()), v);
             }
         }
     }

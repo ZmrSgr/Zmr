@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.sgr.zmr.com.sgr.Modules.Health.Adapter.BaseRecyclerAdapter;
+import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.Drug;
 import cn.sgr.zmr.com.sgr.Modules.Home.Model.bean.StoreResult;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.GreenDao.DaoCacheManage;
@@ -25,7 +27,7 @@ public class StoreAdapter extends BaseRecyclerAdapter<StoreResult.HospitalBean> 
 
     private Context context;
     private DaoCacheManage daoManage;
-    private List<StoreResult.HospitalBean> mDatas;
+    private List<StoreResult.HospitalBean> mDatas = new ArrayList<>();
 
     public StoreAdapter(Context context) {
         this.context = context;
@@ -44,6 +46,7 @@ public class StoreAdapter extends BaseRecyclerAdapter<StoreResult.HospitalBean> 
     public void onBind(RecyclerView.ViewHolder viewHolder, int position, StoreResult.HospitalBean data) {
         ViewHolder mHolder = (ViewHolder) viewHolder;
         if(data != null){
+            mDatas.add(data);
             if(!TextUtils.isEmpty(data.getHospitalName())){
                 mHolder.tvHospitalName.setText(data.getHospitalName());
             }
@@ -64,7 +67,7 @@ public class StoreAdapter extends BaseRecyclerAdapter<StoreResult.HospitalBean> 
     }
 
     public interface OnRecyclerViewListener {
-        void onItemClick(int position, View v);
+        void onItemClick(StoreResult.HospitalBean data, View v);
 
         boolean onItemLongClick(int position);
     }
@@ -86,12 +89,13 @@ public class StoreAdapter extends BaseRecyclerAdapter<StoreResult.HospitalBean> 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             if (null != onRecyclerViewListener) {
-                onRecyclerViewListener.onItemClick(this.getPosition(), v);
+                onRecyclerViewListener.onItemClick( mDatas.get(this.getPosition()), v);
             }
         }
     }

@@ -3,8 +3,6 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Location;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,13 +31,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.sgr.zmr.com.sgr.Base.BaseActivity;
 import cn.sgr.zmr.com.sgr.Base.MyApplication;
-import cn.sgr.zmr.com.sgr.Modules.Health.Search.DetailTieActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Location.NearByDrug.DrugActivity;
 import cn.sgr.zmr.com.sgr.Modules.Home.Location.NearByStore.StoreActivity;
 import cn.sgr.zmr.com.sgr.R;
 import cn.sgr.zmr.com.sgr.Utils.util.LocationService;
 import cn.sgr.zmr.com.sgr.Utils.util.UtilKey;
-import cn.sgr.zmr.com.sgr.Utils.util.Utils;
 
 public class LocationActivity extends BaseActivity {
     @BindView(R.id.mapView)
@@ -58,7 +54,6 @@ public class LocationActivity extends BaseActivity {
     private Marker mMarkerA;//宝宝位置标签
     private InfoWindow mInfoWindow;
 
-
     @BindView(R.id.nearby_baby)
     TextView nearby_baby;
 
@@ -67,8 +62,6 @@ public class LocationActivity extends BaseActivity {
 
     @BindView(R.id.nearby_medice)
     TextView nearby_medice;
-
-
 
     private BaiduMap mBaiduMap;
     // 定位相关
@@ -106,22 +99,20 @@ public class LocationActivity extends BaseActivity {
         StartLocation();
         getLocation();
     }
-   //获取位置并且显示
+        //获取位置并且显示
     private void getLocation() {
         //定义Maker坐标点
         LatLng point = new LatLng(22.255253, 113.567137);
-//构建Marker图标
+        //构建Marker图标
         BitmapDescriptor bitmap = BitmapDescriptorFactory
                 .fromResource(R.drawable.baby_icon);
-//构建MarkerOption，用于在地图上添加Marker
+        //构建MarkerOption，用于在地图上添加Marker
         OverlayOptions option = new MarkerOptions()
                 .position(point)
                 .icon(bitmap);
-//在地图上添加Marker，并显示
+       //在地图上添加Marker，并显示
         mMarkerA = (Marker) (mBaiduMap.addOverlay(option));
-//        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(point));
-
-
+        //maker监听事件
         mBaiduMap.setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             public boolean onMarkerClick(final Marker marker) {
                 Button button = new Button(getApplicationContext());
@@ -147,23 +138,14 @@ public class LocationActivity extends BaseActivity {
             }
         });
     }
-
-
-
-
    //开始定位
     private void StartLocation() {
         mBaiduMap.setMyLocationConfigeration(new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, true, null));
         mLocClient = new LocationClient(this);
-
         mLocClient.registerLocationListener(listener);
-
         locService = ((MyApplication) getApplication()).locationService;
         option = locService.getDefaultLocationClientOption();
-
-
         mLocClient.setLocOption(option);
-//        mLocClient.requestLocation();
         mLocClient.start();
     }
 
@@ -177,11 +159,8 @@ public class LocationActivity extends BaseActivity {
             // TODO Auto-generated method stub
 
             if (location != null && (location.getLocType() == 161 || location.getLocType() == 66)) {
-
                 Mylat=String.valueOf(location.getLatitude());
                 Mylng=String.valueOf(location.getLongitude());
-
-
                 locData_curry = new MyLocationData.Builder()
                         .accuracy(location.getRadius())
                         // 此处设置开发者获取到的方向信息，顺时针0-360
@@ -189,71 +168,19 @@ public class LocationActivity extends BaseActivity {
                         .longitude(location.getLongitude()).build();
                 mBaiduMap.setMyLocationData(locData_curry);
                 top_view_left_text.setText(location.getAddrStr()+","+location.getLocationDescribe());
-
-
-
-
-
-             /*   Message locMsg = locHander.obtainMessage();
-                Bundle locData = new Bundle();
-*//*                Bundle locData;
-//                locData = Algorithm(location);
-                if (locData != null) {
-//                    locData.putParcelable("loc", location);
-//                    locMsg.setData(locData);
-                    locHander.sendMessage(locMsg);
-                }*//*
-                locData.putParcelable("loc", location);
-                locMsg.setData(locData);
-                locHander.sendMessage(locMsg);*/
             }
         }
     };
-
-    /***
-     * 接收定位结果消息，并显示在地图上
-     */
-    private Handler locHander = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
-            super.handleMessage(msg);
-            try {
-                location = msg.getData().getParcelable("loc");
-                top_view_left_text.setText(location.getAddrStr()+","+location.getLocationDescribe());
-
-                if (location != null) {
-                    LatLng point = new LatLng(location.getLatitude(), location.getLongitude());
-                    // 构建Marker图标
-                    BitmapDescriptor bitmap = null;
-                    bitmap = BitmapDescriptorFactory.fromResource(R.drawable.icon_openmap_focuse_mark); // 非推算结果
-                    // 构建MarkerOption，用于在地图上添加Marker
-                    OverlayOptions option = new MarkerOptions().position(point).icon(bitmap);
-                    // 在地图上添加Marker，并显示
-                    mBaiduMap.addOverlay(option);
-                    mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(point));
-                }
-            } catch (Exception e) {
-                // TODO: handle exception
-            }
-        }
-
-    };
-
     @OnClick({R.id.top_view_back,R.id.top_view_left_text,R.id.relocation,R.id.nearby_baby,R.id.nearby_medice,R.id.nearby_store})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.top_view_left_text:
                 Toast.makeText(this,top_view_left_text.getText().toString(),Toast.LENGTH_LONG).show();
                 break;
-
             case R.id.top_view_back:
                 finish();
                 break;
-
             case R.id.nearby_baby:
-
                 break;
 
             case R.id.nearby_medice://跳转到附近医疗
@@ -267,7 +194,6 @@ public class LocationActivity extends BaseActivity {
                 break;
 
             case R.id.nearby_store:
-//                Utils.toNextActivity(this, StoreActivity.class);
                 Intent i = new Intent(this, StoreActivity.class);
                 if(Mylat != null){
                     i.putExtra(UtilKey.STORE_LAT, Mylat);
@@ -287,7 +213,6 @@ public class LocationActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         // 在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
-//		WriteLog.getInstance().close();
         locService.unregisterListener(listener);
         locService.stop();
         mapView.onDestroy();

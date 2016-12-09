@@ -66,8 +66,6 @@ public class SearchFragment<T> extends BaseFragment implements SearchContract.Vi
     @BindView(R.id.recent_list)
     ListView recent_list;
 
-
-
     @BindView(R.id.top_view_back)
     ImageView top_view_back;
 
@@ -252,7 +250,6 @@ public class SearchFragment<T> extends BaseFragment implements SearchContract.Vi
     public void showSearchRecent(final List<SearchRecent> datas) {
 
         if (datas != null) {
-
 
             searchRecentAdapter=new SearchRecentAdapter(getActivity(),datas);
             recent_list.setAdapter(searchRecentAdapter);

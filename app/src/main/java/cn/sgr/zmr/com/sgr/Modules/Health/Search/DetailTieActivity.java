@@ -96,13 +96,6 @@ public class DetailTieActivity extends BaseActivity {
         m_webview.getSettings().setUseWideViewPort(true);
         m_webview.getSettings().setLoadWithOverviewMode(true);
         m_webview.getSettings().setJavaScriptEnabled(true);
-        // m_webview.setScrollBarStyle(0);//设置滚动条风格，为0表示不给滚动条留空间
-        // setScalesPageToFit:NO
-        // m_webview.getSettings().sets
-        // WebSettings webSettings= m_webview.getSettings(); // webView:
-        // 类WebView的实例
-        // webSettings.setLayoutAlgorithm(LayoutAlgorithm.NORMAL);
-        // webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
         m_webview.setWebViewClient(new WebViewClient() {
             // 用WebView载入页面
             @Override

@@ -5,7 +5,7 @@ package cn.sgr.zmr.com.sgr.Modules.Home.Model.bean;
  *
  * 药店信息
  */
-public class Drug {
+public class Drug implements  java.io.Serializable{
 /*
     "durgstoreName": "珠海市金鼎恒祥学康医药堂", //药店名称
             "address": "珠海市唐家湾镇金鼎北京师范大学珠海分校海华苑6栋1号铺B区", // 药店地址
@@ -15,12 +15,21 @@ public class Drug {
             "telephone": "6128350" // 电话
 */
 
+    String url;
     String durgstoreName;
     String address;
     String latitude;
     String longitude;
     String distance;
     String telephone;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getDurgstoreName() {
         return durgstoreName;

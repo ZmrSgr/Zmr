@@ -34,6 +34,7 @@
                 android:id="@+id/tv_storename_item_drugstore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:text="爱心堂健康药房"/>
 
             <TextView
@@ -42,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_storename_item_drugstore"
                 android:layout_marginTop="@dimen/margin_8dp"
+                android:textSize="14sp"
                 android:text="平沙四路益美超市对面"/>
 
             <TextView
@@ -49,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="31.5公里"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true" />
 
