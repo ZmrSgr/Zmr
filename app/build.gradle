@@ -56,7 +56,7 @@ dependencies {
     compile 'com.sgr.zmr:Ripple:0.0.1'
     compile 'com.sgr.zmr:MPChartLib:0.0.1'
     compile project(':libzxing')
-    compile project(':boommenu')
+    compile 'com.sgr.zmr:Boommenu:0.0.1'
     compile(name: 'scannerlib-debug', ext: 'aar')
     //    compile project(':ProgressCirclelibrary')
 //        compile 'com.github.orangegangsters:library:1.0.0@aar'
